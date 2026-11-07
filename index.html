@@ -35,7 +35,7 @@ header .innen{display:flex;align-items:center;gap:12px;padding-block:12px}
 header img{width:48px;height:48px;border-radius:12px;background:#fff;flex:none}
 header h1{margin:0;font-size:19px;line-height:1.1;letter-spacing:.01em}
 header p{margin:3px 0 0;font-size:13px;opacity:.75}
-#reiter{position:sticky;top:0;z-index:5;background:var(--bg);padding-block:10px 8px;border-bottom:1px solid var(--linie)}
+#reiter{background:var(--bg);padding-block:10px 8px;border-bottom:1px solid var(--linie)}
 .raster{display:grid;grid-template-columns:repeat(60,1fr);gap:6px}
 .raster button{font-family:inherit;font-weight:600;font-size:14px;line-height:1.15;padding:10px 4px;border-radius:9px;border:1px solid var(--linie);
   background:var(--karte);color:var(--text);cursor:pointer;min-width:0;overflow-wrap:anywhere}
@@ -104,7 +104,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-07 a";
+const FASSUNG = "2026-11-07 b";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -238,8 +238,16 @@ function wocheTage(now) {
 }
 function wocheSpiele(now) {
   const tage = new Set(wocheTage(now)), gesehen = new Set(), aus = [];
-  for (const t of D.teams) for (const sp of eigeneSpiele(t))
-    if (tage.has(tagKey(new Date(sp.d))) && !gesehen.has(sp.id + "|" + t.id)) { gesehen.add(sp.id + "|" + t.id); aus.push(sp); }
+  // Ein Spiel nur einmal. Gehört es nicht einer Mannschaft selbst (Pokal ohne I/II, hängt an allen
+  // derselben Altersklasse), steht die Altersklasse da („MIN“ statt MIN 1, MIN 2, …).
+  for (const t of D.teams) for (const sp of eigeneSpiele(t)) {
+    if (!tage.has(tagKey(new Date(sp.d)))) continue;
+    const eigen = t.ids.includes(sp.h.id) || t.ids.includes(sp.a.id);
+    const key = sp.id + "|" + (eigen ? t.id : t.kat);
+    if (gesehen.has(key)) continue;
+    gesehen.add(key);
+    aus.push(eigen ? sp : { ...sp, team: { ...t, reiter: t.reiter.replace(/ \d+$/, "") } });
+  }
   return aus.sort((a, b) => a.d.localeCompare(b.d));
 }
 function wocheHtml(now) {
