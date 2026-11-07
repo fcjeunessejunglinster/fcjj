@@ -114,7 +114,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-07 d";
+const FASSUNG = "2026-11-07 e";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -136,7 +136,9 @@ const TEXTE = {
     keineWoche: "Diese Woche keine Spiele.", heuteKurz: " · heute", alle: "Alle Mannschaften", saison: "Saison",
     leer: "Noch keine Daten", leerText: "Die Spiele kommen mit dem ersten automatischen Abruf von der FLF. Das dauert nach dem Einrichten ein paar Minuten.",
     fuss: (d, f) => `Daten von der FLF · zuletzt geändert ${d}<br>FC Jeunesse Junglinster · seit 1935 · Fassung ${f}`,
-    unterzeile: "Spiele, Ergebnisse und Tabellen", laden: "Lade …" },
+    unterzeile: "Spiele, Ergebnisse und Tabellen", laden: "Lade …",
+    natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
+    natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
     forfait: "Forfeit", laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
     ca: "approx. ", uhr: "", heim: "🏠 Home vs ", aus: "✈️ Away at ", tabelle: "Table",
@@ -149,7 +151,9 @@ const TEXTE = {
     keineWoche: "No matches this week.", heuteKurz: " · today", alle: "All teams", saison: "Season",
     leer: "No data yet", leerText: "The matches arrive with the first automatic update from the FLF, a few minutes after setup.",
     fuss: (d, f) => `Data from the FLF · last updated ${d}<br>FC Jeunesse Junglinster · since 1935 · Version ${f}`,
-    unterzeile: "Matches, results and tables", laden: "Loading …" },
+    unterzeile: "Matches, results and tables", laden: "Loading …",
+    natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
+    natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
     forfait: "Forfait", laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
     ca: "vers ", uhr: "", heim: "🏠 À domicile contre ", aus: "✈️ À l'extérieur à ", tabelle: "Classement",
@@ -162,7 +166,9 @@ const TEXTE = {
     keineWoche: "Pas de match cette semaine.", heuteKurz: " · aujourd'hui", alle: "Toutes les équipes", saison: "Saison",
     leer: "Pas encore de données", leerText: "Les matchs arrivent avec la première mise à jour automatique de la FLF, quelques minutes après l'installation.",
     fuss: (d, f) => `Données de la FLF · dernière mise à jour ${d}<br>FC Jeunesse Junglinster · depuis 1935 · Version ${f}`,
-    unterzeile: "Matchs, résultats et classements", laden: "Chargement …" },
+    unterzeile: "Matchs, résultats et classements", laden: "Chargement …",
+    natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
+    natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
 let LANG = merk.get("lang") || (l => l.startsWith("en") ? "en" : l.startsWith("fr") ? "fr" : "de")((navigator.language || "").toLowerCase());
 if (!TEXTE[LANG]) LANG = "de";
@@ -281,6 +287,45 @@ function kalenderKarte(t) {
     <code>${esc(https)}</code></div></section>`;
 }
 
+// ---- Nationalmannschaft (Roude Léiw), Daten von FuPa ----
+// FuPa schreibt die Länder deutsch; für FR/EN über den ISO-Code übersetzen.
+const LAENDER = { Albanien: "AL", Andorra: "AD", Armenien: "AM", Aserbaidschan: "AZ", Belgien: "BE", "Bosnien-Herzegowina": "BA",
+  "Bosnien und Herzegowina": "BA", Bulgarien: "BG", "Dänemark": "DK", Deutschland: "DE", England: "GB-ENG", Estland: "EE",
+  "Färöer": "FO", "Färöer-Inseln": "FO", Finnland: "FI", Frankreich: "FR", Georgien: "GE", Gibraltar: "GI", Griechenland: "GR",
+  Irland: "IE", Island: "IS", Israel: "IL", Italien: "IT", Kasachstan: "KZ", Kosovo: "XK", Kroatien: "HR", Lettland: "LV",
+  Liechtenstein: "LI", Litauen: "LT", Luxemburg: "LU", Malta: "MT", Moldau: "MD", Moldawien: "MD", Montenegro: "ME",
+  Niederlande: "NL", Nordirland: "GB-NIR", Nordmazedonien: "MK", Norwegen: "NO", "Österreich": "AT", Polen: "PL", Portugal: "PT",
+  "Rumänien": "RO", Russland: "RU", "San Marino": "SM", Schottland: "GB-SCT", Schweden: "SE", Schweiz: "CH", Serbien: "RS",
+  Slowakei: "SK", Slowenien: "SI", Spanien: "ES", Tschechien: "CZ", "Türkei": "TR", Ukraine: "UA", Ungarn: "HU",
+  Wales: "GB-WLS", Weißrussland: "BY", Belarus: "BY", Zypern: "CY" };
+const UK = { "GB-ENG": { en: "England", fr: "Angleterre" }, "GB-NIR": { en: "Northern Ireland", fr: "Irlande du Nord" },
+  "GB-SCT": { en: "Scotland", fr: "Écosse" }, "GB-WLS": { en: "Wales", fr: "Pays de Galles" }, XK: { en: "Kosovo", fr: "Kosovo" } };
+function land(n) {
+  if (LANG === "de") return n;
+  const c = LAENDER[n]; if (!c) return n;
+  if (UK[c]) return UK[c][LANG];
+  try { return new Intl.DisplayNames([LOC()], { type: "region" }).of(c) || n; } catch (e) { return n; }
+}
+function natiSpiele() {
+  return D.nati.spiele.map(sp => ({ ...sp, heim: sp.h.n === "Luxemburg", erg: true, typ: "",
+    klasse: ({ Testspiele: { de: "Testspiel", en: "Friendly", fr: "Match amical" } }[sp.wett]?.[LANG] || sp.wett)
+      + (sp.runde ? " · " + (LANG === "de" ? sp.runde : sp.runde.replace(/Hinspiel/, LANG === "en" ? "1st leg" : "aller").replace(/Rückspiel/, LANG === "en" ? "2nd leg" : "retour")) : ""), h: { ...sp.h, n: land(sp.h.n) }, a: { ...sp.a, n: land(sp.a.n) } }));
+}
+function natiHtml(now) {
+  const spiele = natiSpiele();
+  const kommend = spiele.filter(sp => !vorbei(sp, now)), gespielt = spiele.filter(sp => vorbei(sp, now)).reverse().slice(0, 8);
+  let html = heuteKarte(spiele, now);
+  html += `<section class="karte"><h2>${T().natiNaechste}</h2>${kommend.length ? `<ul class="spiele">${kommend.slice(0, 5).map(sp => spielLi(sp, now)).join("")}</ul>` : `<p class="hinweis">${T().natiKeine}</p>`}</section>`;
+  const g = D.nati.gruppe;
+  if (g?.tabelle?.length) {
+    const zeilen = g.tabelle.map(z => `<tr class="${z.n === "Luxemburg" ? "wir" : ""}"><td>${z.pl}</td><td>${esc(land(z.n))}</td><td>${z.sp}</td><td>${z.s}</td><td>${z.u}</td><td>${z.nl}</td><td>${z.t}:${z.g}</td><td><b>${z.pkt}</b></td></tr>`).join("");
+    html += `<section class="karte"><h2>${T().tabelle} · ${esc(g.n.replace("Gruppe", T().gruppe))}</h2><div class="tabrahmen"><table>
+      <thead><tr><th>#</th>${T().kopf.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${zeilen}</tbody></table></div></section>`;
+  }
+  if (gespielt.length) html += `<section class="karte"><h2>${T().natiErg}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
+  return html + `<p class="leise" style="text-align:center;margin:0">${T().natiQuelle}</p>`;
+}
+
 // ---- Unsere Woche: alle Spiele aller Mannschaften, Montag bis Sonntag ----
 function wocheTage(now) {
   let heute = tagKey(now);
@@ -330,7 +375,8 @@ function spannen(n) {
 function knoepfe(now) {
   const n = wocheSpiele(now).length, s = spannen(D.teams.length);
   const k = [`<button class="woche" data-reiter="woche" aria-pressed="${AKTIV === "woche"}">${T().woche} <small>· ${T().spiele(n)}</small></button>`]
-    .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}">${esc(t.reiter)}</button>`));
+    .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}">${esc(t.reiter)}</button>`))
+    .concat(D.nati?.spiele?.length ? [`<button class="woche" data-reiter="nati" aria-pressed="${AKTIV === "nati"}">🦁 Roude Léiw</button>`] : []);
   document.getElementById("knoepfe").innerHTML = k.join("");
 }
 function render() {
@@ -343,12 +389,13 @@ function render() {
     document.getElementById("inhalt").innerHTML = `<section class="karte"><h2>${T().leer}</h2><p class="hinweis">${T().leerText}</p></section>`;
     return;
   }
-  if (AKTIV !== "woche" && !D.teams.some(t => String(t.id) === AKTIV)) AKTIV = "woche";
+  if (AKTIV !== "woche" && !(AKTIV === "nati" && D.nati?.spiele?.length) && !D.teams.some(t => String(t.id) === AKTIV)) AKTIV = "woche";
   knoepfe(now);
   const t = D.teams.find(t => String(t.id) === AKTIV);
   document.getElementById("unterzeile").textContent = t ? `${t.alter}${/\d$/.test(t.reiter) ? " " + t.nr : ""} · ${saison()}` : `${T().alle} · ${saison()}`;
   const offenAuf = [...document.querySelectorAll("#inhalt details[open] summary")].map(s => s.textContent);
-  document.getElementById("inhalt").innerHTML = t ? teamHtml(t, now) : wocheHtml(now);
+  if (AKTIV === "nati") document.getElementById("unterzeile").textContent = T().natiUnter;
+  document.getElementById("inhalt").innerHTML = t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : wocheHtml(now);
   for (const s of document.querySelectorAll("#inhalt details summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
   const stand = new Date(D.stand);
   document.getElementById("fuss").innerHTML = T().fuss(`${kurzDatum(stand)} ${uhr(stand)}`, FASSUNG);

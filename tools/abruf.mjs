@@ -317,6 +317,9 @@ async function main() {
   try { bam = await (await import("./bambini.mjs")).bamHolen(); console.log("Bambinis:", bam.quellen.join(", ")); }
   catch (e) { console.error("Bambinis:", e.message); bam = bamAus(alt); }
   bamDazu(neu, bam);
+  // Nationalmannschaft von FuPa. Fehler → alter Stand, der Rest läuft weiter.
+  try { neu.nati = await (await import("./nati.mjs")).natiHolen(); console.log("Nationalmannschaft:", neu.nati.spiele.length, "Spiele,", neu.nati.gruppe?.n || "ohne Tabelle"); }
+  catch (e) { console.error("Nationalmannschaft:", e.message); neu.nati = alt.nati || null; }
   for (const t of neu.teams) t.datei = dateiName(t);
 
   if (JSON.stringify({ ...alt, stand: 0, kategorien: 0 }) === JSON.stringify({ ...neu, stand: 0, kategorien: 0 }) && alt.kategorien?.tag === kategorien.tag) {
