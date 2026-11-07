@@ -40,6 +40,7 @@ header p{margin:3px 0 0;font-size:13px;opacity:.75}
 .raster button{font-family:inherit;font-weight:600;font-size:14px;line-height:1.15;padding:10px 4px;border-radius:9px;border:1px solid var(--linie);
   background:var(--karte);color:var(--text);cursor:pointer;min-width:0;overflow-wrap:anywhere}
 .raster button.woche{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:8px}
+.raster button.nati{padding:7px 4px}
 .raster button.woche small{font-weight:500;color:var(--leise)}
 .raster button[aria-pressed="true"]{background:var(--schwarz);color:var(--bg);border-color:var(--schwarz)}
 .raster button[aria-pressed="true"] small{color:inherit;opacity:.8}
@@ -114,7 +115,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-07 e";
+const FASSUNG = "2026-11-07 f";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -288,6 +289,9 @@ function kalenderKarte(t) {
 }
 
 // ---- Nationalmannschaft (Roude Léiw), Daten von FuPa ----
+// Luxemburger Flagge als Reiter (als Bild, Flaggen-Emojis zeigt Windows nur als „LU“).
+const FLAGGE = '<svg viewBox="0 0 10 6" width="40" height="24" aria-hidden="true" style="display:block;border-radius:3px;box-shadow:0 0 0 1px rgba(0,0,0,.25)">'
+  + '<rect width="10" height="2" fill="#EF3340"/><rect y="2" width="10" height="2" fill="#fff"/><rect y="4" width="10" height="2" fill="#00A3E0"/></svg>';
 // FuPa schreibt die Länder deutsch; für FR/EN über den ISO-Code übersetzen.
 const LAENDER = { Albanien: "AL", Andorra: "AD", Armenien: "AM", Aserbaidschan: "AZ", Belgien: "BE", "Bosnien-Herzegowina": "BA",
   "Bosnien und Herzegowina": "BA", Bulgarien: "BG", "Dänemark": "DK", Deutschland: "DE", England: "GB-ENG", Estland: "EE",
@@ -376,7 +380,7 @@ function knoepfe(now) {
   const n = wocheSpiele(now).length, s = spannen(D.teams.length);
   const k = [`<button class="woche" data-reiter="woche" aria-pressed="${AKTIV === "woche"}">${T().woche} <small>· ${T().spiele(n)}</small></button>`]
     .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}">${esc(t.reiter)}</button>`))
-    .concat(D.nati?.spiele?.length ? [`<button class="woche" data-reiter="nati" aria-pressed="${AKTIV === "nati"}">🦁 Roude Léiw</button>`] : []);
+    .concat(D.nati?.spiele?.length ? [`<button class="woche nati" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="Luxemburg" title="Luxemburg">${FLAGGE}</button>`] : []);
   document.getElementById("knoepfe").innerHTML = k.join("");
 }
 function render() {
