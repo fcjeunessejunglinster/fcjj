@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-07T18:58:22.743Z",
+ "stand": "2026-11-07T20:07:16.747Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -23848,6 +23848,424 @@
     "WU13 Minimes F Cl2 S2 Phase 2",
     "WU13 Minimes F Cl2 S2 Phase 1",
     "Coupe WU13 Minimes F - 1/8 de Finale"
+   ]
+  }
+ },
+ "nati": {
+  "spiele": [
+   {
+    "id": 13823340,
+    "d": "2025-03-22T18:00:00+01:00",
+    "slug": "luxemburg-m1-schweden-m1-250322_2",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Schweden",
+     "n": "Schweden"
+    },
+    "hs": 1,
+    "as": 0,
+    "gespielt": true,
+    "wett": "Testspiele",
+    "runde": null
+   },
+   {
+    "id": 13800564,
+    "d": "2025-03-25T20:45:00+01:00",
+    "slug": "schweiz-m1-luxemburg-m1-250325",
+    "h": {
+     "id": "Schweiz",
+     "n": "Schweiz"
+    },
+    "a": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "hs": 3,
+    "as": 1,
+    "gespielt": true,
+    "wett": "Testspiele",
+    "runde": null
+   },
+   {
+    "id": 13870197,
+    "d": "2025-06-06T19:00:00+02:00",
+    "slug": "luxemburg-m1-slowenien-m1-250606",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Slowenien",
+     "n": "Slowenien"
+    },
+    "hs": 0,
+    "as": 1,
+    "gespielt": true,
+    "wett": "Testspiele",
+    "runde": null
+   },
+   {
+    "id": 13870198,
+    "d": "2025-06-10T20:45:00+02:00",
+    "slug": "luxemburg-m1-republik-irland-m1-250610",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Republik Irland",
+     "n": "Republik Irland"
+    },
+    "hs": 0,
+    "as": 0,
+    "gespielt": true,
+    "wett": "Testspiele",
+    "runde": null
+   },
+   {
+    "id": 13755677,
+    "d": "2025-09-04T20:45:00+02:00",
+    "slug": "luxemburg-m1-nordirland-m1-250904",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Nordirland",
+     "n": "Nordirland"
+    },
+    "hs": 1,
+    "as": 3,
+    "gespielt": true,
+    "wett": "WM-Qualifikation",
+    "runde": "A"
+   },
+   {
+    "id": 13755682,
+    "d": "2025-09-07T20:45:00+02:00",
+    "slug": "luxemburg-m1-slowakei-m1-250907",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Slowakei",
+     "n": "Slowakei"
+    },
+    "hs": 0,
+    "as": 1,
+    "gespielt": true,
+    "wett": "WM-Qualifikation",
+    "runde": "A"
+   },
+   {
+    "id": 13874161,
+    "d": "2025-10-10T20:45:00+02:00",
+    "slug": "deutschland-m1-luxemburg-m1-251010",
+    "h": {
+     "id": "Deutschland",
+     "n": "Deutschland"
+    },
+    "a": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "hs": 4,
+    "as": 0,
+    "gespielt": true,
+    "wett": "WM-Qualifikation",
+    "runde": "A"
+   },
+   {
+    "id": 13755676,
+    "d": "2025-10-13T20:45:00+02:00",
+    "slug": "slowakei-m1-luxemburg-m1-251013",
+    "h": {
+     "id": "Slowakei",
+     "n": "Slowakei"
+    },
+    "a": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "hs": 2,
+    "as": 0,
+    "gespielt": true,
+    "wett": "WM-Qualifikation",
+    "runde": "A"
+   },
+   {
+    "id": 13874163,
+    "d": "2025-11-14T20:45:00+01:00",
+    "slug": "luxemburg-m1-deutschland-m1-251114",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Deutschland",
+     "n": "Deutschland"
+    },
+    "hs": 0,
+    "as": 2,
+    "gespielt": true,
+    "wett": "WM-Qualifikation",
+    "runde": "A"
+   },
+   {
+    "id": 13755683,
+    "d": "2025-11-17T20:45:00+01:00",
+    "slug": "nordirland-m1-luxemburg-m1-251117",
+    "h": {
+     "id": "Nordirland",
+     "n": "Nordirland"
+    },
+    "a": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "hs": 1,
+    "as": 0,
+    "gespielt": true,
+    "wett": "WM-Qualifikation",
+    "runde": "A"
+   },
+   {
+    "id": 14784205,
+    "d": "2026-03-26T18:00:00+01:00",
+    "slug": "malta-m1-luxemburg-m1-260326_2",
+    "h": {
+     "id": "Malta",
+     "n": "Malta"
+    },
+    "a": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "hs": 0,
+    "as": 2,
+    "gespielt": true,
+    "wett": "UEFA Nations League",
+    "runde": "PlayOff-C/D-Hinspiel"
+   },
+   {
+    "id": 14784207,
+    "d": "2026-03-31T18:00:00+02:00",
+    "slug": "luxemburg-m1-malta-m1-260331_2",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Malta",
+     "n": "Malta"
+    },
+    "hs": 3,
+    "as": 0,
+    "gespielt": true,
+    "wett": "UEFA Nations League",
+    "runde": "PlayOff-C/D-Rückspiel"
+   },
+   {
+    "id": 14858781,
+    "d": "2026-06-03T20:45:00+02:00",
+    "slug": "luxemburg-m1-italien-m1-260603",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Italien",
+     "n": "Italien"
+    },
+    "hs": 0,
+    "as": 1,
+    "gespielt": true,
+    "wett": "Testspiele",
+    "runde": null
+   },
+   {
+    "id": 14864210,
+    "d": "2026-06-06T20:00:00+02:00",
+    "slug": "albanien-m1-luxemburg-m1-260606",
+    "h": {
+     "id": "Albanien",
+     "n": "Albanien"
+    },
+    "a": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "hs": 0,
+    "as": 1,
+    "gespielt": true,
+    "wett": "Testspiele",
+    "runde": null
+   },
+   {
+    "id": 14856468,
+    "d": "2026-09-26T18:00:00+02:00",
+    "slug": "bulgarien-m1-luxemburg-m1-260926",
+    "h": {
+     "id": "Bulgarien",
+     "n": "Bulgarien"
+    },
+    "a": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "hs": 1,
+    "as": 2,
+    "gespielt": true,
+    "wett": "UEFA Nations League",
+    "runde": "C4"
+   },
+   {
+    "id": 14856470,
+    "d": "2026-09-29T20:45:00+02:00",
+    "slug": "luxemburg-m1-island-m1-260929",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Island",
+     "n": "Island"
+    },
+    "hs": 0,
+    "as": 3,
+    "gespielt": true,
+    "wett": "UEFA Nations League",
+    "runde": "C4"
+   },
+   {
+    "id": 14856472,
+    "d": "2026-10-03T18:00:00+02:00",
+    "slug": "estland-m1-luxemburg-m1-261003",
+    "h": {
+     "id": "Estland",
+     "n": "Estland"
+    },
+    "a": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "hs": 1,
+    "as": 0,
+    "gespielt": true,
+    "wett": "UEFA Nations League",
+    "runde": "C4"
+   },
+   {
+    "id": 14856473,
+    "d": "2026-10-06T20:45:00+02:00",
+    "slug": "luxemburg-m1-bulgarien-m1-261006",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Bulgarien",
+     "n": "Bulgarien"
+    },
+    "hs": 0,
+    "as": 2,
+    "gespielt": true,
+    "wett": "UEFA Nations League",
+    "runde": "C4"
+   },
+   {
+    "id": 14856475,
+    "d": "2026-11-13T20:45:00+01:00",
+    "slug": "luxemburg-m1-estland-m1-261113",
+    "h": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "a": {
+     "id": "Estland",
+     "n": "Estland"
+    },
+    "hs": null,
+    "as": null,
+    "gespielt": false,
+    "wett": "UEFA Nations League",
+    "runde": "C4",
+    "ort": "Stade de Luxembourg"
+   },
+   {
+    "id": 14856477,
+    "d": "2026-11-16T18:00:00+01:00",
+    "slug": "island-m1-luxemburg-m1-261116",
+    "h": {
+     "id": "Island",
+     "n": "Island"
+    },
+    "a": {
+     "id": "Luxemburg",
+     "n": "Luxemburg"
+    },
+    "hs": null,
+    "as": null,
+    "gespielt": false,
+    "wett": "UEFA Nations League",
+    "runde": "C4"
+   }
+  ],
+  "gruppe": {
+   "n": "UEFA Nations League · Gruppe C4",
+   "tabelle": [
+    {
+     "pl": 1,
+     "id": "Island",
+     "n": "Island",
+     "sp": 4,
+     "s": 2,
+     "u": 2,
+     "nl": 0,
+     "t": 7,
+     "g": 1,
+     "pkt": 8
+    },
+    {
+     "pl": 2,
+     "id": "Estland",
+     "n": "Estland",
+     "sp": 4,
+     "s": 1,
+     "u": 3,
+     "nl": 0,
+     "t": 2,
+     "g": 1,
+     "pkt": 6
+    },
+    {
+     "pl": 3,
+     "id": "Bulgarien",
+     "n": "Bulgarien",
+     "sp": 4,
+     "s": 1,
+     "u": 1,
+     "nl": 2,
+     "t": 3,
+     "g": 5,
+     "pkt": 4
+    },
+    {
+     "pl": 4,
+     "id": "Luxemburg",
+     "n": "Luxemburg",
+     "sp": 4,
+     "s": 1,
+     "u": 0,
+     "nl": 3,
+     "t": 2,
+     "g": 7,
+     "pkt": 3
+    }
    ]
   }
  }
