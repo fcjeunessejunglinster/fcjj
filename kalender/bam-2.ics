@@ -1,0 +1,90 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FC Jeunesse Junglinster//App//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:FCJJ BAM 2
+X-WR-TIMEZONE:Europe/Luxembourg
+REFRESH-INTERVAL;VALUE=DURATION:PT3H
+X-PUBLISHED-TTL:PT3H
+BEGIN:VEVENT
+UID:flf-9202609262-9000702@fcjj-app
+DTSTAMP:20260701T000000Z
+DTSTART:20260926T083000Z
+DTEND:20260926T100000Z
+SUMMARY:⚽ FCJJ BAM 2 · Mini-Spieltag
+LOCATION:Terrain 2 (Berbourg\, synth.)
+DESCRIPTION:Bambinis série 6\, Spieltag 1\nMit ENT Biwer/Berbourg I\, ENT 
+ Biwer/Berbourg II\, Union Mertert-Wasserbillig
+END:VEVENT
+BEGIN:VEVENT
+UID:flf-9202610032-9000702@fcjj-app
+DTSTAMP:20260701T000000Z
+DTSTART:20261003T083000Z
+DTEND:20261003T100000Z
+SUMMARY:⚽ FCJJ BAM 2 · Mini-Spieltag
+LOCATION:Terrain au Parc (Mertert\, synth.)
+DESCRIPTION:Bambinis série 6\, Spieltag 2\nMit Union Mertert-Wasserbillig\
+ , FC Munsbach\, US Sandweiler II
+END:VEVENT
+BEGIN:VEVENT
+UID:flf-9202610102-9000702@fcjj-app
+DTSTAMP:20260701T000000Z
+DTSTART:20261010T083000Z
+DTEND:20261010T100000Z
+SUMMARY:⚽ FCJJ BAM 2 · Mini-Spieltag
+LOCATION:Terrain 2 (Junglinster\, synth.)
+DESCRIPTION:Bambinis série 6\, Spieltag 3\nMit ENT Biwer/Berbourg II\, ENT
+  Biwer/Berbourg I\, ENT Mensdorf/Canach
+END:VEVENT
+BEGIN:VEVENT
+UID:flf-9202610172-9000702@fcjj-app
+DTSTAMP:20260701T000000Z
+DTSTART:20261017T083000Z
+DTEND:20261017T100000Z
+SUMMARY:⚽ FCJJ BAM 2 · Mini-Spieltag
+LOCATION:Terrain Breil (Echternach\, synth.)
+DESCRIPTION:Bambinis série 6\, Spieltag 4\nMit Daring Echternach I\, FC Ko
+ eppchen Wormeldange I\, Victoria Rosport
+END:VEVENT
+BEGIN:VEVENT
+UID:flf-9202610242-9000702@fcjj-app
+DTSTAMP:20260701T000000Z
+DTSTART:20261024T083000Z
+DTEND:20261024T100000Z
+SUMMARY:⚽ FCJJ BAM 2 · Mini-Spieltag
+LOCATION:Terrain au Parc (Mertert\, synth.)
+DESCRIPTION:Bambinis série 6\, Spieltag 5\nMit Union Mertert-Wasserbillig\
+ , CS Grevenmacher II\, Daring Echternach II
+END:VEVENT
+BEGIN:VEVENT
+UID:flf-9202611142-9000702@fcjj-app
+DTSTAMP:20260701T000000Z
+DTSTART:20261114T100000Z
+DTEND:20261114T113000Z
+SUMMARY:⚽ FCJJ BAM 2 · Mini-Spieltag
+LOCATION:Terrain 2 (Grevenmacher\, synth.)
+DESCRIPTION:Bambinis série 6\, Spieltag 6\nMit CS Grevenmacher I\, Daring 
+ Echternach I\, FC Munsbach
+END:VEVENT
+BEGIN:VEVENT
+UID:flf-9202611212-9000702@fcjj-app
+DTSTAMP:20260701T000000Z
+DTSTART:20261121T093000Z
+DTEND:20261121T110000Z
+SUMMARY:⚽ FCJJ BAM 2 · Mini-Spieltag
+LOCATION:Terrain 2 (Sandweiler\, synth.)
+DESCRIPTION:Bambinis série 6\, Spieltag 7\nMit US Sandweiler II\, FC Koepp
+ chen Wormeldange II\, US Moutfort-Medingen
+END:VEVENT
+BEGIN:VEVENT
+UID:flf-9202611282-9000702@fcjj-app
+DTSTAMP:20260701T000000Z
+DTSTART:20261128T093000Z
+DTEND:20261128T110000Z
+SUMMARY:⚽ FCJJ BAM 2 · Mini-Spieltag
+LOCATION:Terrain 2 (Junglinster\, synth.)
+DESCRIPTION:Bambinis série 6\, Spieltag 8\nMit US Berdorf-Consdorf 01\, Da
+ ring Echternach I\, ENT Biwer/Berbourg I
+END:VEVENT
+END:VCALENDAR
