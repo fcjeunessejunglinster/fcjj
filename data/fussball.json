@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-07T20:07:16.747Z",
+ "stand": "2026-11-07T22:48:36.322Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -15249,10 +15249,11 @@
       "id": 44956,
       "n": "Red Star Merl-Belair"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 3,
+     "as": 2,
+     "gespielt": true,
      "forfait": false,
+     "bem": "t.a.b. 3 - 2",
      "ort": "Stade Gaston Diderich (Luxembourg, synth.)"
     },
     {
