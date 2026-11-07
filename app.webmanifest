@@ -1,0 +1,15 @@
+{
+ "name": "FC Jeunesse Junglinster",
+ "short_name": "FCJJ",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#111111",
+ "theme_color": "#111111",
+ "icons": [
+  { "src": "bilder/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+  { "src": "bilder/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+  { "src": "bilder/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+  { "src": "bilder/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+ ]
+}

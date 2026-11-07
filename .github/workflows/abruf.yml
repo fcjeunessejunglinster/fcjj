@@ -1,0 +1,54 @@
+# Holt Spiele und Tabellen des FC Jeunesse Junglinster von der FLF, legt sie als data/fussball.json ab
+# (gelesen von index.html) und schreibt je Mannschaft ein Kalender-Abo unter kalender/*.ics.
+name: FLF-Daten
+
+on:
+  schedule:
+    # Zeiten in UTC (Luxemburg = UTC+1, im Sommer UTC+2). GitHub startet geplante Läufe oft etwas später.
+    - cron: "17 7-21 * * 0,6"   # Samstag und Sonntag stündlich
+    - cron: "17 20 * * 1-5"     # Montag bis Freitag abends
+    - cron: "37 22 * * *"       # jeden Abend spät (Abendspiele)
+    - cron: "7 6 * * *"         # jeden Morgen
+  workflow_dispatch:            # „Run workflow“ im Actions-Tab startet ihn sofort
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: abruf
+  cancel-in-progress: false
+
+jobs:
+  abruf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # pdftotext liest die Bambini-PDFs. Fehlt es, bleibt der alte Bambini-Stand.
+      - run: command -v pdftotext || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils) || true
+      - run: node tools/abruf.mjs
+      - name: Speichern, falls sich etwas geändert hat
+        run: |
+          git add -A data kalender
+          if git diff --cached --quiet; then echo "keine Änderung"; exit 0; fi
+          git config user.name "flf-abruf"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "FLF: Daten aktualisiert"
+          for i in 1 2 3; do
+            git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 10))
+          done
+          exit 1
+      # GitHub schaltet Zeitpläne nach 60 Tagen ohne Änderung im Repo ab (Winterpause). Wieder einschalten.
+      - name: Zeitplan wach halten
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/abruf.yml/enable"

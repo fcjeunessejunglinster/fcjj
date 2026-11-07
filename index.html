@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>FCJJ</title>
+<meta name="description" content="Spiele, Ergebnisse und Tabellen der Mannschaften des FC Jeunesse Junglinster, automatisch von der FLF.">
+<meta name="theme-color" content="#111111">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FCJJ">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="bilder/icon-192.png">
+<link rel="manifest" href="app.webmanifest">
+<style>
+:root{
+  --bg:#f4f4f2; --karte:#fff; --text:#111; --leise:#666660; --linie:#e2e2de;
+  --schwarz:#111; --rot:#e31b23; --rotHell:#fde8e9; --grau:#bfbfbd;
+  --sieg:#1f7a3f; --remis:#8a7a2a; --nl:#b3261e;
+  --kopf:#111; --kopfText:#fff;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121212; --karte:#1c1c1c; --text:#eee; --leise:#a2a29c; --linie:#2e2e2e;
+  --schwarz:#eee; --rotHell:#3a1416; --sieg:#4cb873; --remis:#cdb85a; --nl:#ef6b62;
+  --kopf:#000; color-scheme:dark}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;touch-action:manipulation}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  padding-bottom:env(safe-area-inset-bottom,0px)}
+.innen{max-width:760px;margin:0 auto;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+header{background:var(--kopf);color:var(--kopfText);padding-top:env(safe-area-inset-top,0px);border-bottom:4px solid var(--rot)}
+header .innen{display:flex;align-items:center;gap:12px;padding-block:12px}
+header img{width:48px;height:48px;border-radius:12px;background:#fff;flex:none}
+header h1{margin:0;font-size:19px;line-height:1.1;letter-spacing:.01em}
+header p{margin:3px 0 0;font-size:13px;opacity:.75}
+#reiter{position:sticky;top:0;z-index:5;background:var(--bg);padding-block:10px 8px;border-bottom:1px solid var(--linie)}
+.raster{display:grid;grid-template-columns:repeat(60,1fr);gap:6px}
+.raster button{font-family:inherit;font-weight:600;font-size:14px;line-height:1.15;padding:10px 4px;border-radius:9px;border:1px solid var(--linie);
+  background:var(--karte);color:var(--text);cursor:pointer;min-width:0;overflow-wrap:anywhere}
+.raster button.woche{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:8px}
+.raster button.woche small{font-weight:500;color:var(--leise)}
+.raster button[aria-pressed="true"]{background:var(--schwarz);color:var(--bg);border-color:var(--schwarz)}
+.raster button[aria-pressed="true"] small{color:inherit;opacity:.8}
+.raster button:focus-visible{outline:3px solid var(--rot);outline-offset:1px}
+main .innen{padding-block:14px 30px;display:grid;gap:14px}
+.karte{background:var(--karte);border:1px solid var(--linie);border-radius:12px;overflow:hidden}
+.karte>h2,.karte>summary{margin:0;padding:10px 14px;font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--leise);
+  border-bottom:1px solid var(--linie);font-weight:700}
+details.karte>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;border-bottom:0}
+details.karte>summary::after{content:"Anzeigen ▾";text-transform:none;letter-spacing:0;font-weight:600;color:var(--text)}
+details.karte[open]>summary{border-bottom:1px solid var(--linie)}
+details.karte[open]>summary::after{content:"Zuklappen ▴"}
+.heute{border:2px solid var(--rot)}
+.heute>h2{background:var(--rot);color:#fff;border-bottom:0}
+.gross{padding:14px;display:grid;gap:6px}
+.gross .zeit{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums}
+.gross .gegen{font-size:18px;font-weight:700}
+.leise{color:var(--leise);font-size:14px}
+ul.spiele{list-style:none;margin:0;padding:0}
+ul.spiele li{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--linie)}
+ul.spiele li:first-child{border-top:0}
+ul.spiele li.klick{cursor:pointer}
+.datum{font-size:13px;line-height:1.25;color:var(--leise);font-variant-numeric:tabular-nums}
+.datum b{color:var(--text);font-size:14px}
+.zeile{min-width:0}
+.zeile .t{font-weight:600;overflow-wrap:anywhere}
+.zeile .m{font-size:13px;color:var(--leise);overflow-wrap:anywhere}
+.schild{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 6px;border-radius:5px;
+  background:var(--rotHell);color:var(--rot);margin-right:6px;vertical-align:1px}
+.schild.team{background:var(--schwarz);color:var(--bg)}
+.erg{font-weight:800;font-size:18px;font-variant-numeric:tabular-nums;padding:2px 8px;border-left:4px solid var(--linie);white-space:nowrap}
+.erg.S{border-color:var(--sieg)}.erg.U{border-color:var(--remis)}.erg.N{border-color:var(--nl)}
+.erg.klein{font-size:13px;font-weight:600;color:var(--leise)}
+.uhr{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tabrahmen{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14px}
+th,td{padding:8px 6px;text-align:center}
+th{font-size:12px;color:var(--leise);font-weight:600}
+td:nth-child(2),th:nth-child(2){text-align:left}
+tbody tr+tr td{border-top:1px solid var(--linie)}
+tr.wir td{background:var(--rotHell);font-weight:700}
+tr.wir td:first-child{box-shadow:inset 4px 0 var(--rot)}
+.tag{padding:8px 14px;font-weight:700;font-size:14px;background:var(--bg);border-top:1px solid var(--linie)}
+.knopf{display:inline-block;font-family:inherit;font-weight:600;font-size:15px;text-decoration:none;color:#fff;background:var(--schwarz);
+  border:0;border-radius:10px;padding:11px 14px;cursor:pointer}
+@media (prefers-color-scheme:dark){.knopf{color:#111}}
+.kal{padding:14px;display:grid;gap:8px}
+.kal code{font-size:12px;overflow-wrap:anywhere;color:var(--leise)}
+.hinweis{padding:14px;color:var(--leise)}
+footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
+@media (min-width:600px){.raster button{font-size:15px}}
+</style>
+</head>
+<body>
+<header><div class="innen">
+  <img src="bilder/ball.png" alt="">
+  <div><h1>FC Jeunesse Junglinster</h1><p id="unterzeile">Spiele, Ergebnisse und Tabellen</p></div>
+</div></header>
+<nav id="reiter"><div class="innen raster" id="knoepfe"></div></nav>
+<main><div class="innen" id="inhalt"><p class="hinweis">Lade …</p></div></main>
+<footer id="fuss"></footer>
+
+<script>
+"use strict";
+const FASSUNG = "2026-11-07 a";
+const TZ = "Europe/Luxembourg";
+const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
+const MERK = "fcjj_v1_";
+const merk = {
+  get: k => { try { return localStorage.getItem(MERK + k); } catch (e) { return null; } },
+  set: (k, v) => { try { localStorage.setItem(MERK + k, v); } catch (e) {} },
+};
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// ---- Zeit (immer Luxemburger Zeit, egal wo das Handy steht) ----
+const teile = d => Object.fromEntries(new Intl.DateTimeFormat("de-DE", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit",
+  hour: "2-digit", minute: "2-digit", weekday: "short", hourCycle: "h23" }).formatToParts(d).map(p => [p.type, p.value]));
+const tagKey = d => { const p = teile(d); return `${p.year}-${p.month}-${p.day}`; };
+const uhr = d => { const p = teile(d); return `${p.hour}:${p.minute}`; };
+// Die FLF schreibt „Uhrzeit noch offen“ als 00:00 (manchmal 00:00:01, 01:00, 01:30) — vor 6 Uhr gibt es kein echtes Spiel.
+const offen = sp => +uhr(new Date(sp.d)).slice(0, 2) < 6;
+const wt = d => teile(d).weekday.replace(".", "");
+const kurzDatum = d => { const p = teile(d); return `${+p.day}.${+p.month}.`; };
+const langDatum = d => new Intl.DateTimeFormat("de-DE", { timeZone: TZ, weekday: "long", day: "numeric", month: "long" }).format(d);
+const tagPlus = (key, n) => { const [y, m, d] = key.split("-").map(Number); const x = new Date(Date.UTC(y, m - 1, d + n, 12)); return x.toISOString().slice(0, 10); };
+// Gespielt/vorbei: Ergebnis da, sonst 3 h nach Anpfiff; bei offener Uhrzeit erst am Tag danach.
+const vorbei = (sp, now) => sp.gespielt || (offen(sp) ? tagKey(now) > tagKey(new Date(sp.d)) : now - new Date(sp.d) > 3 * 3600e3);
+
+// ---- Daten ----
+let D = null, AKTIV = merk.get("reiter") || "woche";
+function eigeneSpiele(t) {
+  const ids = new Set([...t.ids, ...(t.mit || [])]);
+  const aus = [];
+  for (const k of Object.values(D.klassen))
+    for (const sp of k.spiele) if (ids.has(sp.h.id) || ids.has(sp.a.id))
+      aus.push({ ...sp, klasse: k.n, kid: k.id, typ: k.typ, erg: k.ergebnisse && !KEINE_ERG.includes(t.kat), heim: ids.has(sp.h.id), team: t });
+  return aus.sort((a, b) => a.d.localeCompare(b.d));
+}
+const gegner = sp => sp.heim ? sp.a : sp.h;
+function wertung(sp) {
+  if (!sp.erg || sp.hs == null) return "";
+  const w = sp.heim ? sp.hs : sp.as, g = sp.heim ? sp.as : sp.hs;
+  return w > g ? "S" : w < g ? "N" : "U";
+}
+const artSchild = sp => sp.bam ? "" : sp.typ === "CUP" ? '<span class="schild">Pokal</span>' : sp.typ === "FM" ? '<span class="schild">Freundschaft</span>' : "";
+
+function ergText(sp, now) {
+  if (sp.erg && sp.hs != null && (sp.gespielt || sp.forfait)) {
+    const w = wertung(sp);
+    return `<span class="erg ${w}">${sp.hs}:${sp.as}</span>`;
+  }
+  if (vorbei(sp, now)) return `<span class="erg klein">${sp.erg ? (sp.bem === "Arrêté" ? "abgebr." : "–") : "gespielt"}</span>`;
+  return `<span class="uhr">${offen(sp) ? "offen" : uhr(new Date(sp.d))}</span>`;
+}
+function spielLi(sp, now, mitTeam) {
+  const d = new Date(sp.d), g = gegner(sp);
+  const titel = sp.bam ? esc(g.n) : `${sp.heim ? "🏠" : "✈️"} ${esc(g.n)}`;
+  const meta = [sp.klasse + (sp.tag ? ` · Spieltag ${sp.tag}` : "")];
+  if (!vorbei(sp, now) && sp.ort) meta.push("📍 " + sp.ort);
+  if (sp.forfait) meta.push("Forfait");
+  if (sp.bem && sp.bem !== "Arrêté") meta.push(sp.bem);
+  return `<li${mitTeam ? ` class="klick" data-gehe="${sp.team.id}"` : ""}><span class="datum"><b>${wt(d)}</b><br>${kurzDatum(d)}</span>
+    <span class="zeile"><span class="t">${mitTeam ? `<span class="schild team">${esc(sp.team.reiter)}</span>` : ""}${artSchild(sp)}${titel}</span>
+    <br><span class="m">${esc(meta.join(" · "))}</span></span>${ergText(sp, now)}</li>`;
+}
+
+// ---- Mannschaft ----
+function heuteKarte(spiele, now) {
+  const heute = tagKey(now), morgen = tagPlus(heute, 1);
+  const sp = spiele.find(s => !vorbei(s, now) && [heute, morgen].includes(tagKey(new Date(s.d))));
+  if (!sp) return "";
+  const d = new Date(sp.d), istHeute = tagKey(d) === heute, g = gegner(sp);
+  const begonnen = !offen(sp) && now >= d;
+  return `<section class="karte heute"><h2>${istHeute ? (begonnen ? "Spiel läuft" : "Heute Spieltag! ⚽") : "Morgen Spieltag! ⚽"}</h2>
+    <div class="gross"><span class="zeit">${offen(sp) ? "Uhrzeit offen" : (sp.bam && !sp.bam.zeitSicher ? "ca. " : "") + uhr(d) + " Uhr"}</span>
+    <span class="gegen">${sp.bam ? esc(g.n) : (sp.heim ? "🏠 Heimspiel gegen " : "✈️ Auswärts bei ") + esc(g.n)}</span>
+    <span class="leise">${artSchild(sp)}${esc(sp.klasse)}${sp.ort ? " · 📍 " + esc(sp.ort) : ""}</span></div></section>`;
+}
+function tabelleKarte(k, t) {
+  if (!k?.tabelle?.length) return "";
+  const ids = new Set(t.ids);
+  const zeilen = k.tabelle.map(z => `<tr class="${ids.has(z.id) ? "wir" : ""}"><td>${z.pl}</td><td>${esc(z.n)}</td><td>${z.sp}</td><td>${z.s}</td><td>${z.u}</td><td>${z.nl}</td><td>${z.t}:${z.g}</td><td><b>${z.pkt}</b></td></tr>`).join("");
+  return `<section class="karte"><h2>Tabelle · ${esc(k.n)}</h2><div class="tabrahmen"><table>
+    <thead><tr><th>#</th><th>Mannschaft</th><th>Sp</th><th>S</th><th>U</th><th>N</th><th>Tore</th><th>Pkt</th></tr></thead><tbody>${zeilen}</tbody></table></div></section>`;
+}
+function klassenSpiele(k, t, now) {
+  const ids = new Set(t.ids), tage = new Map();
+  for (const sp of k.spiele) { const key = sp.tag ? "Spieltag " + sp.tag : "Ohne Spieltag"; if (!tage.has(key)) tage.set(key, []); tage.get(key).push(sp); }
+  let html = "";
+  for (const [tag, liste] of tage) {
+    html += `<div class="tag">${esc(tag)} · ${kurzDatum(new Date(liste[0].d))}</div><ul class="spiele">`;
+    html += liste.map(sp => {
+      const wir = ids.has(sp.h.id) || ids.has(sp.a.id);
+      const erg = k.ergebnisse && sp.hs != null && (sp.gespielt || sp.forfait) ? `<span class="erg">${sp.hs}:${sp.as}</span>`
+        : `<span class="uhr">${vorbei(sp, now) ? "–" : offen(sp) ? "offen" : uhr(new Date(sp.d))}</span>`;
+      return `<li><span class="datum">${wt(new Date(sp.d))}<br>${kurzDatum(new Date(sp.d))}</span><span class="zeile"><span class="t"${wir ? ' style="color:var(--rot)"' : ""}>${esc(sp.h.n)} – ${esc(sp.a.n)}</span></span>${erg}</li>`;
+    }).join("") + "</ul>";
+  }
+  return html;
+}
+function teamHtml(t, now) {
+  const spiele = eigeneSpiele(t);
+  const kommend = spiele.filter(sp => !vorbei(sp, now));
+  const gespielt = spiele.filter(sp => vorbei(sp, now)).reverse();
+  // Aktuelle Ligaklasse = zuletzt begonnene Liga; die anderen sind frühere Phasen.
+  const ligen = t.klassen.map(id => D.klassen[id]).filter(k => k && k.typ === "CC").sort((a, b) => a.start.localeCompare(b.start));
+  const aktuell = ligen[ligen.length - 1], frueher = ligen.slice(0, -1).reverse();
+  let html = heuteKarte(spiele, now);
+  html += `<section class="karte"><h2>Nächste Spiele</h2>${kommend.length ? `<ul class="spiele">${kommend.slice(0, 5).map(sp => spielLi(sp, now)).join("")}</ul>` : '<p class="hinweis">Noch keine Termine.</p>'}</section>`;
+  if (aktuell) html += tabelleKarte(aktuell, t);
+  if (gespielt.length) html += `<section class="karte"><h2>Unsere Ergebnisse</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
+  if (aktuell) html += `<details class="karte"><summary>Alle Spiele der Klasse</summary>${klassenSpiele(aktuell, t, now)}</details>`;
+  for (const k of frueher) html += `<details class="karte"><summary>Früher: ${esc(k.n)}</summary>${tabelleKarte(k, t).replace(/^<section class="karte">|<\/section>$/g, "")}${klassenSpiele(k, t, now)}</details>`;
+  html += kalenderKarte(t);
+  return html;
+}
+function kalenderKarte(t) {
+  const https = new URL("kalender/" + t.datei, location.href).href;
+  const webcal = https.replace(/^https?:/, "webcal:");
+  return `<section class="karte"><h2>Kalender</h2><div class="kal">
+    <a class="knopf" href="${esc(webcal)}">📅 ${esc(t.reiter)} im Kalender abonnieren</a>
+    <span class="leise">Verschobene Spiele wandern im Kalender von selbst mit. Klappt der Knopf nicht, diese Adresse als Kalenderabo eintragen:</span>
+    <code>${esc(https)}</code></div></section>`;
+}
+
+// ---- Unsere Woche: alle Spiele aller Mannschaften, Montag bis Sonntag ----
+function wocheTage(now) {
+  let heute = tagKey(now);
+  const p = teile(now);
+  // Sonntagabend ab 22 Uhr zeigt schon die nächste Woche.
+  if (p.weekday.startsWith("So") && +p.hour >= 22) heute = tagPlus(heute, 1);
+  const [y, m, d] = heute.split("-").map(Number);
+  const wtag = (new Date(Date.UTC(y, m - 1, d)).getUTCDay() + 6) % 7;
+  const montag = tagPlus(heute, -wtag);
+  return Array.from({ length: 7 }, (_, i) => tagPlus(montag, i));
+}
+function wocheSpiele(now) {
+  const tage = new Set(wocheTage(now)), gesehen = new Set(), aus = [];
+  for (const t of D.teams) for (const sp of eigeneSpiele(t))
+    if (tage.has(tagKey(new Date(sp.d))) && !gesehen.has(sp.id + "|" + t.id)) { gesehen.add(sp.id + "|" + t.id); aus.push(sp); }
+  return aus.sort((a, b) => a.d.localeCompare(b.d));
+}
+function wocheHtml(now) {
+  const tage = wocheTage(now), spiele = wocheSpiele(now);
+  const heim = spiele.filter(sp => sp.heim).length;
+  const von = new Date(tage[0] + "T12:00:00Z"), bis = new Date(tage[6] + "T12:00:00Z");
+  let html = `<section class="karte"><h2>Unsere Woche · ${kurzDatum(von)}–${kurzDatum(bis)}</h2>
+    <p class="hinweis" style="padding-block:10px">${spiele.length ? `${spiele.length} Spiele, davon ${heim} zu Hause. Tippen öffnet die Mannschaft.` : "Diese Woche keine Spiele."}</p>`;
+  for (const tag of tage) {
+    const liste = spiele.filter(sp => tagKey(new Date(sp.d)) === tag);
+    if (!liste.length) continue;
+    html += `<div class="tag">${esc(langDatum(new Date(tag + "T12:00:00Z")))}${tag === tagKey(now) ? " · heute" : ""}</div><ul class="spiele">${liste.map(sp => spielLi(sp, now, true)).join("")}</ul>`;
+  }
+  return html + "</section>";
+}
+
+// ---- Oberfläche ----
+// Raster aus 60 Spalten: volle Reihen 4 (Handy) bzw. 6 Knöpfe, die letzte Reihe teilt sich die Breite.
+function spannen(n) {
+  const je = matchMedia("(min-width:600px)").matches ? 6 : 4;
+  const rest = n % je || je;
+  return Array.from({ length: n }, (_, i) => i >= n - rest ? 60 / rest : 60 / je);
+}
+function knoepfe(now) {
+  const n = wocheSpiele(now).length, s = spannen(D.teams.length);
+  const k = [`<button class="woche" data-reiter="woche" aria-pressed="${AKTIV === "woche"}">Unsere Woche <small>· ${n} ${n === 1 ? "Spiel" : "Spiele"}</small></button>`]
+    .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}">${esc(t.reiter)}</button>`));
+  document.getElementById("knoepfe").innerHTML = k.join("");
+}
+function render() {
+  const now = new Date();
+  if (!D?.teams?.length) {
+    document.getElementById("knoepfe").innerHTML = "";
+    document.getElementById("inhalt").innerHTML = `<section class="karte"><h2>Noch keine Daten</h2><p class="hinweis">Die Spiele kommen mit dem ersten automatischen Abruf von der FLF. Das dauert nach dem Einrichten ein paar Minuten.</p></section>`;
+    return;
+  }
+  if (AKTIV !== "woche" && !D.teams.some(t => String(t.id) === AKTIV)) AKTIV = "woche";
+  knoepfe(now);
+  const t = D.teams.find(t => String(t.id) === AKTIV);
+  document.getElementById("unterzeile").textContent = t ? `${t.alter}${/\d$/.test(t.reiter) ? " " + t.nr : ""} · ${D.saison?.n || ""}` : `Alle Mannschaften · ${D.saison?.n || ""}`;
+  const offenAuf = [...document.querySelectorAll("#inhalt details[open] summary")].map(s => s.textContent);
+  document.getElementById("inhalt").innerHTML = t ? teamHtml(t, now) : wocheHtml(now);
+  for (const s of document.querySelectorAll("#inhalt details summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
+  const stand = new Date(D.stand);
+  document.getElementById("fuss").innerHTML = `Daten von der FLF · zuletzt geändert ${kurzDatum(stand)} ${uhr(stand)}<br>FC Jeunesse Junglinster · seit 1935 · Fassung ${FASSUNG}`;
+}
+document.getElementById("knoepfe").addEventListener("click", e => {
+  const b = e.target.closest("button[data-reiter]"); if (!b) return;
+  AKTIV = b.dataset.reiter; merk.set("reiter", AKTIV); render(); scrollTo(0, 0);
+});
+document.getElementById("inhalt").addEventListener("click", e => {
+  const li = e.target.closest("[data-gehe]"); if (!li) return;
+  AKTIV = li.dataset.gehe; merk.set("reiter", AKTIV); render(); scrollTo(0, 0);
+});
+
+async function laden() {
+  try {
+    const r = await fetch("data/fussball.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw new Error(r.status);
+    const neu = await r.json();
+    D = neu; merk.set("data", JSON.stringify(neu));
+  } catch (e) {
+    if (!D) { try { D = JSON.parse(merk.get("data")); } catch (x) {} }
+  }
+  render();
+}
+try { D = JSON.parse(merk.get("data")); if (D) render(); } catch (e) {}
+laden();
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") laden(); });
+setInterval(() => { if (document.visibilityState === "visible") render(); }, 60e3);
+addEventListener("resize", () => D?.teams && knoepfe(new Date()));
+</script>
+</body>
+</html>
