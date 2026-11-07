@@ -54,6 +54,8 @@ details.karte[open]>summary{border-bottom:1px solid var(--linie)}
 details.karte[open]>summary::after{content:"Zuklappen ▴"}
 html[lang="en"] details.karte>summary::after{content:"Show ▾"}
 html[lang="en"] details.karte[open]>summary::after{content:"Hide ▴"}
+html[lang="fr"] details.karte>summary::after{content:"Afficher ▾"}
+html[lang="fr"] details.karte[open]>summary::after{content:"Masquer ▴"}
 .sprache{margin-left:auto;display:flex;gap:4px;flex:none}
 .sprache button{font:inherit;font-size:13px;font-weight:700;padding:5px 8px;border-radius:7px;border:1px solid rgba(255,255,255,.35);
   background:transparent;color:#fff;cursor:pointer}
@@ -104,7 +106,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 <header><div class="innen">
   <img src="bilder/ball.png" alt="">
   <div><h1>FC Jeunesse Junglinster</h1><p id="unterzeile"></p></div>
-  <div class="sprache" role="group" aria-label="Sprache / Language"><button data-lang="de">DE</button><button data-lang="en">EN</button></div>
+  <div class="sprache" role="group" aria-label="Sprache / Language"><button data-lang="de">DE</button><button data-lang="fr">FR</button><button data-lang="en">EN</button></div>
 </div></header>
 <nav id="reiter"><div class="innen raster" id="knoepfe"></div></nav>
 <main><div class="innen" id="inhalt"><p class="hinweis">Lade …</p></div></main>
@@ -112,7 +114,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-07 c";
+const FASSUNG = "2026-11-07 d";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -148,10 +150,24 @@ const TEXTE = {
     leer: "No data yet", leerText: "The matches arrive with the first automatic update from the FLF, a few minutes after setup.",
     fuss: (d, f) => `Data from the FLF · last updated ${d}<br>FC Jeunesse Junglinster · since 1935 · Version ${f}`,
     unterzeile: "Matches, results and tables", laden: "Loading …" },
+  fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
+    forfait: "Forfait", laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
+    ca: "vers ", uhr: "", heim: "🏠 À domicile contre ", aus: "✈️ À l'extérieur à ", tabelle: "Classement",
+    kopf: ["Équipe", "J", "G", "N", "P", "Buts", "Pts"], ohneTag: "Sans journée", naechste: "Prochains matchs",
+    keineTermine: "Pas encore de dates.", ergebnisse: "Nos résultats", alleKlasse: "Tous les matchs de la division", frueher: "Avant : ",
+    kalender: "Calendrier", abo: r => `📅 Ajouter ${r} au calendrier`,
+    aboHinweis: "Les matchs reportés se mettent à jour automatiquement dans le calendrier. Si le bouton ne marche pas, abonnez-vous à cette adresse :",
+    woche: "Notre semaine", spiele: n => n === 1 ? "1 match" : `${n} matchs`,
+    wocheText: (n, h) => `${n === 1 ? "1 match" : n + " matchs"}, dont ${h} à domicile. Touchez un match pour ouvrir l'équipe.`,
+    keineWoche: "Pas de match cette semaine.", heuteKurz: " · aujourd'hui", alle: "Toutes les équipes", saison: "Saison",
+    leer: "Pas encore de données", leerText: "Les matchs arrivent avec la première mise à jour automatique de la FLF, quelques minutes après l'installation.",
+    fuss: (d, f) => `Données de la FLF · dernière mise à jour ${d}<br>FC Jeunesse Junglinster · depuis 1935 · Version ${f}`,
+    unterzeile: "Matchs, résultats et classements", laden: "Chargement …" },
 };
-let LANG = merk.get("lang") || ((navigator.language || "").toLowerCase().startsWith("en") ? "en" : "de");
+let LANG = merk.get("lang") || (l => l.startsWith("en") ? "en" : l.startsWith("fr") ? "fr" : "de")((navigator.language || "").toLowerCase());
+if (!TEXTE[LANG]) LANG = "de";
 const T = () => TEXTE[LANG];
-const LOC = () => LANG === "en" ? "en-GB" : "de-DE";
+const LOC = () => ({ de: "de-DE", en: "en-GB", fr: "fr-FR" })[LANG];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 // ---- Zeit (immer Luxemburger Zeit, egal wo das Handy steht) ----
@@ -162,7 +178,7 @@ const uhr = d => { const p = teile(d); return `${p.hour}:${p.minute}`; };
 // Die FLF schreibt „Uhrzeit noch offen“ als 00:00 (manchmal 00:00:01, 01:00, 01:30) — vor 6 Uhr gibt es kein echtes Spiel.
 const offen = sp => +uhr(new Date(sp.d)).slice(0, 2) < 6;
 const wt = d => new Intl.DateTimeFormat(LOC(), { timeZone: TZ, weekday: "short" }).format(d).replace(".", "");
-const kurzDatum = d => LANG === "en" ? new Intl.DateTimeFormat("en-GB", { timeZone: TZ, day: "numeric", month: "short" }).format(d) : (p => `${+p.day}.${+p.month}.`)(teile(d));
+const kurzDatum = d => LANG !== "de" ? new Intl.DateTimeFormat(LOC(), { timeZone: TZ, day: "numeric", month: "short" }).format(d) : (p => `${+p.day}.${+p.month}.`)(teile(d));
 const langDatum = d => new Intl.DateTimeFormat(LOC(), { timeZone: TZ, weekday: "long", day: "numeric", month: "long" }).format(d);
 const tagPlus = (key, n) => { const [y, m, d] = key.split("-").map(Number); const x = new Date(Date.UTC(y, m - 1, d + n, 12)); return x.toISOString().slice(0, 10); };
 // Gespielt/vorbei: Ergebnis da, sonst 3 h nach Anpfiff; bei offener Uhrzeit erst am Tag danach.
