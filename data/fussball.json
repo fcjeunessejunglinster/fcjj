@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-08T05:26:45.265Z",
+ "stand": "2026-11-08T16:18:14.045Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -17359,9 +17359,9 @@
       "id": 44964,
       "n": "Alliance Äischdall Hobscheid-Eischen"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 2,
+     "as": 3,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain au Parc (Mertert, synth.)"
     },
