@@ -160,7 +160,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 j";
+const FASSUNG = "2026-11-08 k";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -425,7 +425,9 @@ function teamHtml(t, now) {
   const aktuell = ligen[ligen.length - 1], frueher = ligen.slice(0, -1).reverse();
   const kinder = KINDER.includes(t.kat);
   const heute = spieltagHeute(spiele, now), morgen = kinder && !heute && spieltagMorgen(spiele, now);
-  let html = (heute ? heuteHtml(heute, now, kinder) + (FUPA_WIDGET[t.reiter] ? fupaHtml(FUPA_WIDGET[t.reiter], heute.sp.d) : "") : "")
+  // #liveticker in der Adresse zeigt den Ticker auch außerhalb des Spieltags (zum Ausprobieren).
+  const tickerTest = location.hash === "#liveticker" && FUPA_WIDGET[t.reiter];
+  let html = (heute ? heuteHtml(heute, now, kinder) + (FUPA_WIDGET[t.reiter] ? fupaHtml(FUPA_WIDGET[t.reiter], heute.sp.d) : "") : tickerTest ? fupaHtml(FUPA_WIDGET[t.reiter], "") : "")
     + (morgen ? morgenHtml(morgen, now) : "") + letztesHtml(t, spiele, now, aktuell, kinder);
   html += naechsteKarte(kommend, now, kalenderKnopf(t));
   if (aktuell) html += tabelleKarte(aktuell, t);
@@ -609,7 +611,10 @@ function knoepfe(now) {
   document.getElementById("knoepfe").innerHTML = k.join("");
 }
 let COUNTDOWN = false;
+// #liveticker: gleich den Reiter der Seniors öffnen.
+if (location.hash === "#liveticker") merk.set("reiter", "");
 function render() {
+  if (location.hash === "#liveticker" && D?.teams && !merk.get("reiter")) { const s = D.teams.find(t => FUPA_WIDGET[t.reiter]); if (s) { AKTIV = String(s.id); merk.set("reiter", AKTIV); } }
   const now = new Date();
   UMSCHALT = 0;
   document.documentElement.lang = LANG;
