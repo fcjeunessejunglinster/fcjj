@@ -81,6 +81,10 @@ header .innen>div:nth-child(2){min-width:0}
 .fupaplatz{padding:6px 8px;min-height:60px}
 .fupaplatz .match-header-caption.live,.fupaplatz .fp-caption-text.live{border:0!important;box-shadow:none!important}
 .linkknopf{background:none;border:0;padding:6px 0;font:inherit;font-size:13px;color:var(--leise);text-decoration:underline;cursor:pointer}
+ul.spiele li.event{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;background:var(--rotHell)}
+li.event .evt{font-weight:800;font-size:17px;color:var(--rot)}
+li.event .evd{font-size:14px;color:var(--text);font-variant-numeric:tabular-nums}
+.events{border:2px solid var(--rot)}
 .kasten .kabine{font-size:16px;font-weight:700}
 .kasten .satz{font-size:16px;font-weight:700}
 .rocks{font-size:24px;font-weight:900;letter-spacing:.02em;color:var(--rot);font-style:italic}
@@ -160,7 +164,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 m";
+const FASSUNG = "2026-11-08 n";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -196,6 +200,7 @@ const TEXTE = {
     fupaText: "Der Liveticker kommt direkt von FuPa. Dafür verbindet sich das Handy mit FuPa, FuPa sieht dabei seine Internet-Adresse.",
     fupaMerk: "Die App merkt sich das. Zurücknehmen ganz unten.", fupaAus: "FuPa-Liveticker nicht mehr laden",
     fupaApp: "Tore aufs Handy? Mit der FuPa-App dem FC Jeunesse Junglinster folgen.",
+    events: "Events des Vereins",
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
@@ -224,6 +229,7 @@ const TEXTE = {
     fupaText: "The live ticker comes directly from FuPa. Your phone connects to FuPa, which sees its internet address.",
     fupaMerk: "The app remembers this. You can undo it at the very bottom.", fupaAus: "Stop loading the FuPa live ticker",
     fupaApp: "Goals on your phone? Follow FC Jeunesse Junglinster in the FuPa app.",
+    events: "Club events",
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
@@ -252,6 +258,7 @@ const TEXTE = {
     fupaText: "Le live ticker vient directement de FuPa. Le téléphone se connecte à FuPa, qui voit son adresse Internet.",
     fupaMerk: "L'app s'en souvient. Pour annuler, tout en bas.", fupaAus: "Ne plus charger le live ticker FuPa",
     fupaApp: "Les buts sur votre téléphone ? Suivez le FC Jeunesse Junglinster dans l'app FuPa.",
+    events: "Événements du club",
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
@@ -582,6 +589,28 @@ function wocheSpiele(now) {
   }
   return aus.sort((a, b) => a.d.localeCompare(b.d));
 }
+// ---- Events des Vereins (von Hand eingetragen). Neues Event = neue Zeile: von/bis als Datum, Titel, Zusatz optional.
+const EVENTS = [
+  { von: "2027-01-09", bis: "2027-01-10", t: "WanterCup27" },
+];
+function eventDatum(e) {
+  const a = new Date(e.von + "T12:00:00Z"), b = new Date((e.bis || e.von) + "T12:00:00Z");
+  return e.bis && e.bis !== e.von ? `${wt(a)} ${kurzDatum(a)} – ${wt(b)} ${kurzDatum(b)}${LANG === "de" ? b.getUTCFullYear() : " " + b.getUTCFullYear()}`
+    : `${wt(a)} ${kurzDatum(a)}${LANG === "de" ? a.getUTCFullYear() : " " + a.getUTCFullYear()}`;
+}
+const kommendeEvents = now => EVENTS.filter(e => (e.bis || e.von) >= tagKey(now)).sort((a, b) => a.von.localeCompare(b.von));
+const eventAmTag = tag => EVENTS.filter(e => e.von <= tag && tag <= (e.bis || e.von));
+function eventZeile(e, now, mitBis = true) {
+  const n = tageBis(tagKey(now), e.von);
+  const wann = e.von <= tagKey(now) ? T().bis(0) : n <= 60 ? T().bis(n) : "";
+  return `<li class="event"><span class="evt">🏆 ${esc(e.t)}</span><span class="evd">${esc(eventDatum(e))}${mitBis && wann ? ` · ${esc(wann)}` : ""}</span>${e.zusatz ? `<span class="evd">${esc(e.zusatz)}</span>` : ""}</li>`;
+}
+function eventsKarte(now) {
+  const liste = kommendeEvents(now);
+  if (!liste.length) return "";
+  return `<section class="karte events"><h2>${T().events} · Save the date</h2><ul class="spiele">${liste.map(e => eventZeile(e, now)).join("")}</ul></section>`;
+}
+
 function wocheHtml(now) {
   const tage = wocheTage(now), spiele = wocheSpiele(now);
   const heim = spiele.filter(sp => sp.heim).length;
@@ -589,11 +618,11 @@ function wocheHtml(now) {
   let html = `<section class="karte"><h2>${T().woche} · ${kurzDatum(von)}–${kurzDatum(bis)}</h2>
     <p class="hinweis" style="padding-block:10px">${spiele.length ? T().wocheText(spiele.length, heim) : T().keineWoche}</p>`;
   for (const tag of tage) {
-    const liste = spiele.filter(sp => tagKey(new Date(sp.d)) === tag);
-    if (!liste.length) continue;
-    html += `<div class="tag">${esc(langDatum(new Date(tag + "T12:00:00Z")))}${tag === tagKey(now) ? T().heuteKurz : ""}</div><ul class="spiele">${liste.map(sp => spielLi(sp, now, true)).join("")}</ul>`;
+    const liste = spiele.filter(sp => tagKey(new Date(sp.d)) === tag), ev = eventAmTag(tag);
+    if (!liste.length && !ev.length) continue;
+    html += `<div class="tag">${esc(langDatum(new Date(tag + "T12:00:00Z")))}${tag === tagKey(now) ? T().heuteKurz : ""}</div><ul class="spiele">${ev.map(e => eventZeile(e, now, false)).join("")}${liste.map(sp => spielLi(sp, now, true)).join("")}</ul>`;
   }
-  return html + "</section>";
+  return html + "</section>" + eventsKarte(now);
 }
 
 // ---- Oberfläche ----
