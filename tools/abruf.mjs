@@ -263,19 +263,20 @@ async function vereinFinden(zeit, alt) {
 // {ageCategoryId: key}. Bekannte Nummern direkt, die übrigen 1–40 einmal am Tag durchsuchen.
 async function kategorienFinden(zeit, club, alt) {
   const heute = new Date().toISOString().slice(0, 10);
-  if (alt?.kategorien?.tag === heute && alt.kategorien.saison === zeit.seasonId) return alt.kategorien;
+  if (!process.env.NEU_SUCHEN && alt?.kategorien?.tag === heute && alt.kategorien.saison === zeit.seasonId) return alt.kategorien;
   const ids = Object.fromEntries(KATS.filter(k => k.id).map(k => [k.id, k.key]));
   const gefunden = { ...ids }, gesehen = {};
-  for (let id = 1; id <= 40; id++) {
+  for (let id = 1; id <= 60; id++) {
     if (ids[id]) continue;
     try {
       const { matches } = await gq(Q_MATCHES, { c: { ...zeit, clubId: club, ageCategoryId: id, matchTypeId: "ALL" } });
       if (matches.length) {
         const namen = [...new Set(matches.map(m => m.division.name))];
-        gesehen[id] = namen;
+        const unsere = [...new Set(matches.flatMap(m => [m.homeTeam, m.awayTeam]).filter(t => vereinsIds(t).includes(club)).map(t => t.name))];
+        gesehen[id] = { klassen: namen, teams: unsere, spiele: matches.length, erstes: matches.map(m => m.match.matchDate).sort()[0] };
         const key = katAusNamen(namen);
         if (key && !Object.values(gefunden).includes(key)) gefunden[id] = key;
-        console.log(`Altersklasse ${id}: ${key || "nicht gewünscht"} — ${namen.slice(0, 4).join(" | ")}`);
+        console.log(`Altersklasse ${id}: ${key || "nicht gewünscht"} — ${namen.slice(0, 4).join(" | ")} — ${unsere.join(", ")}`);
       }
     } catch (e) { /* unbekannte Nummer */ }
     await pause(700);

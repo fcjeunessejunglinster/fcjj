@@ -10,6 +10,11 @@ on:
     - cron: "37 22 * * *"       # jeden Abend spät (Abendspiele)
     - cron: "7 6 * * *"         # jeden Morgen
   workflow_dispatch:            # „Run workflow“ im Actions-Tab startet ihn sofort
+    inputs:
+      neu_suchen:
+        description: "Altersklassen neu suchen"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -33,6 +38,8 @@ jobs:
       # pdftotext liest die Bambini-PDFs. Fehlt es, bleibt der alte Bambini-Stand.
       - run: command -v pdftotext || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils) || true
       - run: node tools/abruf.mjs
+        env:
+          NEU_SUCHEN: ${{ inputs.neu_suchen && '1' || '' }}
       - name: Speichern, falls sich etwas geändert hat
         run: |
           git add -A data kalender
