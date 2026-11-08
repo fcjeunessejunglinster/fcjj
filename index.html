@@ -165,7 +165,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 p";
+const FASSUNG = "2026-11-08 q";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -594,7 +594,7 @@ function wocheSpiele(now) {
 // kats: für welche Altersklassen (Schlüssel wie in D.teams[].kat) — das Event steht dann auch in deren Reitern.
 const EVENTS = [
   { von: "2026-12-03", t: "Kleeschen", icon: "🎅", kats: ["U7", "U9", "U11", "U13", "WU11", "WU13"], fuer: "BAM · PUP · POU · MIN · WU11 · WU13" },
-  { von: "2027-01-09", bis: "2027-01-10", t: "WanterCup27", kats: ["U7", "U9", "U11", "WU11", "WU13"], fuer: "BAM · PUP · POU · WU11 · WU13" },
+  { von: "2027-01-09", bis: "2027-01-10", t: "WanterCup27", kats: ["U7", "U9", "U11", "U13", "WU11", "WU13"], fuer: "BAM · PUP · POU · MIN · WU11 · WU13" },
 ];
 function eventDatum(e) {
   const a = new Date(e.von + "T12:00:00Z"), b = new Date((e.bis || e.von) + "T12:00:00Z");
