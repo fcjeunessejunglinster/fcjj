@@ -83,6 +83,7 @@ header .innen>div:nth-child(2){min-width:0}
 .linkknopf{background:none;border:0;padding:6px 0;font:inherit;font-size:13px;color:var(--leise);text-decoration:underline;cursor:pointer}
 ul.spiele li.event{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;background:var(--rotHell)}
 li.event .evt{font-weight:800;font-size:17px;color:var(--rot)}
+li.event .evf{font-size:13px;font-weight:700;color:var(--leise);letter-spacing:.03em}
 li.event .evd{font-size:14px;color:var(--text);font-variant-numeric:tabular-nums}
 .events{border:2px solid var(--rot)}
 .kasten .kabine{font-size:16px;font-weight:700}
@@ -164,7 +165,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 n";
+const FASSUNG = "2026-11-08 o";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -200,7 +201,7 @@ const TEXTE = {
     fupaText: "Der Liveticker kommt direkt von FuPa. Dafür verbindet sich das Handy mit FuPa, FuPa sieht dabei seine Internet-Adresse.",
     fupaMerk: "Die App merkt sich das. Zurücknehmen ganz unten.", fupaAus: "FuPa-Liveticker nicht mehr laden",
     fupaApp: "Tore aufs Handy? Mit der FuPa-App dem FC Jeunesse Junglinster folgen.",
-    events: "Events des Vereins",
+    events: "Events des Vereins", fuer: "Für",
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
@@ -229,7 +230,7 @@ const TEXTE = {
     fupaText: "The live ticker comes directly from FuPa. Your phone connects to FuPa, which sees its internet address.",
     fupaMerk: "The app remembers this. You can undo it at the very bottom.", fupaAus: "Stop loading the FuPa live ticker",
     fupaApp: "Goals on your phone? Follow FC Jeunesse Junglinster in the FuPa app.",
-    events: "Club events",
+    events: "Club events", fuer: "For",
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
@@ -258,7 +259,7 @@ const TEXTE = {
     fupaText: "Le live ticker vient directement de FuPa. Le téléphone se connecte à FuPa, qui voit son adresse Internet.",
     fupaMerk: "L'app s'en souvient. Pour annuler, tout en bas.", fupaAus: "Ne plus charger le live ticker FuPa",
     fupaApp: "Les buts sur votre téléphone ? Suivez le FC Jeunesse Junglinster dans l'app FuPa.",
-    events: "Événements du club",
+    events: "Événements du club", fuer: "Pour",
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
@@ -436,7 +437,7 @@ function teamHtml(t, now) {
   const tickerTest = location.hash === "#liveticker" && FUPA_WIDGET[t.reiter];
   let html = (heute ? heuteHtml(heute, now, kinder) + (FUPA_WIDGET[t.reiter] ? fupaHtml(FUPA_WIDGET[t.reiter], heute.sp.d) : "") : tickerTest ? fupaHtml(FUPA_WIDGET[t.reiter], "") : "")
     + (morgen ? morgenHtml(morgen, now) : "") + letztesHtml(t, spiele, now, aktuell, kinder);
-  html += naechsteKarte(kommend, now, kalenderKnopf(t));
+  html += naechsteKarte(kommend, now, kalenderKnopf(t)) + eventsKarte(now, t.kat);
   if (aktuell) html += tabelleKarte(aktuell, t);
   if (gespielt.length) html += `<section class="karte"><h2>${T().ergebnisse}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
   if (aktuell) html += `<details class="karte"><summary>${T().alleKlasse}</summary>${klassenSpiele(aktuell, t, now)}</details>`;
@@ -590,8 +591,9 @@ function wocheSpiele(now) {
   return aus.sort((a, b) => a.d.localeCompare(b.d));
 }
 // ---- Events des Vereins (von Hand eingetragen). Neues Event = neue Zeile: von/bis als Datum, Titel, Zusatz optional.
+// kats: für welche Altersklassen (Schlüssel wie in D.teams[].kat) — das Event steht dann auch in deren Reitern.
 const EVENTS = [
-  { von: "2027-01-09", bis: "2027-01-10", t: "WanterCup27" },
+  { von: "2027-01-09", bis: "2027-01-10", t: "WanterCup27", kats: ["U7", "U9", "U11", "WU11", "WU13"], fuer: "BAM · PUP · POU · WU11 · WU13" },
 ];
 function eventDatum(e) {
   const a = new Date(e.von + "T12:00:00Z"), b = new Date((e.bis || e.von) + "T12:00:00Z");
@@ -603,10 +605,10 @@ const eventAmTag = tag => EVENTS.filter(e => e.von <= tag && tag <= (e.bis || e.
 function eventZeile(e, now, mitBis = true) {
   const n = tageBis(tagKey(now), e.von);
   const wann = e.von <= tagKey(now) ? T().bis(0) : n <= 60 ? T().bis(n) : "";
-  return `<li class="event"><span class="evt">🏆 ${esc(e.t)}</span><span class="evd">${esc(eventDatum(e))}${mitBis && wann ? ` · ${esc(wann)}` : ""}</span>${e.zusatz ? `<span class="evd">${esc(e.zusatz)}</span>` : ""}</li>`;
+  return `<li class="event"><span class="evt">🏆 ${esc(e.t)}</span><span class="evd">${esc(eventDatum(e))}${mitBis && wann ? ` · ${esc(wann)}` : ""}</span>${e.fuer ? `<span class="evf">${esc(T().fuer)} ${esc(e.fuer)}</span>` : ""}${e.zusatz ? `<span class="evd">${esc(e.zusatz)}</span>` : ""}</li>`;
 }
-function eventsKarte(now) {
-  const liste = kommendeEvents(now);
+function eventsKarte(now, kat) {
+  const liste = kommendeEvents(now).filter(e => !kat || (e.kats || []).includes(kat));
   if (!liste.length) return "";
   return `<section class="karte events"><h2>${T().events} · Save the date</h2><ul class="spiele">${liste.map(e => eventZeile(e, now)).join("")}</ul></section>`;
 }
