@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-08T16:48:11.148Z",
+ "stand": "2026-11-08T17:18:11.438Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -17341,9 +17341,9 @@
       "id": 45434,
       "n": "CS Fola Esch-Alzette"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 1,
+     "as": 4,
+     "gespielt": true,
      "forfait": false,
      "ort": "Parc des Sports (Diekirch, synth.)"
     },
