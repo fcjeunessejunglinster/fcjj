@@ -1,0 +1,9 @@
+name: Probe (einmalig)
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -s https://api.openligadb.de/getbltable/pl/2026 | python3 -c "import json,sys;d=json.load(sys.stdin);print('TABLE',len(d), d[0]['teamName'] if d else '')"
+          curl -s https://api.openligadb.de/getmatchdata/pl | python3 -c "import json,sys;d=json.load(sys.stdin);print('MATCHES',len(d), d[0]['group']['groupName'], sum(1 for m in d if m['matchIsFinished']), 'finished', sum(len(m['goals']) for m in d), 'goals')"
