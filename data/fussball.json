@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-08T02:43:05.367Z",
+ "stand": "2026-11-08T05:21:54.206Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -23814,34 +23814,76 @@
    "9999": "RES"
   },
   "gesehen": {
-   "2": [
-    "U19 Juniors Cl4 S1 Phase 2",
-    "U19 Juniors Cl4 S2 Phase 1",
-    "Coupe du Prince U19 - 1/16 de Finale",
-    "Amicaux 2"
-   ],
-   "3": [
-    "U17 Cadets Cl4 S3 Phase 2",
-    "U17 Cadets Cl4 S3 Phase 1",
-    "Coupe U17 Cadets - 1/16 de Finale"
-   ],
-   "15": [
-    "WU15 Scolaires F Cl1 Phase 2",
-    "WU15 Scolaires F Cl2 S1 Phase 1",
-    "Coupe WU15 Scolaires F - tour préliminaire",
-    "Coupe WU15 Scolaires F - 1/8 de Finale"
-   ],
-   "28": [
-    "Amicaux 2"
-   ],
-   "29": [
-    "WU11 Poussins F S1 Tour 1"
-   ],
-   "33": [
-    "WU13 Minimes F Cl2 S2 Phase 2",
-    "WU13 Minimes F Cl2 S2 Phase 1",
-    "Coupe WU13 Minimes F - 1/8 de Finale"
-   ]
+   "2": {
+    "klassen": [
+     "U19 Juniors Cl4 S1 Phase 2",
+     "U19 Juniors Cl4 S2 Phase 1",
+     "Coupe du Prince U19 - 1/16 de Finale",
+     "Amicaux 2"
+    ],
+    "teams": [
+     "Jeunesse Junglinster"
+    ],
+    "spiele": 15,
+    "erstes": "2026-08-29T15:00:00+02:00"
+   },
+   "3": {
+    "klassen": [
+     "U17 Cadets Cl4 S3 Phase 2",
+     "U17 Cadets Cl4 S3 Phase 1",
+     "Coupe U17 Cadets - 1/16 de Finale"
+    ],
+    "teams": [
+     "Jeunesse Junglinster"
+    ],
+    "spiele": 11,
+    "erstes": "2026-09-20T14:00:00+02:00"
+   },
+   "15": {
+    "klassen": [
+     "WU15 Scolaires F Cl1 Phase 2",
+     "WU15 Scolaires F Cl2 S1 Phase 1",
+     "Coupe WU15 Scolaires F - tour préliminaire",
+     "Coupe WU15 Scolaires F - 1/8 de Finale"
+    ],
+    "teams": [
+     "Jeunesse Junglinster"
+    ],
+    "spiele": 12,
+    "erstes": "2026-09-20T11:00:00+02:00"
+   },
+   "28": {
+    "klassen": [
+     "Amicaux 2"
+    ],
+    "teams": [
+     "Jeunesse Junglinster"
+    ],
+    "spiele": 6,
+    "erstes": "2026-09-07T19:30:00+02:00"
+   },
+   "29": {
+    "klassen": [
+     "WU11 Poussins F S1 Tour 1"
+    ],
+    "teams": [
+     "Jeunesse Junglinster"
+    ],
+    "spiele": 6,
+    "erstes": "2026-09-26T11:00:00+02:00"
+   },
+   "33": {
+    "klassen": [
+     "WU13 Minimes F Cl2 S2 Phase 2",
+     "WU13 Minimes F Cl2 S2 Phase 1",
+     "Coupe WU13 Minimes F - 1/8 de Finale"
+    ],
+    "teams": [
+     "Jeunesse Junglinster"
+    ],
+    "spiele": 10,
+    "erstes": "2026-09-20T11:00:00+02:00"
+   }
   }
  },
  "nati": {
