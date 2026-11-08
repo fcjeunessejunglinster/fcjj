@@ -72,6 +72,15 @@ header .innen>div:nth-child(2){min-width:0}
 .kasten ul.spiele li{padding:4px 0;border:0}
 .kasten .zusatz{font-size:14px;color:var(--leise)}
 .kasten .zusatz b{color:var(--text)}
+.fupa{border:2px solid var(--rot)}
+.fupa .fupatext{padding:12px 14px 0;font-size:14px;color:var(--leise)}
+.fupa .fupatext a{color:var(--text)}
+.fupa .knopf{margin:12px 14px 4px}
+.fupa .klein{padding:4px 14px 12px;font-size:12px;color:var(--leise)}
+.fupa .klein a{color:var(--leise)}
+.fupaplatz{padding:6px 8px;min-height:60px}
+.fupaplatz .match-header-caption.live,.fupaplatz .fp-caption-text.live{border:0!important;box-shadow:none!important}
+.linkknopf{background:none;border:0;padding:6px 0;font:inherit;font-size:13px;color:var(--leise);text-decoration:underline;cursor:pointer}
 .kasten .kabine{font-size:16px;font-weight:700}
 .kasten .satz{font-size:16px;font-weight:700}
 .rocks{font-size:24px;font-weight:900;letter-spacing:.02em;color:var(--rot);font-style:italic}
@@ -151,7 +160,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 i";
+const FASSUNG = "2026-11-08 j";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -183,6 +192,10 @@ const TEXTE = {
     shop: "🛍️ Vereinsshop", teilen: "📤 App teilen", kopiert: "Link kopiert – jetzt einfügen und verschicken.",
     teilText: u => `Die App des FC Jeunesse Junglinster: Spiele, Ergebnisse und Tabellen aller Mannschaften, immer aktuell. ⚽\n${u}`,
     kabinen: (h, g) => `🚪 Kabinen: FCJJ ${h} · Gäste ${g}`,
+    fupaTitel: "Liveticker", fupaVon: "von FuPa", fupaAn: "Liveticker anzeigen",
+    fupaText: "Der Liveticker kommt direkt von FuPa. Dafür verbindet sich das Handy mit FuPa, FuPa sieht dabei seine Internet-Adresse.",
+    fupaMerk: "Die App merkt sich das. Zurücknehmen ganz unten.", fupaAus: "FuPa-Liveticker nicht mehr laden",
+    fupaApp: "Tore aufs Handy? Mit der FuPa-App dem FC Jeunesse Junglinster folgen.",
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
@@ -207,6 +220,10 @@ const TEXTE = {
     shop: "🛍️ Club shop", teilen: "📤 Share the app", kopiert: "Link copied – paste it to share.",
     teilText: u => `The FC Jeunesse Junglinster app: matches, results and tables for all our teams, always up to date. ⚽\n${u}`,
     kabinen: (h, g) => `🚪 Dressing rooms: FCJJ ${h} · Visitors ${g}`,
+    fupaTitel: "Live ticker", fupaVon: "from FuPa", fupaAn: "Show live ticker",
+    fupaText: "The live ticker comes directly from FuPa. Your phone connects to FuPa, which sees its internet address.",
+    fupaMerk: "The app remembers this. You can undo it at the very bottom.", fupaAus: "Stop loading the FuPa live ticker",
+    fupaApp: "Goals on your phone? Follow FC Jeunesse Junglinster in the FuPa app.",
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
@@ -231,6 +248,10 @@ const TEXTE = {
     shop: "🛍️ Boutique du club", teilen: "📤 Partager l'app", kopiert: "Lien copié – collez-le pour le partager.",
     teilText: u => `L'app du FC Jeunesse Junglinster : matchs, résultats et classements de toutes nos équipes, toujours à jour. ⚽\n${u}`,
     kabinen: (h, g) => `🚪 Vestiaires : FCJJ ${h} · Visiteurs ${g}`,
+    fupaTitel: "Live ticker", fupaVon: "par FuPa", fupaAn: "Afficher le live ticker",
+    fupaText: "Le live ticker vient directement de FuPa. Le téléphone se connecte à FuPa, qui voit son adresse Internet.",
+    fupaMerk: "L'app s'en souvient. Pour annuler, tout en bas.", fupaAus: "Ne plus charger le live ticker FuPa",
+    fupaApp: "Les buts sur votre téléphone ? Suivez le FC Jeunesse Junglinster dans l'app FuPa.",
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
@@ -404,7 +425,8 @@ function teamHtml(t, now) {
   const aktuell = ligen[ligen.length - 1], frueher = ligen.slice(0, -1).reverse();
   const kinder = KINDER.includes(t.kat);
   const heute = spieltagHeute(spiele, now), morgen = kinder && !heute && spieltagMorgen(spiele, now);
-  let html = (heute ? heuteHtml(heute, now, kinder) : "") + (morgen ? morgenHtml(morgen, now) : "") + letztesHtml(t, spiele, now, aktuell, kinder);
+  let html = (heute ? heuteHtml(heute, now, kinder) + (FUPA_WIDGET[t.reiter] ? fupaHtml(FUPA_WIDGET[t.reiter], heute.sp.d) : "") : "")
+    + (morgen ? morgenHtml(morgen, now) : "") + letztesHtml(t, spiele, now, aktuell, kinder);
   html += naechsteKarte(kommend, now, kalenderKnopf(t));
   if (aktuell) html += tabelleKarte(aktuell, t);
   if (gespielt.length) html += `<section class="karte"><h2>${T().ergebnisse}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
@@ -436,6 +458,59 @@ function kalenderKnopf(t) {
     <span class="leise">${T().aboHinweis}</span>
     <code>${esc(https)}</code></div>`;
 }
+
+// ---- FuPa-Liveticker der Seniors (offizielles FuPa-Widget „Team-Liveticker“, wie in der Koeppchen-App) ----
+// Im FuPa-Widget-Builder angelegt (8.11.2026), gilt nur für https://fcjeunessejunglinster.github.io/.
+// Weitere Mannschaft (z. B. Réserves): eigenes Widget anlegen, Kennung hier mit dem Namen des Reiters eintragen.
+const FUPA_WIDGET = { "Seniors": "3LogsC5yrMCUFqOr4tE5NQRuMTZ" };
+const FUPA_CLUB = "https://www.fupa.net/club/fc-jeunesse-junglinster";
+// Das Widget lädt erst nach Zustimmung (das Handy spricht dann direkt mit FuPa). Die App merkt sich „ja“.
+const fupaOk = () => merk.get("fupa") === "ja";
+function fupaHtml(id, anstoss) {
+  return `<section class="karte fupa"><h2>${T().fupaTitel} · ${T().fupaVon}</h2>` + (fupaOk()
+    ? `<div class="fupaplatz" data-fw="${esc(id)}" data-anstoss="${esc(anstoss)}"></div>`
+    : `<div class="fupatext">${esc(T().fupaText)}</div><button class="knopf" data-fupa="ja">${esc(T().fupaAn)}</button><div class="klein">${esc(T().fupaMerk)}</div>`)
+    + `<div class="klein"><a href="${FUPA_CLUB}" target="_blank" rel="noopener">${esc(T().fupaApp)}</a></div></section>`;
+}
+// Das Widget-Element bleibt über alle Neuaufbauten dasselbe (der Inhalt wird jede Minute neu gebaut) und wird nach jedem
+// Aufbau in seinen Platz gehängt. FuPas Skript erkennt neu eingehängte Elemente selbst und lädt ein gefülltes nicht neu.
+const FUPA_EL = new Map();
+let FUPA_ZULETZT = new Set();
+function fupaEinsetzen() {
+  if (!fupaOk()) return;
+  const plaetze = document.querySelectorAll(".fupaplatz[data-fw]");
+  const jetzt = new Set([...plaetze].map(p => p.dataset.fw));
+  if ([...jetzt].some(id => !FUPA_ZULETZT.has(id) && FUPA_EL.has(id))) setTimeout(fupaAktualisieren, 300);
+  FUPA_ZULETZT = jetzt;
+  for (const platz of plaetze) {
+    const id = platz.dataset.fw;
+    let el = FUPA_EL.get(id);
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "fp-widget_root-" + id;
+      el.innerHTML = `<a href="${FUPA_CLUB}" target="_blank" rel="noopener">FC Jeunesse Junglinster auf FuPa</a>`;
+      FUPA_EL.set(id, el);
+    }
+    platz.appendChild(el);
+  }
+  if (plaetze.length && !document.getElementById("fupaSkript")) {
+    const sk = document.createElement("script");
+    sk.id = "fupaSkript"; sk.src = "https://widget-api.fupa.net/vendor/widget.js?v1";
+    document.head.appendChild(sk);
+  }
+}
+// Das Widget aktualisiert sich nicht von selbst (nur Knopf ↻). Die App tippt ihn an: jede Minute von 15 min vor bis
+// 3 h nach Anpfiff, solange die App vorne ist, und sofort beim Zurückkommen.
+function fupaAktualisieren() {
+  if (!fupaOk() || document.hidden) return;
+  const jetzt = Date.now();
+  for (const platz of document.querySelectorAll(".fupaplatz[data-anstoss]")) {
+    const a = Date.parse(platz.dataset.anstoss);
+    if (a - 15 * 60e3 <= jetzt && jetzt <= a + 180 * 60e3) platz.querySelector(".fp-liveticker-view-refresh-button")?.click();
+  }
+}
+setInterval(fupaAktualisieren, 60e3);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(fupaAktualisieren, 500); });
 
 // ---- Nationalmannschaft (Roude Léiw), Daten von FuPa ----
 // Luxemburger Flagge als Reiter (als Bild, Flaggen-Emojis zeigt Windows nur als „LU“).
@@ -553,14 +628,21 @@ function render() {
   if (AKTIV === "nati") document.getElementById("unterzeile").textContent = T().natiUnter;
   document.getElementById("inhalt").innerHTML = t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : wocheHtml(now);
   for (const s of document.querySelectorAll("#inhalt details summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
+  fupaEinsetzen();
   const stand = new Date(D.stand);
   document.getElementById("teilen").textContent = T().teilen;
   document.getElementById("shop").textContent = T().shop;
-  document.getElementById("fuss").innerHTML = T().fuss(`${kurzDatum(stand)} ${uhr(stand)}`, FASSUNG);
+  document.getElementById("fuss").innerHTML = T().fuss(`${kurzDatum(stand)} ${uhr(stand)}`, FASSUNG)
+    + (fupaOk() ? `<br><button class="linkknopf" data-fupa="nein">${T().fupaAus}</button>` : "");
 }
 document.getElementById("knoepfe").addEventListener("click", e => {
   const b = e.target.closest("button[data-reiter]"); if (!b) return;
   AKTIV = b.dataset.reiter; merk.set("reiter", AKTIV); render(); scrollTo(0, 0);
+});
+document.addEventListener("click", e => {
+  const f = e.target.closest("[data-fupa]"); if (!f) return;
+  merk.set("fupa", f.dataset.fupa);
+  if (f.dataset.fupa === "nein") location.reload(); else render();
 });
 document.getElementById("inhalt").addEventListener("click", e => {
   const li = e.target.closest("[data-gehe]"); if (!li) return;
