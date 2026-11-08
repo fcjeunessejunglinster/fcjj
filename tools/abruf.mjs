@@ -277,6 +277,7 @@ async function kategorienFinden(zeit, club, alt) {
         const key = katAusNamen(namen);
         if (key && !Object.values(gefunden).includes(key)) gefunden[id] = key;
         console.log(`Altersklasse ${id}: ${key || "nicht gewünscht"} — ${namen.slice(0, 4).join(" | ")} — ${unsere.join(", ")}`);
+        if (!key) for (const m of matches.slice(0, 6)) console.log(`   ${m.match.matchDate} ${m.homeTeam.name} – ${m.awayTeam.name} (${m.division.name})`);
       }
     } catch (e) { /* unbekannte Nummer */ }
     await pause(700);
@@ -327,7 +328,7 @@ async function main() {
   catch (e) { console.error("Nationalmannschaft:", e.message); neu.nati = alt.nati || null; }
   for (const t of neu.teams) t.datei = dateiName(t);
 
-  if (JSON.stringify({ ...alt, stand: 0, kategorien: 0 }) === JSON.stringify({ ...neu, stand: 0, kategorien: 0 }) && alt.kategorien?.tag === kategorien.tag) {
+  if (JSON.stringify({ ...alt, stand: 0, kategorien: 0 }) === JSON.stringify({ ...neu, stand: 0, kategorien: 0 }) && alt.kategorien?.tag === kategorien.tag && !process.env.NEU_SUCHEN) {
     console.log("unverändert");
   } else {
     writeFileSync(OUT, JSON.stringify(neu, null, 1) + "\n");
