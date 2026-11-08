@@ -349,8 +349,13 @@ export function stadtAus(ort) {
   const w = ort.replace(/\(.*\)/, "").trim().split(/\s+/).filter(x => !/^(stade|terrain|am|um|an|in|de|du|des|la|le|rue|\d+)$/i.test(x));
   return w.length ? w[w.length - 1] : null;
 }
+// Nur Treffer in Luxemburg und gleich hinter der Grenze gelten (sonst landete „II“ in Finnland, „Trausch“ in Sachsen).
+const IM_GEBIET = ([lat, lon]) => lat > 49.3 && lat < 50.3 && lon > 5.6 && lon < 6.7;
+// Von Hand, wo die Suche danebenliegt (Platz nach einer Person benannt, Doppelort).
+const ORTE_FEST = { "Trausch": [49.628, 6.023], "Colmarberg": [49.811, 6.093], "Bourscheid/Michelau": [49.897, 6.065], "II": null, "-": null };
 async function orteFinden(D, alt) {
-  const staedte = { ...(alt.orte?.staedte || {}) };
+  const staedte = Object.fromEntries(Object.entries(alt.orte?.staedte || {}).filter(([, k]) => k && IM_GEBIET(k)));
+  Object.assign(staedte, ORTE_FEST);
   const plaetze = new Set(["Junglinster"]);
   for (const k of Object.values(D.klassen)) for (const sp of k.spiele) { const st = stadtAus(sp.ort); if (st) plaetze.add(st); }
   for (const st of plaetze) {
@@ -358,8 +363,9 @@ async function orteFinden(D, alt) {
     let treffer = null;
     for (const land of ["&countryCode=LU", ""]) {
       try {
-        const r = await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(st)}&count=1&language=fr${land}`)).json();
-        if (r.results?.length) { treffer = [Math.round(r.results[0].latitude * 1e3) / 1e3, Math.round(r.results[0].longitude * 1e3) / 1e3]; break; }
+        const r = await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(st)}&count=5&language=fr${land}`)).json();
+        const x = (r.results || []).map(e => [Math.round(e.latitude * 1e3) / 1e3, Math.round(e.longitude * 1e3) / 1e3]).find(IM_GEBIET);
+        if (x) { treffer = x; break; }
       } catch (e) {}
     }
     staedte[st] = treffer;
