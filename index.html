@@ -165,7 +165,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 o";
+const FASSUNG = "2026-11-08 p";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -593,6 +593,7 @@ function wocheSpiele(now) {
 // ---- Events des Vereins (von Hand eingetragen). Neues Event = neue Zeile: von/bis als Datum, Titel, Zusatz optional.
 // kats: für welche Altersklassen (Schlüssel wie in D.teams[].kat) — das Event steht dann auch in deren Reitern.
 const EVENTS = [
+  { von: "2026-12-03", t: "Kleeschen", icon: "🎅", kats: ["U7", "U9", "U11", "U13", "WU11", "WU13"], fuer: "BAM · PUP · POU · MIN · WU11 · WU13" },
   { von: "2027-01-09", bis: "2027-01-10", t: "WanterCup27", kats: ["U7", "U9", "U11", "WU11", "WU13"], fuer: "BAM · PUP · POU · WU11 · WU13" },
 ];
 function eventDatum(e) {
@@ -605,7 +606,7 @@ const eventAmTag = tag => EVENTS.filter(e => e.von <= tag && tag <= (e.bis || e.
 function eventZeile(e, now, mitBis = true) {
   const n = tageBis(tagKey(now), e.von);
   const wann = e.von <= tagKey(now) ? T().bis(0) : n <= 60 ? T().bis(n) : "";
-  return `<li class="event"><span class="evt">🏆 ${esc(e.t)}</span><span class="evd">${esc(eventDatum(e))}${mitBis && wann ? ` · ${esc(wann)}` : ""}</span>${e.fuer ? `<span class="evf">${esc(T().fuer)} ${esc(e.fuer)}</span>` : ""}${e.zusatz ? `<span class="evd">${esc(e.zusatz)}</span>` : ""}</li>`;
+  return `<li class="event"><span class="evt">${e.icon || "🏆"} ${esc(e.t)}</span><span class="evd">${esc(eventDatum(e))}${mitBis && wann ? ` · ${esc(wann)}` : ""}</span>${e.fuer ? `<span class="evf">${esc(T().fuer)} ${esc(e.fuer)}</span>` : ""}${e.zusatz ? `<span class="evd">${esc(e.zusatz)}</span>` : ""}</li>`;
 }
 function eventsKarte(now, kat) {
   const liste = kommendeEvents(now).filter(e => !kat || (e.kats || []).includes(kat));
