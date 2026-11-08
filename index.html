@@ -63,7 +63,20 @@ html[lang="fr"] details.karte[open]>summary::after{content:"Masquer ▴"}
 .sprache button[aria-pressed="true"]{background:#fff;color:#111;border-color:#fff}
 header .innen>div:nth-child(2){min-width:0}
 .heute{border:2px solid var(--rot)}
-.heute>h2{background:var(--rot);color:#fff;border-bottom:0}
+.heute>h2{background:var(--rot);color:#fff;border-bottom:0;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.heute>h2 .schild{background:#fff;color:var(--rot);margin:0}
+.kasten{padding:12px 14px 14px;display:grid;gap:8px;text-align:center}
+.kasten .wann{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+.kasten .wann.klein{font-size:14px;font-weight:600;color:var(--leise)}
+.kasten ul.spiele li{padding:4px 0;border:0}
+.kasten .zusatz{font-size:14px;color:var(--leise)}
+.kasten .zusatz b{color:var(--text)}
+.kasten .satz{font-size:16px;font-weight:700}
+li.sp .mitte.gross{font-size:30px;padding:4px 12px;min-width:84px}
+.naechst{padding:12px 14px 0;text-align:center;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.naechst span{font-size:14px;font-weight:600;color:var(--leise)}
+ul.spiele li.erstes{border-top:0;padding-top:6px}
+.kal{border-top:1px solid var(--linie)}
 .gross{padding:14px;display:grid;gap:6px}
 .gross .zeit{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums}
 .gross .gegen{font-size:18px;font-weight:700}
@@ -129,7 +142,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 a";
+const FASSUNG = "2026-11-08 b";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -152,6 +165,12 @@ const TEXTE = {
     leer: "Noch keine Daten", leerText: "Die Spiele kommen mit dem ersten automatischen Abruf von der FLF. Das dauert nach dem Einrichten ein paar Minuten.",
     fuss: (d, f) => `Daten von der FLF · zuletzt geändert ${d}<br>FC Jeunesse Junglinster · seit 1935 · Fassung ${f}`,
     unterzeile: "Spiele, Ergebnisse und Tabellen", laden: "Lade …",
+    gleich: "Gleich geht's los! ⚽", anpfiffIn: m => `Anpfiff in ${m} ${m === 1 ? "Minute" : "Minuten"}`, anstoss: z => `Anstoß ${z}`,
+    seit: z => `seit ${z}`, ergKommt: "Das Ergebnis erscheint, sobald es eingetragen ist.", letztes: "Letztes Spiel", endstand: "Endstand",
+    ergFolgt: "Ergebnis folgt", ergFlf: "Ergebnis kommt, sobald die FLF es einträgt.", platz: n => `jetzt <b>${n}. Platz</b>`,
+    super: r => `Super gemacht, ${r}! 💪`, naechstes: "Nächstes Spiel", naechstesBam: "Nächster Mini-Spieltag", gegenW: " gegen ",
+    trinken: "Trinkflasche nicht vergessen! 😉", glueck: "Viel Spaß und viel Glück! 💪", daumen: "Daumen drücken! 🤞",
+    bis: n => n === 0 ? "heute" : n === 1 ? "morgen" : `in ${n} Tagen`,
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
@@ -167,6 +186,12 @@ const TEXTE = {
     leer: "No data yet", leerText: "The matches arrive with the first automatic update from the FLF, a few minutes after setup.",
     fuss: (d, f) => `Data from the FLF · last updated ${d}<br>FC Jeunesse Junglinster · since 1935 · Version ${f}`,
     unterzeile: "Matches, results and tables", laden: "Loading …",
+    gleich: "Kick-off soon! ⚽", anpfiffIn: m => `Kick-off in ${m} ${m === 1 ? "minute" : "minutes"}`, anstoss: z => `Kick-off ${z}`,
+    seit: z => `since ${z}`, ergKommt: "The result will appear as soon as it is entered.", letztes: "Last match", endstand: "Full time",
+    ergFolgt: "Result to follow", ergFlf: "The result will appear once the FLF enters it.", platz: n => `now <b>${n}${n % 10 === 1 && n !== 11 ? "st" : n % 10 === 2 && n !== 12 ? "nd" : n % 10 === 3 && n !== 13 ? "rd" : "th"} place</b>`,
+    super: r => `Well done, ${r}! 💪`, naechstes: "Next match", naechstesBam: "Next mini matchday", gegenW: " vs ",
+    trinken: "Don't forget your water bottle! 😉", glueck: "Have fun and good luck! 💪", daumen: "Fingers crossed! 🤞",
+    bis: n => n === 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`,
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
@@ -182,6 +207,12 @@ const TEXTE = {
     leer: "Pas encore de données", leerText: "Les matchs arrivent avec la première mise à jour automatique de la FLF, quelques minutes après l'installation.",
     fuss: (d, f) => `Données de la FLF · dernière mise à jour ${d}<br>FC Jeunesse Junglinster · depuis 1935 · Version ${f}`,
     unterzeile: "Matchs, résultats et classements", laden: "Chargement …",
+    gleich: "Ça va commencer ! ⚽", anpfiffIn: m => `Coup d'envoi dans ${m} ${m === 1 ? "minute" : "minutes"}`, anstoss: z => `Coup d'envoi ${z}`,
+    seit: z => `depuis ${z}`, ergKommt: "Le résultat apparaîtra dès qu'il sera saisi.", letztes: "Dernier match", endstand: "Score final",
+    ergFolgt: "Résultat à venir", ergFlf: "Le résultat apparaîtra dès que la FLF l'aura saisi.", platz: n => `maintenant <b>${n}${n === 1 ? "er" : "e"}</b>`,
+    super: r => `Bravo, ${r} ! 💪`, naechstes: "Prochain match", naechstesBam: "Prochaine mini-journée", gegenW: " contre ",
+    trinken: "N'oubliez pas la gourde ! 😉", glueck: "Amusez-vous bien et bonne chance ! 💪", daumen: "On croise les doigts ! 🤞",
+    bis: n => n === 0 ? "aujourd'hui" : n === 1 ? "demain" : `dans ${n} jours`,
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
@@ -230,8 +261,8 @@ function mitte(sp, now, erg, w) {
   if (vorbei(sp, now)) return `<span class="mitte leise">${erg ? (sp.bem === "Arrêté" ? T().abgebr : "–") : T().gespielt}</span>`;
   return offen(sp) ? `<span class="mitte leise">${T().offen}</span>` : `<span class="mitte zeit">${uhr(new Date(sp.d))}</span>`;
 }
-function zeile(sp, now, { wirH, wirA, erg, w, unten, attr = "" }) {
-  return `<li class="sp${attr ? " klick" : ""}"${attr}><span class="tm h${wirH ? " wir" : ""}">${esc(sp.h.n)}</span>${mitte(sp, now, erg, w)}
+function zeile(sp, now, { wirH, wirA, erg, w, unten, attr = "", m }) {
+  return `<li class="sp${attr ? " klick" : ""}"${attr}><span class="tm h${wirH ? " wir" : ""}">${esc(sp.h.n)}</span>${m ?? mitte(sp, now, erg, w)}
     <span class="tm${wirA ? " wir" : ""}">${esc(sp.a.n)}</span><span class="unten">${unten}</span></li>`;
 }
 function spielLi(sp, now, mitTeam) {
@@ -245,16 +276,66 @@ function spielLi(sp, now, mitTeam) {
 }
 
 // ---- Mannschaft ----
-function heuteKarte(spiele, now) {
-  const heute = tagKey(now), morgen = tagPlus(heute, 1);
-  const sp = spiele.find(s => !vorbei(s, now) && [heute, morgen].includes(tagKey(new Date(s.d))));
-  if (!sp) return "";
-  const d = new Date(sp.d), istHeute = tagKey(d) === heute, g = gegner(sp);
-  const begonnen = !offen(sp) && now >= d;
-  return `<section class="karte heute"><h2>${istHeute ? (begonnen ? T().laeuft : T().heute) : T().morgen}</h2>
-    <div class="gross"><span class="zeit">${offen(sp) ? T().zeitOffen : (sp.bam && !sp.bam.zeitSicher ? T().ca : "") + uhr(d) + T().uhr}</span>
-    <span class="gegen">${sp.bam ? esc(g.n) : (sp.heim ? T().heim : T().aus) + esc(g.n)}</span>
-    <span class="leise">${artSchild(sp)}${esc(sp.klasse)}${sp.ort ? " · 📍 " + esc(sp.ort) : ""}</span></div></section>`;
+// Kästen oben wie in der Koeppchen-App: „Heute Spieltag!“ (alle), „Morgen Spieltag!“ (nur Kinder, am Vortag),
+// „Letztes Spiel“ (bis 7 Tage; Kinder bis zum Vortag des nächsten, sonst bis zum Spieltag).
+const KINDER = ["U7", "U9", "U11", "U13", "U15", "WU11", "WU13", "WU15"];
+const tageBis = (a, b) => Math.round((Date.parse(b + "T12:00:00Z") - Date.parse(a + "T12:00:00Z")) / 864e5);
+const zeitText = sp => offen(sp) ? T().zeitOffen : (sp.bam && !sp.bam.zeitSicher ? T().ca : "") + uhr(new Date(sp.d)) + T().uhr;
+const wannText = sp => `${wt(new Date(sp.d))} ${kurzDatum(new Date(sp.d))} · ${zeitText(sp)}`;
+const schildText = sp => sp.bam ? "" : sp.typ === "CUP" ? T().cup : sp.typ === "FM" ? T().friendly : sp.wett === "Testspiele" ? T().friendly : "";
+const kopf = (titel, sp, rechts) => `<h2><span>${titel}</span>${rechts ? `<span class="schild">${esc(rechts)}</span>` : sp && schildText(sp) ? `<span class="schild">${esc(schildText(sp))}</span>` : ""}</h2>`;
+const kastenZeile = (sp, now, m) => `<ul class="spiele">${zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, w: wertung(sp), unten: "", m })}</ul>`.replace('<span class="unten"></span>', "");
+let UMSCHALT = 0;   // Zeitpunkt, zu dem der Heute-Kasten umschaltet (Countdown, Anpfiff) — der Takt baut dann neu.
+function spieltagHeute(spiele, now) {
+  const sp = spiele.find(s => tagKey(new Date(s.d)) === tagKey(now) && !(s.gespielt && s.hs != null) && !vorbei(s, now));
+  return sp ? { sp, begonnen: !offen(sp) && now >= new Date(sp.d) } : null;
+}
+function spieltagMorgen(spiele, now) {
+  return spiele.find(s => tagKey(new Date(s.d)) === tagPlus(tagKey(now), 1) && !vorbei(s, now)) || null;
+}
+function heuteHtml(h, now, kinder) {
+  const sp = h.sp, d = new Date(sp.d), rest = d - now;
+  const min = !h.begonnen && !offen(sp) && rest > 0 && rest <= 15 * 60e3 ? Math.ceil(rest / 60e3) : 0;
+  if (!h.begonnen && !offen(sp)) UMSCHALT = +d - (min ? 0 : 15 * 60e3);
+  if (min) COUNTDOWN = true;
+  const titel = h.begonnen ? T().laeuft : min ? T().gleich : T().heute;
+  const oben = h.begonnen ? T().seit(uhr(d)) : min ? `${T().anpfiffIn(min)} · ${uhr(d)}` : offen(sp) ? T().zeitOffen : T().anstoss(uhr(d));
+  const satz = kinder ? (!h.begonnen && !min ? T().trinken : h.begonnen ? T().daumen : T().glueck) : h.begonnen ? T().ergKommt : "";
+  return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
+    ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}<div class="zusatz">${esc(sp.klasse)}</div>
+    ${satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : ""}</div></section>`;
+}
+function morgenHtml(sp, now) {
+  return `<section class="karte heute">${kopf(T().morgen, sp)}<div class="kasten"><div class="wann">${esc(offen(sp) ? T().zeitOffen : T().anstoss(uhr(new Date(sp.d))))}</div>
+    ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}<div class="zusatz">${esc(sp.klasse)}</div>
+    <div class="satz">${esc(T().trinken)}</div></div></section>`;
+}
+function letztesHtml(t, spiele, now, aktuell, kinder) {
+  if (spieltagHeute(spiele, now) || (kinder && spieltagMorgen(spiele, now))) return "";
+  const vorbeiL = spiele.filter(s => vorbei(s, now) && new Date(s.d) <= now).reverse();
+  const datum = sp => `${wt(new Date(sp.d))} ${kurzDatum(new Date(sp.d))}`;
+  if (!kinder) {
+    // Erwachsene: Ergebnis groß, Klasse und Platz. Auch ohne FLF-Ergebnis („Ergebnis folgt“), dann nur bis 48 h.
+    const mitErg = s => s.erg && s.hs != null && (s.gespielt || s.forfait);
+    const sp = vorbeiL.find(s => mitErg(s) || now - new Date(s.d) <= 48 * 3600e3);
+    if (!sp || now - new Date(sp.d) > 7 * 864e5) return "";
+    const erg = mitErg(sp), liga = aktuell && aktuell.spiele.some(x => x.id === sp.id);
+    const zeileTab = erg && liga && (aktuell.tabelle || []).find(r => t.ids.includes(r.id));
+    const unten = [liga ? esc(aktuell.n) : esc(sp.klasse), zeileTab ? T().platz(zeileTab.pl) : ""].filter(Boolean).join(" · ");
+    return `<section class="karte heute">${kopf(T().letztes, null, erg ? T().endstand : T().ergFolgt)}<div class="kasten">
+      <div class="wann klein">${esc(datum(sp))}${sp.tag ? ` · ${T().spieltag} ${sp.tag}` : ""}</div>
+      ${kastenZeile(sp, now, `<span class="mitte gross ${erg ? wertung(sp) : ""}">${erg ? `${sp.hs}:${sp.as}` : "–:–"}</span>`)}
+      ${erg ? "" : `<div class="zusatz">${T().ergFlf}</div>`}<div class="zusatz">${unten}</div></div></section>`;
+  }
+  // Kinder: gelobt wird das Spielen, das Ergebnis steht klein wie in der Liste.
+  const sp = vorbeiL[0];
+  if (!sp || now - new Date(sp.d) > 7 * 864e5) return "";
+  const n = spiele.find(s => !vorbei(s, now));
+  const naechst = n ? `<div class="zusatz">${sp.bam ? T().naechstesBam : T().naechstes}: <b>${esc(wannText(n))}</b>${n.bam ? "" : esc(T().gegenW + gegner(n).n)}${n.ort ? "<br>📍 " + esc(n.ort) : ""}</div>` : "";
+  return `<section class="karte heute">${kopf(T().letztes, sp)}<div class="kasten"><div class="wann klein">${esc(datum(sp))}</div>
+    <div class="satz">${esc(T().super(t.reiter))}</div>${kastenZeile(sp, now)}${naechst}</div></section>`;
 }
 function tabelleKarte(k, t) {
   if (!k?.tabelle?.length) return "";
@@ -284,22 +365,39 @@ function teamHtml(t, now) {
   // Aktuelle Ligaklasse = zuletzt begonnene Liga; die anderen sind frühere Phasen.
   const ligen = t.klassen.map(id => D.klassen[id]).filter(k => k && k.typ === "CC").sort((a, b) => a.start.localeCompare(b.start));
   const aktuell = ligen[ligen.length - 1], frueher = ligen.slice(0, -1).reverse();
-  let html = heuteKarte(spiele, now);
-  html += `<section class="karte"><h2>${T().naechste}</h2>${kommend.length ? `<ul class="spiele">${kommend.slice(0, 5).map(sp => spielLi(sp, now)).join("")}</ul>` : `<p class="hinweis">${T().keineTermine}</p>`}</section>`;
+  const kinder = KINDER.includes(t.kat);
+  const heute = spieltagHeute(spiele, now), morgen = kinder && !heute && spieltagMorgen(spiele, now);
+  let html = (heute ? heuteHtml(heute, now, kinder) : "") + (morgen ? morgenHtml(morgen, now) : "") + letztesHtml(t, spiele, now, aktuell, kinder);
+  html += naechsteKarte(kommend, now, kalenderKnopf(t));
   if (aktuell) html += tabelleKarte(aktuell, t);
   if (gespielt.length) html += `<section class="karte"><h2>${T().ergebnisse}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
   if (aktuell) html += `<details class="karte"><summary>${T().alleKlasse}</summary>${klassenSpiele(aktuell, t, now)}</details>`;
   for (const k of frueher) html += `<details class="karte"><summary>${T().frueher}${esc(k.n)}</summary>${tabelleKarte(k, t).replace(/^<section class="karte">|<\/section>$/g, "")}${klassenSpiele(k, t, now)}</details>`;
-  html += kalenderKarte(t);
   return html;
 }
-function kalenderKarte(t) {
+// „Nächste Spiele“: das erste mit Datum, Uhrzeit und „in 3 Tagen“ hervorgehoben, höchstens fünf; Kalender-Knopf darunter.
+function naechsteKarte(kommend, now, unten = "", titel = T().naechste) {
+  let h = `<section class="karte"><h2>${titel}</h2>`;
+  if (!kommend.length) h += `<p class="hinweis">${T().keineTermine}</p>`;
+  else {
+    const n = kommend[0], bis = tageBis(tagKey(now), tagKey(new Date(n.d)));
+    h += `<div class="naechst">${esc(wannText(n))} <span>${esc(T().bis(bis))}</span></div><ul class="spiele">`
+      + kommend.slice(0, 5).map((sp, i) => {
+        if (i) return spielLi(sp, now);
+        const meta = [sp.ort ? "📍 " + sp.ort : "", sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")].filter(Boolean);
+        return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, m: '<span class="mitte leise">–</span>',
+          unten: `${artSchild(sp)}${esc(meta.join(" · "))}` }).replace('class="sp"', 'class="sp erstes"');
+      }).join("") + "</ul>";
+  }
+  return h + unten + "</section>";
+}
+function kalenderKnopf(t) {
   const https = new URL("kalender/" + t.datei, location.href).href;
   const webcal = https.replace(/^https?:/, "webcal:");
-  return `<section class="karte"><h2>${T().kalender}</h2><div class="kal">
+  return `<div class="kal">
     <a class="knopf" href="${esc(webcal)}">${esc(T().abo(t.reiter))}</a>
     <span class="leise">${T().aboHinweis}</span>
-    <code>${esc(https)}</code></div></section>`;
+    <code>${esc(https)}</code></div>`;
 }
 
 // ---- Nationalmannschaft (Roude Léiw), Daten von FuPa ----
@@ -332,8 +430,9 @@ function natiSpiele() {
 function natiHtml(now) {
   const spiele = natiSpiele();
   const kommend = spiele.filter(sp => !vorbei(sp, now)), gespielt = spiele.filter(sp => vorbei(sp, now)).reverse().slice(0, 8);
-  let html = heuteKarte(spiele, now);
-  html += `<section class="karte"><h2>${T().natiNaechste}</h2>${kommend.length ? `<ul class="spiele">${kommend.slice(0, 5).map(sp => spielLi(sp, now)).join("")}</ul>` : `<p class="hinweis">${T().natiKeine}</p>`}</section>`;
+  const heute = spieltagHeute(spiele, now);
+  let html = heute ? heuteHtml(heute, now, false) : "";
+  html += kommend.length ? naechsteKarte(kommend, now, "", T().natiNaechste) : `<section class="karte"><h2>${T().natiNaechste}</h2><p class="hinweis">${T().natiKeine}</p></section>`;
   const g = D.nati.gruppe;
   if (g?.tabelle?.length) {
     const zeilen = g.tabelle.map(z => `<tr class="${z.n === "Luxemburg" ? "wir" : ""}"><td>${z.pl}</td><td>${esc(land(z.n))}</td><td>${z.sp}</td><td>${z.s}</td><td>${z.u}</td><td>${z.nl}</td><td>${z.t}:${z.g}</td><td><b>${z.pkt}</b></td></tr>`).join("");
@@ -397,8 +496,10 @@ function knoepfe(now) {
     .concat(D.nati?.spiele?.length ? [`<button class="woche nati" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="Luxemburg" title="Luxemburg">${FLAGGE}</button>`] : []);
   document.getElementById("knoepfe").innerHTML = k.join("");
 }
+let COUNTDOWN = false;
 function render() {
   const now = new Date();
+  UMSCHALT = 0;
   document.documentElement.lang = LANG;
   for (const b of document.querySelectorAll(".sprache button")) b.setAttribute("aria-pressed", b.dataset.lang === LANG);
   document.getElementById("unterzeile").textContent = T().unterzeile;
@@ -449,6 +550,11 @@ try { D = JSON.parse(merk.get("data")); if (D) render(); } catch (e) {}
 laden();
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") laden(); });
 setInterval(() => { if (document.visibilityState === "visible") render(); }, 60e3);
+// Countdown (letzte 15 min vor Anpfiff) und Anpfiff: alle 10 s prüfen und neu aufbauen.
+setInterval(() => {
+  if (document.visibilityState !== "visible" || !D?.teams) return;
+  if (COUNTDOWN || (UMSCHALT && Date.now() >= UMSCHALT)) { COUNTDOWN = false; render(); }
+}, 10e3);
 addEventListener("resize", () => D?.teams && knoepfe(new Date()));
 </script>
 </body>
