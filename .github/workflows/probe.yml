@@ -1,0 +1,15 @@
+name: Probe (einmalig)
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -s https://api.openligadb.de/getavailableleagues | python3 -c "
+          import json,sys
+          d=json.load(sys.stdin)
+          for l in d:
+            n=(l.get('leagueName') or '')
+            if l.get('leagueSeason') in (2025,2026) and any(k in n.lower() for k in ['premier','england','engl']): print(l['leagueShortcut'], l['leagueSeason'], n)
+          "
+          for s in pl epl pl1; do echo "== $s"; curl -s https://api.openligadb.de/getmatchdata/$s/2026/10 | head -c 400; echo; done
