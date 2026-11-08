@@ -151,7 +151,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 h";
+const FASSUNG = "2026-11-08 i";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -283,10 +283,10 @@ function zeile(sp, now, { wirH, wirA, erg, w, unten, attr = "", m }) {
   return `<li class="sp${attr ? " klick" : ""}"${attr}><span class="tm h${wirH ? " wir" : ""}">${esc(sp.h.n)}</span>${m ?? mitte(sp, now, erg, w)}
     <span class="tm${wirA ? " wir" : ""}">${esc(sp.a.n)}</span><span class="unten">${unten}</span></li>`;
 }
-// Kabinen bei Heimspielen (vom Verein, 8.11.2026): [Heimmannschaft, Gäste]. Bambinis und Veteranen: keine Anzeige
+// Kabinen bei Heimspielen (vom Verein, 8.11.2026): [Heimmannschaft, Gäste]. Bambinis: keine Anzeige
 // (Bambinis werden spontan vergeben). Neue Mannschaft = neue Zeile, Schlüssel = Name des Reiters.
 const KABINEN = {
-  "Seniors": [8, 1], "Réserves": [6, 1], "JUN": [5, 1], "CAD": [5, 3],
+  "Seniors": [8, 1], "Réserves": [6, 1], "Veteranen": [8, 1], "JUN": [5, 1], "CAD": [5, 3],
   "SCO 1": [5, 1], "SCO 2": [4, 3],
   "MIN 1": [8, 3], "MIN 2": [6, 1], "MIN 3": [5, 1], "MIN 4": [4, 3],
   "POU 1": [4, 3], "POU 2": [4, 3], "POU 3": [4, 3],
