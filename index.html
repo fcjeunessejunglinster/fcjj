@@ -165,7 +165,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 r";
+const FASSUNG = "2026-11-08 s";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -475,7 +475,7 @@ function kalenderKnopf(t) {
 // Weitere Mannschaft (z. B. Réserves): eigenes Widget anlegen, Kennung hier mit dem Namen des Reiters eintragen.
 const FUPA_WIDGET = { "Seniors": "3LogsC5yrMCUFqOr4tE5NQRuMTZ", "Réserves": "3LoumFG32IteFsCAbe4xILX5V7y" };
 // Kader (FuPa-Widget „Kader“, 8.11.2026), aufklappbar, an jedem Tag.
-const FUPA_KADER = { "Seniors": "3LpBYN3mQnzQOPvRiEb2G50VWbs" };
+const FUPA_KADER = { "Seniors": "3LpBYN3mQnzQOPvRiEb2G50VWbs", "Réserves": "3LpC6rNsRXnx51xq1zeLA0eu6TX" };
 function kaderHtml(id) {
   return `<details class="karte"><summary>${T().kader} · ${T().fupaVon}</summary>` + (fupaOk()
     ? `<div class="fupaplatz" data-fw="${esc(id)}"></div>`
