@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-08T05:21:54.206Z",
+ "stand": "2026-11-08T05:26:45.265Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -381,6 +381,22 @@
    "alter": "Seniors Réserves",
    "mit": [],
    "datei": "reserves.ics"
+  },
+  {
+   "id": 44726,
+   "ids": [
+    44726
+   ],
+   "n": "Jeunesse Junglinster",
+   "kat": "VET",
+   "klassen": [
+    19563
+   ],
+   "nr": 0,
+   "reiter": "Veteranen",
+   "alter": "Veteranen",
+   "mit": [],
+   "datei": "veteranen.ics"
   }
  ],
  "klassen": {
@@ -16881,6 +16897,24 @@
      "ort": "Terrain 2 (Lorentzweiler, synth.)"
     },
     {
+     "id": 9029634,
+     "d": "2026-09-07T19:30:00+02:00",
+     "tag": 7,
+     "h": {
+      "id": 46662,
+      "n": "Marisca Mersch"
+     },
+     "a": {
+      "id": 44726,
+      "n": "Jeunesse Junglinster"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Schintgespesch (Mersch)"
+    },
+    {
      "id": 9029669,
      "d": "2026-09-12T13:00:00+02:00",
      "tag": 12,
@@ -16917,6 +16951,24 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
+     "id": 9029691,
+     "d": "2026-09-14T19:30:00+02:00",
+     "tag": 14,
+     "h": {
+      "id": 44726,
+      "n": "Jeunesse Junglinster"
+     },
+     "a": {
+      "id": 46641,
+      "n": "FC Luxembourg City"
+     },
+     "hs": 2,
+     "as": 2,
+     "gespielt": true,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
      "id": 9029800,
      "d": "2026-09-28T20:00:00+02:00",
      "tag": 28,
@@ -16933,6 +16985,78 @@
      "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 9029857,
+     "d": "2026-10-05T19:30:00+02:00",
+     "tag": 5,
+     "h": {
+      "id": 44726,
+      "n": "Jeunesse Junglinster"
+     },
+     "a": {
+      "id": 44802,
+      "n": "AS Rupensia Lusitanos Larochette"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 9030001,
+     "d": "2026-11-02T19:30:00+01:00",
+     "tag": 2,
+     "h": {
+      "id": 44726,
+      "n": "Jeunesse Junglinster"
+     },
+     "a": {
+      "id": 46704,
+      "n": "US Sandweiler"
+     },
+     "hs": 3,
+     "as": 1,
+     "gespielt": true,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 9030062,
+     "d": "2026-11-09T19:30:00+01:00",
+     "tag": 9,
+     "h": {
+      "id": 44726,
+      "n": "Jeunesse Junglinster"
+     },
+     "a": {
+      "id": 45568,
+      "n": "FC 72 Erpeldange"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 1 (Junglinster)"
+    },
+    {
+     "id": 9029698,
+     "d": "2026-11-16T19:30:00+01:00",
+     "tag": 16,
+     "h": {
+      "id": 45786,
+      "n": "Sporting Mertzig"
+     },
+     "a": {
+      "id": 44726,
+      "n": "Jeunesse Junglinster"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Mertzig, synth.)"
     },
     {
      "id": 9029913,
@@ -23809,6 +23933,7 @@
    "7": "U11",
    "11": "U15",
    "15": "WU15",
+   "28": "VET",
    "29": "WU11",
    "33": "WU13",
    "9999": "RES"
@@ -23851,16 +23976,6 @@
     ],
     "spiele": 12,
     "erstes": "2026-09-20T11:00:00+02:00"
-   },
-   "28": {
-    "klassen": [
-     "Amicaux 2"
-    ],
-    "teams": [
-     "Jeunesse Junglinster"
-    ],
-    "spiele": 6,
-    "erstes": "2026-09-07T19:30:00+02:00"
    },
    "29": {
     "klassen": [
