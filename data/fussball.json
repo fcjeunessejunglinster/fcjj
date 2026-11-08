@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-08T01:49:35.357Z",
+ "stand": "2026-11-08T02:43:05.367Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -170,9 +170,7 @@
    "nr": 2,
    "reiter": "MIN 2",
    "alter": "Minimes U13",
-   "mit": [
-    44740
-   ],
+   "mit": [],
    "datei": "min-2.ics"
   },
   {
@@ -189,9 +187,7 @@
    "nr": 3,
    "reiter": "MIN 3",
    "alter": "Minimes U13",
-   "mit": [
-    44740
-   ],
+   "mit": [],
    "datei": "min-3.ics"
   },
   {
@@ -208,9 +204,7 @@
    "nr": 4,
    "reiter": "MIN 4",
    "alter": "Minimes U13",
-   "mit": [
-    44740
-   ],
+   "mit": [],
    "datei": "min-4.ics"
   },
   {
@@ -247,9 +241,7 @@
    "nr": 2,
    "reiter": "SCO 2",
    "alter": "Scolaires U15",
-   "mit": [
-    44736
-   ],
+   "mit": [],
    "datei": "sco-2.ics"
   },
   {
