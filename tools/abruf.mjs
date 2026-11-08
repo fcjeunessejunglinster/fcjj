@@ -159,7 +159,11 @@ export function aufbereiten({ saison, club, vereinsSpiele, klassen }) {
     t.nr = ROEM[z] || (andere.length ? 1 : 0);
     t.reiter = kat.kurz + (t.nr && andere.length ? " " + t.nr : "");
     t.alter = kat.n;
-    t.mit = alle.filter(o => !reiterTeams.includes(o) && o.kat === t.kat && (!zusatz(o.n) || zusatz(o.n) === z)).flatMap(o => o.ids);
+    // Pokal-/Freundschaftsmannschaft ohne I/II gehört zur „I“ (die FLF nennt MIN 1 im Pokal „Jeunesse Junglinster“,
+    // in der Liga „… I“; vom Verein, 8.11.2026). Gibt es keine „I“, hängt sie an allen der Altersklasse.
+    const hatEins = reiterTeams.some(o => o.kat === t.kat && zusatz(o.n) === "I");
+    t.mit = alle.filter(o => !reiterTeams.includes(o) && o.kat === t.kat
+      && (zusatz(o.n) ? zusatz(o.n) === z : !hatEins || z === "I")).flatMap(o => o.ids);
   }
   const reihe = k => KATS.findIndex(x => x.key === k);
   return {
