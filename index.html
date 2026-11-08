@@ -165,7 +165,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 s";
+const FASSUNG = "2026-11-08 t";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -729,6 +729,8 @@ async function laden() {
 try { D = JSON.parse(merk.get("data")); if (D) render(); } catch (e) {}
 laden();
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") laden(); });
+// Bleibt die App offen (z. B. am Spielfeldrand), alle 5 Minuten neue Daten holen.
+setInterval(() => { if (document.visibilityState === "visible") laden(); }, 5 * 60e3);
 setInterval(() => { if (document.visibilityState === "visible") render(); }, 60e3);
 // Countdown (letzte 15 min vor Anpfiff) und Anpfiff: alle 10 s prüfen und neu aufbauen.
 setInterval(() => {
