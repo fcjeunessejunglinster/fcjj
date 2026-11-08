@@ -86,8 +86,9 @@ li.event .evt{font-weight:800;font-size:17px;color:var(--rot)}
 li.event .evf{font-size:13px;font-weight:700;color:var(--leise);letter-spacing:.03em}
 li.event .evd{font-size:14px;color:var(--text);font-variant-numeric:tabular-nums}
 .events{border:2px solid var(--rot)}
-.blknopf .livepunkt{color:var(--rot);font-size:12px;vertical-align:1px}
-.raster button.blknopf[aria-pressed="true"] .livepunkt{color:#fff}
+.raster button.blknopf{padding:5px 4px;position:relative}
+.raster button.blknopf[aria-pressed="true"]{background:var(--karte);color:var(--text);border:2px solid var(--schwarz)}
+.blknopf .livepunkt{color:var(--rot);font-size:14px;position:absolute;top:4px;right:8px}
 li.sp .mitte.live{background:var(--rot);border-color:var(--rot);color:#fff}
 li.sp .tore{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0 16px;font-size:12px;color:var(--leise)}
 li.sp .tore .h{text-align:right}
@@ -171,7 +172,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 u";
+const FASSUNG = "2026-11-08 v";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -734,7 +735,7 @@ function knoepfe(now) {
   const k = [`<button class="woche" data-reiter="woche" aria-pressed="${AKTIV === "woche"}">${T().woche} <small>· ${T().spiele(n)}</small></button>`]
     .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}">${esc(t.reiter)}</button>`))
     .concat(D.nati?.spiele?.length ? [`<button class="nati" style="grid-column:span 30" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="FLF" title="FLF"><img src="bilder/flf.png" alt="FLF" width="31" height="40" style="display:block;margin:auto"></button>`] : [])
-    .concat([`<button class="blknopf" style="grid-column:span ${D.nati?.spiele?.length ? 30 : 60}" data-reiter="bl" aria-pressed="${AKTIV === "bl"}">Bundesliga${blLaeuft(new Date()) ? ' <span class="livepunkt">●</span>' : ""}</button>`]);
+    .concat([`<button class="blknopf" style="grid-column:span ${D.nati?.spiele?.length ? 30 : 60}" data-reiter="bl" aria-pressed="${AKTIV === "bl"}" aria-label="Bundesliga" title="Bundesliga"><img src="bilder/bundesliga.png" alt="Bundesliga" height="40" style="display:block;margin:auto;height:40px;width:auto">${blLaeuft(new Date()) ? '<span class="livepunkt">●</span>' : ""}</button>`]);
   document.getElementById("knoepfe").innerHTML = k.join("");
 }
 let COUNTDOWN = false;
