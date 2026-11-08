@@ -72,6 +72,7 @@ header .innen>div:nth-child(2){min-width:0}
 .kasten ul.spiele li{padding:4px 0;border:0}
 .kasten .zusatz{font-size:14px;color:var(--leise)}
 .kasten .zusatz b{color:var(--text)}
+.kasten .kabine{font-size:16px;font-weight:700}
 .kasten .satz{font-size:16px;font-weight:700}
 .rocks{font-size:24px;font-weight:900;letter-spacing:.02em;color:var(--rot);font-style:italic}
 li.sp .mitte.gross{font-size:30px;padding:4px 12px;min-width:84px}
@@ -150,7 +151,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 g";
+const FASSUNG = "2026-11-08 h";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -181,6 +182,7 @@ const TEXTE = {
     bis: n => n === 0 ? "heute" : n === 1 ? "morgen" : `in ${n} Tagen`,
     shop: "🛍️ Vereinsshop", teilen: "📤 App teilen", kopiert: "Link kopiert – jetzt einfügen und verschicken.",
     teilText: u => `Die App des FC Jeunesse Junglinster: Spiele, Ergebnisse und Tabellen aller Mannschaften, immer aktuell. ⚽\n${u}`,
+    kabinen: (h, g) => `🚪 Kabinen: FCJJ ${h} · Gäste ${g}`,
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
@@ -204,6 +206,7 @@ const TEXTE = {
     bis: n => n === 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`,
     shop: "🛍️ Club shop", teilen: "📤 Share the app", kopiert: "Link copied – paste it to share.",
     teilText: u => `The FC Jeunesse Junglinster app: matches, results and tables for all our teams, always up to date. ⚽\n${u}`,
+    kabinen: (h, g) => `🚪 Dressing rooms: FCJJ ${h} · Visitors ${g}`,
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
@@ -227,6 +230,7 @@ const TEXTE = {
     bis: n => n === 0 ? "aujourd'hui" : n === 1 ? "demain" : `dans ${n} jours`,
     shop: "🛍️ Boutique du club", teilen: "📤 Partager l'app", kopiert: "Lien copié – collez-le pour le partager.",
     teilText: u => `L'app du FC Jeunesse Junglinster : matchs, résultats et classements de toutes nos équipes, toujours à jour. ⚽\n${u}`,
+    kabinen: (h, g) => `🚪 Vestiaires : FCJJ ${h} · Visiteurs ${g}`,
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
@@ -279,10 +283,26 @@ function zeile(sp, now, { wirH, wirA, erg, w, unten, attr = "", m }) {
   return `<li class="sp${attr ? " klick" : ""}"${attr}><span class="tm h${wirH ? " wir" : ""}">${esc(sp.h.n)}</span>${m ?? mitte(sp, now, erg, w)}
     <span class="tm${wirA ? " wir" : ""}">${esc(sp.a.n)}</span><span class="unten">${unten}</span></li>`;
 }
+// Kabinen bei Heimspielen (vom Verein, 8.11.2026): [Heimmannschaft, Gäste]. Bambinis und Veteranen: keine Anzeige
+// (Bambinis werden spontan vergeben). Neue Mannschaft = neue Zeile, Schlüssel = Name des Reiters.
+const KABINEN = {
+  "Seniors": [8, 1], "Réserves": [6, 1], "JUN": [5, 1], "CAD": [5, 3],
+  "SCO 1": [5, 1], "SCO 2": [4, 3],
+  "MIN 1": [8, 3], "MIN 2": [6, 1], "MIN 3": [5, 1], "MIN 4": [4, 3],
+  "POU 1": [4, 3], "POU 2": [4, 3], "POU 3": [4, 3],
+  "PUP 1": [4, 1], "PUP 2": [5, 2], "PUP 3": [4, 1],
+  "WU15": [5, 3], "WU13": [4, 1], "WU11": [5, 3],
+};
+function kabine(sp, now) {
+  if (!sp.heim || !sp.team || sp.bam || vorbei(sp, now)) return "";
+  const k = KABINEN[sp.team.reiter];
+  return k ? T().kabinen(k[0], k[1]) : "";
+}
 function spielLi(sp, now, mitTeam) {
   const d = new Date(sp.d);
   const meta = [sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")];
   if (!vorbei(sp, now) && sp.ort) meta.push("📍 " + sp.ort);
+  if (kabine(sp, now)) meta.push(kabine(sp, now));
   if (sp.forfait) meta.push(T().forfait);
   if (sp.bem && sp.bem !== "Arrêté") meta.push(sp.bem);
   const unten = `${mitTeam ? `<span class="schild team">${esc(sp.team.reiter)}</span>` : ""}${artSchild(sp)}<b>${wt(d)} ${kurzDatum(d)}</b> · ${esc(meta.join(" · "))}`;
@@ -317,13 +337,13 @@ function heuteHtml(h, now, kinder) {
   const satz = kinder ? (!h.begonnen && !min ? T().trinken : h.begonnen ? T().daumen : T().glueck) : h.begonnen ? T().ergKommt : "";
   return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
-    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}<div class="zusatz">${esc(sp.klasse)}</div>
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}<div class="zusatz">${esc(sp.klasse)}</div>
     ${satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : ""}</div></section>`;
 }
 function morgenHtml(sp, now) {
   return `<section class="karte heute">${kopf(T().morgen, sp)}<div class="kasten"><div class="wann">${esc(offen(sp) ? T().zeitOffen : T().anstoss(uhr(new Date(sp.d))))}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
-    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}<div class="zusatz">${esc(sp.klasse)}</div>
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}<div class="zusatz">${esc(sp.klasse)}</div>
     <div class="satz">${esc(T().trinken)}</div></div></section>`;
 }
 // Slogan nach einem Sieg einer Jugendmannschaft (alle außer Seniors, Réserves und Veteranen; vom Verein, 8.11.2026).
@@ -401,7 +421,7 @@ function naechsteKarte(kommend, now, unten = "", titel = T().naechste) {
     h += `<div class="naechst">${esc(wannText(n))} <span>${esc(T().bis(bis))}</span></div><ul class="spiele">`
       + kommend.slice(0, 5).map((sp, i) => {
         if (i) return spielLi(sp, now);
-        const meta = [sp.ort ? "📍 " + sp.ort : "", sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")].filter(Boolean);
+        const meta = [sp.ort ? "📍 " + sp.ort : "", kabine(sp, now), sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")].filter(Boolean);
         return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, m: '<span class="mitte leise">–</span>',
           unten: `${artSchild(sp)}${esc(meta.join(" · "))}` }).replace('class="sp"', 'class="sp erstes"');
       }).join("") + "</ul>";
