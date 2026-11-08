@@ -73,6 +73,7 @@ header .innen>div:nth-child(2){min-width:0}
 .kasten .zusatz{font-size:14px;color:var(--leise)}
 .kasten .zusatz b{color:var(--text)}
 .kasten .satz{font-size:16px;font-weight:700}
+.rocks{font-size:24px;font-weight:900;letter-spacing:.02em;color:var(--rot);font-style:italic}
 li.sp .mitte.gross{font-size:30px;padding:4px 12px;min-width:84px}
 .naechst{padding:12px 14px 0;text-align:center;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
 .naechst span{font-size:14px;font-weight:600;color:var(--leise)}
@@ -147,7 +148,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 d";
+const FASSUNG = "2026-11-08 e";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -323,6 +324,9 @@ function morgenHtml(sp, now) {
     ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}<div class="zusatz">${esc(sp.klasse)}</div>
     <div class="satz">${esc(T().trinken)}</div></div></section>`;
 }
+// Slogan nach einem Sieg einer Jugendmannschaft (alle außer Seniors und Réserves; vom Verein, 8.11.2026).
+const ROCKS = '<div class="rocks">YOUth ROCKs! 🤘</div>';
+const rocks = (t, sp) => !["SEN", "RES"].includes(t.kat) && wertung(sp) === "S" && (sp.gespielt || sp.forfait) ? ROCKS : "";
 function letztesHtml(t, spiele, now, aktuell, kinder) {
   if (spieltagHeute(spiele, now) || (kinder && spieltagMorgen(spiele, now))) return "";
   const vorbeiL = spiele.filter(s => vorbei(s, now) && new Date(s.d) <= now).reverse();
@@ -338,7 +342,7 @@ function letztesHtml(t, spiele, now, aktuell, kinder) {
     return `<section class="karte heute">${kopf(T().letztes, null, erg ? T().endstand : T().ergFolgt)}<div class="kasten">
       <div class="wann klein">${esc(datum(sp))}${sp.tag ? ` · ${T().spieltag} ${sp.tag}` : ""}</div>
       ${kastenZeile(sp, now, `<span class="mitte gross ${erg ? wertung(sp) : ""}">${erg ? `${sp.hs}:${sp.as}` : "–:–"}</span>`)}
-      ${erg ? "" : `<div class="zusatz">${T().ergFlf}</div>`}<div class="zusatz">${unten}</div></div></section>`;
+      ${erg ? rocks(t, sp) : `<div class="zusatz">${T().ergFlf}</div>`}<div class="zusatz">${unten}</div></div></section>`;
   }
   // Kinder: gelobt wird das Spielen, das Ergebnis steht klein wie in der Liste.
   const sp = vorbeiL[0];
@@ -346,7 +350,7 @@ function letztesHtml(t, spiele, now, aktuell, kinder) {
   const n = spiele.find(s => !vorbei(s, now));
   const naechst = n ? `<div class="zusatz">${sp.bam ? T().naechstesBam : T().naechstes}: <b>${esc(wannText(n))}</b>${n.bam ? "" : esc(T().gegenW + gegner(n).n)}${n.ort ? "<br>📍 " + esc(n.ort) : ""}</div>` : "";
   return `<section class="karte heute">${kopf(T().letztes, sp)}<div class="kasten"><div class="wann klein">${esc(datum(sp))}</div>
-    <div class="satz">${esc(T().super(t.reiter))}</div>${kastenZeile(sp, now)}${naechst}</div></section>`;
+    <div class="satz">${esc(T().super(t.reiter))}</div>${kastenZeile(sp, now)}${rocks(t, sp)}${naechst}</div></section>`;
 }
 function tabelleKarte(k, t) {
   if (!k?.tabelle?.length) return "";
