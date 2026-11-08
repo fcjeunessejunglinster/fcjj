@@ -40,7 +40,8 @@ header p{margin:3px 0 0;font-size:13px;opacity:.75}
 .raster button{font-family:inherit;font-weight:600;font-size:14px;line-height:1.15;padding:10px 4px;border-radius:9px;border:1px solid var(--linie);
   background:var(--karte);color:var(--text);cursor:pointer;min-width:0;overflow-wrap:anywhere}
 .raster button.woche{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:8px}
-.raster button.nati{padding:7px 4px}
+.raster button.nati{padding:5px 4px}
+.raster button.nati[aria-pressed="true"]{background:var(--karte);color:var(--text);border:2px solid var(--schwarz)}
 .raster button.woche small{font-weight:500;color:var(--leise)}
 .raster button[aria-pressed="true"]{background:var(--schwarz);color:var(--bg);border-color:var(--schwarz)}
 .raster button[aria-pressed="true"] small{color:inherit;opacity:.8}
@@ -142,7 +143,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 b";
+const FASSUNG = "2026-11-08 c";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -493,7 +494,7 @@ function knoepfe(now) {
   const n = wocheSpiele(now).length, s = spannen(D.teams.length);
   const k = [`<button class="woche" data-reiter="woche" aria-pressed="${AKTIV === "woche"}">${T().woche} <small>· ${T().spiele(n)}</small></button>`]
     .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}">${esc(t.reiter)}</button>`))
-    .concat(D.nati?.spiele?.length ? [`<button class="woche nati" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="Luxemburg" title="Luxemburg">${FLAGGE}</button>`] : []);
+    .concat(D.nati?.spiele?.length ? [`<button class="woche nati" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="FLF" title="FLF"><img src="bilder/flf.png" alt="FLF" width="31" height="40" style="display:block"></button>`] : []);
   document.getElementById("knoepfe").innerHTML = k.join("");
 }
 let COUNTDOWN = false;
