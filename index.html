@@ -175,7 +175,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 z";
+const FASSUNG = "2026-11-08 za";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -565,12 +565,14 @@ setInterval(fupaAktualisieren, 60e3);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(fupaAktualisieren, 500); });
 
 // ---- Ligen live aus OpenLigaDB (frei, ohne Schlüssel, CORS offen; am 8.11.2026 geprüft) ----
-// Bundesliga für alle; Premier League nur in der englischen Fassung (vom Verein, 8.11.2026).
+// Bundesliga für alle. `sprachen` beschränkt eine Liga auf bestimmte Sprachfassungen.
 // Der Browser fragt direkt: aktueller Spieltag + Tabelle. Läuft ein Spiel, jede Minute neu, sonst alle 10 Minuten.
 const BL_API = "https://api.openligadb.de/";
 const LIGEN = {
   bl: { api: "bl1", name: "1. Bundesliga", logo: "bilder/bundesliga.png", sprachen: null },
-  pl: { api: "pl", name: "Premier League", logo: null, sprachen: ["en"] },
+  // Premier League: am 8.11.2026 eingebaut und wieder herausgenommen (vom Verein) — bei OpenLigaDB waren die Ergebnisse
+  // des laufenden Spieltags am Sonntagabend noch nicht eingetragen. Mit besserer Quelle wieder einschalten:
+  // pl: { api: "pl", name: "Premier League", logo: null, sprachen: ["en"] },
 };
 for (const L of Object.values(LIGEN)) Object.assign(L, { spiele: [], tabelle: [], geholt: 0, fehler: false, laedt: false });
 const ligaDa = key => !!LIGEN[key] && (!LIGEN[key].sprachen || LIGEN[key].sprachen.includes(LANG));
