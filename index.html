@@ -93,6 +93,9 @@ li.sp .mitte.live{background:var(--rot);border-color:var(--rot);color:#fff}
 li.sp .tore{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0 16px;font-size:12px;color:var(--leise)}
 li.sp .tore .h{text-align:right}
 .livezeile{color:var(--rot);font-weight:700}
+.sponsor{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px;background:#fff;border:1px solid var(--linie);border-radius:12px}
+.sponsor span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6a6a66}
+.sponsor img{width:100%;max-width:260px;height:auto;display:block}
 .kasten .kabine{font-size:16px;font-weight:700}
 .kasten .satz{font-size:16px;font-weight:700}
 .rocks{font-size:24px;font-weight:900;letter-spacing:.02em;color:var(--rot);font-style:italic}
@@ -172,7 +175,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 v";
+const FASSUNG = "2026-11-08 w";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -212,6 +215,7 @@ const TEXTE = {
     blQuelle: "Bundesliga-Daten von OpenLigaDB (freiwillig gepflegt, Tore können kurz später erscheinen)",
     blFehler: "Die Bundesliga-Daten sind gerade nicht erreichbar.", blHz: "Halbzeit", blLive: "läuft", blEnde: "Ende", blTab: "Tabelle 1. Bundesliga",
     elf: "Elfm.", eigentor: "ET",
+    sponsorJugend: "Partner unserer Jugend",
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
@@ -244,6 +248,7 @@ const TEXTE = {
     blQuelle: "Bundesliga data from OpenLigaDB (maintained by volunteers, goals may appear a little later)",
     blFehler: "The Bundesliga data is not available right now.", blHz: "Half-time", blLive: "live", blEnde: "FT", blTab: "Bundesliga table",
     elf: "pen.", eigentor: "OG",
+    sponsorJugend: "Our youth partner",
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
@@ -276,6 +281,7 @@ const TEXTE = {
     blQuelle: "Données Bundesliga via OpenLigaDB (mises à jour par des bénévoles, les buts peuvent apparaître un peu plus tard)",
     blFehler: "Les données de la Bundesliga ne sont pas disponibles pour le moment.", blHz: "Mi-temps", blLive: "en cours", blEnde: "Fin", blTab: "Classement Bundesliga",
     elf: "pén.", eigentor: "csc",
+    sponsorJugend: "Partenaire de nos jeunes",
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
@@ -458,8 +464,15 @@ function teamHtml(t, now) {
   if (gespielt.length) html += `<section class="karte"><h2>${T().ergebnisse}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
   if (aktuell) html += `<details class="karte"><summary>${T().alleKlasse}</summary>${klassenSpiele(aktuell, t, now)}</details>`;
   if (FUPA_KADER[t.reiter]) html += kaderHtml(FUPA_KADER[t.reiter]);
+  // Sponsor der Jugend (vom Verein, 8.11.2026): unten in allen Jugend-Reitern.
   for (const k of frueher) html += `<details class="karte"><summary>${T().frueher}${esc(k.n)}</summary>${tabelleKarte(k, t).replace(/^<section class="karte">|<\/section>$/g, "")}${klassenSpiele(k, t, now)}</details>`;
+  if (SPONSOR_JUGEND.kats.includes(t.kat)) html += sponsorHtml(SPONSOR_JUGEND);
   return html;
+}
+const SPONSOR_JUGEND = { bild: "bilder/sponsor-jugend.jpg", name: "SOPI Concept – Construction / Rénovation",
+  kats: ["U7", "U9", "U11", "U13", "U15", "U17", "U19", "WU11", "WU13", "WU15"] };
+function sponsorHtml(sp) {
+  return `<section class="sponsor"><span>${T().sponsorJugend}</span><img src="${sp.bild}" alt="${esc(sp.name)}" loading="lazy"></section>`;
 }
 // „Nächste Spiele“: das erste mit Datum, Uhrzeit und „in 3 Tagen“ hervorgehoben, höchstens fünf; Kalender-Knopf darunter.
 function naechsteKarte(kommend, now, unten = "", titel = T().naechste) {
