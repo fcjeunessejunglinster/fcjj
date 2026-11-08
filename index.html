@@ -86,6 +86,12 @@ li.event .evt{font-weight:800;font-size:17px;color:var(--rot)}
 li.event .evf{font-size:13px;font-weight:700;color:var(--leise);letter-spacing:.03em}
 li.event .evd{font-size:14px;color:var(--text);font-variant-numeric:tabular-nums}
 .events{border:2px solid var(--rot)}
+.blknopf .livepunkt{color:var(--rot);font-size:12px;vertical-align:1px}
+.raster button.blknopf[aria-pressed="true"] .livepunkt{color:#fff}
+li.sp .mitte.live{background:var(--rot);border-color:var(--rot);color:#fff}
+li.sp .tore{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0 16px;font-size:12px;color:var(--leise)}
+li.sp .tore .h{text-align:right}
+.livezeile{color:var(--rot);font-weight:700}
 .kasten .kabine{font-size:16px;font-weight:700}
 .kasten .satz{font-size:16px;font-weight:700}
 .rocks{font-size:24px;font-weight:900;letter-spacing:.02em;color:var(--rot);font-style:italic}
@@ -165,7 +171,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 t";
+const FASSUNG = "2026-11-08 u";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -202,6 +208,9 @@ const TEXTE = {
     fupaMerk: "Die App merkt sich das. Zurücknehmen ganz unten.", fupaAus: "FuPa-Liveticker nicht mehr laden",
     fupaApp: "Tore aufs Handy? Mit der FuPa-App dem FC Jeunesse Junglinster folgen.",
     events: "Events des Vereins", fuer: "Für",
+    blQuelle: "Bundesliga-Daten von OpenLigaDB (freiwillig gepflegt, Tore können kurz später erscheinen)",
+    blFehler: "Die Bundesliga-Daten sind gerade nicht erreichbar.", blHz: "Halbzeit", blLive: "läuft", blEnde: "Ende", blTab: "Tabelle 1. Bundesliga",
+    elf: "Elfm.", eigentor: "ET",
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
@@ -231,6 +240,9 @@ const TEXTE = {
     fupaMerk: "The app remembers this. You can undo it at the very bottom.", fupaAus: "Stop loading the FuPa live ticker",
     fupaApp: "Goals on your phone? Follow FC Jeunesse Junglinster in the FuPa app.",
     events: "Club events", fuer: "For",
+    blQuelle: "Bundesliga data from OpenLigaDB (maintained by volunteers, goals may appear a little later)",
+    blFehler: "The Bundesliga data is not available right now.", blHz: "Half-time", blLive: "live", blEnde: "FT", blTab: "Bundesliga table",
+    elf: "pen.", eigentor: "OG",
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
@@ -260,6 +272,9 @@ const TEXTE = {
     fupaMerk: "L'app s'en souvient. Pour annuler, tout en bas.", fupaAus: "Ne plus charger le live ticker FuPa",
     fupaApp: "Les buts sur votre téléphone ? Suivez le FC Jeunesse Junglinster dans l'app FuPa.",
     events: "Événements du club", fuer: "Pour",
+    blQuelle: "Données Bundesliga via OpenLigaDB (mises à jour par des bénévoles, les buts peuvent apparaître un peu plus tard)",
+    blFehler: "Les données de la Bundesliga ne sont pas disponibles pour le moment.", blHz: "Mi-temps", blLive: "en cours", blEnde: "Fin", blTab: "Classement Bundesliga",
+    elf: "pén.", eigentor: "csc",
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
@@ -531,6 +546,76 @@ function fupaAktualisieren() {
 setInterval(fupaAktualisieren, 60e3);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(fupaAktualisieren, 500); });
 
+// ---- 1. Bundesliga, live aus OpenLigaDB (frei, ohne Schlüssel, CORS offen; am 8.11.2026 geprüft) ----
+// Der Browser fragt direkt: aktueller Spieltag + Tabelle. Läuft ein Spiel, jede Minute neu, sonst alle 10 Minuten.
+const BL_API = "https://api.openligadb.de/";
+const BL = { spiele: [], tabelle: [], geholt: 0, fehler: false, laedt: false };
+const blAnstoss = m => new Date(m.matchDateTimeUTC);
+const blLive = (m, now) => !m.matchIsFinished && now >= blAnstoss(m) && now - blAnstoss(m) < 150 * 60e3;
+const blLaeuft = now => BL.spiele.some(m => blLive(m, now));
+function blStand(m) {
+  const g = m.goals?.length ? m.goals[m.goals.length - 1] : null;
+  const ende = m.matchResults?.find(r => r.resultTypeID === 2);
+  if (m.matchIsFinished && ende) return [ende.pointsTeam1, ende.pointsTeam2];
+  if (g) return [g.scoreTeam1, g.scoreTeam2];
+  if (ende) return [ende.pointsTeam1, ende.pointsTeam2];
+  return [0, 0];
+}
+// Spielminute grob aus dem Anstoß (45 + 15 Pause + 45); OpenLigaDB liefert keine laufende Minute.
+function blMinute(m, now) {
+  const min = Math.floor((now - blAnstoss(m)) / 60e3) + 1;
+  if (min <= 45) return min + "'";
+  if (min <= 47) return "45+'";
+  if (min <= 62) return T().blHz;
+  return min - 17 <= 90 ? (min - 17) + "'" : "90+'";
+}
+async function blHolen() {
+  if (BL.laedt) return;
+  BL.laedt = true;
+  try {
+    const sp = await (await fetch(BL_API + "getmatchdata/bl1", { cache: "no-store" })).json();
+    const saison = sp[0]?.leagueSeason;
+    const tab = saison ? await (await fetch(BL_API + "getbltable/bl1/" + saison, { cache: "no-store" })).json() : [];
+    BL.spiele = sp.sort((a, b) => a.matchDateTimeUTC.localeCompare(b.matchDateTimeUTC)); BL.tabelle = tab; BL.fehler = false;
+  } catch (e) { BL.fehler = true; }
+  BL.geholt = Date.now(); BL.laedt = false;
+  if (AKTIV === "bl") render(); else if (D?.teams) knoepfe(new Date());
+}
+function blHolenFaellig(now) {
+  const bald = BL.spiele.some(m => !m.matchIsFinished && blAnstoss(m) - now < 15 * 60e3 && now - blAnstoss(m) < 150 * 60e3);
+  if (Date.now() - BL.geholt > (bald ? 55e3 : 10 * 60e3)) blHolen();
+}
+setInterval(() => { if (document.visibilityState === "visible" && AKTIV === "bl") blHolenFaellig(new Date()); }, 15e3);
+function blTore(m) {
+  if (!m.goals?.length) return "";
+  const z = (g, team) => (g.scoringTeamId ?? (g.scoreTeam1 > (m.goals[m.goals.indexOf(g) - 1]?.scoreTeam1 ?? 0) ? m.team1.teamId : m.team2.teamId)) === team;
+  const txt = g => `${g.matchMinute ?? "?"}' ${esc(g.goalGetterName || "")}${g.isPenalty ? ` (${T().elf})` : ""}${g.isOwnGoal ? ` (${T().eigentor})` : ""}`;
+  const h = m.goals.filter(g => z(g, m.team1.teamId)).map(txt).join("<br>"), a = m.goals.filter(g => z(g, m.team2.teamId)).map(txt).join("<br>");
+  return `<span class="tore"><span class="h">${h}</span><span>${a}</span></span>`;
+}
+function blHtml(now) {
+  if (!BL.geholt) { blHolen(); return `<p class="hinweis">${T().laden}</p>`; }
+  if (BL.fehler && !BL.spiele.length) return `<section class="karte"><p class="hinweis">${T().blFehler}</p></section>`;
+  const tage = new Map();
+  for (const m of BL.spiele) { const k = tagKey(blAnstoss(m)); if (!tage.has(k)) tage.set(k, []); tage.get(k).push(m); }
+  let html = `<section class="karte${blLaeuft(now) ? " heute" : ""}"><h2>${esc(BL.spiele[0]?.group?.groupName || "Bundesliga")}</h2>`;
+  for (const [tag, liste] of tage) {
+    html += `<div class="tag">${esc(langDatum(new Date(tag + "T12:00:00Z")))}</div><ul class="spiele">` + liste.map(m => {
+      const live = blLive(m, now), [a, b] = blStand(m), d = blAnstoss(m);
+      const mitte = m.matchIsFinished || live ? `<span class="mitte${live ? " live" : ""}">${a} : ${b}</span>` : `<span class="mitte zeit">${uhr(d)}</span>`;
+      const unten = live ? `<span class="livezeile">● ${T().blLive} · ${blMinute(m, now)}</span>` : m.matchIsFinished ? T().blEnde : esc(m.location?.locationStadium || "");
+      return `<li class="sp"><span class="tm h">${esc(m.team1.shortName || m.team1.teamName)}</span>${mitte}<span class="tm">${esc(m.team2.shortName || m.team2.teamName)}</span>`
+        + `${blTore(m)}<span class="unten">${unten}</span></li>`;
+    }).join("") + "</ul>";
+  }
+  html += "</section>";
+  if (BL.tabelle.length) {
+    const zeilen = BL.tabelle.map((z, i) => `<tr><td>${i + 1}</td><td>${esc(z.shortName || z.teamName)}</td><td>${z.matches}</td><td>${z.won}</td><td>${z.draw}</td><td>${z.lost}</td><td>${z.goals}:${z.opponentGoals}</td><td><b>${z.points}</b></td></tr>`).join("");
+    html += `<section class="karte"><h2>${T().blTab}</h2><div class="tabrahmen"><table><thead><tr><th>#</th>${T().kopf.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${zeilen}</tbody></table></div></section>`;
+  }
+  return html + `<p class="leise" style="text-align:center;margin:0">${T().blQuelle}</p>`;
+}
+
 // ---- Nationalmannschaft (Roude Léiw), Daten von FuPa ----
 // Luxemburger Flagge als Reiter (als Bild, Flaggen-Emojis zeigt Windows nur als „LU“).
 const FLAGGE = '<svg viewBox="0 0 10 6" width="40" height="24" aria-hidden="true" style="display:block;border-radius:3px;box-shadow:0 0 0 1px rgba(0,0,0,.25)">'
@@ -648,7 +733,8 @@ function knoepfe(now) {
   const n = wocheSpiele(now).length, s = spannen(D.teams.length);
   const k = [`<button class="woche" data-reiter="woche" aria-pressed="${AKTIV === "woche"}">${T().woche} <small>· ${T().spiele(n)}</small></button>`]
     .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}">${esc(t.reiter)}</button>`))
-    .concat(D.nati?.spiele?.length ? [`<button class="woche nati" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="FLF" title="FLF"><img src="bilder/flf.png" alt="FLF" width="31" height="40" style="display:block"></button>`] : []);
+    .concat(D.nati?.spiele?.length ? [`<button class="nati" style="grid-column:span 30" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="FLF" title="FLF"><img src="bilder/flf.png" alt="FLF" width="31" height="40" style="display:block;margin:auto"></button>`] : [])
+    .concat([`<button class="blknopf" style="grid-column:span ${D.nati?.spiele?.length ? 30 : 60}" data-reiter="bl" aria-pressed="${AKTIV === "bl"}">Bundesliga${blLaeuft(new Date()) ? ' <span class="livepunkt">●</span>' : ""}</button>`]);
   document.getElementById("knoepfe").innerHTML = k.join("");
 }
 let COUNTDOWN = false;
@@ -666,13 +752,15 @@ function render() {
     document.getElementById("inhalt").innerHTML = `<section class="karte"><h2>${T().leer}</h2><p class="hinweis">${T().leerText}</p></section>`;
     return;
   }
-  if (AKTIV !== "woche" && !(AKTIV === "nati" && D.nati?.spiele?.length) && !D.teams.some(t => String(t.id) === AKTIV)) AKTIV = "woche";
+  if (AKTIV !== "woche" && AKTIV !== "bl" && !(AKTIV === "nati" && D.nati?.spiele?.length) && !D.teams.some(t => String(t.id) === AKTIV)) AKTIV = "woche";
   knoepfe(now);
   const t = D.teams.find(t => String(t.id) === AKTIV);
   document.getElementById("unterzeile").textContent = t ? `${t.alter}${/\d$/.test(t.reiter) ? " " + t.nr : ""} · ${saison()}` : `${T().alle} · ${saison()}`;
   const offenAuf = [...document.querySelectorAll("#inhalt details[open] summary")].map(s => s.textContent);
   if (AKTIV === "nati") document.getElementById("unterzeile").textContent = T().natiUnter;
-  document.getElementById("inhalt").innerHTML = t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : wocheHtml(now);
+  if (AKTIV === "bl") document.getElementById("unterzeile").textContent = "1. Bundesliga" + (BL.spiele[0] ? " · " + BL.spiele[0].leagueSeason + "/" + String(BL.spiele[0].leagueSeason + 1).slice(2) : "");
+  document.getElementById("inhalt").innerHTML = t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : AKTIV === "bl" ? blHtml(now) : wocheHtml(now);
+  if (AKTIV === "bl") blHolenFaellig(now);
   for (const s of document.querySelectorAll("#inhalt details summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
   fupaEinsetzen();
   const stand = new Date(D.stand);
