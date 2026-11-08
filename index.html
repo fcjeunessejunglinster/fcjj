@@ -128,6 +128,9 @@ tr.wir td:first-child{box-shadow:inset 4px 0 var(--rot)}
 .kal code{font-size:12px;overflow-wrap:anywhere;color:var(--leise)}
 .hinweis{padding:14px;color:var(--leise)}
 footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
+.teilen{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px 22px}
+.teilen .knopf{font-size:16px;padding:12px 22px}
+.teilen .ok{font-size:13px;color:var(--leise);min-height:1.2em}
 @media (min-width:600px){.raster button{font-size:15px}}
 </style>
 </head>
@@ -139,11 +142,12 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 </div></header>
 <nav id="reiter"><div class="innen raster" id="knoepfe"></div></nav>
 <main><div class="innen" id="inhalt"><p class="hinweis">Lade …</p></div></main>
+<div class="teilen"><button class="knopf" id="teilen" type="button"></button><span class="ok" id="teilenOk" aria-live="polite"></span></div>
 <footer id="fuss"></footer>
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 c";
+const FASSUNG = "2026-11-08 d";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -164,7 +168,7 @@ const TEXTE = {
     wocheText: (n, h) => `${n === 1 ? "1 Spiel" : n + " Spiele"}, davon ${h} zu Hause. Tippen öffnet die Mannschaft.`,
     keineWoche: "Diese Woche keine Spiele.", heuteKurz: " · heute", alle: "Alle Mannschaften", saison: "Saison",
     leer: "Noch keine Daten", leerText: "Die Spiele kommen mit dem ersten automatischen Abruf von der FLF. Das dauert nach dem Einrichten ein paar Minuten.",
-    fuss: (d, f) => `Daten von der FLF · zuletzt geändert ${d}<br>FC Jeunesse Junglinster · seit 1935 · Fassung ${f}`,
+    fuss: (d, f) => `Daten von der FLF · zuletzt geändert ${d}<br>FC Jeunesse Junglinster · seit 1935 · Fassung&nbsp;${f.replace(" ", "&nbsp;")}`,
     unterzeile: "Spiele, Ergebnisse und Tabellen", laden: "Lade …",
     gleich: "Gleich geht's los! ⚽", anpfiffIn: m => `Anpfiff in ${m} ${m === 1 ? "Minute" : "Minuten"}`, anstoss: z => `Anstoß ${z}`,
     seit: z => `seit ${z}`, ergKommt: "Das Ergebnis erscheint, sobald es eingetragen ist.", letztes: "Letztes Spiel", endstand: "Endstand",
@@ -172,6 +176,8 @@ const TEXTE = {
     super: r => `Super gemacht, ${r}! 💪`, naechstes: "Nächstes Spiel", naechstesBam: "Nächster Mini-Spieltag", gegenW: " gegen ",
     trinken: "Trinkflasche nicht vergessen! 😉", glueck: "Viel Spaß und viel Glück! 💪", daumen: "Daumen drücken! 🤞",
     bis: n => n === 0 ? "heute" : n === 1 ? "morgen" : `in ${n} Tagen`,
+    teilen: "📤 App teilen", kopiert: "Link kopiert – jetzt einfügen und verschicken.",
+    teilText: u => `Die App des FC Jeunesse Junglinster: Spiele, Ergebnisse und Tabellen aller Mannschaften, immer aktuell. ⚽\n${u}`,
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
@@ -185,7 +191,7 @@ const TEXTE = {
     wocheText: (n, h) => `${n === 1 ? "1 match" : n + " matches"}, ${h} at home. Tap a match to open the team.`,
     keineWoche: "No matches this week.", heuteKurz: " · today", alle: "All teams", saison: "Season",
     leer: "No data yet", leerText: "The matches arrive with the first automatic update from the FLF, a few minutes after setup.",
-    fuss: (d, f) => `Data from the FLF · last updated ${d}<br>FC Jeunesse Junglinster · since 1935 · Version ${f}`,
+    fuss: (d, f) => `Data from the FLF · last updated ${d}<br>FC Jeunesse Junglinster · since 1935 · Version&nbsp;${f.replace(" ", "&nbsp;")}`,
     unterzeile: "Matches, results and tables", laden: "Loading …",
     gleich: "Kick-off soon! ⚽", anpfiffIn: m => `Kick-off in ${m} ${m === 1 ? "minute" : "minutes"}`, anstoss: z => `Kick-off ${z}`,
     seit: z => `since ${z}`, ergKommt: "The result will appear as soon as it is entered.", letztes: "Last match", endstand: "Full time",
@@ -193,6 +199,8 @@ const TEXTE = {
     super: r => `Well done, ${r}! 💪`, naechstes: "Next match", naechstesBam: "Next mini matchday", gegenW: " vs ",
     trinken: "Don't forget your water bottle! 😉", glueck: "Have fun and good luck! 💪", daumen: "Fingers crossed! 🤞",
     bis: n => n === 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`,
+    teilen: "📤 Share the app", kopiert: "Link copied – paste it to share.",
+    teilText: u => `The FC Jeunesse Junglinster app: matches, results and tables for all our teams, always up to date. ⚽\n${u}`,
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
@@ -206,7 +214,7 @@ const TEXTE = {
     wocheText: (n, h) => `${n === 1 ? "1 match" : n + " matchs"}, dont ${h} à domicile. Touchez un match pour ouvrir l'équipe.`,
     keineWoche: "Pas de match cette semaine.", heuteKurz: " · aujourd'hui", alle: "Toutes les équipes", saison: "Saison",
     leer: "Pas encore de données", leerText: "Les matchs arrivent avec la première mise à jour automatique de la FLF, quelques minutes après l'installation.",
-    fuss: (d, f) => `Données de la FLF · dernière mise à jour ${d}<br>FC Jeunesse Junglinster · depuis 1935 · Version ${f}`,
+    fuss: (d, f) => `Données de la FLF · dernière mise à jour ${d}<br>FC Jeunesse Junglinster · depuis 1935 · Version&nbsp;${f.replace(" ", "&nbsp;")}`,
     unterzeile: "Matchs, résultats et classements", laden: "Chargement …",
     gleich: "Ça va commencer ! ⚽", anpfiffIn: m => `Coup d'envoi dans ${m} ${m === 1 ? "minute" : "minutes"}`, anstoss: z => `Coup d'envoi ${z}`,
     seit: z => `depuis ${z}`, ergKommt: "Le résultat apparaîtra dès qu'il sera saisi.", letztes: "Dernier match", endstand: "Score final",
@@ -214,6 +222,8 @@ const TEXTE = {
     super: r => `Bravo, ${r} ! 💪`, naechstes: "Prochain match", naechstesBam: "Prochaine mini-journée", gegenW: " contre ",
     trinken: "N'oubliez pas la gourde ! 😉", glueck: "Amusez-vous bien et bonne chance ! 💪", daumen: "On croise les doigts ! 🤞",
     bis: n => n === 0 ? "aujourd'hui" : n === 1 ? "demain" : `dans ${n} jours`,
+    teilen: "📤 Partager l'app", kopiert: "Lien copié – collez-le pour le partager.",
+    teilText: u => `L'app du FC Jeunesse Junglinster : matchs, résultats et classements de toutes nos équipes, toujours à jour. ⚽\n${u}`,
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
@@ -518,6 +528,7 @@ function render() {
   document.getElementById("inhalt").innerHTML = t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : wocheHtml(now);
   for (const s of document.querySelectorAll("#inhalt details summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
   const stand = new Date(D.stand);
+  document.getElementById("teilen").textContent = T().teilen;
   document.getElementById("fuss").innerHTML = T().fuss(`${kurzDatum(stand)} ${uhr(stand)}`, FASSUNG);
 }
 document.getElementById("knoepfe").addEventListener("click", e => {
@@ -535,6 +546,19 @@ document.querySelector(".sprache").addEventListener("click", e => {
   LANG = b.dataset.lang; merk.set("lang", LANG); render();
 });
 document.querySelector("#inhalt .hinweis").textContent = T().laden;
+
+// App teilen: Teilen-Leiste des Handys, sonst Link in die Zwischenablage. Nur `text` (mit Link darin), kein `url`:
+// mit `url` lässt iMessage den Text weg (in der Koeppchen-App so gesehen).
+const APP_URL = () => location.origin + location.pathname.replace(/index\.html$/, "");
+document.getElementById("teilen").addEventListener("click", async () => {
+  const text = T().teilText(APP_URL()), ok = document.getElementById("teilenOk");
+  ok.textContent = "";
+  if (navigator.share) {
+    try { await navigator.share({ text }); return; } catch (e) { if (e.name === "AbortError") return; }
+  }
+  try { await navigator.clipboard.writeText(text); ok.textContent = T().kopiert; }
+  catch (e) { ok.textContent = APP_URL(); }
+});
 
 async function laden() {
   try {
