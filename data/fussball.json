@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-08T16:18:14.045Z",
+ "stand": "2026-11-08T16:48:11.148Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -17377,9 +17377,9 @@
       "id": 46188,
       "n": "CS Grevenmacher"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 9,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Ettelbrück)"
     }
