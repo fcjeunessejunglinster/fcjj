@@ -165,7 +165,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 q";
+const FASSUNG = "2026-11-08 r";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -197,7 +197,7 @@ const TEXTE = {
     shop: "🛍️ Vereinsshop", teilen: "📤 App teilen", kopiert: "Link kopiert – jetzt einfügen und verschicken.",
     teilText: u => `Die App des FC Jeunesse Junglinster: Spiele, Ergebnisse und Tabellen aller Mannschaften, immer aktuell. ⚽\n${u}`,
     kabinen: (h, g) => `🚪 Kabinen: FCJJ ${h} · Gäste ${g}`,
-    fupaTitel: "Liveticker", fupaVon: "von FuPa", fupaAn: "Liveticker anzeigen",
+    kader: "Kader", kaderAn: "Kader anzeigen", fupaTitel: "Liveticker", fupaVon: "von FuPa", fupaAn: "Liveticker anzeigen",
     fupaText: "Der Liveticker kommt direkt von FuPa. Dafür verbindet sich das Handy mit FuPa, FuPa sieht dabei seine Internet-Adresse.",
     fupaMerk: "Die App merkt sich das. Zurücknehmen ganz unten.", fupaAus: "FuPa-Liveticker nicht mehr laden",
     fupaApp: "Tore aufs Handy? Mit der FuPa-App dem FC Jeunesse Junglinster folgen.",
@@ -226,7 +226,7 @@ const TEXTE = {
     shop: "🛍️ Club shop", teilen: "📤 Share the app", kopiert: "Link copied – paste it to share.",
     teilText: u => `The FC Jeunesse Junglinster app: matches, results and tables for all our teams, always up to date. ⚽\n${u}`,
     kabinen: (h, g) => `🚪 Dressing rooms: FCJJ ${h} · Visitors ${g}`,
-    fupaTitel: "Live ticker", fupaVon: "from FuPa", fupaAn: "Show live ticker",
+    kader: "Squad", kaderAn: "Show squad", fupaTitel: "Live ticker", fupaVon: "from FuPa", fupaAn: "Show live ticker",
     fupaText: "The live ticker comes directly from FuPa. Your phone connects to FuPa, which sees its internet address.",
     fupaMerk: "The app remembers this. You can undo it at the very bottom.", fupaAus: "Stop loading the FuPa live ticker",
     fupaApp: "Goals on your phone? Follow FC Jeunesse Junglinster in the FuPa app.",
@@ -255,7 +255,7 @@ const TEXTE = {
     shop: "🛍️ Boutique du club", teilen: "📤 Partager l'app", kopiert: "Lien copié – collez-le pour le partager.",
     teilText: u => `L'app du FC Jeunesse Junglinster : matchs, résultats et classements de toutes nos équipes, toujours à jour. ⚽\n${u}`,
     kabinen: (h, g) => `🚪 Vestiaires : FCJJ ${h} · Visiteurs ${g}`,
-    fupaTitel: "Live ticker", fupaVon: "par FuPa", fupaAn: "Afficher le live ticker",
+    kader: "Effectif", kaderAn: "Afficher l'effectif", fupaTitel: "Live ticker", fupaVon: "par FuPa", fupaAn: "Afficher le live ticker",
     fupaText: "Le live ticker vient directement de FuPa. Le téléphone se connecte à FuPa, qui voit son adresse Internet.",
     fupaMerk: "L'app s'en souvient. Pour annuler, tout en bas.", fupaAus: "Ne plus charger le live ticker FuPa",
     fupaApp: "Les buts sur votre téléphone ? Suivez le FC Jeunesse Junglinster dans l'app FuPa.",
@@ -441,6 +441,7 @@ function teamHtml(t, now) {
   if (aktuell) html += tabelleKarte(aktuell, t);
   if (gespielt.length) html += `<section class="karte"><h2>${T().ergebnisse}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
   if (aktuell) html += `<details class="karte"><summary>${T().alleKlasse}</summary>${klassenSpiele(aktuell, t, now)}</details>`;
+  if (FUPA_KADER[t.reiter]) html += kaderHtml(FUPA_KADER[t.reiter]);
   for (const k of frueher) html += `<details class="karte"><summary>${T().frueher}${esc(k.n)}</summary>${tabelleKarte(k, t).replace(/^<section class="karte">|<\/section>$/g, "")}${klassenSpiele(k, t, now)}</details>`;
   return html;
 }
@@ -473,6 +474,14 @@ function kalenderKnopf(t) {
 // Im FuPa-Widget-Builder angelegt (8.11.2026), gilt nur für https://fcjeunessejunglinster.github.io/.
 // Weitere Mannschaft (z. B. Réserves): eigenes Widget anlegen, Kennung hier mit dem Namen des Reiters eintragen.
 const FUPA_WIDGET = { "Seniors": "3LogsC5yrMCUFqOr4tE5NQRuMTZ", "Réserves": "3LoumFG32IteFsCAbe4xILX5V7y" };
+// Kader (FuPa-Widget „Kader“, 8.11.2026), aufklappbar, an jedem Tag.
+const FUPA_KADER = { "Seniors": "3LpBYN3mQnzQOPvRiEb2G50VWbs" };
+function kaderHtml(id) {
+  return `<details class="karte"><summary>${T().kader} · ${T().fupaVon}</summary>` + (fupaOk()
+    ? `<div class="fupaplatz" data-fw="${esc(id)}"></div>`
+    : `<div class="fupa" style="border:0"><div class="fupatext">${esc(T().fupaText)}</div><button class="knopf" data-fupa="ja">${esc(T().kaderAn)}</button><div class="klein">${esc(T().fupaMerk)}</div></div>`)
+    + `</details>`;
+}
 const FUPA_CLUB = "https://www.fupa.net/club/fc-jeunesse-junglinster";
 // Das Widget lädt erst nach Zustimmung (das Handy spricht dann direkt mit FuPa). Die App merkt sich „ja“.
 const fupaOk = () => merk.get("fupa") === "ja";
