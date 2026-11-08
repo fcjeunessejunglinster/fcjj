@@ -131,6 +131,8 @@ tr.wir td:first-child{box-shadow:inset 4px 0 var(--rot)}
 footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 .teilen{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px 22px}
 .teilen .knopf{font-size:16px;padding:12px 22px}
+.unten-knoepfe{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+#shop{background:var(--rot);color:#fff}
 .teilen .ok{font-size:13px;color:var(--leise);min-height:1.2em}
 @media (min-width:600px){.raster button{font-size:15px}}
 </style>
@@ -143,12 +145,12 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 </div></header>
 <nav id="reiter"><div class="innen raster" id="knoepfe"></div></nav>
 <main><div class="innen" id="inhalt"><p class="hinweis">Lade …</p></div></main>
-<div class="teilen"><button class="knopf" id="teilen" type="button"></button><span class="ok" id="teilenOk" aria-live="polite"></span></div>
+<div class="teilen"><div class="unten-knoepfe"><a class="knopf" id="shop" href="https://form.jotform.com/242614644810352" target="_blank" rel="noopener"></a><button class="knopf" id="teilen" type="button"></button></div><span class="ok" id="teilenOk" aria-live="polite"></span></div>
 <footer id="fuss"></footer>
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 f";
+const FASSUNG = "2026-11-08 g";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -177,7 +179,7 @@ const TEXTE = {
     super: r => `Super gemacht, ${r}! 💪`, naechstes: "Nächstes Spiel", naechstesBam: "Nächster Mini-Spieltag", gegenW: " gegen ",
     trinken: "Trinkflasche nicht vergessen! 😉", glueck: "Viel Spaß und viel Glück! 💪", daumen: "Daumen drücken! 🤞",
     bis: n => n === 0 ? "heute" : n === 1 ? "morgen" : `in ${n} Tagen`,
-    teilen: "📤 App teilen", kopiert: "Link kopiert – jetzt einfügen und verschicken.",
+    shop: "🛍️ Vereinsshop", teilen: "📤 App teilen", kopiert: "Link kopiert – jetzt einfügen und verschicken.",
     teilText: u => `Die App des FC Jeunesse Junglinster: Spiele, Ergebnisse und Tabellen aller Mannschaften, immer aktuell. ⚽\n${u}`,
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
@@ -200,7 +202,7 @@ const TEXTE = {
     super: r => `Well done, ${r}! 💪`, naechstes: "Next match", naechstesBam: "Next mini matchday", gegenW: " vs ",
     trinken: "Don't forget your water bottle! 😉", glueck: "Have fun and good luck! 💪", daumen: "Fingers crossed! 🤞",
     bis: n => n === 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`,
-    teilen: "📤 Share the app", kopiert: "Link copied – paste it to share.",
+    shop: "🛍️ Club shop", teilen: "📤 Share the app", kopiert: "Link copied – paste it to share.",
     teilText: u => `The FC Jeunesse Junglinster app: matches, results and tables for all our teams, always up to date. ⚽\n${u}`,
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
@@ -223,7 +225,7 @@ const TEXTE = {
     super: r => `Bravo, ${r} ! 💪`, naechstes: "Prochain match", naechstesBam: "Prochaine mini-journée", gegenW: " contre ",
     trinken: "N'oubliez pas la gourde ! 😉", glueck: "Amusez-vous bien et bonne chance ! 💪", daumen: "On croise les doigts ! 🤞",
     bis: n => n === 0 ? "aujourd'hui" : n === 1 ? "demain" : `dans ${n} jours`,
-    teilen: "📤 Partager l'app", kopiert: "Lien copié – collez-le pour le partager.",
+    shop: "🛍️ Boutique du club", teilen: "📤 Partager l'app", kopiert: "Lien copié – collez-le pour le partager.",
     teilText: u => `L'app du FC Jeunesse Junglinster : matchs, résultats et classements de toutes nos équipes, toujours à jour. ⚽\n${u}`,
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
@@ -533,6 +535,7 @@ function render() {
   for (const s of document.querySelectorAll("#inhalt details summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
   const stand = new Date(D.stand);
   document.getElementById("teilen").textContent = T().teilen;
+  document.getElementById("shop").textContent = T().shop;
   document.getElementById("fuss").innerHTML = T().fuss(`${kurzDatum(stand)} ${uhr(stand)}`, FASSUNG);
 }
 document.getElementById("knoepfe").addEventListener("click", e => {
