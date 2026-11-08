@@ -31,6 +31,8 @@ export const KATS = [
   { key: "WU15", n: "Jeunes Filles WU15", kurz: "WU15", muster: /\bWU\s?15\b|Jeunes Filles/i },
   { key: "SEN",  n: "Seniors",         kurz: "Seniors",  id: 1 },
   { key: "RES",  n: "Seniors Réserves", kurz: "Réserves", id: 9999 },
+  // Altersklasse 28: bei der FLF nur Freundschaftsspiele („Amicaux 2“), montags 19:30 — die Veteranen (vom Verein, 8.11.2026).
+  { key: "VET",  n: "Veteranen",       kurz: "Veteranen", id: 28 },
 ];
 // Bei den Kleinen zeigt die App keine Ergebnisse (wie die FLF; auch nicht in Freundschaftsspielen).
 export const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
@@ -220,7 +222,7 @@ export const dateiName = t => t.reiter.toLowerCase().normalize("NFD").replace(/[
 export function ics(D, t) {
   const unsere = new Set([...t.ids, ...(t.mit || [])]);
   const name = x => unsere.has(x.id) ? "FCJJ " + t.reiter : x.n;
-  const dauer = t.kat === "SEN" || t.kat === "RES" ? 120 : KEINE_ERG.includes(t.kat) ? 90 : 105;
+  const dauer = ["SEN", "RES", "VET"].includes(t.kat) ? 120 : KEINE_ERG.includes(t.kat) ? 90 : 105;
   const z = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//FC Jeunesse Junglinster//App//DE", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
     `X-WR-CALNAME:${icsText("FCJJ " + t.reiter)}`, "X-WR-TIMEZONE:Europe/Luxembourg", "REFRESH-INTERVAL;VALUE=DURATION:PT3H", "X-PUBLISHED-TTL:PT3H"];
   for (const sp of eigeneSpiele(D, t)) {
