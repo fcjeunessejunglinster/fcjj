@@ -96,6 +96,10 @@ li.sp .tore .h{text-align:right}
 .sponsor{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px;background:#fff;border:1px solid var(--linie);border-radius:12px}
 .sponsor span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6a6a66}
 .sponsor img{width:100%;max-width:260px;height:auto;display:block}
+.wetter{display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;font-size:15px;font-variant-numeric:tabular-nums}
+.wetter b{font-size:18px}
+.wetter .leise{font-size:13px}
+.naechst + .wetter{padding:4px 14px 0}
 .kasten .kabine{font-size:16px;font-weight:700}
 .kasten .satz{font-size:16px;font-weight:700}
 .rocks{font-size:24px;font-weight:900;letter-spacing:.02em;color:var(--rot);font-style:italic}
@@ -175,7 +179,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 za";
+const FASSUNG = "2026-11-08 zb";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -215,7 +219,8 @@ const TEXTE = {
     blQuelle: n => `${n}: Daten von OpenLigaDB (freiwillig gepflegt, Tore können kurz später erscheinen)`,
     blFehler: n => `Die Daten (${n}) sind gerade nicht erreichbar.`, blHz: "Halbzeit", blLive: "läuft", blEnde: "Ende", blTab: n => `Tabelle ${n}`,
     elf: "Elfm.", eigentor: "ET",
-    sponsorJugend: "Partner unserer Jugend",
+    sponsorJugend: "Partner unserer Jugend", wetterMittag: "um 14 Uhr",
+    wetter: [["sonnig"], ["heiter"], ["bewölkt"], ["Nebel"], ["Niesel"], ["Regen"], ["Schnee"], ["Gewitter"]],
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
@@ -248,7 +253,8 @@ const TEXTE = {
     blQuelle: n => `${n} data from OpenLigaDB (maintained by volunteers, goals may appear a little later)`,
     blFehler: n => `The ${n} data is not available right now.`, blHz: "Half-time", blLive: "live", blEnde: "FT", blTab: n => `${n} table`,
     elf: "pen.", eigentor: "OG",
-    sponsorJugend: "Our youth partner",
+    sponsorJugend: "Our youth partner", wetterMittag: "at 2 pm",
+    wetter: [["sunny"], ["partly cloudy"], ["cloudy"], ["fog"], ["drizzle"], ["rain"], ["snow"], ["thunderstorm"]],
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
@@ -281,7 +287,8 @@ const TEXTE = {
     blQuelle: n => `${n} : données via OpenLigaDB (mises à jour par des bénévoles, les buts peuvent apparaître un peu plus tard)`,
     blFehler: n => `Les données (${n}) ne sont pas disponibles pour le moment.`, blHz: "Mi-temps", blLive: "en cours", blEnde: "Fin", blTab: n => `Classement ${n}`,
     elf: "pén.", eigentor: "csc",
-    sponsorJugend: "Partenaire de nos jeunes",
+    sponsorJugend: "Partenaire de nos jeunes", wetterMittag: "à 14 h",
+    wetter: [["ensoleillé"], ["éclaircies"], ["nuageux"], ["brouillard"], ["bruine"], ["pluie"], ["neige"], ["orage"]],
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
@@ -388,13 +395,13 @@ function heuteHtml(h, now, kinder) {
   const satz = kinder ? (!h.begonnen && !min ? T().trinken : h.begonnen ? T().daumen : T().glueck) : h.begonnen ? T().ergKommt : "";
   return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
-    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}<div class="zusatz">${esc(sp.klasse)}</div>
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
     ${satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : ""}</div></section>`;
 }
 function morgenHtml(sp, now) {
   return `<section class="karte heute">${kopf(T().morgen, sp)}<div class="kasten"><div class="wann">${esc(offen(sp) ? T().zeitOffen : T().anstoss(uhr(new Date(sp.d))))}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
-    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}<div class="zusatz">${esc(sp.klasse)}</div>
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
     <div class="satz">${esc(T().trinken)}</div></div></section>`;
 }
 // Slogan nach einem Sieg einer Jugendmannschaft (alle außer Seniors, Réserves und Veteranen; vom Verein, 8.11.2026).
@@ -480,7 +487,7 @@ function naechsteKarte(kommend, now, unten = "", titel = T().naechste) {
   if (!kommend.length) h += `<p class="hinweis">${T().keineTermine}</p>`;
   else {
     const n = kommend[0], bis = tageBis(tagKey(now), tagKey(new Date(n.d)));
-    h += `<div class="naechst">${esc(wannText(n))} <span>${esc(T().bis(bis))}</span></div><ul class="spiele">`
+    h += `<div class="naechst">${esc(wannText(n))} <span>${esc(T().bis(bis))}</span></div>${wetterHtml(n, now)}<ul class="spiele">`
       + kommend.slice(0, 5).map((sp, i) => {
         if (i) return spielLi(sp, now);
         const meta = [sp.ort ? "📍 " + sp.ort : "", kabine(sp, now), sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")].filter(Boolean);
@@ -497,6 +504,52 @@ function kalenderKnopf(t) {
     <a class="knopf" href="${esc(webcal)}">${esc(T().abo(t.reiter))}</a>
     <span class="leise">${T().aboHinweis}</span>
     <code>${esc(https)}</code></div>`;
+}
+
+// ---- Wetter am Spielort zur Anstoßzeit (Open-Meteo, frei, ohne Schlüssel). Koordinaten der Orte holt der Abruf
+// (D.orte, aus dem Platznamen). Nur für Spiele in den nächsten 7 Tagen; ohne Uhrzeit das Wetter um 14 Uhr.
+const WETTER = new Map();   // "lat,lon" → { stunden: {zeit → [temp, regen%, code, wind]}, geholt, laedt }
+function stadtAus(ort) {
+  if (!ort) return null;
+  const k = ort.match(/\(([^,)]+)/)?.[1]?.trim();
+  if (k && !/^synth/i.test(k)) return k;
+  const w = ort.replace(/\(.*\)/, "").trim().split(/\s+/).filter(x => !/^(stade|terrain|am|um|an|in|de|du|des|la|le|rue|\d+)$/i.test(x));
+  return w.length ? w[w.length - 1] : null;
+}
+function koordinaten(sp) {
+  const st = stadtAus(sp.ort);
+  return (st && D?.orte?.staedte?.[st]) || (sp.heim && !sp.bam && !sp.ort ? D?.orte?.heim : null) || null;
+}
+async function wetterHolen(key) {
+  const w = WETTER.get(key) || {}; if (w.laedt) return;
+  WETTER.set(key, { ...w, laedt: true });
+  const [lat, lon] = key.split(",");
+  try {
+    const r = await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,precipitation_probability,weather_code,wind_speed_10m&timezone=Europe%2FLuxembourg&forecast_days=8`)).json();
+    const st = {};
+    r.hourly.time.forEach((z, i) => st[z] = [r.hourly.temperature_2m[i], r.hourly.precipitation_probability[i], r.hourly.weather_code[i], r.hourly.wind_speed_10m[i]]);
+    WETTER.set(key, { stunden: st, geholt: Date.now(), laedt: false });
+  } catch (e) { WETTER.set(key, { ...w, geholt: Date.now(), laedt: false }); }
+  render();
+}
+// WMO-Wettercode → Symbol und Text
+function wetterArt(c) {
+  const a = c === 0 ? 0 : c <= 2 ? 1 : c === 3 ? 2 : c <= 48 ? 3 : c <= 57 ? 4 : c <= 67 ? 5 : c <= 77 ? 6 : c <= 82 ? 5 : c <= 86 ? 6 : 7;
+  return [["☀️", ...T().wetter[0]], ["🌤", ...T().wetter[1]], ["☁️", ...T().wetter[2]], ["🌫", ...T().wetter[3]], ["🌦", ...T().wetter[4]],
+    ["🌧", ...T().wetter[5]], ["🌨", ...T().wetter[6]], ["⛈", ...T().wetter[7]]][a];
+}
+function wetterHtml(sp, now) {
+  const d = new Date(sp.d);
+  if (d - now > 7 * 864e5 || vorbei(sp, now)) return "";
+  const k = koordinaten(sp); if (!k) return "";
+  const key = k.join(","), w = WETTER.get(key);
+  if (!w || (!w.laedt && Date.now() - (w.geholt || 0) > 3600e3)) wetterHolen(key);
+  if (!w?.stunden) return "";
+  const stunde = offen(sp) ? "14:00" : uhr(d).slice(0, 2) + ":00";
+  const x = w.stunden[`${tagKey(d)}T${stunde}`]; if (!x) return "";
+  const [sym, text] = wetterArt(x[2]);
+  return `<div class="wetter"><span>${sym}</span><b>${Math.round(x[0])}°</b><span>${esc(text)}</span>`
+    + `<span class="leise">· 💧 ${x[1] ?? 0} % · 💨 ${Math.round(x[3])} km/h${offen(sp) ? " · " + T().wetterMittag : ""}</span></div>`;
 }
 
 // ---- FuPa-Liveticker der Seniors (offizielles FuPa-Widget „Team-Liveticker“, wie in der Koeppchen-App) ----

@@ -329,6 +329,7 @@ async function main() {
   try { neu.nati = await (await import("./nati.mjs")).natiHolen(); console.log("Nationalmannschaft:", neu.nati.spiele.length, "Spiele,", neu.nati.gruppe?.n || "ohne Tabelle"); }
   catch (e) { console.error("Nationalmannschaft:", e.message); neu.nati = alt.nati || null; }
   for (const t of neu.teams) t.datei = dateiName(t);
+  try { neu.orte = await orteFinden(neu, alt); } catch (e) { console.error("Orte:", e.message); neu.orte = alt.orte || null; }
 
   if (JSON.stringify({ ...alt, stand: 0, kategorien: 0 }) === JSON.stringify({ ...neu, stand: 0, kategorien: 0 }) && alt.kategorien?.tag === kategorien.tag && !process.env.NEU_SUCHEN) {
     console.log("unverändert");
@@ -336,6 +337,36 @@ async function main() {
     writeFileSync(OUT, JSON.stringify(neu, null, 1) + "\n");
     console.log("geschrieben:", neu.teams.map(t => t.reiter).join(", "));
   }
+}
+
+// ---- Koordinaten der Spielorte (für das Wetter in der App), über die Geocoding-Suche von Open-Meteo (frei, ohne Schlüssel).
+// Ort aus dem Platznamen: „Terrain 2 (Junglinster, synth.)“ → Junglinster; ohne Ort in Klammern das letzte Wort
+// („Terrain Hollerich (synth.)“ → Hollerich). Einmal gefundene Orte bleiben in data/fussball.json (orte).
+export function stadtAus(ort) {
+  if (!ort) return null;
+  const k = ort.match(/\(([^,)]+)/)?.[1]?.trim();
+  if (k && !/^synth/i.test(k)) return k;
+  const w = ort.replace(/\(.*\)/, "").trim().split(/\s+/).filter(x => !/^(stade|terrain|am|um|an|in|de|du|des|la|le|rue|\d+)$/i.test(x));
+  return w.length ? w[w.length - 1] : null;
+}
+async function orteFinden(D, alt) {
+  const staedte = { ...(alt.orte?.staedte || {}) };
+  const plaetze = new Set(["Junglinster"]);
+  for (const k of Object.values(D.klassen)) for (const sp of k.spiele) { const st = stadtAus(sp.ort); if (st) plaetze.add(st); }
+  for (const st of plaetze) {
+    if (st in staedte) continue;
+    let treffer = null;
+    for (const land of ["&countryCode=LU", ""]) {
+      try {
+        const r = await (await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(st)}&count=1&language=fr${land}`)).json();
+        if (r.results?.length) { treffer = [Math.round(r.results[0].latitude * 1e3) / 1e3, Math.round(r.results[0].longitude * 1e3) / 1e3]; break; }
+      } catch (e) {}
+    }
+    staedte[st] = treffer;
+    console.log("Ort:", st, treffer || "nicht gefunden");
+    await pause(300);
+  }
+  return { staedte, heim: staedte.Junglinster || [49.711, 6.249] };
 }
 
 function kalender() {
