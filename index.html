@@ -175,7 +175,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 x";
+const FASSUNG = "2026-11-08 y";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -507,7 +507,7 @@ const FUPA_WIDGET = { "Seniors": "3LogsC5yrMCUFqOr4tE5NQRuMTZ", "Réserves": "3L
 // Weitere FuPa-Widgets je Reiter, aufklappbar unten (Kader 8.11., Spielerstatistik 8.11.2026). art = Schlüssel in TEXTE.
 const FUPA_EXTRA = {
   "Seniors": [{ art: "kader", id: "3LpBYN3mQnzQOPvRiEb2G50VWbs" }, { art: "statistik", id: "3Lpw1mDHnW4pzOQCX0KGGmCc8AH" }],
-  "Réserves": [{ art: "kader", id: "3LpC6rNsRXnx51xq1zeLA0eu6TX" }],
+  "Réserves": [{ art: "kader", id: "3LpC6rNsRXnx51xq1zeLA0eu6TX" }, { art: "statistik", id: "3LpwlgavVE6J3GxStMfiH2456cy" }],
 };
 function fupaExtraHtml(w) {
   return `<details class="karte"><summary>${T()[w.art]} · ${T().fupaVon}</summary>` + (fupaOk()
