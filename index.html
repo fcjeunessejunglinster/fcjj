@@ -213,7 +213,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 j";
+const FASSUNG = "2026-11-09 k";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1045,10 +1045,10 @@ function linksHtml() {
   return `<section class="karte"><h2>${T().links}</h2><ul class="spiele linkliste">` + LINKS.map(l => {
     const [titel, text] = T().linkListe[l.key];
     return `<li><a href="${esc(l.url)}" target="_blank" rel="noopener"><span class="lk">${l.icon}</span><span class="lt"><b>${esc(titel)}</b><span>${esc(text)}</span></span><span class="lp">›</span></a></li>`;
-  }).join("") + `</ul></section><section class="karte hinweisbeitrag"><h2>💶 ${T().beitragTitel}</h2><p>${esc(T().beitrag)}</p>
+  }).join("") + `</ul></section><details class="karte hinweisbeitrag"><summary>💶 ${T().beitragTitel}</summary><p>${esc(T().beitrag)}</p>
     <div class="betraege"><span class="leise">${T().betraegeTitel}</span><table>${BEITRAEGE.map(([b, i]) => `<tr><td>${b} €</td><td>${esc(T().beitragArt[i])}</td></tr>`).join("")}</table></div>
     <div class="iban"><span class="leise">${T().ibanLabel}</span><code id="ibanText">${IBAN}</code>
-    <button class="knopf" id="ibanKopieren" type="button">${T().kopieren}</button><span class="leise" id="ibanOk" aria-live="polite"></span></div></section>`;
+    <button class="knopf" id="ibanKopieren" type="button">${T().kopieren}</button><span class="leise" id="ibanOk" aria-live="polite"></span></div></details>`;
 }
 
 // ---- Hilfe: App auf dem Handy installieren (iPhone / Android). Das eigene Gerät steht zuerst.
