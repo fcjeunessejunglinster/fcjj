@@ -51,7 +51,7 @@ main .innen{padding-block:14px 30px;display:grid;gap:14px}
 .karte>h2,.karte>summary{margin:0;padding:10px 14px;font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--leise);
   border-bottom:1px solid var(--linie);font-weight:700}
 details.karte>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;border-bottom:0}
-details.karte>summary::after{content:"Anzeigen ▾";text-transform:none;letter-spacing:0;font-weight:600;color:var(--text)}
+details.karte>summary::after{white-space:nowrap;flex:none;margin-left:10px;content:"Anzeigen ▾";text-transform:none;letter-spacing:0;font-weight:600;color:var(--text)}
 details.karte[open]>summary{border-bottom:1px solid var(--linie)}
 details.karte[open]>summary::after{content:"Zuklappen ▴"}
 html[lang="en"] details.karte>summary::after{content:"Show ▾"}
@@ -162,6 +162,13 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 .teilen .knopf{font-size:16px;padding:12px 22px}
 .unten-knoepfe{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 #shop{background:var(--rot);color:#fff}
+.hilfe{margin:0 auto 18px;max-width:732px}
+#hilfe{width:calc(100% - 2 * max(14px, env(safe-area-inset-left, 0px)))}
+.hilfe .anleitung{padding:4px 14px 14px}
+.hilfe h3{margin:14px 0 6px;font-size:16px}
+.hilfe ol{margin:0;padding-left:22px;display:grid;gap:6px}
+.hilfe .tipp{margin:10px 0 0;font-size:14px;color:var(--leise)}
+.hilfe .schon{padding:14px;color:var(--sieg);font-weight:700}
 .teilen .ok{font-size:13px;color:var(--leise);min-height:1.2em}
 @media (min-width:600px){.raster button{font-size:15px}}
 </style>
@@ -175,11 +182,12 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 <nav id="reiter"><div class="innen raster" id="knoepfe"></div></nav>
 <main><div class="innen" id="inhalt"><p class="hinweis">Lade …</p></div></main>
 <div class="teilen"><div class="unten-knoepfe"><a class="knopf" id="shop" href="https://form.jotform.com/242614644810352" target="_blank" rel="noopener"></a><button class="knopf" id="teilen" type="button"></button></div><span class="ok" id="teilenOk" aria-live="polite"></span></div>
+<details class="karte hilfe innen" id="hilfe"><summary id="hilfeTitel"></summary><div id="hilfeText"></div></details>
 <footer id="fuss"></footer>
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-08 zb";
+const FASSUNG = "2026-11-09 a";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -219,7 +227,18 @@ const TEXTE = {
     blQuelle: n => `${n}: Daten von OpenLigaDB (freiwillig gepflegt, Tore können kurz später erscheinen)`,
     blFehler: n => `Die Daten (${n}) sind gerade nicht erreichbar.`, blHz: "Halbzeit", blLive: "läuft", blEnde: "Ende", blTab: n => `Tabelle ${n}`,
     elf: "Elfm.", eigentor: "ET",
-    sponsorJugend: "Partner unserer Jugend", wetterMittag: "um 14 Uhr",
+    sponsorJugend: "Partner unserer Jugend",
+    hilfe: { titel: "📲 Hilfe: App aufs Handy holen", iphone: "iPhone / iPad", android: "Android",
+      iosSchritte: ["Diese Seite in <b>Safari</b> öffnen (nicht in Chrome oder in WhatsApp).",
+        "Unten auf das <b>Teilen-Symbol</b> tippen (Quadrat mit Pfeil nach oben ⬆️).",
+        "Etwas nach unten wischen und <b>„Zum Home-Bildschirm“</b> wählen.",
+        "Oben rechts auf <b>„Hinzufügen“</b> tippen. Fertig: Das FCJJ-Symbol ist jetzt auf dem Home-Bildschirm."],
+      androidSchritte: ["Diese Seite in <b>Chrome</b> öffnen.",
+        "Oben rechts auf die <b>drei Punkte ⋮</b> tippen.",
+        "<b>„App installieren“</b> oder <b>„Zum Startbildschirm hinzufügen“</b> wählen.",
+        "Mit <b>„Installieren“</b> bestätigen. Fertig: Das FCJJ-Symbol ist jetzt bei den Apps."],
+      tipp: "Die App öffnet sich dann wie eine normale App, im Vollbild und immer mit den neuesten Spielen. Sie braucht keinen App Store und keine Anmeldung.",
+      schon: "Die App ist auf diesem Gerät schon installiert." }, wetterMittag: "um 14 Uhr",
     wetter: [["sonnig"], ["heiter"], ["bewölkt"], ["Nebel"], ["Niesel"], ["Regen"], ["Schnee"], ["Gewitter"]],
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
@@ -253,7 +272,18 @@ const TEXTE = {
     blQuelle: n => `${n} data from OpenLigaDB (maintained by volunteers, goals may appear a little later)`,
     blFehler: n => `The ${n} data is not available right now.`, blHz: "Half-time", blLive: "live", blEnde: "FT", blTab: n => `${n} table`,
     elf: "pen.", eigentor: "OG",
-    sponsorJugend: "Our youth partner", wetterMittag: "at 2 pm",
+    sponsorJugend: "Our youth partner",
+    hilfe: { titel: "📲 Help: put the app on your phone", iphone: "iPhone / iPad", android: "Android",
+      iosSchritte: ["Open this page in <b>Safari</b> (not in Chrome or WhatsApp).",
+        "Tap the <b>Share icon</b> at the bottom (square with an arrow ⬆️).",
+        "Scroll down a little and choose <b>“Add to Home Screen”</b>.",
+        "Tap <b>“Add”</b> at the top right. Done: the FCJJ icon is now on your home screen."],
+      androidSchritte: ["Open this page in <b>Chrome</b>.",
+        "Tap the <b>three dots ⋮</b> at the top right.",
+        "Choose <b>“Install app”</b> or <b>“Add to Home screen”</b>.",
+        "Confirm with <b>“Install”</b>. Done: the FCJJ icon is now with your apps."],
+      tipp: "It then opens like a normal app, full screen and always with the latest matches. No app store and no sign-up needed.",
+      schon: "The app is already installed on this device." }, wetterMittag: "at 2 pm",
     wetter: [["sunny"], ["partly cloudy"], ["cloudy"], ["fog"], ["drizzle"], ["rain"], ["snow"], ["thunderstorm"]],
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
@@ -287,7 +317,18 @@ const TEXTE = {
     blQuelle: n => `${n} : données via OpenLigaDB (mises à jour par des bénévoles, les buts peuvent apparaître un peu plus tard)`,
     blFehler: n => `Les données (${n}) ne sont pas disponibles pour le moment.`, blHz: "Mi-temps", blLive: "en cours", blEnde: "Fin", blTab: n => `Classement ${n}`,
     elf: "pén.", eigentor: "csc",
-    sponsorJugend: "Partenaire de nos jeunes", wetterMittag: "à 14 h",
+    sponsorJugend: "Partenaire de nos jeunes",
+    hilfe: { titel: "📲 Aide : installer l'app sur le téléphone", iphone: "iPhone / iPad", android: "Android",
+      iosSchritte: ["Ouvrir cette page dans <b>Safari</b> (pas dans Chrome ni dans WhatsApp).",
+        "Toucher l'<b>icône Partager</b> en bas (carré avec une flèche ⬆️).",
+        "Faire défiler un peu et choisir <b>« Sur l'écran d'accueil »</b>.",
+        "Toucher <b>« Ajouter »</b> en haut à droite. C'est fait : l'icône FCJJ est sur l'écran d'accueil."],
+      androidSchritte: ["Ouvrir cette page dans <b>Chrome</b>.",
+        "Toucher les <b>trois points ⋮</b> en haut à droite.",
+        "Choisir <b>« Installer l'application »</b> ou <b>« Ajouter à l'écran d'accueil »</b>.",
+        "Confirmer avec <b>« Installer »</b>. C'est fait : l'icône FCJJ est avec vos applications."],
+      tipp: "L'app s'ouvre alors comme une application normale, en plein écran et toujours avec les derniers matchs. Pas besoin d'App Store ni d'inscription.",
+      schon: "L'app est déjà installée sur cet appareil." }, wetterMittag: "à 14 h",
     wetter: [["ensoleillé"], ["éclaircies"], ["nuageux"], ["brouillard"], ["bruine"], ["pluie"], ["neige"], ["orage"]],
     natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
@@ -856,6 +897,7 @@ function render() {
   const stand = new Date(D.stand);
   document.getElementById("teilen").textContent = T().teilen;
   document.getElementById("shop").textContent = T().shop;
+  hilfeAufbauen();
   document.getElementById("fuss").innerHTML = T().fuss(`${kurzDatum(stand)} ${uhr(stand)}`, FASSUNG)
     + (fupaOk() ? `<br><button class="linkknopf" data-fupa="nein">${T().fupaAus}</button>` : "");
 }
@@ -892,6 +934,22 @@ document.getElementById("teilen").addEventListener("click", async () => {
   try { await navigator.clipboard.writeText(text); ok.textContent = T().kopiert; }
   catch (e) { ok.textContent = APP_URL(); }
 });
+
+// ---- Hilfe: App auf dem Handy installieren (iPhone / Android). Das eigene Gerät steht zuerst.
+const IST_IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const IST_ANDROID = /Android/.test(navigator.userAgent);
+const INSTALLIERT = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+let HILFE_LANG = "";
+function hilfeAufbauen() {
+  if (HILFE_LANG === LANG) return;   // nur bei Sprachwechsel neu (sonst klappte der Takt sie zu)
+  HILFE_LANG = LANG;
+  const h = T().hilfe;
+  document.getElementById("hilfeTitel").textContent = h.titel;
+  const ios = `<h3>🍎 ${h.iphone}</h3><ol>${h.iosSchritte.map(x => `<li>${x}</li>`).join("")}</ol>`;
+  const andr = `<h3>🤖 ${h.android}</h3><ol>${h.androidSchritte.map(x => `<li>${x}</li>`).join("")}</ol>`;
+  document.getElementById("hilfeText").innerHTML = (INSTALLIERT ? `<div class="schon">✓ ${h.schon}</div>` : "")
+    + `<div class="anleitung">${IST_ANDROID ? andr + ios : ios + andr}<p class="tipp">${h.tipp}</p></div>`;
+}
 
 async function laden() {
   try {
