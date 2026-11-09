@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-09T19:18:24.032Z",
+ "stand": "2026-11-09T22:18:26.293Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -15295,9 +15295,9 @@
       "id": 45405,
       "n": "FC Koeppchen Wormeldange I"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 15,
+     "as": 2,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
     },
@@ -15349,9 +15349,9 @@
       "id": 44658,
       "n": "Racing Heiderscheid-Eschdorf"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 3,
+     "as": 0,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain Hollerich (synth.)"
     },
@@ -15385,9 +15385,9 @@
       "id": 45310,
       "n": "FF Norden 02 Weiswampach-Hupperdange I"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 5,
+     "as": 4,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Pétange, synth.)"
     },
@@ -15403,9 +15403,9 @@
       "id": 44886,
       "n": "FC Wiltz 71"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 4,
+     "as": 0,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade E. Mayrisch II (Esch, synth.)"
     },
