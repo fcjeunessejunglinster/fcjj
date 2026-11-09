@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 u";
+const FASSUNG = "2026-11-09 v";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1079,7 +1079,9 @@ const LINKS = [
   { key: "dokumente", icon: "🗂️", url: "https://fcjj.lu/divers" },
   { key: "kontakt", icon: "✉️", url: "https://fcjj.lu/contact" },
   { key: "preinscription", icon: "👋", url: "https://fcjj.forms.app/preinscription" },
-  { key: "medico", icon: "🩺", url: "https://guichet.public.lu/fr/citoyens/loisirs/activites-sportives/pratique-activite-sportive/controle-medico-sportif.html#accordionItem-accordionitem_services_en_ligne_et_formulaires" },
+  { key: "medico", icon: "🩺", url: { de: "https://guichet.public.lu/de/citoyens/loisirs/activites-sportives/pratique-activite-sportive/controle-medico-sportif.html",
+    en: "https://guichet.public.lu/en/citoyens/loisirs/activites-sportives/pratique-activite-sportive/controle-medico-sportif.html",
+    fr: "https://guichet.public.lu/fr/citoyens/loisirs/activites-sportives/pratique-activite-sportive/controle-medico-sportif.html" } },
   { key: "licence", icon: "📝", url: "https://fcjj.forms.app/demandelicence" },
   { key: "affiliation", icon: "📄", url: "dokumente/demande-affiliation-flf.pdf" },
 ];
@@ -1095,7 +1097,7 @@ document.addEventListener("click", async e => {
 function linksHtml() {
   return `<section class="karte"><h2>${T().links}</h2><ul class="spiele linkliste">` + LINKS.map(l => {
     const [titel, text] = T().linkListe[l.key];
-    return `<li><a href="${esc(l.url)}" target="_blank" rel="noopener"><span class="lk">${l.icon}</span><span class="lt"><b>${esc(titel)}</b><span>${esc(text)}</span></span><span class="lp">›</span></a></li>`;
+    return `<li><a href="${esc(typeof l.url === "string" ? l.url : l.url[LANG] || l.url.fr)}" target="_blank" rel="noopener"><span class="lk">${l.icon}</span><span class="lt"><b>${esc(titel)}</b><span>${esc(text)}</span></span><span class="lp">›</span></a></li>`;
   }).join("") + `</ul></section><details class="karte hinweisbeitrag"><summary>💶 ${T().beitragTitel}</summary><p>${esc(T().beitrag)}</p><p class="ausschluss">${esc(T().ausschluss)}</p>
     <div class="betraege"><span class="leise">${T().betraegeTitel}</span><table>${BEITRAEGE.map(([b, i]) => `<tr><td>${b} €</td><td>${esc(T().beitragArt[i])}</td></tr>`).join("")}</table></div>
     <div class="iban"><span class="leise">${T().ibanLabel}</span><code id="ibanText">${IBAN}</code>
