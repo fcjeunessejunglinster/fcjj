@@ -19,7 +19,9 @@ const BEKANNTE_MANNSCHAFT = 44720;
 // Reiter in dieser Reihenfolge (vom Verein). `id` = ageCategoryId der FLF, wo bekannt; die
 // anderen findet der Durchlauf über die Namen der Klassen (`muster`).
 export const KATS = [
-  { key: "U7",   n: "Bambinis U7",     kurz: "BAM" },
+  // U7: Altersklasse 12 bei der FLF. Bis jetzt führt sie dort keine Mini-Spieltage (geprüft 9.11.2026), darum kommen
+  // die Bambinis aus den PDFs (tools/bambini.mjs). Sobald der FCJJ dort Spiele hat, nimmt der Abruf die (bamDazu).
+  { key: "U7",   n: "Bambinis U7",     kurz: "BAM", id: 12 },
   { key: "U9",   n: "Pupilles U9",     kurz: "PUP",  id: 5,  muster: /\bU\s?9\b|Pupilles/i },
   { key: "U11",  n: "Poussins U11",    kurz: "POU",  id: 7,  muster: /\bU\s?11\b|Poussins/i },
   { key: "U13",  n: "Minimes U13",     kurz: "MIN",  id: 4,  muster: /\bU\s?13\b|Minimes/i },
@@ -178,8 +180,19 @@ export function aufbereiten({ saison, club, vereinsSpiele, klassen }) {
 }
 
 // Bambinis (aus den PDFs) dazulegen.
+// Bambinis: Führt die FLF im Extranet Spiele unserer U7 (nicht nur einzelne Freundschaftsspiele), gilt das Extranet
+// und die PDFs fallen weg. Sonst gelten die PDFs, und U7-Mannschaften aus dem Extranet werden nicht gezeigt.
+export const BAM_EXTRANET_AB = 3;   // so viele eigene Spiele, damit das Extranet als vollständig gilt
+export function bamImExtranet(D) {
+  const ids = new Set(D.teams.filter(t => t.kat === "U7").flatMap(t => [...t.ids, ...(t.mit || [])]));
+  if (!ids.size) return false;
+  let n = 0;
+  for (const k of Object.values(D.klassen)) if (!String(k.id).startsWith("bam-")) for (const sp of k.spiele) if (ids.has(sp.h.id) || ids.has(sp.a.id)) n++;
+  return n >= BAM_EXTRANET_AB;
+}
 export function bamDazu(D, bam) {
-  if (!bam?.teams?.length) return;
+  if (bamImExtranet(D)) { console.log("Bambinis: Spiele stehen jetzt im FLF-Extranet — die PDFs werden nicht mehr gebraucht"); return; }
+  if (!bam?.teams?.length) { D.teams = D.teams.filter(t => t.kat !== "U7"); return; }
   const viele = bam.teams.length > 1;
   for (const t of bam.teams) Object.assign(t, { reiter: "BAM" + (viele ? " " + t.nr : ""), alter: "Bambinis U7", mit: [] });
   D.teams = [...bam.teams, ...D.teams.filter(t => t.kat !== "U7")];
