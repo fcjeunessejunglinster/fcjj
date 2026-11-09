@@ -100,6 +100,9 @@ li.sp .tore .h{text-align:right}
 .wetter b{font-size:18px}
 .wetter .leise{font-size:13px}
 .naechst + .wetter{padding:4px 14px 0}
+.route{color:var(--rot);font-weight:700;text-decoration:none;white-space:nowrap}
+.route:hover{text-decoration:underline}
+.kasten .routeknopf{justify-self:center;font-size:16px;padding:10px 18px}
 .kasten .kabine{font-size:16px;font-weight:700}
 .kasten .satz{font-size:16px;font-weight:700}
 .rocks{font-size:24px;font-weight:900;letter-spacing:.02em;color:var(--rot);font-style:italic}
@@ -187,7 +190,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 a";
+const FASSUNG = "2026-11-09 b";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -227,7 +230,7 @@ const TEXTE = {
     blQuelle: n => `${n}: Daten von OpenLigaDB (freiwillig gepflegt, Tore können kurz später erscheinen)`,
     blFehler: n => `Die Daten (${n}) sind gerade nicht erreichbar.`, blHz: "Halbzeit", blLive: "läuft", blEnde: "Ende", blTab: n => `Tabelle ${n}`,
     elf: "Elfm.", eigentor: "ET",
-    sponsorJugend: "Partner unserer Jugend",
+    sponsorJugend: "Partner unserer Jugend", route: "Route", routeLang: "Route zum Platz",
     hilfe: { titel: "📲 Hilfe: App aufs Handy holen", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Diese Seite in <b>Safari</b> öffnen (nicht in Chrome oder in WhatsApp).",
         "Unten auf das <b>Teilen-Symbol</b> tippen (Quadrat mit Pfeil nach oben ⬆️).",
@@ -272,7 +275,7 @@ const TEXTE = {
     blQuelle: n => `${n} data from OpenLigaDB (maintained by volunteers, goals may appear a little later)`,
     blFehler: n => `The ${n} data is not available right now.`, blHz: "Half-time", blLive: "live", blEnde: "FT", blTab: n => `${n} table`,
     elf: "pen.", eigentor: "OG",
-    sponsorJugend: "Our youth partner",
+    sponsorJugend: "Our youth partner", route: "Directions", routeLang: "Directions to the pitch",
     hilfe: { titel: "📲 Help: put the app on your phone", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Open this page in <b>Safari</b> (not in Chrome or WhatsApp).",
         "Tap the <b>Share icon</b> at the bottom (square with an arrow ⬆️).",
@@ -317,7 +320,7 @@ const TEXTE = {
     blQuelle: n => `${n} : données via OpenLigaDB (mises à jour par des bénévoles, les buts peuvent apparaître un peu plus tard)`,
     blFehler: n => `Les données (${n}) ne sont pas disponibles pour le moment.`, blHz: "Mi-temps", blLive: "en cours", blEnde: "Fin", blTab: n => `Classement ${n}`,
     elf: "pén.", eigentor: "csc",
-    sponsorJugend: "Partenaire de nos jeunes",
+    sponsorJugend: "Partenaire de nos jeunes", route: "Itinéraire", routeLang: "Itinéraire jusqu'au terrain",
     hilfe: { titel: "📲 Aide : installer l'app sur le téléphone", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Ouvrir cette page dans <b>Safari</b> (pas dans Chrome ni dans WhatsApp).",
         "Toucher l'<b>icône Partager</b> en bas (carré avec une flèche ⬆️).",
@@ -397,6 +400,21 @@ function kabine(sp, now) {
   const k = KABINEN[sp.team.reiter];
   return k ? T().kabinen(k[0], k[1]) : "";
 }
+// ---- Anfahrt zu Auswärtsspielen: Link in die Karten-App (iPhone: Apple Karten, sonst Google Maps) mit Route zum Platz.
+// Gesucht wird nach Platz + Ort aus dem FLF-Namen; „Terrain 2 (Mersch, synth.)“ → „Terrain de football Mersch“.
+function routeZiel(ort) {
+  const stadt = stadtAus(ort);
+  const name = ort.replace(/\(.*\)/, "").replace(/\bsynth(étique)?\.?/gi, "").trim();
+  const allgemein = /^terrain(\s+\d+)?$/i.test(name) || !name;
+  return (allgemein ? "Terrain de football " + (stadt || "") : name + (stadt && !name.includes(stadt) ? ", " + stadt : "")) + ", Luxembourg";
+}
+function routeUrl(ort) {
+  const z = encodeURIComponent(routeZiel(ort));
+  return IST_IOS ? `https://maps.apple.com/?daddr=${z}` : `https://www.google.com/maps/dir/?api=1&destination=${z}`;
+}
+const routeLink = (sp, now) => !sp.heim && sp.ort && sp.team && !vorbei(sp, now)
+  ? `<a class="route" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().route}</a>` : "";
+
 function spielLi(sp, now, mitTeam) {
   const d = new Date(sp.d);
   const meta = [sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")];
@@ -404,7 +422,8 @@ function spielLi(sp, now, mitTeam) {
   if (kabine(sp, now)) meta.push(kabine(sp, now));
   if (sp.forfait) meta.push(T().forfait);
   if (sp.bem && sp.bem !== "Arrêté") meta.push(sp.bem);
-  const unten = `${mitTeam ? `<span class="schild team">${esc(sp.team.reiter)}</span>` : ""}${artSchild(sp)}<b>${wt(d)} ${kurzDatum(d)}</b> · ${esc(meta.join(" · "))}`;
+  const r = routeLink(sp, now);
+  const unten = `${mitTeam ? `<span class="schild team">${esc(sp.team.reiter)}</span>` : ""}${artSchild(sp)}<b>${wt(d)} ${kurzDatum(d)}</b> · ${esc(meta.join(" · "))}${r ? " · " + r : ""}`;
   return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, w: wertung(sp), unten, attr: mitTeam ? ` data-gehe="${sp.team.id}"` : "" });
 }
 
@@ -436,13 +455,13 @@ function heuteHtml(h, now, kinder) {
   const satz = kinder ? (!h.begonnen && !min ? T().trinken : h.begonnen ? T().daumen : T().glueck) : h.begonnen ? T().ergKommt : "";
   return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
-    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
     ${satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : ""}</div></section>`;
 }
 function morgenHtml(sp, now) {
   return `<section class="karte heute">${kopf(T().morgen, sp)}<div class="kasten"><div class="wann">${esc(offen(sp) ? T().zeitOffen : T().anstoss(uhr(new Date(sp.d))))}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
-    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
     <div class="satz">${esc(T().trinken)}</div></div></section>`;
 }
 // Slogan nach einem Sieg einer Jugendmannschaft (alle außer Seniors, Réserves und Veteranen; vom Verein, 8.11.2026).
@@ -533,7 +552,7 @@ function naechsteKarte(kommend, now, unten = "", titel = T().naechste) {
         if (i) return spielLi(sp, now);
         const meta = [sp.ort ? "📍 " + sp.ort : "", kabine(sp, now), sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")].filter(Boolean);
         return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, m: '<span class="mitte leise">–</span>',
-          unten: `${artSchild(sp)}${esc(meta.join(" · "))}` }).replace('class="sp"', 'class="sp erstes"');
+          unten: `${artSchild(sp)}${esc(meta.join(" · "))}${routeLink(sp, now) ? " · " + routeLink(sp, now) : ""}` }).replace('class="sp"', 'class="sp erstes"');
       }).join("") + "</ul>";
   }
   return h + unten + "</section>";
@@ -911,6 +930,7 @@ document.addEventListener("click", e => {
   if (f.dataset.fupa === "nein") location.reload(); else render();
 });
 document.getElementById("inhalt").addEventListener("click", e => {
+  if (e.target.closest("a")) return;   // Links (Route) nicht als Reiterwechsel
   const li = e.target.closest("[data-gehe]"); if (!li) return;
   AKTIV = li.dataset.gehe; merk.set("reiter", AKTIV); render(); scrollTo(0, 0);
 });
