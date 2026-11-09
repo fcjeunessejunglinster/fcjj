@@ -111,7 +111,11 @@ li.sp .tore .h{text-align:right}
 .fupalink:hover{border-color:var(--schwarz)}
 ul.spiele.linkliste li{display:block;padding:0}
 .hinweisbeitrag{border:2px solid var(--rot)}
-.hinweisbeitrag p{margin:0;padding:12px 14px 14px;line-height:1.5}
+.iban{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:0 14px 14px}
+.iban .leise{font-size:13px;width:100%}
+.iban code{font-size:18px;font-weight:700;letter-spacing:.03em;font-variant-numeric:tabular-nums;user-select:all}
+.iban .knopf{padding:8px 14px;font-size:14px}
+.hinweisbeitrag p{margin:0;padding:12px 14px;line-height:1.5}
 .linkliste a{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px;text-decoration:none;color:var(--text)}
 .linkliste .lk{font-size:24px}
 .linkliste .lt{display:grid;gap:2px;min-width:0}
@@ -204,7 +208,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 h";
+const FASSUNG = "2026-11-09 i";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -245,7 +249,7 @@ const TEXTE = {
     blFehler: n => `Die Daten (${n}) sind gerade nicht erreichbar.`, blHz: "Halbzeit", blLive: "läuft", blEnde: "Ende", blTab: n => `Tabelle ${n}`,
     elf: "Elfm.", eigentor: "ET",
     sponsorJugend: "Partner unserer Jugend",
-    beitragTitel: "Mitgliedsbeitrag",
+    beitragTitel: "Mitgliedsbeitrag", ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: "Wir möchten diese Gelegenheit nutzen, um dich daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags als Spielerin oder Spieler Voraussetzung für die Teilnahme an Training und Spielen ist und dir freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften gibt.",
     links: "Nützliche Links", linkListe: {
       website: ["Offizielle Vereinsseite", "fcjj.lu"],
@@ -299,7 +303,7 @@ const TEXTE = {
     blFehler: n => `The ${n} data is not available right now.`, blHz: "Half-time", blLive: "live", blEnde: "FT", blTab: n => `${n} table`,
     elf: "pen.", eigentor: "OG",
     sponsorJugend: "Our youth partner",
-    beitragTitel: "Membership fee",
+    beitragTitel: "Membership fee", ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: "We would like to take this opportunity to remind you that paying the membership fee as a player is a prerequisite for taking part in training sessions and matches, and that it gives you free entry to the home matches of our Seniors teams.",
     links: "Useful links", linkListe: {
       website: ["Official club website", "fcjj.lu"],
@@ -353,7 +357,7 @@ const TEXTE = {
     blFehler: n => `Les données (${n}) ne sont pas disponibles pour le moment.`, blHz: "Mi-temps", blLive: "en cours", blEnde: "Fin", blTab: n => `Classement ${n}`,
     elf: "pén.", eigentor: "csc",
     sponsorJugend: "Partenaire de nos jeunes",
-    beitragTitel: "Cotisation",
+    beitragTitel: "Cotisation", ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: "Nous aimerions profiter de cette occasion pour te rappeler que le paiement de la cotisation en tant que joueuse ou joueur est une condition préalable à la participation aux séances d'entraînement et aux matchs, et qu'il te donne droit à l'entrée gratuite aux matchs à domicile de nos équipes Seniors.",
     links: "Liens utiles", linkListe: {
       website: ["Site officiel du club", "fcjj.lu"],
@@ -1023,11 +1027,20 @@ const LINKS = [
   { key: "licence", icon: "📝", url: "https://fcjj.forms.app/demandelicence" },
   { key: "affiliation", icon: "📄", url: "dokumente/demande-affiliation-flf.pdf" },
 ];
+const IBAN = "LU58 0030 0216 2326 0000";   // Vereinskonto für die Cotisation (vom Verein, 9.11.2026)
+document.addEventListener("click", async e => {
+  if (!e.target.closest("#ibanKopieren")) return;
+  const ok = document.getElementById("ibanOk");
+  try { await navigator.clipboard.writeText(IBAN.replace(/\s/g, "")); ok.textContent = "✓ " + T().kopiert2; }
+  catch (x) { const r = document.createRange(); r.selectNodeContents(document.getElementById("ibanText")); getSelection().removeAllRanges(); getSelection().addRange(r); ok.textContent = T().markiert; }
+});
 function linksHtml() {
   return `<section class="karte"><h2>${T().links}</h2><ul class="spiele linkliste">` + LINKS.map(l => {
     const [titel, text] = T().linkListe[l.key];
     return `<li><a href="${esc(l.url)}" target="_blank" rel="noopener"><span class="lk">${l.icon}</span><span class="lt"><b>${esc(titel)}</b><span>${esc(text)}</span></span><span class="lp">›</span></a></li>`;
-  }).join("") + `</ul></section><section class="karte hinweisbeitrag"><h2>💶 ${T().beitragTitel}</h2><p>${esc(T().beitrag)}</p></section>`;
+  }).join("") + `</ul></section><section class="karte hinweisbeitrag"><h2>💶 ${T().beitragTitel}</h2><p>${esc(T().beitrag)}</p>
+    <div class="iban"><span class="leise">${T().ibanLabel}</span><code id="ibanText">${IBAN}</code>
+    <button class="knopf" id="ibanKopieren" type="button">${T().kopieren}</button><span class="leise" id="ibanOk" aria-live="polite"></span></div></section>`;
 }
 
 // ---- Hilfe: App auf dem Handy installieren (iPhone / Android). Das eigene Gerät steht zuerst.
