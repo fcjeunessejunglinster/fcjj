@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 v";
+const FASSUNG = "2026-11-09 w";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -565,7 +565,7 @@ function morgenHtml(sp, now) {
     <div class="satz">${esc(T().trinken)}</div></div></section>`;
 }
 // Slogan nach einem Sieg einer Jugendmannschaft (alle außer Seniors, Réserves und Veteranen; vom Verein, 8.11.2026).
-const ROCKS = '<div class="rocks">YOUth ROCKs! 🤘</div>';
+const ROCKS = '<div class="rocks">#YOUth ROCKs! 🤘</div>';
 const rocks = (t, sp) => !["SEN", "RES", "VET"].includes(t.kat) && wertung(sp) === "S" && (sp.gespielt || sp.forfait) ? ROCKS : "";
 function letztesHtml(t, spiele, now, aktuell, kinder) {
   if (spieltagHeute(spiele, now) || (kinder && spieltagMorgen(spiele, now))) return "";
