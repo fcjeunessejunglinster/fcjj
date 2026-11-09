@@ -3,8 +3,6 @@
 Spiele, Ergebnisse, Tabellen und Kalender-Abos aller Mannschaften des **FC Jeunesse Junglinster**,
 automatisch von der FLF. Eine einzige Webseite (`index.html`), die Daten holt GitHub selbst.
 
-Idee und FLF-Schnittstelle nach dem Vorbild von https://fckoeppchen.github.io/ (FC Koeppchen).
-
 ## So kommt die App ins Netz (einmalig, ca. 10 Minuten)
 
 1. **GitHub-Konto** anlegen (github.com). Am schönsten ist eine eigene Organisation, z. B. `fcjj`
