@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 p";
+const FASSUNG = "2026-11-09 q";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -463,8 +463,12 @@ const ROUTE_FEST = {
   // 9.11.2026 nachgesehen: Waze/Gemeinde Steinsel bzw. FC Luxembourg City (Platzliste)
   "Stade Henri Bausch (Steinsel, synth.)": "16 Rue de l'Alzette, Steinsel",
   "Terrain 2 (Walferdange, synth.)": "27 Route de Diekirch, 7220 Walferdange",
+  // 9.11.2026: Gemeinde Sandweiler (sandweiler.lu, Sports & loisirs) und US Sandweiler — beide Plätze am Stade Norbert Hübsch
+  "Terrain 2 (Sandweiler, synth.)": "Stade Norbert Hübsch, Rue de la Gare, Sandweiler",
+  "Stade Norbert Hubsch (Sandweiler)": "Stade Norbert Hübsch, Rue de la Gare, Sandweiler",
 };
-const platzAdresse = ort => ort && /\d/.test(ROUTE_FEST[ort] || "") ? ROUTE_FEST[ort] : "";
+// Adresse unter dem 📍 nur bei genau eingetragenen Plätzen (nicht bei Einträgen nur für einen Ort).
+const platzAdresse = ort => (ort && ROUTE_FEST[ort]) || "";
 function routeZiel(ort) {
   const stadt = stadtAus(ort);
   if (ROUTE_FEST[ort]) return ROUTE_FEST[ort] + ", Luxembourg";
