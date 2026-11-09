@@ -190,7 +190,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 b";
+const FASSUNG = "2026-11-09 c";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -402,8 +402,11 @@ function kabine(sp, now) {
 }
 // ---- Anfahrt zu Auswärtsspielen: Link in die Karten-App (iPhone: Apple Karten, sonst Google Maps) mit Route zum Platz.
 // Gesucht wird nach Platz + Ort aus dem FLF-Namen; „Terrain 2 (Mersch, synth.)“ → „Terrain de football Mersch“.
+// Plätze, die die Karten-App über den FLF-Namen nicht genau findet (vom Verein). Schlüssel: Ort aus dem FLF-Namen.
+const ROUTE_FEST = { "Grevenmacher": "Op Flohr, Grevenmacher" };
 function routeZiel(ort) {
   const stadt = stadtAus(ort);
+  if (ROUTE_FEST[stadt]) return ROUTE_FEST[stadt] + ", Luxembourg";
   const name = ort.replace(/\(.*\)/, "").replace(/\bsynth(étique)?\.?/gi, "").trim();
   const allgemein = /^terrain(\s+\d+)?$/i.test(name) || !name;
   return (allgemein ? "Terrain de football " + (stadt || "") : name + (stadt && !name.includes(stadt) ? ", " + stadt : "")) + ", Luxembourg";
