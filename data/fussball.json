@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-09T11:18:15.323Z",
+ "stand": "2026-11-09T12:31:07.400Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -9728,7 +9728,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Hosingen, synth.)"
     },
@@ -23933,6 +23933,7 @@
    "5": "U9",
    "7": "U11",
    "11": "U15",
+   "12": "U7",
    "15": "WU15",
    "28": "VET",
    "29": "WU11",
