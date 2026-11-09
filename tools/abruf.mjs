@@ -40,7 +40,6 @@ export const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 
 const OUT = new URL("../data/fussball.json", import.meta.url);
 const KAL = new URL("../kalender/", import.meta.url);
-const MELD = new URL("../data/meldungen.json", import.meta.url);
 
 const M_FIELDS = `match{ id gameday matchDate isPlayed isForfait homeScore awayScore finalHomeScore finalAwayScore finalScoreComment }
   division{ id name showResult showRanking } matchType{ id }
@@ -350,15 +349,6 @@ async function main() {
     writeFileSync(OUT, JSON.stringify(neu, null, 1) + "\n");
     console.log("geschrieben:", neu.teams.map(t => t.reiter).join(", "));
   }
-  // Push-Meldungen (Fehler hier dürfen den Abruf nicht stören)
-  try {
-    const vorher = existsSync(MELD) ? JSON.parse(readFileSync(MELD, "utf8")).ev || [] : [];
-    const ev = (await import("./meldungen.mjs")).meldungen(alt, neu, new Date(), vorher);
-    if (JSON.stringify(ev) !== JSON.stringify(vorher)) {
-      writeFileSync(MELD, JSON.stringify({ stand: new Date().toISOString(), ev }, null, 1) + "\n");
-      console.log("Meldungen:", ev.map(e => e.id).join(", ") || "keine");
-    }
-  } catch (e) { console.error("Meldungen:", e.message); }
 }
 
 // ---- Koordinaten der Spielorte (für das Wetter in der App), über die Geocoding-Suche von Open-Meteo (frei, ohne Schlüssel).
