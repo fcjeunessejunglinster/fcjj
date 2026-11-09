@@ -143,7 +143,7 @@ ul.spiele{list-style:none;margin:0;padding:0}
 ul.spiele li{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--linie)}
 ul.spiele li:first-child{border-top:0}
 ul.spiele li.klick{cursor:pointer}
-/* Spielzeile wie in der Koeppchen-App: Heim rechtsbündig | Ergebnis/Uhrzeit | Gast, darunter Datum und Klasse */
+/* Spielzeile: Heim rechtsbündig | Ergebnis/Uhrzeit | Gast, darunter Datum und Klasse */
 ul.spiele li.sp{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:4px 10px;align-items:center}
 li.sp .tm{font-size:15px;line-height:1.2;overflow-wrap:anywhere}
 li.sp .tm.h{text-align:right}
@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 x";
+const FASSUNG = "2026-11-09 y";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -528,8 +528,8 @@ function spielLi(sp, now, mitTeam) {
 }
 
 // ---- Mannschaft ----
-// Kästen oben wie in der Koeppchen-App: „Heute Spieltag!“ (alle), „Morgen Spieltag!“ (nur Kinder, am Vortag),
-// „Letztes Spiel“ (bis 7 Tage; Kinder bis zum Vortag des nächsten, sonst bis zum Spieltag).
+// Kästen oben: „Heute Spieltag!“ (alle), „Morgen Spieltag!“ (nur Kinder, am Vortag),
+// „Letztes Spiel“ (bis 3 Tage; Kinder bis zum Vortag des nächsten, sonst bis zum Spieltag).
 const KINDER = ["U7", "U9", "U11", "U13", "U15", "WU11", "WU13", "WU15"];
 const tageBis = (a, b) => Math.round((Date.parse(b + "T12:00:00Z") - Date.parse(a + "T12:00:00Z")) / 864e5);
 const zeitText = sp => offen(sp) ? T().zeitOffen : (sp.bam && !sp.bam.zeitSicher ? T().ca : "") + uhr(new Date(sp.d)) + T().uhr;
@@ -575,7 +575,7 @@ function letztesHtml(t, spiele, now, aktuell, kinder) {
     // Erwachsene: Ergebnis groß, Klasse und Platz. Auch ohne FLF-Ergebnis („Ergebnis folgt“), dann nur bis 48 h.
     const mitErg = s => s.erg && s.hs != null && (s.gespielt || s.forfait);
     const sp = vorbeiL.find(s => mitErg(s) || now - new Date(s.d) <= 48 * 3600e3);
-    // Erwachsene: höchstens 3 Tage nach dem Spiel (vom Verein, 9.11.2026; vorher 7 wie bei Koeppchen).
+    // Erwachsene: höchstens 3 Tage nach dem Spiel (vom Verein, 9.11.2026).
     if (!sp || now - new Date(sp.d) > 3 * 864e5) return "";
     const erg = mitErg(sp), liga = aktuell && aktuell.spiele.some(x => x.id === sp.id);
     const zeileTab = erg && liga && (aktuell.tabelle || []).find(r => t.ids.includes(r.id));
@@ -716,7 +716,7 @@ function wetterHtml(sp, now) {
     + `<span class="leise">· 💧 ${x[1] ?? 0} % · 💨 ${Math.round(x[3])} km/h${offen(sp) ? " · " + T().wetterMittag : ""}</span></div>`;
 }
 
-// ---- FuPa-Liveticker der Seniors (offizielles FuPa-Widget „Team-Liveticker“, wie in der Koeppchen-App) ----
+// ---- FuPa-Liveticker der Seniors (offizielles FuPa-Widget „Team-Liveticker“) ----
 // Im FuPa-Widget-Builder angelegt (8.11.2026), gilt nur für https://fcjeunessejunglinster.github.io/.
 // Weitere Mannschaft (z. B. Réserves): eigenes Widget anlegen, Kennung hier mit dem Namen des Reiters eintragen.
 const FUPA_WIDGET = { "Seniors": "3LogsC5yrMCUFqOr4tE5NQRuMTZ", "Réserves": "3LoumFG32IteFsCAbe4xILX5V7y" };
@@ -1061,7 +1061,7 @@ document.querySelector(".sprache").addEventListener("click", e => {
 document.querySelector("#inhalt .hinweis").textContent = T().laden;
 
 // App teilen: Teilen-Leiste des Handys, sonst Link in die Zwischenablage. Nur `text` (mit Link darin), kein `url`:
-// mit `url` lässt iMessage den Text weg (in der Koeppchen-App so gesehen).
+// mit `url` lässt iMessage den Text weg.
 const APP_URL = () => location.origin + location.pathname.replace(/index\.html$/, "");
 document.getElementById("teilen").addEventListener("click", async () => {
   const text = T().teilText(APP_URL()), ok = document.getElementById("teilenOk");

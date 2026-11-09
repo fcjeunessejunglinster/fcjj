@@ -1,7 +1,6 @@
 // Cloudflare Worker „fcjj“: stößt den FLF-Abruf auf GitHub pünktlich an.
 // GitHub lässt geplante Läufe oft aus oder startet sie spät; Cloudflare läuft pünktlich (Cron jede Viertelstunde)
 // und startet den Workflow per workflow_dispatch. GitHubs eigener Zeitplan bleibt als Reserve.
-// Idee wie in der Koeppchen-App (Plan B).
 //
 // Einrichten (einmalig):
 //  - Worker anlegen, diesen Code einfügen, Deploy.

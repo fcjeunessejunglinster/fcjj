@@ -1,4 +1,4 @@
-// Test mit nachgebauten Rohdaten: echte FLF-Spiele aus dem Koeppchen-Stand, in denen der FCJJ vorkommt.
+// Test mit nachgebauten Rohdaten: echte FLF-Spiele, in denen der FCJJ vorkommt.
 // node test/abruf.mjs <pfad zu fussball.json mit FLF-Daten> [ausgabe]
 import { readFileSync, writeFileSync } from "node:fs";
 import assert from "node:assert/strict";
@@ -30,7 +30,7 @@ for (const k of Object.values(src.klassen)) {
     totalLosses: z.nl, totalOwnGoals: z.t, totalAgainstGoals: z.g, totalPoints: z.pkt }, team: { id: z.id, name: z.n } })) || null };
 }
 const D = aufbereiten({ saison: src.saison, club: CLUB, vereinsSpiele, klassen });
-// Bambinis aus dem Koeppchen-Stand nachgebaut
+// Bambinis nachgebaut
 const bk = Object.values(src.klassen).filter(k => String(k.id).startsWith("bam-"));
 const bam = { teams: [{ id: 9000702, ids: [9000702], n: "Jeunesse Junglinster II", kat: "U7", nr: 2, klassen: bk.map(k => k.id) }], klassen: {} };
 for (const k of bk) bam.klassen[k.id] = { ...k, spiele: k.spiele.filter(sp => sp.bam?.mit.some(n => /Junglinster/.test(n))).map(sp => {

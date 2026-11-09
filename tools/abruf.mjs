@@ -2,8 +2,7 @@
 // Läuft als GitHub Action (.github/workflows/abruf.yml), lokal: node tools/abruf.mjs
 //
 // Quelle: die Schnittstelle hinter https://extranet.flf.lu/match (antwortet ohne Anmeldung, aber ohne
-// CORS-Freigabe — darum dieser Umweg über GitHub). Idee und Schnittstelle übernommen aus
-// fckoeppchen.github.io, für den FC Jeunesse Junglinster neu und schlanker geschrieben.
+// CORS-Freigabe — darum dieser Umweg über GitHub).
 //
 // Der Verein und die Altersklassen werden selbst gesucht: Die FLF-Nummer des Vereins kommt über
 // eine bekannte Mannschaft, die Altersklassen über einen Durchlauf aller Nummern (einmal am Tag).
