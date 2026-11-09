@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-09T17:18:14.322Z",
+ "stand": "2026-11-09T19:18:24.032Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -11823,7 +11823,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
     },
@@ -12075,7 +12075,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
