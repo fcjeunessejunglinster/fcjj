@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 r";
+const FASSUNG = "2026-11-09 s";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -556,7 +556,8 @@ function letztesHtml(t, spiele, now, aktuell, kinder) {
   }
   // Kinder: gelobt wird das Spielen, das Ergebnis steht klein wie in der Liste.
   const sp = vorbeiL[0];
-  if (!sp || now - new Date(sp.d) > 7 * 864e5) return "";
+  // Kinder: höchstens 3 Tage (vom Verein, 9.11.2026; vorher 7), und nur bis zum Vortag des nächsten Spiels (oben).
+  if (!sp || now - new Date(sp.d) > 3 * 864e5) return "";
   const n = spiele.find(s => !vorbei(s, now));
   const naechst = n ? `<div class="zusatz">${sp.bam ? T().naechstesBam : T().naechstes}: <b>${esc(wannText(n))}</b>${n.bam ? "" : esc(T().gegenW + gegner(n).n)}${n.ort ? "<br>📍 " + esc(n.ort) : ""}</div>` : "";
   return `<section class="karte heute">${kopf(T().letztes, sp)}<div class="kasten"><div class="wann klein">${esc(datum(sp))}</div>
