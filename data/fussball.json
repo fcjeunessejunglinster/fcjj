@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-09T12:31:07.400Z",
+ "stand": "2026-11-09T16:06:57.149Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -10358,24 +10358,6 @@
      "ort": "Am Ga (Wormeldange, synth.)"
     },
     {
-     "id": 6685075,
-     "d": "2026-11-22T00:00:01+01:00",
-     "tag": 7,
-     "h": {
-      "id": 45317,
-      "n": "Victoria Rosport I"
-     },
-     "a": {
-      "id": 46194,
-      "n": "CS Grevenmacher I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Ralingen (synth.)"
-    },
-    {
      "id": 6685073,
      "d": "2026-11-22T09:30:00+01:00",
      "tag": 7,
@@ -10392,6 +10374,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 6685075,
+     "d": "2026-11-22T09:30:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 45317,
+      "n": "Victoria Rosport I"
+     },
+     "a": {
+      "id": 46194,
+      "n": "CS Grevenmacher I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Ralingen (synth.)"
     },
     {
      "id": 6685071,
@@ -11034,24 +11034,6 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
-     "id": 6689072,
-     "d": "2026-11-22T00:00:01+01:00",
-     "tag": 7,
-     "h": {
-      "id": 45453,
-      "n": "FC Mamer 32 III"
-     },
-     "a": {
-      "id": 46212,
-      "n": "FC Lorentzweiler II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Fr. Trausch (synth.)"
-    },
-    {
      "id": 6689073,
      "d": "2026-11-22T09:30:00+01:00",
      "tag": 7,
@@ -11122,6 +11104,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Prince Jean (Luxembourg, synth.)"
+    },
+    {
+     "id": 6689072,
+     "d": "2026-11-22T11:30:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 45453,
+      "n": "FC Mamer 32 III"
+     },
+     "a": {
+      "id": 46212,
+      "n": "FC Lorentzweiler II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Fr. Trausch (synth.)"
     },
     {
      "id": 6689083,
@@ -11657,7 +11657,7 @@
     },
     {
      "id": 6690072,
-     "d": "2026-11-22T00:00:01+01:00",
+     "d": "2026-11-22T09:30:00+01:00",
      "tag": 7,
      "h": {
       "id": 45454,
@@ -11672,24 +11672,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Fr. Trausch (synth.)"
-    },
-    {
-     "id": 6690073,
-     "d": "2026-11-22T00:00:01+01:00",
-     "tag": 7,
-     "h": {
-      "id": 45705,
-      "n": "Una Strassen III"
-     },
-     "a": {
-      "id": 46172,
-      "n": "Alisontia Steinsel II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Strassen, synth.)"
     },
     {
      "id": 6690071,
@@ -11708,6 +11690,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Prince Jean (Luxembourg, synth.)"
+    },
+    {
+     "id": 6690073,
+     "d": "2026-11-22T11:00:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 45705,
+      "n": "Una Strassen III"
+     },
+     "a": {
+      "id": 46172,
+      "n": "Alisontia Steinsel II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Strassen, synth.)"
     },
     {
      "id": 6690075,
@@ -12242,24 +12242,6 @@
      "ort": "Parc des Sports (Diekirch, synth.)"
     },
     {
-     "id": 6714072,
-     "d": "2026-11-21T00:00:01+01:00",
-     "tag": 7,
-     "h": {
-      "id": 45601,
-      "n": "Marisca Mersch III"
-     },
-     "a": {
-      "id": 45369,
-      "n": "Résidence Walferdange III"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Mersch, synth.)"
-    },
-    {
      "id": 6714073,
      "d": "2026-11-21T09:30:00+01:00",
      "tag": 7,
@@ -12294,6 +12276,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Erpeldange, synth.)"
+    },
+    {
+     "id": 6714072,
+     "d": "2026-11-21T15:00:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 45601,
+      "n": "Marisca Mersch III"
+     },
+     "a": {
+      "id": 45369,
+      "n": "Résidence Walferdange III"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Mersch, synth.)"
     },
     {
      "id": 6714075,
@@ -12936,42 +12936,6 @@
      "ort": "Terrain au Parc (Mertert, synth.)"
     },
     {
-     "id": 6716072,
-     "d": "2026-11-21T00:00:01+01:00",
-     "tag": 7,
-     "h": {
-      "id": 46205,
-      "n": "US Moutfort-Medingen I"
-     },
-     "a": {
-      "id": 46278,
-      "n": "Union Mertert-Wasserbillig I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Am Brill (Moutfort, synth.)"
-    },
-    {
-     "id": 6716075,
-     "d": "2026-11-21T00:00:01+01:00",
-     "tag": 7,
-     "h": {
-      "id": 45319,
-      "n": "Victoria Rosport I"
-     },
-     "a": {
-      "id": 45392,
-      "n": "FC Koeppchen Wormeldange I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Ralingen (synth.)"
-    },
-    {
      "id": 6716074,
      "d": "2026-11-21T11:00:00+01:00",
      "tag": 7,
@@ -13008,6 +12972,24 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
+     "id": 6716072,
+     "d": "2026-11-21T11:00:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 46205,
+      "n": "US Moutfort-Medingen I"
+     },
+     "a": {
+      "id": 46278,
+      "n": "Union Mertert-Wasserbillig I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Am Brill (Moutfort, synth.)"
+    },
+    {
      "id": 6716071,
      "d": "2026-11-21T15:00:00+01:00",
      "tag": 7,
@@ -13024,6 +13006,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Canach, synth.)"
+    },
+    {
+     "id": 6716075,
+     "d": "2026-11-21T15:30:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 45319,
+      "n": "Victoria Rosport I"
+     },
+     "a": {
+      "id": 45392,
+      "n": "FC Koeppchen Wormeldange I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Ralingen (synth.)"
     },
     {
      "id": 6716084,
@@ -13558,24 +13558,6 @@
      "ort": "Terrain 2 (Christnach, synth)"
     },
     {
-     "id": 6720072,
-     "d": "2026-11-21T00:00:01+01:00",
-     "tag": 7,
-     "h": {
-      "id": 46142,
-      "n": "Red Star Merl-Belair III"
-     },
-     "a": {
-      "id": 46380,
-      "n": "Olympia Christnach-Waldbillig"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Josy Barthel II (synth.)"
-    },
-    {
      "id": 6720073,
      "d": "2026-11-21T09:30:00+01:00",
      "tag": 7,
@@ -13628,6 +13610,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain synthétique (Hesperange, synth.)"
+    },
+    {
+     "id": 6720072,
+     "d": "2026-11-21T16:30:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 46142,
+      "n": "Red Star Merl-Belair III"
+     },
+     "a": {
+      "id": 46380,
+      "n": "Olympia Christnach-Waldbillig"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Josy Barthel II (synth.)"
     },
     {
      "id": 6720085,
@@ -15265,6 +15265,25 @@
      "ort": "Stade Gaston Diderich (Luxembourg, synth.)"
     },
     {
+     "id": 13504,
+     "d": "2026-11-09T00:00:01+01:00",
+     "tag": 1,
+     "h": {
+      "id": 45625,
+      "n": "FC Differdange 03"
+     },
+     "a": {
+      "id": 46497,
+      "n": "Green-Boys 77 Harlange-Tarchamps I"
+     },
+     "hs": 3,
+     "as": 0,
+     "gespielt": true,
+     "forfait": true,
+     "bem": "FF",
+     "ort": "Stade Thillenberg 1 (Differdange)"
+    },
+    {
      "id": 13501,
      "d": "2026-11-09T20:00:00+01:00",
      "tag": 1,
@@ -15299,25 +15318,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Albert Kongs (Itzig)"
-    },
-    {
-     "id": 13504,
-     "d": "2026-11-09T20:00:00+01:00",
-     "tag": 1,
-     "h": {
-      "id": 45625,
-      "n": "FC Differdange 03"
-     },
-     "a": {
-      "id": 46497,
-      "n": "Green-Boys 77 Harlange-Tarchamps I"
-     },
-     "hs": 3,
-     "as": 0,
-     "gespielt": true,
-     "forfait": true,
-     "bem": "FF",
-     "ort": "Stade Thillenberg 1 (Differdange)"
     },
     {
      "id": 13498,
@@ -20076,24 +20076,6 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
-     "id": 6231021,
-     "d": "2026-11-22T00:00:01+01:00",
-     "tag": 2,
-     "h": {
-      "id": 46080,
-      "n": "ENT Steinsel/Walferdange"
-     },
-     "a": {
-      "id": 46426,
-      "n": "F91 Dudelange I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Henri Bausch (Steinsel, synth.)"
-    },
-    {
      "id": 6231022,
      "d": "2026-11-22T11:00:00+01:00",
      "tag": 2,
@@ -20128,6 +20110,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Prince Jean (Luxembourg, synth.)"
+    },
+    {
+     "id": 6231021,
+     "d": "2026-11-22T11:00:00+01:00",
+     "tag": 2,
+     "h": {
+      "id": 46080,
+      "n": "ENT Steinsel/Walferdange"
+     },
+     "a": {
+      "id": 46426,
+      "n": "F91 Dudelange I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Henri Bausch (Steinsel, synth.)"
     },
     {
      "id": 6231031,
@@ -20429,24 +20429,6 @@
      "ort": "Terrain 2 (Sandweiler, synth.)"
     },
     {
-     "id": 6253023,
-     "d": "2026-11-22T01:30:00+01:00",
-     "tag": 2,
-     "h": {
-      "id": 46034,
-      "n": "ENT Région Moselle"
-     },
-     "a": {
-      "id": 45771,
-      "n": "FC Blo-Wäiss Izeg"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Jos Durbach (Bous, synth.)"
-    },
-    {
      "id": 6253021,
      "d": "2026-11-22T11:00:00+01:00",
      "tag": 2,
@@ -20463,6 +20445,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Beggen, synth.)"
+    },
+    {
+     "id": 6253023,
+     "d": "2026-11-22T11:00:00+01:00",
+     "tag": 2,
+     "h": {
+      "id": 46034,
+      "n": "ENT Région Moselle"
+     },
+     "a": {
+      "id": 45771,
+      "n": "FC Blo-Wäiss Izeg"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Jos Durbach (Bous, synth.)"
     },
     {
      "id": 6253022,
@@ -20794,24 +20794,6 @@
      "ort": "Terrain 3 (Weidingen, synth.)"
     },
     {
-     "id": 3276022,
-     "d": "2026-11-21T01:00:00+01:00",
-     "tag": 2,
-     "h": {
-      "id": 46746,
-      "n": "ENT Schieren/Colmarberg/Erpeldange II"
-     },
-     "a": {
-      "id": 45920,
-      "n": "FC Wiltz 71"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Schieren, synth.)"
-    },
-    {
      "id": 3276021,
      "d": "2026-11-21T15:00:00+01:00",
      "tag": 2,
@@ -20828,6 +20810,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain In Bertzent (Niederfeulen, synth.)"
+    },
+    {
+     "id": 3276022,
+     "d": "2026-11-21T16:30:00+01:00",
+     "tag": 2,
+     "h": {
+      "id": 46746,
+      "n": "ENT Schieren/Colmarberg/Erpeldange II"
+     },
+     "a": {
+      "id": 45920,
+      "n": "FC Wiltz 71"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Schieren, synth.)"
     },
     {
      "id": 3276023,
@@ -22332,24 +22332,6 @@
      "ort": "Am Ga (Wormeldange, synth.)"
     },
     {
-     "id": 6345021,
-     "d": "2026-11-21T00:00:01+01:00",
-     "tag": 2,
-     "h": {
-      "id": 46022,
-      "n": "Union Remich/Bous I"
-     },
-     "a": {
-      "id": 46192,
-      "n": "CS Grevenmacher I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain um Gréin (Remich, synth.)"
-    },
-    {
      "id": 6345022,
      "d": "2026-11-21T13:30:00+01:00",
      "tag": 2,
@@ -22366,6 +22348,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Berbourg, synth.)"
+    },
+    {
+     "id": 6345021,
+     "d": "2026-11-21T16:30:00+01:00",
+     "tag": 2,
+     "h": {
+      "id": 46022,
+      "n": "Union Remich/Bous I"
+     },
+     "a": {
+      "id": 46192,
+      "n": "CS Grevenmacher I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain um Gréin (Remich, synth.)"
     },
     {
      "id": 6345031,
@@ -22666,8 +22666,26 @@
      "ort": "Terrain 2 (Walferdange, synth.)"
     },
     {
+     "id": 6353023,
+     "d": "2026-11-21T14:00:00+01:00",
+     "tag": 2,
+     "h": {
+      "id": 45896,
+      "n": "US Hostert II"
+     },
+     "a": {
+      "id": 44739,
+      "n": "Jeunesse Junglinster II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Carrière (Senningerberg, synth.)"
+    },
+    {
      "id": 6353021,
-     "d": "2026-11-21T00:00:01+01:00",
+     "d": "2026-11-21T14:30:00+01:00",
      "tag": 2,
      "h": {
       "id": 46201,
@@ -22685,7 +22703,7 @@
     },
     {
      "id": 6353022,
-     "d": "2026-11-21T00:15:00+01:00",
+     "d": "2026-11-21T16:00:00+01:00",
      "tag": 2,
      "h": {
       "id": 46367,
@@ -22700,24 +22718,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain au Parc (Mertert, synth.)"
-    },
-    {
-     "id": 6353023,
-     "d": "2026-11-21T14:00:00+01:00",
-     "tag": 2,
-     "h": {
-      "id": 45896,
-      "n": "US Hostert II"
-     },
-     "a": {
-      "id": 44739,
-      "n": "Jeunesse Junglinster II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Carrière (Senningerberg, synth.)"
     },
     {
      "id": 6353031,
@@ -23019,24 +23019,6 @@
      "ort": "Terrain 2 (Mersch, synth.)"
     },
     {
-     "id": 6358022,
-     "d": "2026-11-21T00:00:01+01:00",
-     "tag": 2,
-     "h": {
-      "id": 46179,
-      "n": "Blo-Wäiss Medernach II"
-     },
-     "a": {
-      "id": 45596,
-      "n": "Marisca Mersch II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Stegen, synth.)"
-    },
-    {
      "id": 6358021,
      "d": "2026-11-21T14:00:00+01:00",
      "tag": 2,
@@ -23053,6 +23035,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 6358022,
+     "d": "2026-11-21T15:00:00+01:00",
+     "tag": 2,
+     "h": {
+      "id": 46179,
+      "n": "Blo-Wäiss Medernach II"
+     },
+     "a": {
+      "id": 45596,
+      "n": "Marisca Mersch II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Stegen, synth.)"
     },
     {
      "id": 6358023,
@@ -23343,7 +23343,7 @@
     },
     {
      "id": 6359022,
-     "d": "2026-11-21T01:00:00+01:00",
+     "d": "2026-11-21T14:00:00+01:00",
      "tag": 2,
      "h": {
       "id": 46761,
