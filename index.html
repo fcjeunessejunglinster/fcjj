@@ -37,7 +37,7 @@ header h1{margin:0;font-size:19px;line-height:1.1;letter-spacing:.01em}
 header p{margin:3px 0 0;font-size:13px;opacity:.75}
 #reiter{background:var(--bg);padding-block:10px 8px;border-bottom:1px solid var(--linie)}
 .raster{display:grid;grid-template-columns:repeat(60,1fr);gap:6px}
-.raster button{font-family:inherit;font-weight:600;font-size:14px;line-height:1.15;padding:10px 4px;border-radius:9px;border:1px solid var(--linie);
+.raster button{position:relative;font-family:inherit;font-weight:600;font-size:14px;line-height:1.15;padding:10px 4px;border-radius:9px;border:1px solid var(--linie);
   background:var(--karte);color:var(--text);cursor:pointer;min-width:0;overflow-wrap:anywhere}
 .raster button.woche{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:8px}
 .raster button.nati{padding:5px 4px}
@@ -88,6 +88,9 @@ li.event .evd{font-size:14px;color:var(--text);font-variant-numeric:tabular-nums
 .events{border:2px solid var(--rot)}
 .raster button.blknopf{padding:5px 4px;position:relative}
 .raster button.blknopf[aria-pressed="true"]{background:var(--karte);color:var(--text);border:2px solid var(--schwarz)}
+.tagpunkt{position:absolute;top:4px;right:4px;width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
+.raster button[aria-pressed="true"] .tagpunkt{box-shadow:0 0 0 2px var(--schwarz)}
+.raster button.nati[aria-pressed="true"] .tagpunkt{box-shadow:0 0 0 2px var(--karte)}
 .blknopf .livepunkt{color:var(--rot);font-size:14px;position:absolute;top:4px;right:8px}
 li.sp .mitte.live{background:var(--rot);border-color:var(--rot);color:#fff}
 li.sp .tore{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0 16px;font-size:12px;color:var(--leise)}
@@ -190,7 +193,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 c";
+const FASSUNG = "2026-11-09 d";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -230,7 +233,7 @@ const TEXTE = {
     blQuelle: n => `${n}: Daten von OpenLigaDB (freiwillig gepflegt, Tore können kurz später erscheinen)`,
     blFehler: n => `Die Daten (${n}) sind gerade nicht erreichbar.`, blHz: "Halbzeit", blLive: "läuft", blEnde: "Ende", blTab: n => `Tabelle ${n}`,
     elf: "Elfm.", eigentor: "ET",
-    sponsorJugend: "Partner unserer Jugend", route: "Route", routeLang: "Route zum Platz",
+    sponsorJugend: "Partner unserer Jugend", heuteSpielt: "Heute Spieltag", route: "Route", routeLang: "Route zum Platz",
     hilfe: { titel: "📲 Hilfe: App aufs Handy holen", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Diese Seite in <b>Safari</b> öffnen (nicht in Chrome oder in WhatsApp).",
         "Unten auf das <b>Teilen-Symbol</b> tippen (Quadrat mit Pfeil nach oben ⬆️).",
@@ -275,7 +278,7 @@ const TEXTE = {
     blQuelle: n => `${n} data from OpenLigaDB (maintained by volunteers, goals may appear a little later)`,
     blFehler: n => `The ${n} data is not available right now.`, blHz: "Half-time", blLive: "live", blEnde: "FT", blTab: n => `${n} table`,
     elf: "pen.", eigentor: "OG",
-    sponsorJugend: "Our youth partner", route: "Directions", routeLang: "Directions to the pitch",
+    sponsorJugend: "Our youth partner", heuteSpielt: "Match day today", route: "Directions", routeLang: "Directions to the pitch",
     hilfe: { titel: "📲 Help: put the app on your phone", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Open this page in <b>Safari</b> (not in Chrome or WhatsApp).",
         "Tap the <b>Share icon</b> at the bottom (square with an arrow ⬆️).",
@@ -320,7 +323,7 @@ const TEXTE = {
     blQuelle: n => `${n} : données via OpenLigaDB (mises à jour par des bénévoles, les buts peuvent apparaître un peu plus tard)`,
     blFehler: n => `Les données (${n}) ne sont pas disponibles pour le moment.`, blHz: "Mi-temps", blLive: "en cours", blEnde: "Fin", blTab: n => `Classement ${n}`,
     elf: "pén.", eigentor: "csc",
-    sponsorJugend: "Partenaire de nos jeunes", route: "Itinéraire", routeLang: "Itinéraire jusqu'au terrain",
+    sponsorJugend: "Partenaire de nos jeunes", heuteSpielt: "Jour de match", route: "Itinéraire", routeLang: "Itinéraire jusqu'au terrain",
     hilfe: { titel: "📲 Aide : installer l'app sur le téléphone", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Ouvrir cette page dans <b>Safari</b> (pas dans Chrome ni dans WhatsApp).",
         "Toucher l'<b>icône Partager</b> en bas (carré avec une flèche ⬆️).",
@@ -881,11 +884,16 @@ function spannen(n) {
   const rest = n % je || je;
   return Array.from({ length: n }, (_, i) => i >= n - rest ? 60 / rest : 60 / je);
 }
+// Roter Punkt am Reiter, wenn die Mannschaft heute spielt (der ganze Spieltag, auch nach dem Spiel).
+const SPIELTAG_PUNKT = '<span class="tagpunkt" aria-hidden="true"></span>';
+const heuteSpieltag = (spiele, now) => spiele.some(sp => tagKey(new Date(sp.d)) === tagKey(now));
 function knoepfe(now) {
   const n = wocheSpiele(now).length, s = spannen(D.teams.length);
+  const heuteT = new Set(D.teams.filter(t => heuteSpieltag(eigeneSpiele(t), now)).map(t => t.id));
+  const heuteN = D.nati?.spiele?.length && heuteSpieltag(D.nati.spiele, now);
   const k = [`<button class="woche" data-reiter="woche" aria-pressed="${AKTIV === "woche"}">${T().woche} <small>· ${T().spiele(n)}</small></button>`]
-    .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}">${esc(t.reiter)}</button>`))
-    .concat(D.nati?.spiele?.length ? [`<button class="nati" style="grid-column:span ${60 / (1 + ligaKeys().length)}" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="FLF" title="FLF"><img src="bilder/flf.png" alt="FLF" width="31" height="40" style="display:block;margin:auto"></button>`] : [])
+    .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}"${heuteT.has(t.id) ? ` title="${esc(T().heuteSpielt)}"` : ""}>${esc(t.reiter)}${heuteT.has(t.id) ? SPIELTAG_PUNKT : ""}</button>`))
+    .concat(D.nati?.spiele?.length ? [`<button class="nati" style="grid-column:span ${60 / (1 + ligaKeys().length)}" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="FLF" title="FLF"><img src="bilder/flf.png" alt="FLF" width="31" height="40" style="display:block;margin:auto">${heuteN ? SPIELTAG_PUNKT : ""}</button>`] : [])
     .concat(ligaKeys().map(k => ligaKnopf(k, 60 / (ligaKeys().length + (D.nati?.spiele?.length ? 1 : 0)))));
   document.getElementById("knoepfe").innerHTML = k.join("");
 }
