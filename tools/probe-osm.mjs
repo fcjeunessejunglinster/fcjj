@@ -7,7 +7,8 @@ const q = `[out:json][timeout:120];
   nwr["leisure"="sports_centre"]["sport"~"soccer"](49.40,5.70,50.20,6.56);
 );
 out center tags;`;
-for (const url of ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]) {
+for (const url of ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter", "https://overpass-api.de/api/interpreter"]) {
+  await new Promise(r => setTimeout(r, 5000));
   try {
     const r = await fetch(url, { method: "POST", body: "data=" + encodeURIComponent(q), headers: { "user-agent": "fcjj-app (club fixtures app)" } });
     const j = await r.json();
