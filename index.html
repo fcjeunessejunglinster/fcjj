@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 s";
+const FASSUNG = "2026-11-09 u";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -456,29 +456,60 @@ function kabine(sp, now) {
 }
 // ---- Anfahrt zu Auswärtsspielen: Link in die Karten-App (iPhone: Apple Karten, sonst Google Maps) mit Route zum Platz.
 // Gesucht wird nach Platz + Ort aus dem FLF-Namen; „Terrain 2 (Mersch, synth.)“ → „Terrain de football Mersch“.
-// Plätze, die die Karten-App über den FLF-Namen nicht genau findet (vom Verein). Schlüssel: Ort aus dem FLF-Namen.
-// Schlüssel: genauer FLF-Platzname (geht vor) oder Ort. Mit Adresse zeigt die App sie auch unter dem 📍.
-const ROUTE_FEST = {
-  "Grevenmacher": "Op Flohr, Grevenmacher",
-  // 9.11.2026 nachgesehen: Waze/Gemeinde Steinsel bzw. FC Luxembourg City (Platzliste)
-  "Stade Henri Bausch (Steinsel, synth.)": "16 Rue de l'Alzette, Steinsel",
-  "Terrain 2 (Walferdange, synth.)": "27 Route de Diekirch, 7220 Walferdange",
-  // 9.11.2026: Gemeinde Sandweiler (sandweiler.lu, Sports & loisirs) und US Sandweiler — beide Plätze am Stade Norbert Hübsch
-  "Terrain 2 (Sandweiler, synth.)": "Stade Norbert Hübsch, Rue de la Gare, Sandweiler",
-  "Stade Norbert Hubsch (Sandweiler)": "Stade Norbert Hübsch, Rue de la Gare, Sandweiler",
+// ---- Plätze, genau festgelegt (9.11.2026 geprüft, alle kommenden Auswärtsplätze des FCJJ).
+// k = Koordinaten des Spielfelds (OpenStreetMap, Feld/Stadion beim Verein des Platzes) — Route und Wetter gehen dorthin.
+// a = Adresse (wird unter dem 📍 gezeigt). q = Suchtext für die Karten-App, wo keine sicheren Koordinaten da sind.
+// Plätze ohne Eintrag: Suche nach Platzname + Ort (bei Stadien mit eigenem Namen findet die Karten-App sie sicher).
+const PLAETZE = {
+  "Am Ga (Wormeldange, synth.)": { k: [49.6196, 6.3987] },
+  "Stade Demy Steichen (Steinfort)": { k: [49.6645, 5.9168] },
+  "Stade Emile Bintner (Luxembourg, synth.)": { k: [49.5918, 6.1307] },
+  "Stade Henri Bausch (Steinsel, synth.)": { k: [49.6768, 6.1285], a: "16 Rue de l'Alzette, Steinsel" },
+  "Stade Norbert Hubsch (Sandweiler)": { k: [49.6113, 6.2158], a: "Stade Norbert Hübsch, Rue de la Gare, Sandweiler" },
+  "Terrain 2 (Sandweiler, synth.)": { k: [49.6113, 6.2158], a: "Stade Norbert Hübsch, Rue de la Gare, Sandweiler" },
+  "Stade Prince Jean (Luxembourg, synth.)": { k: [49.6078, 6.0911] },
+  "Stade Roger Winandy (Schouweiler)": { k: [49.5802, 5.9447] },
+  "Stade des Mineurs (Lasauvage)": { k: [49.5265, 5.8356] },
+  "Stade Klengbousbierg 2 (Bissen, synth.)": { k: [49.7875, 6.0824] },
+  "Terrain 2 (Beggen, synth.)": { k: [49.6464, 6.1354], a: "Rue Henri Dunant, Beggen" },
+  "Terrain 2 (Berbourg, synth.)": { k: [49.7313, 6.4007] },
+  "Terrain 2 (Ettelbrück)": { k: [49.8427, 6.0941], a: "Stade Am Deich, Ettelbruck" },
+  "Terrain 2 (Grevenmacher, synth.)": { q: "Op Flohr, Grevenmacher", a: "Op Flohr, Grevenmacher" },
+  "Stade Op Flohr (Grevenmacher)": { q: "Op Flohr, Grevenmacher", a: "Op Flohr, Grevenmacher" },
+  "Terrain 2 (Lintgen, synth.)": { k: [49.7215, 6.1218], a: "Stade Jean Donnersbach, Lintgen" },
+  "Terrain 2 (Mensdorf, synth.)": { k: [49.6480, 6.2990], a: "Stade Op Birk, 33 Rue d'Uebersyren, Mensdorf" },
+  "Terrain 2 (Mertzig, synth.)": { k: [49.8351, 6.0042], a: "Stade an de Burwiesen, Mertzig" },
+  "Terrain 2 (Stegen, synth.)": { k: [49.8269, 6.1855], a: "Stade um Bloen Eck, Stegen" },
+  "Terrain 2 (Walferdange, synth.)": { k: [49.6626, 6.1297], a: "27 Route de Diekirch, 7220 Walferdange" },
+  "Terrain 2 (Weidingen)": { k: [49.9752, 5.9425], a: "Centre sportif Wiltz-Weidingen" },
+  "Terrain 3 (Weidingen, synth.)": { k: [49.9755, 5.9434], a: "Centre sportif Wiltz-Weidingen" },
+  "Terrain Am Brill (Moutfort, synth.)": { k: [49.5879, 6.2570] },
+  "Terrain Carrière (Senningerberg, synth.)": { k: [49.6589, 6.2270] },
+  "Terrain In Bertzent (Niederfeulen, synth.)": { k: [49.8531, 6.0490] },
+  "Terrain Um Essig (Ell)": { k: [49.7614, 5.8578] },
+  "Terrain au Parc (Mertert, synth.)": { k: [49.7009, 6.4786] },
+  "Terrain rue de Mersch (Kopstal)": { k: [49.6688, 6.0741] },
+  "Terrain rue de la Gare (Clemency)": { k: [49.5942, 5.8812] },
+  "Terrain um Gréin (Remich, synth.)": { k: [49.5394, 6.3624] },
+  // Hauptplatz des Vereins (sporteden.com); ob der Kunstrasen „Terrain 2“ genau dort liegt, ist nicht bestätigt.
+  "Terrain 2 (Mersch, synth.)": { q: "Stade Schintgespesch, Mersch" },
+  "Terrain 2 (Schieren, synth.)": { q: "Terrain Am Ge'er, Schieren" },
+  // Ohne Ort im FLF-Namen: Platz von CS Oberkorn (Differdange), nicht Mersch.
+  "Stade Camille Mersch (synth.)": { q: "Stade Camille Mersch, Oberkorn", wetter: [49.5134, 5.8898] },
 };
-// Adresse unter dem 📍 nur bei genau eingetragenen Plätzen (nicht bei Einträgen nur für einen Ort).
-const platzAdresse = ort => (ort && ROUTE_FEST[ort]) || "";
+const platzAdresse = ort => (ort && PLAETZE[ort]?.a) || "";
 function routeZiel(ort) {
+  const p = PLAETZE[ort];
+  if (p?.q) return p.q + ", Luxembourg";
   const stadt = stadtAus(ort);
-  if (ROUTE_FEST[ort]) return ROUTE_FEST[ort] + ", Luxembourg";
-  if (ROUTE_FEST[stadt]) return ROUTE_FEST[stadt] + ", Luxembourg";
   const name = ort.replace(/\(.*\)/, "").replace(/\bsynth(étique)?\.?/gi, "").trim();
   const allgemein = /^terrain(\s+\d+)?$/i.test(name) || !name;
-  return (allgemein ? "Terrain de football " + (stadt || "") : name + (stadt && !name.includes(stadt) ? ", " + stadt : "")) + ", Luxembourg";
+  const z = allgemein ? "Terrain de football " + (stadt || "") : name + (stadt && !name.includes(stadt) ? ", " + stadt : "");
+  return /Luxembourg$/.test(z) ? z : z + ", Luxembourg";
 }
 function routeUrl(ort) {
-  const z = encodeURIComponent(routeZiel(ort));
+  const k = PLAETZE[ort]?.k;
+  const z = k ? k.join(",") : encodeURIComponent(routeZiel(ort));
   return IST_IOS ? `https://maps.apple.com/?daddr=${z}` : `https://www.google.com/maps/dir/?api=1&destination=${z}`;
 }
 const routeLink = (sp, now) => !sp.heim && sp.ort && sp.team && !vorbei(sp, now)
@@ -649,6 +680,7 @@ function stadtAus(ort) {
   return w.length ? w[w.length - 1] : null;
 }
 function koordinaten(sp) {
+  const p = PLAETZE[sp.ort]; if (p?.k || p?.wetter) return p.k || p.wetter;
   const st = stadtAus(sp.ort);
   return (st && D?.orte?.staedte?.[st]) || (sp.heim && !sp.bam && !sp.ort ? D?.orte?.heim : null) || null;
 }
