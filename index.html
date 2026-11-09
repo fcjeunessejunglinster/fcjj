@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 q";
+const FASSUNG = "2026-11-09 r";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -544,7 +544,8 @@ function letztesHtml(t, spiele, now, aktuell, kinder) {
     // Erwachsene: Ergebnis groß, Klasse und Platz. Auch ohne FLF-Ergebnis („Ergebnis folgt“), dann nur bis 48 h.
     const mitErg = s => s.erg && s.hs != null && (s.gespielt || s.forfait);
     const sp = vorbeiL.find(s => mitErg(s) || now - new Date(s.d) <= 48 * 3600e3);
-    if (!sp || now - new Date(sp.d) > 7 * 864e5) return "";
+    // Erwachsene: höchstens 3 Tage nach dem Spiel (vom Verein, 9.11.2026; vorher 7 wie bei Koeppchen).
+    if (!sp || now - new Date(sp.d) > 3 * 864e5) return "";
     const erg = mitErg(sp), liga = aktuell && aktuell.spiele.some(x => x.id === sp.id);
     const zeileTab = erg && liga && (aktuell.tabelle || []).find(r => t.ids.includes(r.id));
     const unten = [liga ? esc(aktuell.n) : esc(sp.klasse), zeileTab ? T().platz(zeileTab.pl) : ""].filter(Boolean).join(" · ");
