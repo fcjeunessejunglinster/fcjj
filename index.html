@@ -182,6 +182,8 @@ tr.wir td:first-child{box-shadow:inset 4px 0 var(--rot)}
   border:0;border-radius:10px;padding:11px 14px;cursor:pointer}
 @media (prefers-color-scheme:dark){.knopf{color:#111}}
 .kal{padding:14px;display:grid;gap:8px}
+.kal.push{border-top:1px solid var(--linie)}
+.kal .knopf.an{opacity:.75}
 .kal code{font-size:12px;overflow-wrap:anywhere;color:var(--leise)}
 .hinweis{padding:14px;color:var(--leise)}
 footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
@@ -214,7 +216,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 z";
+const FASSUNG = "2026-11-09 push";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -230,6 +232,11 @@ const TEXTE = {
     kopf: ["Mannschaft", "Sp", "S", "U", "N", "Tore", "Pkt"], ohneTag: "Ohne Spieltag", naechste: "Nächste Spiele",
     keineTermine: "Noch keine Termine.", ergebnisse: "Unsere Ergebnisse", alleKlasse: "Alle Spiele der Klasse", frueher: "Früher: ",
     kalender: "Kalender", abo: r => `📅 ${r} im Kalender abonnieren`,
+    push: { an: r => `🔔 Mitteilungen für ${r} einschalten`, aus: r => `🔕 Mitteilungen für ${r} ausschalten`,
+      hinweis: "Neue Ergebnisse, verlegte Spiele und am Vortag um 18 Uhr „Morgen Spieltag!“.",
+      ios: "Auf dem iPhone kommen Mitteilungen nur, wenn die App auf dem Home-Bildschirm installiert ist (Hilfe ganz unten).",
+      nein: "Mitteilungen sind für diese App blockiert. Bitte in den Einstellungen des Handys erlauben.",
+      fehler: "Hat nicht geklappt. Bitte später nochmal versuchen.", ok: "✓ Eingeschaltet", weg: "Ausgeschaltet" },
     aboHinweis: "Verschobene Spiele wandern im Kalender von selbst mit. Klappt der Knopf nicht, diese Adresse als Kalenderabo eintragen:",
     woche: "Unsere Woche", spiele: n => n === 1 ? "1 Spiel" : `${n} Spiele`,
     wocheText: (n, h) => `${n === 1 ? "1 Spiel" : n + " Spiele"}, davon ${h} zu Hause. Tippen öffnet die Mannschaft.`,
@@ -285,6 +292,11 @@ const TEXTE = {
     kopf: ["Team", "P", "W", "D", "L", "Goals", "Pts"], ohneTag: "No matchday", naechste: "Upcoming matches",
     keineTermine: "No fixtures yet.", ergebnisse: "Our results", alleKlasse: "All matches in this division", frueher: "Earlier: ",
     kalender: "Calendar", abo: r => `📅 Add ${r} to your calendar`,
+    push: { an: r => `🔔 Turn on notifications for ${r}`, aus: r => `🔕 Turn off notifications for ${r}`,
+      hinweis: "New results, rescheduled matches and “Matchday tomorrow!” the day before at 6 pm.",
+      ios: "On iPhone, notifications only work once the app is installed on the home screen (help at the bottom).",
+      nein: "Notifications are blocked for this app. Please allow them in your phone's settings.",
+      fehler: "That didn't work. Please try again later.", ok: "✓ Turned on", weg: "Turned off" },
     aboHinweis: "Rescheduled matches update in your calendar automatically. If the button doesn't work, subscribe to this address:",
     woche: "Our week", spiele: n => n === 1 ? "1 match" : `${n} matches`,
     wocheText: (n, h) => `${n === 1 ? "1 match" : n + " matches"}, ${h} at home. Tap a match to open the team.`,
@@ -340,6 +352,11 @@ const TEXTE = {
     kopf: ["Équipe", "J", "G", "N", "P", "Buts", "Pts"], ohneTag: "Sans journée", naechste: "Prochains matchs",
     keineTermine: "Pas encore de dates.", ergebnisse: "Nos résultats", alleKlasse: "Tous les matchs de la division", frueher: "Avant : ",
     kalender: "Calendrier", abo: r => `📅 Ajouter ${r} au calendrier`,
+    push: { an: r => `🔔 Activer les notifications pour ${r}`, aus: r => `🔕 Désactiver les notifications pour ${r}`,
+      hinweis: "Nouveaux résultats, matchs reportés et la veille à 18 h « Demain jour de match ! ».",
+      ios: "Sur iPhone, les notifications ne fonctionnent que si l'app est installée sur l'écran d'accueil (aide tout en bas).",
+      nein: "Les notifications sont bloquées pour cette app. Merci de les autoriser dans les réglages du téléphone.",
+      fehler: "Ça n'a pas marché. Merci de réessayer plus tard.", ok: "✓ Activées", weg: "Désactivées" },
     aboHinweis: "Les matchs reportés se mettent à jour automatiquement dans le calendrier. Si le bouton ne marche pas, abonnez-vous à cette adresse :",
     woche: "Notre semaine", spiele: n => n === 1 ? "1 match" : `${n} matchs`,
     wocheText: (n, h) => `${n === 1 ? "1 match" : n + " matchs"}, dont ${h} à domicile. Touchez un match pour ouvrir l'équipe.`,
@@ -628,7 +645,7 @@ function teamHtml(t, now) {
   const tickerTest = location.hash === "#liveticker" && FUPA_WIDGET[t.reiter];
   let html = (heute ? heuteHtml(heute, now, kinder) + (FUPA_WIDGET[t.reiter] ? fupaHtml(FUPA_WIDGET[t.reiter], heute.sp.d) : "") : tickerTest ? fupaHtml(FUPA_WIDGET[t.reiter], "") : "")
     + (morgen ? morgenHtml(morgen, now) : "") + letztesHtml(t, spiele, now, aktuell, kinder);
-  html += naechsteKarte(kommend, now, kalenderKnopf(t)) + eventsKarte(now, t.kat);
+  html += naechsteKarte(kommend, now, pushKnopf(t) + kalenderKnopf(t)) + eventsKarte(now, t.kat);
   if (aktuell) html += tabelleKarte(aktuell, t);
   if (gespielt.length) html += `<section class="karte"><h2>${T().ergebnisse}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
   if (aktuell) html += `<details class="karte"><summary>${T().alleKlasse}</summary>${klassenSpiele(aktuell, t, now)}</details>`;
@@ -659,6 +676,59 @@ function naechsteKarte(kommend, now, unten = "", titel = T().naechste) {
       }).join("") + "</ul>";
   }
   return h + unten + "</section>";
+}
+// ---- Push-Mitteilungen je Mannschaft (verschickt vom Cloudflare-Worker, siehe tools/cloudflare-worker.js).
+// Leer = Push aus (Knopf wird nicht gezeigt). Adresse des Workers, z. B. https://fcjj.<konto>.workers.dev
+const PUSH_URL = "";
+const PUSH_GEHT = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+const pushTeams = () => { try { return JSON.parse(merk.get("push") || "[]"); } catch (e) { return []; } };
+let PUSH_INFO = "";
+function pushKnopf(t) {
+  if (!PUSH_URL) return "";
+  const p = T().push;
+  if (!PUSH_GEHT) return IST_IOS && !INSTALLIERT ? `<div class="kal push"><span class="leise">🔔 ${p.ios}</span></div>` : "";
+  const an = pushTeams().includes(String(t.id));
+  return `<div class="kal push"><button class="knopf${an ? " an" : ""}" type="button" data-push="${t.id}">${esc((an ? p.aus : p.an)(t.reiter))}</button>
+    <span class="leise">${p.hinweis}</span><span class="leise" id="pushInfo" aria-live="polite">${esc(PUSH_INFO)}</span></div>`;
+}
+async function pushAbo(neu) {
+  const reg = await navigator.serviceWorker.register("sw.js");
+  await navigator.serviceWorker.ready;
+  let sub = await reg.pushManager.getSubscription();
+  if (!sub && neu) {
+    const r = await fetch(PUSH_URL + "/schluessel");
+    if (!r.ok) throw new Error("schluessel " + r.status);
+    const k = (await r.json()).key.replace(/-/g, "+").replace(/_/g, "/");
+    sub = await reg.pushManager.subscribe({ userVisibleOnly: true,
+      applicationServerKey: Uint8Array.from(atob(k + "===".slice((k.length + 3) % 4)), c => c.charCodeAt(0)) });
+  }
+  return sub;
+}
+async function pushMelden(teams) {
+  const sub = await pushAbo(teams.length > 0);
+  if (!sub) return;
+  const r = await fetch(PUSH_URL + (teams.length ? "/abo" : "/abmelden"), { method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ sub: sub.toJSON(), teams, lang: LANG }) });
+  if (!r.ok) throw new Error("abo " + r.status);
+  if (!teams.length) await sub.unsubscribe().catch(() => {});
+  merk.set("pushSync", String(Date.now()));
+}
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-push]"); if (!b) return;
+  const id = b.dataset.push, alt = pushTeams(), an = !alt.includes(id);
+  const teams = an ? [...alt, id] : alt.filter(x => x !== id);
+  b.disabled = true; PUSH_INFO = "";
+  try {
+    if (an && (await Notification.requestPermission()) !== "granted") { PUSH_INFO = T().push.nein; }
+    else { await pushMelden(teams); merk.set("push", JSON.stringify(teams)); PUSH_INFO = an ? T().push.ok : T().push.weg; }
+  } catch (x) { console.log("Push:", x); PUSH_INFO = T().push.fehler; }
+  render();
+});
+// Einmal am Tag (und bei Sprachwechsel) die Anmeldung auffrischen: Sprache, und falls der Worker sie verloren hat.
+function pushAuffrischen(sofort) {
+  if (!PUSH_URL || !PUSH_GEHT || !pushTeams().length || Notification.permission !== "granted") return;
+  if (!sofort && Date.now() - +(merk.get("pushSync") || 0) < 864e5) return;
+  pushMelden(pushTeams()).catch(x => console.log("Push:", x));
 }
 function kalenderKnopf(t) {
   const https = new URL("kalender/" + t.datei, location.href).href;
@@ -1004,6 +1074,8 @@ function knoepfe(now) {
   document.getElementById("knoepfe").innerHTML = k.join("");
 }
 let COUNTDOWN = false;
+// Aus einer Mitteilung: ?reiter=<id> öffnet die Mannschaft.
+{ const r = new URLSearchParams(location.search).get("reiter"); if (r) { AKTIV = r; merk.set("reiter", r); history.replaceState(null, "", location.pathname + location.hash); } }
 // #liveticker: gleich den Reiter der Seniors öffnen.
 if (location.hash === "#liveticker") merk.set("reiter", "");
 function render() {
@@ -1056,7 +1128,7 @@ document.getElementById("inhalt").addEventListener("click", e => {
 const saison = () => (D.saison?.n || "").replace(/^Saison/, T().saison);
 document.querySelector(".sprache").addEventListener("click", e => {
   const b = e.target.closest("button[data-lang]"); if (!b) return;
-  LANG = b.dataset.lang; merk.set("lang", LANG); render();
+  LANG = b.dataset.lang; merk.set("lang", LANG); render(); pushAuffrischen(true);
 });
 document.querySelector("#inhalt .hinweis").textContent = T().laden;
 
@@ -1133,6 +1205,7 @@ async function laden() {
 }
 try { D = JSON.parse(merk.get("data")); if (D) render(); } catch (e) {}
 laden();
+pushAuffrischen();
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") laden(); });
 // Bleibt die App offen (z. B. am Spielfeldrand), alle 5 Minuten neue Daten holen.
 setInterval(() => { if (document.visibilityState === "visible") laden(); }, 5 * 60e3);
