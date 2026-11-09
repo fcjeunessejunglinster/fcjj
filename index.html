@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 o";
+const FASSUNG = "2026-11-09 p";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -457,9 +457,17 @@ function kabine(sp, now) {
 // ---- Anfahrt zu Auswärtsspielen: Link in die Karten-App (iPhone: Apple Karten, sonst Google Maps) mit Route zum Platz.
 // Gesucht wird nach Platz + Ort aus dem FLF-Namen; „Terrain 2 (Mersch, synth.)“ → „Terrain de football Mersch“.
 // Plätze, die die Karten-App über den FLF-Namen nicht genau findet (vom Verein). Schlüssel: Ort aus dem FLF-Namen.
-const ROUTE_FEST = { "Grevenmacher": "Op Flohr, Grevenmacher" };
+// Schlüssel: genauer FLF-Platzname (geht vor) oder Ort. Mit Adresse zeigt die App sie auch unter dem 📍.
+const ROUTE_FEST = {
+  "Grevenmacher": "Op Flohr, Grevenmacher",
+  // 9.11.2026 nachgesehen: Waze/Gemeinde Steinsel bzw. FC Luxembourg City (Platzliste)
+  "Stade Henri Bausch (Steinsel, synth.)": "16 Rue de l'Alzette, Steinsel",
+  "Terrain 2 (Walferdange, synth.)": "27 Route de Diekirch, 7220 Walferdange",
+};
+const platzAdresse = ort => ort && /\d/.test(ROUTE_FEST[ort] || "") ? ROUTE_FEST[ort] : "";
 function routeZiel(ort) {
   const stadt = stadtAus(ort);
+  if (ROUTE_FEST[ort]) return ROUTE_FEST[ort] + ", Luxembourg";
   if (ROUTE_FEST[stadt]) return ROUTE_FEST[stadt] + ", Luxembourg";
   const name = ort.replace(/\(.*\)/, "").replace(/\bsynth(étique)?\.?/gi, "").trim();
   const allgemein = /^terrain(\s+\d+)?$/i.test(name) || !name;
@@ -512,13 +520,13 @@ function heuteHtml(h, now, kinder) {
   const satz = kinder ? (!h.begonnen && !min ? T().trinken : h.begonnen ? T().daumen : T().glueck) : h.begonnen ? T().ergKommt : "";
   return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
-    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
     ${satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : ""}</div></section>`;
 }
 function morgenHtml(sp, now) {
   return `<section class="karte heute">${kopf(T().morgen, sp)}<div class="kasten"><div class="wann">${esc(offen(sp) ? T().zeitOffen : T().anstoss(uhr(new Date(sp.d))))}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
-    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
     <div class="satz">${esc(T().trinken)}</div></div></section>`;
 }
 // Slogan nach einem Sieg einer Jugendmannschaft (alle außer Seniors, Réserves und Veteranen; vom Verein, 8.11.2026).
