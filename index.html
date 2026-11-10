@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-09 z2";
+const FASSUNG = "2026-11-10 a";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -949,7 +949,24 @@ function wocheSpiele(now) {
 const EVENTS = [
   { von: "2026-12-03", t: "Kleeschen", icon: "🎅", kats: ["U7", "U9", "U11", "U13", "WU11", "WU13"], fuer: "BAM · PUP · POU · MIN · WU11 · WU13" },
   { von: "2027-01-09", bis: "2027-01-10", t: "WanterCup27", kats: ["U7", "U9", "U11", "U13", "WU11", "WU13"], fuer: "BAM · PUP · POU · MIN · WU11 · WU13" },
+  // LALUX Indoor Cup 2026/27 (Calendrier général der FLF, vom Verein 10.11.2026). Nur in den Mannschaften und in der Woche,
+  // nicht in der Übersicht „Save the date“ (nurTeam). Orte und Uhrzeiten stehen nicht im Kalender.
+  ...[
+    ["2026-12-05", "", 1, ["U9", "U11"]], ["2026-12-12", "2026-12-13", 1, ["U9", "U11"]],
+    ["2027-01-02", "2027-01-03", 1, ["U13"]],
+    ["2027-01-09", "2027-01-10", 2, ["U11"]], ["2027-01-09", "2027-01-10", 1, ["WU13"]],
+    ["2027-01-16", "2027-01-17", 2, ["U9", "U13"]],
+    ["2027-01-23", "2027-01-24", 1, ["WU11"]],
+    ["2027-01-30", "2027-01-31", 3, ["U11"]], ["2027-01-30", "2027-01-31", 2, ["WU13"]],
+    ["2027-02-06", "2027-02-07", 3, ["U9", "U13"]], ["2027-02-06", "2027-02-07", 2, ["WU11"]],
+    ["2027-02-20", "", 0, ["U11", "WU11", "WU13"]], ["2027-02-21", "", 0, ["U9", "U13"]],
+  ].map(([von, bis, runde, kats]) => ({ von, bis: bis || undefined, icon: "🏟️", nurTeam: true, kats,
+    fuer: kats.map(k => ({ U9: "PUP", U11: "POU", U13: "MIN" })[k] || k).join(" · "),
+    t: runde ? { de: `LALUX Indoor Cup · ${runde}. Runde`, en: `LALUX Indoor Cup · Round ${runde}`, fr: `LALUX Indoor Cup · ${runde === 1 ? "1er" : runde + "e"} tour` }
+      : { de: "LALUX Indoor Cup · Finale", en: "LALUX Indoor Cup · Final", fr: "LALUX Indoor Cup · Finale" },
+    zusatz: runde ? undefined : { de: "Für die qualifizierten Mannschaften", en: "For the qualified teams", fr: "Pour les équipes qualifiées" } })),
 ];
+const sprachText = x => typeof x === "string" ? x : x?.[LANG] || x?.fr || "";
 function eventDatum(e) {
   const a = new Date(e.von + "T12:00:00Z"), b = new Date((e.bis || e.von) + "T12:00:00Z");
   return e.bis && e.bis !== e.von ? `${wt(a)} ${kurzDatum(a)} – ${wt(b)} ${kurzDatum(b)}${LANG === "de" ? b.getUTCFullYear() : " " + b.getUTCFullYear()}`
@@ -960,10 +977,10 @@ const eventAmTag = tag => EVENTS.filter(e => e.von <= tag && tag <= (e.bis || e.
 function eventZeile(e, now, mitBis = true) {
   const n = tageBis(tagKey(now), e.von);
   const wann = e.von <= tagKey(now) ? T().bis(0) : n <= 60 ? T().bis(n) : "";
-  return `<li class="event"><span class="evt">${e.icon || "🏆"} ${esc(e.t)}</span><span class="evd">${esc(eventDatum(e))}${mitBis && wann ? ` · ${esc(wann)}` : ""}</span>${e.fuer ? `<span class="evf">${esc(T().fuer)} ${esc(e.fuer)}</span>` : ""}${e.zusatz ? `<span class="evd">${esc(e.zusatz)}</span>` : ""}</li>`;
+  return `<li class="event"><span class="evt">${e.icon || "🏆"} ${esc(sprachText(e.t))}</span><span class="evd">${esc(eventDatum(e))}${mitBis && wann ? ` · ${esc(wann)}` : ""}</span>${e.fuer ? `<span class="evf">${esc(T().fuer)} ${esc(e.fuer)}</span>` : ""}${e.zusatz ? `<span class="evd">${esc(sprachText(e.zusatz))}</span>` : ""}</li>`;
 }
 function eventsKarte(now, kat) {
-  const liste = kommendeEvents(now).filter(e => !kat || (e.kats || []).includes(kat));
+  const liste = kommendeEvents(now).filter(e => kat ? (e.kats || []).includes(kat) : !e.nurTeam);
   if (!liste.length) return "";
   return `<section class="karte events"><h2>${T().events} · Save the date</h2><ul class="spiele">${liste.map(e => eventZeile(e, now)).join("")}</ul></section>`;
 }
