@@ -1,0 +1,20 @@
+name: probe
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir out && cd out
+          for r in c13e4827-2ad3-48ae-9d60-83583829102c; do
+            curl -sS -L -D hdr-de.txt -H "Origin: https://fcjeunessejunglinster.github.io" "https://data.public.lu/fr/datasets/r/$r" -o de.csv || true
+          done
+          curl -sS -D hdr-api.txt -H "Origin: https://fcjeunessejunglinster.github.io" "https://data.public.lu/api/1/datasets/meteolux-weather-warnings-for-the-grand-duchy-of-luxembourg-1/" -o api.json || true
+          curl -sS -I -X OPTIONS -H "Origin: https://fcjeunessejunglinster.github.io" -H "Access-Control-Request-Method: GET" "https://download.data.public.lu/resources/meteolux-weather-warnings-for-the-grand-duchy-of-luxembourg-1/20261110-125605/de-data-alerts.csv" > hdr-opt.txt || true
+          curl -sS -L "https://download.data.public.lu/resources/meteolux-weather-warnings-for-the-grand-duchy-of-luxembourg-1/20250327-150911/warning-icons-description.txt" -o icons.txt || true
+          curl -sS -L "https://gist.githubusercontent.com/grischard/f3f6f26546758f702936d07b9aba05a1/raw/c81a1edcff750d18209c8513ff3bcadc90ae9c75/meteolux-alerts-examples.csv" -o beispiele.csv || true
+          curl -sS -D hdr-ml.txt "https://www.meteolux.lu/" -o /dev/null || true
+          cd .. && git init -q pd && cp out/* pd/ && cd pd && git add -A && git -c user.name=p -c user.email=p@p commit -qm p
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" HEAD:refs/heads/probe-daten
