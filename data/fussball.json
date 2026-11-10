@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-09T22:18:26.293Z",
+ "stand": "2026-11-10T02:47:01.285Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -15313,9 +15313,9 @@
       "id": 45483,
       "n": "US Rumelange"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 2,
+     "as": 3,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Albert Kongs (Itzig)"
     },
@@ -15331,9 +15331,9 @@
       "id": 45159,
       "n": "Minière Lasauvage"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 11,
+     "as": 0,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Fr. Trausch (synth.)"
     },
@@ -15367,10 +15367,11 @@
       "id": 44801,
       "n": "FC The Belval Belvaux"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 3,
+     "as": 4,
+     "gespielt": true,
      "forfait": false,
+     "bem": "t.a.b. 3 - 4",
      "ort": "Terrain 2 (Walferdange, synth.)"
     },
     {
@@ -23923,7 +23924,7 @@
   }
  },
  "kategorien": {
-  "tag": "2026-11-09",
+  "tag": "2026-11-10",
   "saison": "20262027",
   "ids": {
    "1": "SEN",
