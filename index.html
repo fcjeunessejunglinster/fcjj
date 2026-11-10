@@ -102,6 +102,16 @@ li.sp .tore .h{text-align:right}
 .wetter{display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;font-size:15px;font-variant-numeric:tabular-nums}
 .wetter b{font-size:18px}
 .wetter .leise{font-size:13px}
+.warnung{border:2px solid #f2c200}
+.warnung.w-orange{border-color:#f28c00}
+.warnung.w-red{border-color:#e30613}
+.warnung ul{list-style:none;margin:0;padding:0 14px 6px}
+.warnung li{padding:8px 0;border-top:1px solid var(--linie);display:grid;gap:4px}
+.warnung li:first-child{border-top:0}
+.warnung .klein{padding:0 14px 12px}
+.warnspiel{text-align:center;font-weight:600;font-size:14px;padding:6px 10px;margin:6px auto 0;border-radius:10px;background:#fff6cc;color:#5c4a00;width:fit-content}
+.warnspiel.w-orange{background:#ffe3c2;color:#6b3600}
+.warnspiel.w-red{background:#ffd6d9;color:#7a0010}
 .naechst + .wetter{padding:4px 14px 0}
 .route{color:var(--rot);font-weight:700;text-decoration:none;white-space:nowrap}
 .route:hover{text-decoration:underline}
@@ -215,7 +225,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 m";
+const FASSUNG = "2026-11-10 n";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -259,6 +269,7 @@ const TEXTE = {
     unfall: { titel: "Sportunfall", text: ["Die C.S.M.S. ist eine gegenseitige Hilfsgesellschaft für **lizenzierte** Sportlerinnen und Sportler. Sie dient als ergänzende Unfallversicherung für medizinische Kosten nach Sportunfällen.", "Bei einem Sportunfall bitte an {MAIL} schreiben, um eine Meldung bei der C.S.M.S. auszufüllen und die Erstattung der Arztkosten zu beantragen.", "Das Formular muss vom behandelnden Arzt ausgefüllt und von Ihrem Sportverein unterzeichnet werden.", "Sie zahlen die medizinischen Rechnungen zunächst selbst und reichen die Originalrechnungen bei der CNS ein. Die Abrechnung der CNS mit der Kopie der Rechnungen schicken Sie dann an die C.S.M.S., welche die Differenz gemäß ihren Statuten zurückerstattet."], info: "ℹ️ Weitere Informationen (auf Französisch): {INFO}", frist: "⚠️ Achtung: Die Meldung muss innerhalb von 60 Tagen nach dem Unfall erfolgen." },
     cdj: { knopf: "🙋 Der Jugendkommission beitreten", text: "Die Jugendkommission (CDJ) sucht Eltern und Helfer, die mit anpacken." },
     flfPlan: ["Strategischer Plan der FLF 2027–2031", "flf.lu (auf Französisch)"],
+    warn: { titel: "Wetterwarnung", land: "ganzes Land", nord: "Norden", sued: "Süden", quelle: "Quelle: MeteoLux" },
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht aktives Mitglied"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -317,6 +328,7 @@ const TEXTE = {
     unfall: { titel: "Sports accident", text: ["The C.S.M.S. is a mutual aid society for **licensed** athletes. It serves as supplementary accident insurance for medical costs after sports accidents.", "In case of a sports accident, please contact {MAIL} to fill in a declaration with the C.S.M.S. and request reimbursement of medical costs.", "The form must be filled in by the treating doctor and signed by your sports club.", "You first pay the medical bills yourself and submit the original bills to the CNS. You then send the CNS statement together with a copy of the bills to the C.S.M.S., which reimburses the difference in accordance with its statutes."], info: "ℹ️ More information (in French): {INFO}", frist: "⚠️ Please note: the declaration must be made within 60 days of the accident." },
     cdj: { knopf: "🙋 Join the youth commission", text: "The youth commission (CDJ) is looking for parents and helpers to lend a hand." },
     flfPlan: ["FLF strategic plan 2027–2031", "flf.lu (in French)"],
+    warn: { titel: "Weather warning", land: "whole country", nord: "north", sued: "south", quelle: "Source: MeteoLux" },
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-active member"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -375,6 +387,7 @@ const TEXTE = {
     unfall: { titel: "Accident de sport", text: ["La C.S.M.S. est une société de secours mutuels pour les sportives et sportifs **licenciés**. Elle sert d’assurance accident complémentaire pour les frais médicaux après un accident de sport.", "En cas d’accident de sport, veuillez contacter {MAIL} afin de remplir une déclaration auprès de la C.S.M.S. pour demander le remboursement des frais médicaux.", "Le formulaire doit être rempli par le médecin traitant et signé par votre club sportif.", "Vous payez d’abord vous-même les factures médicales et vous remettez les factures originales à la CNS. Vous envoyez ensuite le décompte de la CNS avec la copie des factures à la C.S.M.S., qui rembourse la différence conformément à ses statuts."], info: "ℹ️ Informations supplémentaires : {INFO}", frist: "⚠️ Attention : la déclaration doit être effectuée dans un délai de 60 jours suivant l’accident." },
     cdj: { knopf: "🙋 Rejoindre la commission des jeunes", text: "La commission des jeunes (CDJ) cherche des parents et bénévoles pour donner un coup de main." },
     flfPlan: ["Plan stratégique de la FLF 2027–2031", "flf.lu"],
+    warn: { titel: "Avertissement météo", land: "tout le pays", nord: "nord", sued: "sud", quelle: "Source : MeteoLux" },
     beitragTitel: "Cotisation", ausschluss: "Le non-paiement de la cotisation entraîne l’exclusion du club.", betraegeTitel: "Les cotisations s'élèvent à :", beitragArt: ["pour le 1er membre joueur", "pour le 2ème membre joueur", "à partir du 3ème membre joueur", "pour un membre non actif"], ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: ["Nous souhaitons profiter de cette occasion pour rappeler que le paiement de la cotisation est une condition préalable à la participation aux séances d’entraînement et aux matchs en tant que joueuse ou joueur.", "Il donne également droit à l’entrée gratuite aux matchs à domicile de nos équipes Seniors, ainsi qu’au droit de vote à l’Assemblée générale, conformément aux statuts du club."],
     links: "Liens utiles", linkListe: {
@@ -715,7 +728,71 @@ function wetterArt(c) {
   return [["☀️", ...T().wetter[0]], ["🌤", ...T().wetter[1]], ["☁️", ...T().wetter[2]], ["🌫", ...T().wetter[3]], ["🌦", ...T().wetter[4]],
     ["🌧", ...T().wetter[5]], ["🌨", ...T().wetter[6]], ["⛈", ...T().wetter[7]]][a];
 }
-function wetterHtml(sp, now) {
+// ---- Wetterwarnungen von MeteoLux (data.public.lu, Lizenz CC0). Direkt im Browser geladen (data.public.lu erlaubt
+// den Abruf aus der App), höchstens alle 15 Minuten. Nur zwei Regionen: Norden (Ösling) und Süden (Gutland).
+// Spalten: NORTH;SOUTH;LEGEND;DESCRIPTION;VALUE;COLOR;ICON;LINK;START_VALIDITY_DATE;END_VALIDITY_DATE
+const WARN_ID = { de: "c13e4827-2ad3-48ae-9d60-83583829102c", fr: "878bae1b-8324-429c-bbe0-6e3a11ee9f62", en: "5e41bef8-338b-4ec1-97d8-cad6e08b3421" };
+const WARN_ICON = { "02": "💨", "03": "🌧️", "04": "❄️", "05": "🧊", "06": "⛈️", "09": "🌡️", "10": "🥶", "11": "🌊", "13": "😷", "14": "😷" };
+const WARN_FARBE = { yellow: "🟡", orange: "🟠", red: "🔴" };
+const WARN_NORD_AB = 49.88;   // Breitengrad: nördlich davon gilt die Warnung „Norden“ (Diekirch, Wiltz, Clervaux …)
+let WARN = { liste: [], geholt: 0, lang: "" };
+function luxDatum(s) {   // „2026-11-10 14:00“ in Luxemburger Zeit → Date
+  const m = (s || "").match(/^(\d{4})-(\d\d)-(\d\d)[ T](\d\d):(\d\d)/); if (!m) return null;
+  const roh = Date.UTC(+m[1], m[2] - 1, +m[3], +m[4], +m[5]);
+  const teile = Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Luxembourg", year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date(roh)).map(x => [x.type, x.value]));
+  const alsLux = Date.UTC(+teile.year, teile.month - 1, +teile.day, +teile.hour, +teile.minute);
+  return new Date(roh - (alsLux - roh));
+}
+function csvZeile(l) {   // Felder mit „;“ getrennt, auch in Anführungszeichen
+  const f = []; let x = "", q = false;
+  for (let i = 0; i < l.length; i++) {
+    const c = l[i];
+    if (q) { if (c === '"' && l[i + 1] === '"') { x += '"'; i++; } else if (c === '"') q = false; else x += c; }
+    else if (c === '"') q = true; else if (c === ";") { f.push(x); x = ""; } else x += c;
+  }
+  return [...f, x].map(v => v.trim());
+}
+function warnLesen(text) {
+  const z = text.replace(/\uFEFF/g, "").split(/\r?\n/).filter(x => x.trim() && !/^(sep=|created;)/i.test(x.trim()));
+  const kopf = csvZeile(z.shift() || "").map(k => k.toUpperCase());
+  return z.map(l => { const f = csvZeile(l), o = Object.fromEntries(kopf.map((k, i) => [k, f[i] || ""]));
+    return { nord: /^true$/i.test(o.NORTH), sued: /^true$/i.test(o.SOUTH), titel: o.DESCRIPTION, text: o.VALUE, farbe: o.COLOR.toLowerCase(),
+      icon: o.ICON, von: luxDatum(o.START_VALIDITY_DATE), bis: luxDatum(o.END_VALIDITY_DATE) }; })
+    .filter(w => w.titel && (WARN_FARBE[w.farbe] || (w.icon === "05" && w.text)));   // Warnungen ab Gelb, dazu Straßenzustand
+}
+async function warnHolen() {
+  const lang = LANG; WARN.geholt = Date.now(); WARN.lang = lang;
+  try {
+    const r = await fetch(`https://data.public.lu/fr/datasets/r/${WARN_ID[lang] || WARN_ID.fr}`, { cache: "no-store" });
+    if (r.ok) { WARN = { liste: warnLesen(await r.text()), geholt: Date.now(), lang }; render(); }
+  } catch (e) { /* ohne Netz: alte Warnungen bleiben */ }
+}
+const warnAktiv = now => WARN.liste.filter(w => !w.bis || w.bis > now);
+const warnRegion = w => w.nord && w.sued ? T().warn.land : w.nord ? T().warn.nord : w.sued ? T().warn.sued : "";
+function warnZeit(w) {
+  const f = d => d.toLocaleString(LOC(), { timeZone: "Europe/Luxembourg", weekday: "short", hour: "2-digit", minute: "2-digit" });
+  return w.von && w.bis ? `${f(w.von)} – ${w.bis - w.von < 864e5 && tagKey(w.von) === tagKey(w.bis) ? uhr(w.bis) : f(w.bis)}` : "";
+}
+function warnHtml(now) {
+  const l = warnAktiv(now); if (!l.length) return "";
+  const stufe = ["red", "orange", "yellow"].find(f => l.some(w => w.farbe === f)) || "info";
+  return `<section class="karte warnung w-${stufe}"><h2>⚠️ ${esc(T().warn.titel)}</h2><ul>` + l.map(w =>
+    `<li><b>${WARN_FARBE[w.farbe] || ""} ${WARN_ICON[w.icon] || ""} ${esc(w.titel)}</b><span class="leise">${esc([warnRegion(w), warnZeit(w)].filter(Boolean).join(" · "))}</span>`
+    + (w.text ? `<div>${esc(w.text)}</div>` : "") + `</li>`).join("")
+    + `</ul><div class="klein"><a href="https://www.meteolux.lu/" target="_blank" rel="noopener">${esc(T().warn.quelle)}</a></div></section>`;
+}
+// Am Spieltag: Warnungen für die Region des Platzes, die zur Spielzeit gelten.
+function warnSpielHtml(sp, now) {
+  const d = new Date(sp.d); if (d - now > 3 * 864e5 || vorbei(sp, now)) return "";
+  const k = koordinaten(sp), nord = k ? k[0] >= WARN_NORD_AB : null;
+  const beginn = d, ende = new Date(+d + (offen(sp) ? 24 : 2) * 3600e3);   // Uhrzeit offen: ganzer Tag
+  const l = warnAktiv(now).filter(w => WARN_FARBE[w.farbe] && (nord === null || (nord ? w.nord : w.sued))
+    && (!w.von || w.von < ende) && (!w.bis || w.bis > beginn));
+  return l.map(w => `<div class="warnspiel w-${w.farbe}">${WARN_FARBE[w.farbe]} ${WARN_ICON[w.icon] || "⚠️"} ${esc(w.titel)}${warnRegion(w) ? " · " + esc(warnRegion(w)) : ""}</div>`).join("");
+}
+function wetterHtml(sp, now) { return wetterNurHtml(sp, now) + warnSpielHtml(sp, now); }
+function wetterNurHtml(sp, now) {
   const d = new Date(sp.d);
   if (d - now > 7 * 864e5 || vorbei(sp, now)) return "";
   const k = koordinaten(sp); if (!k) return "";
@@ -1067,7 +1144,8 @@ function render() {
   const L = ligaDa(AKTIV) ? LIGEN[AKTIV] : null;
   if (L) document.getElementById("unterzeile").textContent = L.name + (L.spiele[0] ? " · " + L.spiele[0].leagueSeason + "/" + String(L.spiele[0].leagueSeason + 1).slice(2) : "");
   if (AKTIV === "links") document.getElementById("unterzeile").textContent = T().links;
-  document.getElementById("inhalt").innerHTML = t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : L ? ligaHtml(AKTIV, now) : AKTIV === "links" ? linksHtml() : wocheHtml(now);
+  if (Date.now() - WARN.geholt > 15 * 60e3 || WARN.lang !== LANG) warnHolen();
+  document.getElementById("inhalt").innerHTML = warnHtml(now) + (t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : L ? ligaHtml(AKTIV, now) : AKTIV === "links" ? linksHtml() : wocheHtml(now));
   if (L) ligaHolenFaellig(AKTIV, now);
   for (const s of document.querySelectorAll("#inhalt details summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
   fupaEinsetzen();
