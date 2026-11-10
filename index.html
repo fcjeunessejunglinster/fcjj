@@ -244,7 +244,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 v";
+const FASSUNG = "2026-11-10 w";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1057,8 +1057,8 @@ function blKaderHtml() {
   const k = T().kader2, saison = k.prof.saison(BL_KADER.saison);
   const verein = t => `<details class="blkader"><summary><img src="${esc(t.logo)}" alt="" width="28" height="28" loading="lazy" onerror="this.style.visibility='hidden'">${esc(t.n)}<span class="leise">${t.sp.length}</span></summary>`
     + spielerListeHtml(t.sp, p => [[saison, p.p?.bl]]) + "</details>";
-  return `<section class="karte"><h2>${esc(k.titel)} · ${esc(LIGEN.bl.name)}</h2>${BL_KADER.teams.map(verein).join("")}`
-    + `<p class="leise" style="padding:8px 14px 12px;margin:0">${esc(k.quelle(kurzDatum(new Date(BL_KADER.stand))))}</p></section>`;
+  return `<details class="karte"><summary>${esc(k.titel)} · ${esc(LIGEN.bl.name)}</summary>${BL_KADER.teams.map(verein).join("")}`
+    + `<p class="leise" style="padding:8px 14px 12px;margin:0">${esc(k.quelle(kurzDatum(new Date(BL_KADER.stand))))}</p></details>`;
 }
 function ligaKnopf(key, breite) {
   const L = LIGEN[key];
@@ -1092,9 +1092,9 @@ function natiAfHtml(ohneTabelle) {   // Tabelle nur, wenn FuPa keine liefert
   }
   if (NATI_AF.sp?.length) {
     const k = T().kader2;
-    html += `<section class="karte"><h2>${esc(k.titel)} · ${esc(landName("Luxembourg").replace(/^\S+ /, ""))}</h2>`
+    html += `<details class="karte"><summary>${esc(k.titel)} · ${esc(landName("Luxembourg").replace(/^\S+ /, ""))}</summary>`
       + spielerListeHtml(NATI_AF.sp, p => (p.p?.wb?.length ? p.p.wb : [{ n: "UEFA Nations League" }]).map(w => [`${wbName(w.n)} ${NATI_AF.saison}`, w]))
-      + `<p class="leise" style="padding:8px 14px 12px;margin:0">${esc(k.quelle(kurzDatum(new Date(NATI_AF.stand))))}</p></section>`;
+      + `<p class="leise" style="padding:8px 14px 12px;margin:0">${esc(k.quelle(kurzDatum(new Date(NATI_AF.stand))))}</p></details>`;
   }
   return html;
 }
