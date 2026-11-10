@@ -215,7 +215,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 l";
+const FASSUNG = "2026-11-10 m";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -735,6 +735,9 @@ function wetterHtml(sp, now) {
 const FUPA_WIDGET = { "Seniors": "3LogsC5yrMCUFqOr4tE5NQRuMTZ", "Réserves": "3LoumFG32IteFsCAbe4xILX5V7y" };
 // Kader (FuPa-Widget „Kader“, 8.11.2026), aufklappbar, an jedem Tag.
 // Weitere FuPa-Widgets je Reiter, aufklappbar unten (Kader 8.11., Spielerstatistik 8.11.2026). art = Schlüssel in TEXTE.
+const FUPA_NATI = {
+  14856475: "3Lv3V0TZDj6zqM4e3luwifVQR4Y",   // Luxemburg – Estland, 13.11.2026 (vom Verein, 10.11.2026)
+};
 const FUPA_EXTRA = {
   "Seniors": [{ art: "kader", id: "3LpBYN3mQnzQOPvRiEb2G50VWbs" }, { art: "statistik", id: "3Lpw1mDHnW4pzOQCX0KGGmCc8AH" }],
   "Réserves": [{ art: "kader", id: "3LpC6rNsRXnx51xq1zeLA0eu6TX" }, { art: "statistik", id: "3LpwlgavVE6J3GxStMfiH2456cy" }],
@@ -921,6 +924,10 @@ function natiHtml(now) {
   const kommend = spiele.filter(sp => !vorbei(sp, now)), gespielt = spiele.filter(sp => vorbei(sp, now)).reverse().slice(0, 8);
   const heute = spieltagHeute(spiele, now);
   let html = heute ? heuteHtml(heute, now, false) : "";
+  // FuPa-Liveticker der Nationalmannschaft je Spiel (Spiel-id aus data/fussball.json → Widget-id von FuPa)
+  const ticker = heute && FUPA_NATI[heute.sp.id] ? FUPA_NATI[heute.sp.id]
+    : location.hash === "#liveticker" ? FUPA_NATI[kommend.find(sp => FUPA_NATI[sp.id])?.id] : "";
+  if (ticker) html += fupaHtml(ticker, heute ? heute.sp.d : "");
   html += kommend.length ? naechsteKarte(kommend, now, "", T().natiNaechste) : `<section class="karte"><h2>${T().natiNaechste}</h2><p class="hinweis">${T().natiKeine}</p></section>`;
   const g = D.nati.gruppe;
   if (g?.tabelle?.length) {
@@ -1039,6 +1046,7 @@ let COUNTDOWN = false;
 // #liveticker: gleich den Reiter der Seniors öffnen.
 if (location.hash === "#liveticker") merk.set("reiter", "");
 function render() {
+  if (location.hash === "#liveticker" && D?.nati?.spiele?.some(sp => FUPA_NATI[sp.id] && !vorbei(sp, new Date())) && !merk.get("reiter")) { AKTIV = "nati"; merk.set("reiter", AKTIV); }
   if (location.hash === "#liveticker" && D?.teams && !merk.get("reiter")) { const s = D.teams.find(t => FUPA_WIDGET[t.reiter]); if (s) { AKTIV = String(s.id); merk.set("reiter", AKTIV); } }
   const now = new Date();
   UMSCHALT = 0;
