@@ -243,7 +243,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 t";
+const FASSUNG = "2026-11-10 u";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1256,7 +1256,7 @@ function render() {
   knoepfe(now);
   const t = D.teams.find(t => String(t.id) === AKTIV);
   document.getElementById("unterzeile").textContent = t ? `${t.alter}${/\d$/.test(t.reiter) ? " " + t.nr : ""} · ${saison()}` : `${T().alle} · ${saison()}`;
-  const offenAuf = [...document.querySelectorAll("#inhalt details[open] summary")].map(s => s.textContent);
+  const offenAuf = [...document.querySelectorAll("#inhalt details[open] > summary")].map(s => s.textContent);
   if (AKTIV === "nati") document.getElementById("unterzeile").textContent = T().natiUnter;
   const L = ligaDa(AKTIV) ? LIGEN[AKTIV] : null;
   if (L) document.getElementById("unterzeile").textContent = L.name + (L.spiele[0] ? " · " + L.spiele[0].leagueSeason + "/" + String(L.spiele[0].leagueSeason + 1).slice(2) : "");
@@ -1265,7 +1265,7 @@ function render() {
   ferienHolen();
   document.getElementById("inhalt").innerHTML = warnHtml(now) + (t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : L ? ligaHtml(AKTIV, now) : AKTIV === "links" ? linksHtml() : wocheHtml(now));
   if (L) ligaHolenFaellig(AKTIV, now);
-  for (const s of document.querySelectorAll("#inhalt details summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
+  for (const s of document.querySelectorAll("#inhalt details > summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
   fupaEinsetzen();
   const stand = new Date(D.stand);
   document.getElementById("teilen").textContent = T().teilen;
