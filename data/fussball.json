@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-10T02:47:01.285Z",
+ "stand": "2026-11-10T11:18:31.248Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -9863,7 +9863,7 @@
     },
     {
      "id": 6651071,
-     "d": "2026-11-21T10:30:00+01:00",
+     "d": "2026-11-21T11:00:00+01:00",
      "tag": 7,
      "h": {
       "id": 46293,
@@ -10376,24 +10376,6 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
-     "id": 6685075,
-     "d": "2026-11-22T09:30:00+01:00",
-     "tag": 7,
-     "h": {
-      "id": 45317,
-      "n": "Victoria Rosport I"
-     },
-     "a": {
-      "id": 46194,
-      "n": "CS Grevenmacher I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Ralingen (synth.)"
-    },
-    {
      "id": 6685071,
      "d": "2026-11-22T10:30:00+01:00",
      "tag": 7,
@@ -10410,6 +10392,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain Breil (Echternach, synth.)"
+    },
+    {
+     "id": 6685075,
+     "d": "2026-11-22T11:00:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 45317,
+      "n": "Victoria Rosport I"
+     },
+     "a": {
+      "id": 46194,
+      "n": "CS Grevenmacher I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Ralingen (synth.)"
     },
     {
      "id": 6685085,
@@ -11052,6 +11052,24 @@
      "ort": "Stade Gaston Diderich (Luxembourg, synth.)"
     },
     {
+     "id": 6689072,
+     "d": "2026-11-22T09:30:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 45453,
+      "n": "FC Mamer 32 III"
+     },
+     "a": {
+      "id": 46212,
+      "n": "FC Lorentzweiler II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Fr. Trausch (synth.)"
+    },
+    {
      "id": 6689075,
      "d": "2026-11-22T09:30:00+01:00",
      "tag": 7,
@@ -11104,24 +11122,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Prince Jean (Luxembourg, synth.)"
-    },
-    {
-     "id": 6689072,
-     "d": "2026-11-22T11:30:00+01:00",
-     "tag": 7,
-     "h": {
-      "id": 45453,
-      "n": "FC Mamer 32 III"
-     },
-     "a": {
-      "id": 46212,
-      "n": "FC Lorentzweiler II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Fr. Trausch (synth.)"
     },
     {
      "id": 6689083,
@@ -12973,7 +12973,7 @@
     },
     {
      "id": 6716072,
-     "d": "2026-11-21T11:00:00+01:00",
+     "d": "2026-11-21T14:00:00+01:00",
      "tag": 7,
      "h": {
       "id": 46205,
@@ -13009,7 +13009,7 @@
     },
     {
      "id": 6716075,
-     "d": "2026-11-21T15:30:00+01:00",
+     "d": "2026-11-21T15:00:00+01:00",
      "tag": 7,
      "h": {
       "id": 45319,
@@ -20077,24 +20077,6 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
-     "id": 6231022,
-     "d": "2026-11-22T11:00:00+01:00",
-     "tag": 2,
-     "h": {
-      "id": 45973,
-      "n": "Atert Bissen"
-     },
-     "a": {
-      "id": 45153,
-      "n": "Jeunesse Junglinster"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
-    },
-    {
      "id": 6231023,
      "d": "2026-11-22T11:00:00+01:00",
      "tag": 2,
@@ -20129,6 +20111,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Henri Bausch (Steinsel, synth.)"
+    },
+    {
+     "id": 6231022,
+     "d": "2026-11-22T11:30:00+01:00",
+     "tag": 2,
+     "h": {
+      "id": 45973,
+      "n": "Atert Bissen"
+     },
+     "a": {
+      "id": 45153,
+      "n": "Jeunesse Junglinster"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
     },
     {
      "id": 6231031,
@@ -22686,7 +22686,7 @@
     },
     {
      "id": 6353021,
-     "d": "2026-11-21T14:30:00+01:00",
+     "d": "2026-11-21T15:30:00+01:00",
      "tag": 2,
      "h": {
       "id": 46201,
