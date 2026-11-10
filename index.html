@@ -244,7 +244,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 x";
+const FASSUNG = "2026-11-10 y";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -292,6 +292,7 @@ const TEXTE = {
     ferien: "Schulferien", feiertag: "Feiertag",
     regeln: [k => `Spielregeln ${k}`, "FLF · PDF auf Französisch"],
     kader2: { titel: "Kader", pos: { Goalkeeper: "Tor", Defender: "Abwehr", Midfielder: "Mittelfeld", Attacker: "Angriff" }, jahre: a => `${a} J.`, prof: { geb: "Geboren", in: "in", verl: "🚑 verletzt", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Spiele", se: "Startelf", min: "Minuten", t: "Tore", v: "Vorlagen", gk: "Gegentore", par: "Paraden", g: "Gelb", r: "Rot", note: "Note", keine: "Noch kein Einsatz in dieser Saison" }, quelle: d => `Kader: API-Football, Stand ${d}` },
+    matchball: "⚽ Einen Spielball sponsern",
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht aktives Mitglied"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -354,6 +355,7 @@ const TEXTE = {
     ferien: "School holidays", feiertag: "Public holiday",
     regeln: [k => `Rules of play ${k}`, "FLF · PDF in French"],
     kader2: { titel: "Squads", pos: { Goalkeeper: "Goalkeepers", Defender: "Defenders", Midfielder: "Midfielders", Attacker: "Forwards" }, jahre: a => `${a} yrs`, prof: { geb: "Born", in: "in", verl: "🚑 injured", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Apps", se: "Starts", min: "Minutes", t: "Goals", v: "Assists", gk: "Conceded", par: "Saves", g: "Yellow", r: "Red", note: "Rating", keine: "No appearances this season yet" }, quelle: d => `Squads: API-Football, as of ${d}` },
+    matchball: "⚽ Sponsor a match ball",
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-active member"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -416,6 +418,7 @@ const TEXTE = {
     ferien: "Vacances scolaires", feiertag: "Jour férié",
     regeln: [k => `Règles de jeu ${k}`, "FLF · PDF"],
     kader2: { titel: "Effectifs", pos: { Goalkeeper: "Gardiens", Defender: "Défenseurs", Midfielder: "Milieux", Attacker: "Attaquants" }, jahre: a => `${a} ans`, prof: { geb: "Né le", in: "à", verl: "🚑 blessé", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Matchs", se: "titulaire", min: "Minutes", t: "Buts", v: "Passes déc.", gk: "Buts encaissés", par: "Arrêts", g: "Jaunes", r: "Rouges", note: "Note", keine: "Pas encore joué cette saison" }, quelle: d => `Effectifs : API-Football, état au ${d}` },
+    matchball: "⚽ Sponsoriser un ballon de match",
     beitragTitel: "Cotisation", ausschluss: "Le non-paiement de la cotisation entraîne l’exclusion du club.", betraegeTitel: "Les cotisations s'élèvent à :", beitragArt: ["pour le 1er membre joueur", "pour le 2ème membre joueur", "à partir du 3ème membre joueur", "pour un membre non actif"], ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: ["Nous souhaitons profiter de cette occasion pour rappeler que le paiement de la cotisation est une condition préalable à la participation aux séances d’entraînement et aux matchs en tant que joueuse ou joueur.", "Il donne également droit à l’entrée gratuite aux matchs à domicile de nos équipes Seniors, ainsi qu’au droit de vote à l’Assemblée générale, conformément aux statuts du club."],
     links: "Liens utiles", linkListe: {
@@ -687,6 +690,8 @@ function teamHtml(t, now) {
   for (const l of FUPA_LINKS[t.reiter] || []) html += fupaLinkHtml(l);
   // Sponsor der Jugend (vom Verein, 8.11.2026): unten in allen Jugend-Reitern.
   for (const k of frueher) html += `<details class="karte"><summary>${T().frueher}${esc(k.n)}</summary>${tabelleKarte(k, t).replace(/^<section class="karte">|<\/section>$/g, "")}${klassenSpiele(k, t, now)}</details>`;
+  // Spielball sponsern (vom Verein, 10.11.2026), nur bei den Seniors
+  if (t.kat === "SEN") html += `<section class="karte cdj"><a class="knopf" href="https://fcjj.lu/matchball/seniors" target="_blank" rel="noopener">${esc(T().matchball)}</a></section>`;
   if (REGELN[t.kat]) html += `<section class="karte"><h2>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</h2><ul class="spiele linkliste"><li><a href="${esc(dok(REGELN[t.kat]))}" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</b><span>${esc(T().regeln[1])}</span></span><span class="lp">›</span></a></li></ul></section>`;
   if (SPONSOR_JUGEND.kats.includes(t.kat)) html += cdjHtml() + sponsorHtml(SPONSOR_JUGEND);
   return html;
