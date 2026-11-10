@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 g";
+const FASSUNG = "2026-11-10 h";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -953,7 +953,7 @@ const EVENTS = [
   { von: "2026-12-03", t: "Kleeschen", icon: "🎅", kats: ["U7", "U9", "U11", "U13", "WU11", "WU13"], fuer: "BAM · PUP · POU · MIN · WU11 · WU13" },
   { von: "2027-01-09", bis: "2027-01-10", t: "WanterCup27", kats: ["U7", "U9", "U11", "U13", "WU11", "WU13"], fuer: "BAM · PUP · POU · MIN · WU11 · WU13" },
   // LALUX Indoor Cup 2026/27 (Calendrier général der FLF, vom Verein 10.11.2026). Nur in den Mannschaften und in der Woche,
-  // nicht in der Übersicht „Save the date“ (nurTeam). 2. Runde, 3. Runde PUP/MIN und Finale nur für Qualifizierte (vom Verein, 10.11.2026). Orte und Uhrzeiten stehen nicht im Kalender.
+  // nicht in der Übersicht „Save the date“ (nurTeam). Ab der 2. Runde nur für Qualifizierte (vom Verein, 10.11.2026). Orte und Uhrzeiten stehen nicht im Kalender.
   ...[
     ["2026-12-05", "", 1, ["U9", "U11"]], ["2026-12-12", "2026-12-13", 1, ["U9", "U11"]],
     ["2027-01-02", "2027-01-03", 1, ["U13"]],
@@ -967,7 +967,7 @@ const EVENTS = [
     fuer: kats.map(k => ({ U9: "PUP", U11: "POU", U13: "MIN" })[k] || k).join(" · "),
     t: runde ? { de: `LALUX Indoor Cup · ${runde}. Runde`, en: `LALUX Indoor Cup · Round ${runde}`, fr: `LALUX Indoor Cup · ${runde === 1 ? "1er" : runde + "e"} tour` }
       : { de: "LALUX Indoor Cup · Finale", en: "LALUX Indoor Cup · Final", fr: "LALUX Indoor Cup · Finale" },
-    zusatz: runde === 1 || (runde === 3 && kats.includes("U11")) ? undefined : { de: "Für die qualifizierten Mannschaften", en: "For the qualified teams", fr: "Pour les équipes qualifiées" } })),
+    zusatz: runde === 1 ? undefined : { de: "Für die qualifizierten Mannschaften", en: "For the qualified teams", fr: "Pour les équipes qualifiées" } })),
 ];
 const sprachText = x => typeof x === "string" ? x : x?.[LANG] || x?.fr || "";
 function eventDatum(e) {
