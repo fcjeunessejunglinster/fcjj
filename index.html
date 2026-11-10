@@ -112,6 +112,7 @@ li.sp .tore .h{text-align:right}
 .warnspiel{text-align:center;font-weight:600;font-size:14px;padding:6px 10px;margin:6px auto 0;border-radius:10px;background:#fff6cc;color:#5c4a00;width:fit-content}
 .warnspiel.w-orange{background:#ffe3c2;color:#6b3600}
 .warnspiel.w-red{background:#ffd6d9;color:#7a0010}
+.ferienzeile{padding-block:0 10px;font-weight:600}
 .naechst + .wetter{padding:4px 14px 0}
 .route{color:var(--rot);font-weight:700;text-decoration:none;white-space:nowrap}
 .route:hover{text-decoration:underline}
@@ -225,7 +226,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 n";
+const FASSUNG = "2026-11-10 o";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -270,6 +271,7 @@ const TEXTE = {
     cdj: { knopf: "🙋 Der Jugendkommission beitreten", text: "Die Jugendkommission (CDJ) sucht Eltern und Helfer, die mit anpacken." },
     flfPlan: ["Strategischer Plan der FLF 2027–2031", "flf.lu (auf Französisch)"],
     warn: { titel: "Wetterwarnung", land: "ganzes Land", nord: "Norden", sued: "Süden", quelle: "Quelle: MeteoLux" },
+    ferien: "Schulferien", feiertag: "Feiertag",
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht aktives Mitglied"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -329,6 +331,7 @@ const TEXTE = {
     cdj: { knopf: "🙋 Join the youth commission", text: "The youth commission (CDJ) is looking for parents and helpers to lend a hand." },
     flfPlan: ["FLF strategic plan 2027–2031", "flf.lu (in French)"],
     warn: { titel: "Weather warning", land: "whole country", nord: "north", sued: "south", quelle: "Source: MeteoLux" },
+    ferien: "School holidays", feiertag: "Public holiday",
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-active member"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -388,6 +391,7 @@ const TEXTE = {
     cdj: { knopf: "🙋 Rejoindre la commission des jeunes", text: "La commission des jeunes (CDJ) cherche des parents et bénévoles pour donner un coup de main." },
     flfPlan: ["Plan stratégique de la FLF 2027–2031", "flf.lu"],
     warn: { titel: "Avertissement météo", land: "tout le pays", nord: "nord", sued: "sud", quelle: "Source : MeteoLux" },
+    ferien: "Vacances scolaires", feiertag: "Jour férié",
     beitragTitel: "Cotisation", ausschluss: "Le non-paiement de la cotisation entraîne l’exclusion du club.", betraegeTitel: "Les cotisations s'élèvent à :", beitragArt: ["pour le 1er membre joueur", "pour le 2ème membre joueur", "à partir du 3ème membre joueur", "pour un membre non actif"], ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: ["Nous souhaitons profiter de cette occasion pour rappeler que le paiement de la cotisation est une condition préalable à la participation aux séances d’entraînement et aux matchs en tant que joueuse ou joueur.", "Il donne également droit à l’entrée gratuite aux matchs à domicile de nos équipes Seniors, ainsi qu’au droit de vote à l’Assemblée générale, conformément aux statuts du club."],
     links: "Liens utiles", linkListe: {
@@ -1071,7 +1075,32 @@ function eventDatum(e) {
   return e.bis && e.bis !== e.von ? `${wt(a)} ${kurzDatum(a)} – ${wt(b)} ${kurzDatum(b)}${LANG === "de" ? b.getUTCFullYear() : " " + b.getUTCFullYear()}`
     : `${wt(a)} ${kurzDatum(a)}${LANG === "de" ? a.getUTCFullYear() : " " + a.getUTCFullYear()}`;
 }
-const kommendeEvents = now => EVENTS.filter(e => (e.bis || e.von) >= tagKey(now)).sort((a, b) => a.von.localeCompare(b.von));
+// ---- Schulferien und Feiertage in Luxemburg (OpenHolidays API, openholidaysapi.org; frei, ohne Schlüssel, erlaubt den
+// Abruf aus der App). Einmal am Tag je Sprache geholt und im Handy gemerkt.
+let FERIEN = (() => { try { return JSON.parse(merk.get("ferien") || "null"); } catch (e) { return null; } })() || { schul: [], feier: [] };
+let FERIEN_LAEDT = false;
+async function ferienHolen() {
+  if (FERIEN_LAEDT || (FERIEN.lang === LANG && Date.now() - (FERIEN.geholt || 0) < 864e5)) return;
+  FERIEN_LAEDT = true;
+  const heute = new Date(), von = tagKey(new Date(+heute - 31 * 864e5)), bis = tagKey(new Date(+heute + 400 * 864e5));
+  const url = art => `https://openholidaysapi.org/${art}?countryIsoCode=LU&validFrom=${von}&validTo=${bis}&languageIsoCode=${LANG.toUpperCase()}`;
+  const name = x => (x.name || [])[0]?.text || "";
+  try {
+    const [s, f] = await Promise.all(["SchoolHolidays", "PublicHolidays"].map(a => fetch(url(a), { headers: { accept: "application/json" } }).then(r => r.ok ? r.json() : Promise.reject(r.status))));
+    FERIEN = { lang: LANG, geholt: Date.now(),
+      schul: s.map(x => ({ von: x.startDate, bis: x.endDate, t: name(x) })),
+      feier: f.filter(x => x.type === "Public").map(x => ({ tag: x.startDate, t: name(x) })) };
+    merk.set("ferien", JSON.stringify(FERIEN)); render();
+  } catch (e) { /* ohne Netz: alter Stand bleibt */ }
+  FERIEN_LAEDT = false;
+}
+const FERIEN_KATS = ["U7", "U9", "U11", "U13", "U15", "U17", "U19", "WU11", "WU13", "WU15"];
+// Nächste (oder laufende) Schulferien als Eintrag bei „Save the date“, nur bei der Jugend und in der Übersicht.
+const ferienEvents = now => FERIEN.schul.filter(f => f.bis >= tagKey(now)).slice(0, 1)
+  .map(f => ({ von: f.von, bis: f.bis, t: f.t, icon: "🏖️", ferien: true, kats: FERIEN_KATS }));
+const schulferienIn = (von, bis) => FERIEN.schul.filter(f => f.von <= bis && von <= f.bis);
+const feiertagAm = tag => FERIEN.feier.find(f => f.tag === tag);
+const kommendeEvents = now => [...EVENTS, ...ferienEvents(now)].filter(e => (e.bis || e.von) >= tagKey(now)).sort((a, b) => a.von.localeCompare(b.von));
 const eventAmTag = tag => EVENTS.filter(e => e.von <= tag && tag <= (e.bis || e.von));
 function eventZeile(e, now, mitBis = true) {
   const n = tageBis(tagKey(now), e.von);
@@ -1089,11 +1118,12 @@ function wocheHtml(now) {
   const heim = spiele.filter(sp => sp.heim).length;
   const von = new Date(tage[0] + "T12:00:00Z"), bis = new Date(tage[6] + "T12:00:00Z");
   let html = `<section class="karte"><h2>${T().woche} · ${kurzDatum(von)}–${kurzDatum(bis)}</h2>
-    <p class="hinweis" style="padding-block:10px">${spiele.length ? T().wocheText(spiele.length, heim) : T().keineWoche}</p>`;
+    <p class="hinweis" style="padding-block:10px">${spiele.length ? T().wocheText(spiele.length, heim) : T().keineWoche}</p>`
+    + schulferienIn(tage[0], tage[6]).map(f => `<p class="hinweis ferienzeile">🏖️ ${esc(f.t)} · ${esc(eventDatum(f))}</p>`).join("");
   for (const tag of tage) {
-    const liste = spiele.filter(sp => tagKey(new Date(sp.d)) === tag), ev = eventAmTag(tag);
-    if (!liste.length && !ev.length) continue;
-    html += `<div class="tag">${esc(langDatum(new Date(tag + "T12:00:00Z")))}${tag === tagKey(now) ? T().heuteKurz : ""}</div><ul class="spiele">${ev.map(e => eventZeile(e, now, false)).join("")}${liste.map(sp => spielLi(sp, now, true)).join("")}</ul>`;
+    const liste = spiele.filter(sp => tagKey(new Date(sp.d)) === tag), ev = eventAmTag(tag), ft = feiertagAm(tag);
+    if (!liste.length && !ev.length && !ft) continue;
+    html += `<div class="tag">${esc(langDatum(new Date(tag + "T12:00:00Z")))}${tag === tagKey(now) ? T().heuteKurz : ""}${ft ? ` · 🎉 ${esc(ft.t)}` : ""}</div><ul class="spiele">${ev.map(e => eventZeile(e, now, false)).join("")}${liste.map(sp => spielLi(sp, now, true)).join("")}</ul>`;
   }
   return html + "</section>" + eventsKarte(now);
 }
@@ -1145,6 +1175,7 @@ function render() {
   if (L) document.getElementById("unterzeile").textContent = L.name + (L.spiele[0] ? " · " + L.spiele[0].leagueSeason + "/" + String(L.spiele[0].leagueSeason + 1).slice(2) : "");
   if (AKTIV === "links") document.getElementById("unterzeile").textContent = T().links;
   if (Date.now() - WARN.geholt > 15 * 60e3 || WARN.lang !== LANG) warnHolen();
+  ferienHolen();
   document.getElementById("inhalt").innerHTML = warnHtml(now) + (t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : L ? ligaHtml(AKTIV, now) : AKTIV === "links" ? linksHtml() : wocheHtml(now));
   if (L) ligaHolenFaellig(AKTIV, now);
   for (const s of document.querySelectorAll("#inhalt details summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
