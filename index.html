@@ -118,7 +118,16 @@ li.sp .tore .h{text-align:right}
 .blkader summary img{width:28px;height:28px;object-fit:contain}
 .blkader summary .leise{margin-left:auto;font-weight:400}
 .kaderliste{list-style:none;margin:0;padding:0 14px 6px}
-.kaderliste li{display:grid;grid-template-columns:40px 28px 1fr auto;align-items:center;gap:8px;padding:5px 0}
+.kaderliste li{padding:0}
+.profil summary{display:grid;grid-template-columns:40px 28px 1fr auto;align-items:center;gap:8px;padding:5px 0;cursor:pointer;list-style:none}
+.profil summary::-webkit-details-marker{display:none}
+.profilinhalt{display:grid;gap:4px;padding:4px 0 12px 48px;font-size:15px}
+.profilinhalt .tag{margin:8px 0 2px;padding:0;background:none}
+.profilinhalt .verl{color:#e30613}
+.werte{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:6px;margin:0}
+.werte div{background:var(--linie);border-radius:10px;padding:6px 8px;text-align:center}
+.werte dt{font-size:12px;opacity:.75}
+.werte dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums}
 .kaderliste img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--linie)}
 .kaderliste .nr{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
 .naechst + .wetter{padding:4px 14px 0}
@@ -234,7 +243,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 s";
+const FASSUNG = "2026-11-10 t";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -281,7 +290,7 @@ const TEXTE = {
     warn: { titel: "Wetterwarnung", land: "ganzes Land", nord: "Norden", sued: "Süden", quelle: "Quelle: MeteoLux" },
     ferien: "Schulferien", feiertag: "Feiertag",
     regeln: [k => `Spielregeln ${k}`, "FLF · PDF auf Französisch"],
-    kader2: { titel: "Kader", pos: { Goalkeeper: "Tor", Defender: "Abwehr", Midfielder: "Mittelfeld", Attacker: "Angriff" }, jahre: a => `${a} J.`, quelle: d => `Kader: API-Football, Stand ${d}` },
+    kader2: { titel: "Kader", pos: { Goalkeeper: "Tor", Defender: "Abwehr", Midfielder: "Mittelfeld", Attacker: "Angriff" }, jahre: a => `${a} J.`, prof: { geb: "Geboren", in: "in", verl: "🚑 verletzt", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Spiele", se: "Startelf", min: "Minuten", t: "Tore", v: "Vorlagen", gk: "Gegentore", par: "Paraden", g: "Gelb", r: "Rot", note: "Note", keine: "Noch kein Einsatz in dieser Saison" }, quelle: d => `Kader: API-Football, Stand ${d}` },
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht aktives Mitglied"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -343,7 +352,7 @@ const TEXTE = {
     warn: { titel: "Weather warning", land: "whole country", nord: "north", sued: "south", quelle: "Source: MeteoLux" },
     ferien: "School holidays", feiertag: "Public holiday",
     regeln: [k => `Rules of play ${k}`, "FLF · PDF in French"],
-    kader2: { titel: "Squads", pos: { Goalkeeper: "Goalkeepers", Defender: "Defenders", Midfielder: "Midfielders", Attacker: "Forwards" }, jahre: a => `${a} yrs`, quelle: d => `Squads: API-Football, as of ${d}` },
+    kader2: { titel: "Squads", pos: { Goalkeeper: "Goalkeepers", Defender: "Defenders", Midfielder: "Midfielders", Attacker: "Forwards" }, jahre: a => `${a} yrs`, prof: { geb: "Born", in: "in", verl: "🚑 injured", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Apps", se: "Starts", min: "Minutes", t: "Goals", v: "Assists", gk: "Conceded", par: "Saves", g: "Yellow", r: "Red", note: "Rating", keine: "No appearances this season yet" }, quelle: d => `Squads: API-Football, as of ${d}` },
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-active member"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -405,7 +414,7 @@ const TEXTE = {
     warn: { titel: "Avertissement météo", land: "tout le pays", nord: "nord", sued: "sud", quelle: "Source : MeteoLux" },
     ferien: "Vacances scolaires", feiertag: "Jour férié",
     regeln: [k => `Règles de jeu ${k}`, "FLF · PDF"],
-    kader2: { titel: "Effectifs", pos: { Goalkeeper: "Gardiens", Defender: "Défenseurs", Midfielder: "Milieux", Attacker: "Attaquants" }, jahre: a => `${a} ans`, quelle: d => `Effectifs : API-Football, état au ${d}` },
+    kader2: { titel: "Effectifs", pos: { Goalkeeper: "Gardiens", Defender: "Défenseurs", Midfielder: "Milieux", Attacker: "Attaquants" }, jahre: a => `${a} ans`, prof: { geb: "Né le", in: "à", verl: "🚑 blessé", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Matchs", se: "titulaire", min: "Minutes", t: "Buts", v: "Passes déc.", gk: "Buts encaissés", par: "Arrêts", g: "Jaunes", r: "Rouges", note: "Note", keine: "Pas encore joué cette saison" }, quelle: d => `Effectifs : API-Football, état au ${d}` },
     beitragTitel: "Cotisation", ausschluss: "Le non-paiement de la cotisation entraîne l’exclusion du club.", betraegeTitel: "Les cotisations s'élèvent à :", beitragArt: ["pour le 1er membre joueur", "pour le 2ème membre joueur", "à partir du 3ème membre joueur", "pour un membre non actif"], ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: ["Nous souhaitons profiter de cette occasion pour rappeler que le paiement de la cotisation est une condition préalable à la participation aux séances d’entraînement et aux matchs en tant que joueuse ou joueur.", "Il donne également droit à l’entrée gratuite aux matchs à domicile de nos équipes Seniors, ainsi qu’au droit de vote à l’Assemblée générale, conformément aux statuts du club."],
     links: "Liens utiles", linkListe: {
@@ -1000,6 +1009,37 @@ async function blKaderHolen() {
   catch (e) { BL_KADER = { teams: [] }; }
   render();
 }
+// Länder kommen auf Englisch („Germany“) → über den ISO-Code in die Sprache der App (Intl.DisplayNames).
+const LAND_EXTRA = { England: "GB-ENG", Scotland: "GB-SCT", Wales: "GB-WLS", "Northern-Ireland": "GB-NIR", USA: "US", "Korea Republic": "KR",
+  "Congo DR": "CD", "Côte d'Ivoire": "CI", "Ivory Coast": "CI", "Bosnia": "BA", "Czech-Republic": "CZ", Czechia: "CZ", Turkey: "TR", Türkiye: "TR", "Cape Verde Islands": "CV", Kosovo: "XK" };
+let LAND_CODE = null;
+function landName(en) {
+  if (!en) return "";
+  if (!LAND_CODE) { LAND_CODE = {}; try { const dn = new Intl.DisplayNames(["en"], { type: "region" });
+    for (let a = 65; a < 91; a++) for (let b = 65; b < 91; b++) { const c = String.fromCharCode(a, b), n = dn.of(c); if (n && n !== c) LAND_CODE[n] = c; } } catch (e) {} }
+  const c = LAND_EXTRA[en] || LAND_CODE[en] || LAND_CODE[en.replace(/-/g, " ")];
+  if (!c) return en;
+  if (c.startsWith("GB-")) return ({ de: { "GB-ENG": "England", "GB-SCT": "Schottland", "GB-WLS": "Wales", "GB-NIR": "Nordirland" }, fr: { "GB-ENG": "Angleterre", "GB-SCT": "Écosse", "GB-WLS": "pays de Galles", "GB-NIR": "Irlande du Nord" } })[LANG]?.[c] || en.replace(/-/g, " ");
+  try { const fl = c === "XK" ? "" : String.fromCodePoint(...[...c].map(x => 127397 + x.charCodeAt(0))) + " ";
+    return fl + new Intl.DisplayNames([LOC()], { type: "region" }).of(c); } catch (e) { return en; }
+}
+function profilHtml(s) {
+  const p = s.p; if (!p) return "";
+  const k = T().kader2.prof, d = p.geb ? new Date(p.geb + "T12:00:00Z") : null;
+  const name = [p.vn, p.nn].filter(Boolean).join(" ");
+  const zeilen = [
+    name && name !== s.n ? `<b>${esc(name)}</b>` : "",
+    p.nat ? esc(landName(p.nat)) : "",
+    d ? `${k.geb} ${esc(d.toLocaleDateString(LOC(), { timeZone: "UTC", day: "numeric", month: "long", year: "numeric" }))}${p.ort ? ` ${k.in} ${esc(p.ort)}${p.gland && p.gland !== p.nat ? ` (${esc(landName(p.gland).replace(/^\S+ /, ""))})` : ""}` : ""}` : "",
+    [p.gr ? `${p.gr} cm` : "", p.gw ? `${p.gw} kg` : ""].filter(Boolean).join(" · "),
+    p.verl ? `<b class="verl">${k.verl}</b>` : "",
+  ].filter(Boolean).map(z => `<div>${z}</div>`).join("");
+  const b = p.bl, tor = s.pos === "Goalkeeper";
+  const werte = b && b.sp ? [[k.sp, b.sp + (b.se !== b.sp ? ` (${b.se} ${k.se})` : "")], [k.min, b.min],
+    ...(tor ? [[k.gk, b.gk ?? "–"], [k.par, b.par ?? "–"]] : [[k.t, b.t], [k.v, b.v]]), ["🟨", b.g], ["🟥", b.r], ...(b.note ? [[k.note, b.note.toLocaleString(LOC(), { minimumFractionDigits: 1 })]] : [])] : null;
+  return `<div class="profilinhalt">${zeilen}<div class="tag">${esc(k.saison(BL_KADER.saison))}</div>`
+    + (werte ? `<dl class="werte">${werte.map(([a, w]) => `<div><dt>${esc(a)}</dt><dd>${esc(String(w))}</dd></div>`).join("")}</dl>` : `<p class="leise">${k.keine}</p>`) + `</div>`;
+}
 function blKaderHtml() {
   if (!BL_KADER) { if (!BL_KADER_LAEDT) blKaderHolen(); return ""; }
   if (!BL_KADER.teams?.length) return "";
@@ -1008,7 +1048,7 @@ function blKaderHtml() {
     const gruppen = ordnung.map(pos => [pos, t.sp.filter(p => p.pos === pos).sort((x, y) => (x.nr ?? 999) - (y.nr ?? 999))]).filter(([, l]) => l.length);
     return `<details class="blkader"><summary><img src="${esc(t.logo)}" alt="" width="28" height="28" loading="lazy" onerror="this.style.visibility='hidden'">${esc(t.n)}<span class="leise">${t.sp.length}</span></summary>`
       + gruppen.map(([pos, l]) => `<div class="tag">${esc(k.pos[pos] || pos)}</div><ul class="kaderliste">` + l.map(p =>
-        `<li><img src="${esc(p.f)}" alt="" width="40" height="40" loading="lazy" onerror="this.style.visibility='hidden'"><span class="nr">${p.nr ?? ""}</span><span class="nm">${esc(p.n)}</span><span class="leise">${p.a ? esc(k.jahre(p.a)) : ""}</span></li>`).join("") + "</ul>").join("")
+        `<li><details class="profil"><summary><img src="${esc(p.f)}" alt="" width="40" height="40" loading="lazy" onerror="this.style.visibility='hidden'"><span class="nr">${p.nr ?? ""}</span><span class="nm">${esc(p.n)}${p.p?.verl ? " 🚑" : ""}</span><span class="leise">${p.a ? esc(k.jahre(p.a)) : ""}</span></summary>${profilHtml(p)}</details></li>`).join("") + "</ul>").join("")
       + "</details>";
   };
   return `<section class="karte"><h2>${esc(k.titel)} · ${esc(LIGEN.bl.name)}</h2>${BL_KADER.teams.map(verein).join("")}`
