@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-10T17:18:13.770Z",
+ "stand": "2026-11-10T21:18:17.657Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -15440,9 +15440,9 @@
       "id": 45097,
       "n": "CS Bourscheid"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 12,
+     "as": 0,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Op Biirk (Mensdorf)"
     },
