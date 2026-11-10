@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-10T14:49:19.901Z",
+ "stand": "2026-11-10T17:18:13.770Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -10430,42 +10430,6 @@
      "ort": "Terrain 2 (Grevenmacher, synth.)"
     },
     {
-     "id": 6685081,
-     "d": "2026-11-29T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 46352,
-      "n": "ENT Biwer/Berbourg I"
-     },
-     "a": {
-      "id": 45317,
-      "n": "Victoria Rosport I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Berbourg, synth.)"
-    },
-    {
-     "id": 6685084,
-     "d": "2026-11-29T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 46269,
-      "n": "ENT Canach/Mensdorf I"
-     },
-     "a": {
-      "id": 44904,
-      "n": "Jeunesse Junglinster I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Mensdorf, synth.)"
-    },
-    {
      "id": 6685083,
      "d": "2026-11-29T00:00:01+01:00",
      "tag": 8,
@@ -10482,6 +10446,42 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain au Parc (Mertert, synth.)"
+    },
+    {
+     "id": 6685084,
+     "d": "2026-11-29T10:30:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 46269,
+      "n": "ENT Canach/Mensdorf I"
+     },
+     "a": {
+      "id": 44904,
+      "n": "Jeunesse Junglinster I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Mensdorf, synth.)"
+    },
+    {
+     "id": 6685081,
+     "d": "2026-11-29T11:00:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 46352,
+      "n": "ENT Biwer/Berbourg I"
+     },
+     "a": {
+      "id": 45317,
+      "n": "Victoria Rosport I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Berbourg, synth.)"
     }
    ],
    "start": "2026-09-27T10:30:00+02:00"
@@ -12314,24 +12314,6 @@
      "ort": "Terrain Op Birkelt (Larochette, synth.)"
     },
     {
-     "id": 6714081,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 45991,
-      "n": "Atert Bissen III"
-     },
-     "a": {
-      "id": 46112,
-      "n": "AS Rupensia Lusitanos Larochette"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
-    },
-    {
      "id": 6714085,
      "d": "2026-11-28T00:00:01+01:00",
      "tag": 8,
@@ -12350,8 +12332,26 @@
      "ort": "Terrain 2 (Stegen, synth.)"
     },
     {
+     "id": 6714081,
+     "d": "2026-11-28T11:00:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 45991,
+      "n": "Atert Bissen III"
+     },
+     "a": {
+      "id": 46112,
+      "n": "AS Rupensia Lusitanos Larochette"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
+    },
+    {
      "id": 6714084,
-     "d": "2026-11-28T00:00:01+01:00",
+     "d": "2026-11-28T11:00:00+01:00",
      "tag": 8,
      "h": {
       "id": 46579,
@@ -12369,7 +12369,7 @@
     },
     {
      "id": 6714083,
-     "d": "2026-11-28T00:00:01+01:00",
+     "d": "2026-11-28T14:00:00+01:00",
      "tag": 8,
      "h": {
       "id": 46482,
@@ -13044,24 +13044,6 @@
      "ort": "Terrain 2 (Grevenmacher, synth.)"
     },
     {
-     "id": 6716081,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 46350,
-      "n": "ENT Biwer/Berbourg I"
-     },
-     "a": {
-      "id": 45319,
-      "n": "Victoria Rosport I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Berbourg, synth.)"
-    },
-    {
      "id": 6716085,
      "d": "2026-11-28T00:00:01+01:00",
      "tag": 8,
@@ -13114,6 +13096,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain au Parc (Mertert, synth.)"
+    },
+    {
+     "id": 6716081,
+     "d": "2026-11-28T11:00:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 46350,
+      "n": "ENT Biwer/Berbourg I"
+     },
+     "a": {
+      "id": 45319,
+      "n": "Victoria Rosport I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Berbourg, synth.)"
     }
    ],
    "start": "2026-09-26T16:00:00+02:00"
@@ -20849,24 +20849,6 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
-     "id": 3276033,
-     "d": "2026-11-28T01:00:00+01:00",
-     "tag": 3,
-     "h": {
-      "id": 46357,
-      "n": "ENT Biwer/Berbourg/UMW"
-     },
-     "a": {
-      "id": 46746,
-      "n": "ENT Schieren/Colmarberg/Erpeldange II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Berbourg, synth.)"
-    },
-    {
      "id": 3276032,
      "d": "2026-11-28T01:00:00+01:00",
      "tag": 3,
@@ -20901,6 +20883,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 3 (Weidingen, synth.)"
+    },
+    {
+     "id": 3276033,
+     "d": "2026-11-28T16:30:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 46357,
+      "n": "ENT Biwer/Berbourg/UMW"
+     },
+     "a": {
+      "id": 46746,
+      "n": "ENT Schieren/Colmarberg/Erpeldange II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Berbourg, synth.)"
     },
     {
      "id": 3276041,
@@ -21663,24 +21663,6 @@
      "ort": "Terrain Carrière (Senningerberg, synth.)"
     },
     {
-     "id": 6316032,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 3,
-     "h": {
-      "id": 46355,
-      "n": "ENT Biwer/Berbourg/UMW"
-     },
-     "a": {
-      "id": 46398,
-      "n": "AS Red Black Luxembourg II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Streetwheels Arena (Berbourg)"
-    },
-    {
      "id": 6316033,
      "d": "2026-11-28T00:00:01+01:00",
      "tag": 3,
@@ -21715,6 +21697,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Am Dieltchen (Weiler, synth.)"
+    },
+    {
+     "id": 6316032,
+     "d": "2026-11-28T14:30:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 46355,
+      "n": "ENT Biwer/Berbourg/UMW"
+     },
+     "a": {
+      "id": 46398,
+      "n": "AS Red Black Luxembourg II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Berbourg, synth.)"
     },
     {
      "id": 6316043,
@@ -22016,24 +22016,6 @@
      "ort": "Terrain 2 (Lorentzweiler, synth.)"
     },
     {
-     "id": 6324033,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 3,
-     "h": {
-      "id": 46268,
-      "n": "ENT Canach/Mensdorf/Munsbach II"
-     },
-     "a": {
-      "id": 46758,
-      "n": "ENT Ënnersauer-Mëllerdall II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Canach, synth.)"
-    },
-    {
      "id": 6324031,
      "d": "2026-11-28T01:00:00+01:00",
      "tag": 3,
@@ -22068,6 +22050,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Henri Bausch (Steinsel, synth.)"
+    },
+    {
+     "id": 6324033,
+     "d": "2026-11-28T15:00:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 46268,
+      "n": "ENT Canach/Mensdorf/Munsbach II"
+     },
+     "a": {
+      "id": 46758,
+      "n": "ENT Ënnersauer-Mëllerdall II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Canach, synth.)"
     },
     {
      "id": 6324042,
