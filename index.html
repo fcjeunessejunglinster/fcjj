@@ -226,7 +226,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 q";
+const FASSUNG = "2026-11-10 r";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -666,13 +666,17 @@ function teamHtml(t, now) {
   for (const l of FUPA_LINKS[t.reiter] || []) html += fupaLinkHtml(l);
   // Sponsor der Jugend (vom Verein, 8.11.2026): unten in allen Jugend-Reitern.
   for (const k of frueher) html += `<details class="karte"><summary>${T().frueher}${esc(k.n)}</summary>${tabelleKarte(k, t).replace(/^<section class="karte">|<\/section>$/g, "")}${klassenSpiele(k, t, now)}</details>`;
-  if (REGELN[t.kat]) html += `<section class="karte"><h2>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</h2><ul class="spiele linkliste"><li><a href="${REGELN[t.kat]}" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</b><span>${esc(T().regeln[1])}</span></span><span class="lp">›</span></a></li></ul></section>`;
+  if (REGELN[t.kat]) html += `<section class="karte"><h2>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</h2><ul class="spiele linkliste"><li><a href="${esc(dok(REGELN[t.kat]))}" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</b><span>${esc(T().regeln[1])}</span></span><span class="lp">›</span></a></li></ul></section>`;
   if (SPONSOR_JUGEND.kats.includes(t.kat)) html += cdjHtml() + sponsorHtml(SPONSOR_JUGEND);
   return html;
 }
 const SPONSOR_JUGEND = { bild: "bilder/sponsor-jugend.jpg", name: "SOPI Concept – Construction / Rénovation",
   kats: ["U7", "U9", "U11", "U13", "U15", "U17", "U19", "WU11", "WU13", "WU15"] };
 // Jugendkommission (CDJ): Anmeldung über forms.app (vom Verein, 10.11.2026), in allen Jugend-Reitern.
+// PDFs aus dokumente/: In der installierten App (vor allem iPhone) öffnet ein Link innerhalb der App das PDF im
+// App-Fenster ohne Zurück-Knopf. Darum dort über jsDelivr (gleiche Datei aus GitHub, andere Adresse) öffnen:
+// das Handy zeigt das PDF dann in einem eigenen Fenster mit „Fertig“ bzw. ✕ und man kommt zurück in die App.
+const dok = p => p.startsWith("dokumente/") && INSTALLIERT ? `https://cdn.jsdelivr.net/gh/fcjeunessejunglinster/fcjj@main/${p}` : p;
 // Spielregeln der FLF („Loosst eis Fussball spillen“) je Kategorie (vom Verein, 10.11.2026)
 // Mädchen: WU11 und WU13 spielen nach den Regeln U11 bzw. U13 (vom Verein, 10.11.2026).
 const REGELN_KAT = { U7: "U7", U9: "U9", U11: "U11", U13: "U13", WU11: "U11", WU13: "U13" };
@@ -1256,7 +1260,7 @@ document.addEventListener("click", async e => {
 function linksHtml() {
   return `<section class="karte"><h2>${T().links}</h2><ul class="spiele linkliste">` + LINKS.map(l => {
     const [titel, text] = T().linkListe[l.key];
-    return `<li><a href="${esc(typeof l.url === "string" ? l.url : l.url[LANG] || l.url.fr)}" target="_blank" rel="noopener"><span class="lk">${l.icon}</span><span class="lt"><b>${esc(titel)}</b><span>${esc(text)}</span></span><span class="lp">›</span></a></li>`;
+    return `<li><a href="${esc(typeof l.url === "string" ? dok(l.url) : l.url[LANG] || l.url.fr)}" target="_blank" rel="noopener"><span class="lk">${l.icon}</span><span class="lt"><b>${esc(titel)}</b><span>${esc(text)}</span></span><span class="lp">›</span></a></li>`;
   }).join("") + `</ul></section><details class="karte hinweisbeitrag"><summary>💶 ${T().beitragTitel}</summary>${T().beitrag.map(x => `<p>${esc(x)}</p>`).join("")}<p class="ausschluss">${esc(T().ausschluss)}</p>
     <div class="betraege"><span class="leise">${T().betraegeTitel}</span><table>${BEITRAEGE.map(([b, i]) => `<tr><td>${b} €</td><td>${esc(T().beitragArt[i])}</td></tr>`).join("")}</table></div>
     <div class="iban"><span class="leise">${T().ibanLabel}</span><code id="ibanText">${IBAN}</code>
