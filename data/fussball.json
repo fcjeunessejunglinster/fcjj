@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-10T11:18:31.248Z",
+ "stand": "2026-11-10T14:49:19.901Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -11124,24 +11124,6 @@
      "ort": "Stade Prince Jean (Luxembourg, synth.)"
     },
     {
-     "id": 6689083,
-     "d": "2026-11-29T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 46237,
-      "n": "Avenir Beggen"
-     },
-     "a": {
-      "id": 46137,
-      "n": "Red Star Merl-Belair II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Beggen, synth.)"
-    },
-    {
      "id": 6689081,
      "d": "2026-11-29T00:00:01+01:00",
      "tag": 8,
@@ -11212,6 +11194,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Walferdange, synth.)"
+    },
+    {
+     "id": 6689083,
+     "d": "2026-11-29T10:30:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 46237,
+      "n": "Avenir Beggen"
+     },
+     "a": {
+      "id": 46137,
+      "n": "Red Star Merl-Belair II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Beggen, synth.)"
     }
    ],
    "start": "2026-09-27T10:30:00+02:00"
@@ -12936,24 +12936,6 @@
      "ort": "Terrain au Parc (Mertert, synth.)"
     },
     {
-     "id": 6716074,
-     "d": "2026-11-21T11:00:00+01:00",
-     "tag": 7,
-     "h": {
-      "id": 45523,
-      "n": "Daring Echternach I"
-     },
-     "a": {
-      "id": 45931,
-      "n": "FC Munsbach I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Breil (Echternach, synth.)"
-    },
-    {
      "id": 6716073,
      "d": "2026-11-21T11:00:00+01:00",
      "tag": 7,
@@ -12988,6 +12970,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain Am Brill (Moutfort, synth.)"
+    },
+    {
+     "id": 6716074,
+     "d": "2026-11-21T14:30:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 45523,
+      "n": "Daring Echternach I"
+     },
+     "a": {
+      "id": 45931,
+      "n": "FC Munsbach I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Breil (Echternach, synth.)"
     },
     {
      "id": 6716071,
@@ -13576,24 +13576,6 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
-     "id": 6720075,
-     "d": "2026-11-21T10:00:00+01:00",
-     "tag": 7,
-     "h": {
-      "id": 45871,
-      "n": "Daring Echternach III"
-     },
-     "a": {
-      "id": 46210,
-      "n": "FC Lorentzweiler II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Breil (Echternach, synth.)"
-    },
-    {
      "id": 6720071,
      "d": "2026-11-21T10:00:00+01:00",
      "tag": 7,
@@ -13610,6 +13592,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain synthétique (Hesperange, synth.)"
+    },
+    {
+     "id": 6720075,
+     "d": "2026-11-21T11:00:00+01:00",
+     "tag": 7,
+     "h": {
+      "id": 45871,
+      "n": "Daring Echternach III"
+     },
+     "a": {
+      "id": 46210,
+      "n": "FC Lorentzweiler II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Breil (Echternach, synth.)"
     },
     {
      "id": 6720072,
@@ -23397,7 +23397,7 @@
     },
     {
      "id": 6359033,
-     "d": "2026-11-28T00:00:01+01:00",
+     "d": "2026-11-28T16:30:00+01:00",
      "tag": 3,
      "h": {
       "id": 44703,
