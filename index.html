@@ -214,7 +214,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 b";
+const FASSUNG = "2026-11-10 c";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -255,6 +255,7 @@ const TEXTE = {
     blFehler: n => `Die Daten (${n}) sind gerade nicht erreichbar.`, blHz: "Halbzeit", blLive: "läuft", blEnde: "Ende", blTab: n => `Tabelle ${n}`,
     elf: "Elfm.", eigentor: "ET",
     sponsorJugend: "Partner unserer Jugend",
+    unfall: { titel: "Sportunfall", text: ["Bei einem Sportunfall bitte an {MAIL} schreiben, um eine Meldung bei der C.S.M.S. auszufüllen und die Erstattung der Arztkosten zu beantragen."], frist: "⚠️ Achtung: Die Meldung muss innerhalb von 60 Tagen nach dem Unfall erfolgen." },
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht aktives Mitglied"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -310,6 +311,7 @@ const TEXTE = {
     blFehler: n => `The ${n} data is not available right now.`, blHz: "Half-time", blLive: "live", blEnde: "FT", blTab: n => `${n} table`,
     elf: "pen.", eigentor: "OG",
     sponsorJugend: "Our youth partner",
+    unfall: { titel: "Sports accident", text: ["In case of a sports accident, please contact {MAIL} to fill in a declaration with the C.S.M.S. and request reimbursement of medical costs."], frist: "⚠️ Please note: the declaration must be made within 60 days of the accident." },
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-active member"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -365,6 +367,7 @@ const TEXTE = {
     blFehler: n => `Les données (${n}) ne sont pas disponibles pour le moment.`, blHz: "Mi-temps", blLive: "en cours", blEnde: "Fin", blTab: n => `Classement ${n}`,
     elf: "pén.", eigentor: "csc",
     sponsorJugend: "Partenaire de nos jeunes",
+    unfall: { titel: "Accident de sport", text: ["En cas d’accident de sport, veuillez contacter {MAIL} afin de remplir une déclaration auprès de la C.S.M.S. pour demander le remboursement des frais médicaux."], frist: "⚠️ Attention : la déclaration doit être effectuée dans un délai de 60 jours suivant l’accident." },
     beitragTitel: "Cotisation", ausschluss: "Le non-paiement de la cotisation entraîne l’exclusion du club.", betraegeTitel: "Les cotisations s'élèvent à :", beitragArt: ["pour le 1er membre joueur", "pour le 2ème membre joueur", "à partir du 3ème membre joueur", "pour un membre non actif"], ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: ["Nous souhaitons profiter de cette occasion pour rappeler que le paiement de la cotisation est une condition préalable à la participation aux séances d’entraînement et aux matchs en tant que joueuse ou joueur.", "Il donne également droit à l’entrée gratuite aux matchs à domicile de nos équipes Seniors, ainsi qu’au droit de vote à l’Assemblée générale, conformément aux statuts du club."],
     links: "Liens utiles", linkListe: {
@@ -1104,6 +1107,7 @@ const LINKS = [
 ];
 // Cotisations 2026/27 (vom Verein, 9.11.2026): [Betrag, Art] — Art = Index in TEXTE.beitragArt.
 const BEITRAEGE = [[220, 0], [170, 1], [120, 2], [120, 3]];
+const UNFALL_MAIL = "secretaire@fcjj.lu";   // Sportunfall: Meldung an die C.S.M.S. (vom Verein, 10.11.2026)
 const IBAN = "LU58 0030 0216 2326 0000";   // Vereinskonto für die Cotisation (vom Verein, 9.11.2026)
 document.addEventListener("click", async e => {
   if (!e.target.closest("#ibanKopieren")) return;
@@ -1118,7 +1122,8 @@ function linksHtml() {
   }).join("") + `</ul></section><details class="karte hinweisbeitrag"><summary>💶 ${T().beitragTitel}</summary>${T().beitrag.map(x => `<p>${esc(x)}</p>`).join("")}<p class="ausschluss">${esc(T().ausschluss)}</p>
     <div class="betraege"><span class="leise">${T().betraegeTitel}</span><table>${BEITRAEGE.map(([b, i]) => `<tr><td>${b} €</td><td>${esc(T().beitragArt[i])}</td></tr>`).join("")}</table></div>
     <div class="iban"><span class="leise">${T().ibanLabel}</span><code id="ibanText">${IBAN}</code>
-    <button class="knopf" id="ibanKopieren" type="button">${T().kopieren}</button><span class="leise" id="ibanOk" aria-live="polite"></span></div></details>`;
+    <button class="knopf" id="ibanKopieren" type="button">${T().kopieren}</button><span class="leise" id="ibanOk" aria-live="polite"></span></div></details>`
+    + `<details class="karte hinweisbeitrag"><summary>🩹 ${T().unfall.titel}</summary>${T().unfall.text.map(x => `<p>${esc(x).replace("{MAIL}", `<a href="mailto:${UNFALL_MAIL}">${UNFALL_MAIL}</a>`)}</p>`).join("")}<p class="ausschluss">${esc(T().unfall.frist)}</p></details>`;
 }
 
 // ---- Hilfe: App auf dem Handy installieren (iPhone / Android). Das eigene Gerät steht zuerst.
