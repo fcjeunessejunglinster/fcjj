@@ -1,0 +1,24 @@
+name: probe
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.APIFOOTBALL_KEY }}
+        run: |
+          mkdir out && cd out
+          q() { curl -sS -H "x-apisports-key: $K" "https://v3.football.api-sports.io/$1" -o "$2"; sleep 1; }
+          q "teams?name=Luxembourg" team.json
+          ID=$(python3 -c "import json;r=json.load(open('team.json'))['response'];print([x['team']['id'] for x in r if x['team']['national']][0])")
+          echo "id=$ID"
+          q "players/squads?team=$ID" kader.json
+          q "fixtures?team=$ID&next=4" naechste.json
+          q "fixtures?team=$ID&last=6" letzte.json
+          q "leagues?team=$ID&current=true" ligen.json
+          q "standings?league=5&season=2026&team=$ID" tabelle.json
+          q "players?team=$ID&season=2026" spieler.json
+          cd .. && git init -q pd && cp out/* pd/ && cd pd && git add -A && git -c user.name=p -c user.email=p@p commit -qm p
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" HEAD:refs/heads/probe-daten
