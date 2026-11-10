@@ -119,6 +119,7 @@ li.sp .tore .h{text-align:right}
 .blkader summary .leise{margin-left:auto;font-weight:400}
 .kaderliste{list-style:none;margin:0;padding:0 14px 6px}
 .kaderliste li{padding:0}
+tr.wir td{font-weight:700;background:rgba(227,6,19,.08)}
 .profil summary{display:grid;grid-template-columns:40px 28px 1fr auto;align-items:center;gap:8px;padding:5px 0;cursor:pointer;list-style:none}
 .profil summary::-webkit-details-marker{display:none}
 .profilinhalt{display:grid;gap:4px;padding:4px 0 12px 48px;font-size:15px}
@@ -243,7 +244,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 u";
+const FASSUNG = "2026-11-10 v";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1023,7 +1024,7 @@ function landName(en) {
   try { const fl = c === "XK" ? "" : String.fromCodePoint(...[...c].map(x => 127397 + x.charCodeAt(0))) + " ";
     return fl + new Intl.DisplayNames([LOC()], { type: "region" }).of(c); } catch (e) { return en; }
 }
-function profilHtml(s) {
+function profilHtml(s, bloecke) {
   const p = s.p; if (!p) return "";
   const k = T().kader2.prof, d = p.geb ? new Date(p.geb + "T12:00:00Z") : null;
   const name = [p.vn, p.nn].filter(Boolean).join(" ");
@@ -1034,23 +1035,28 @@ function profilHtml(s) {
     [p.gr ? `${p.gr} cm` : "", p.gw ? `${p.gw} kg` : ""].filter(Boolean).join(" · "),
     p.verl ? `<b class="verl">${k.verl}</b>` : "",
   ].filter(Boolean).map(z => `<div>${z}</div>`).join("");
-  const b = p.bl, tor = s.pos === "Goalkeeper";
-  const werte = b && b.sp ? [[k.sp, b.sp + (b.se !== b.sp ? ` (${b.se} ${k.se})` : "")], [k.min, b.min],
-    ...(tor ? [[k.gk, b.gk ?? "–"], [k.par, b.par ?? "–"]] : [[k.t, b.t], [k.v, b.v]]), ["🟨", b.g], ["🟥", b.r], ...(b.note ? [[k.note, b.note.toLocaleString(LOC(), { minimumFractionDigits: 1 })]] : [])] : null;
-  return `<div class="profilinhalt">${zeilen}<div class="tag">${esc(k.saison(BL_KADER.saison))}</div>`
-    + (werte ? `<dl class="werte">${werte.map(([a, w]) => `<div><dt>${esc(a)}</dt><dd>${esc(String(w))}</dd></div>`).join("")}</dl>` : `<p class="leise">${k.keine}</p>`) + `</div>`;
+  // bloecke: [[Überschrift, Statistik]] – Bundesliga: eine Saison; Nationalmannschaft: je Wettbewerb
+  const tor = s.pos === "Goalkeeper";
+  const werteHtml = b => `<dl class="werte">${[[k.sp, b.sp + (b.se !== b.sp ? ` (${b.se} ${k.se})` : "")], [k.min, b.min],
+    ...(tor ? [[k.gk, b.gk ?? "–"], [k.par, b.par ?? "–"]] : [[k.t, b.t], [k.v, b.v]]), ["🟨", b.g], ["🟥", b.r],
+    ...(b.note ? [[k.note, b.note.toLocaleString(LOC(), { minimumFractionDigits: 1 })]] : [])].map(([a, w]) => `<div><dt>${esc(a)}</dt><dd>${esc(String(w))}</dd></div>`).join("")}</dl>`;
+  const mit = (bloecke || []).filter(([, b]) => b?.sp);
+  return `<div class="profilinhalt">${zeilen}` + (mit.length ? mit.map(([t, b]) => `<div class="tag">${esc(t)}</div>${werteHtml(b)}`).join("")
+    : `<div class="tag">${esc((bloecke || [])[0]?.[0] || "")}</div><p class="leise">${k.keine}</p>`) + `</div>`;
+}
+// Spielerliste nach Positionen, jeder Spieler aufklappbar mit Profil (Bundesliga-Kader und Nationalmannschaft).
+function spielerListeHtml(spieler, bloecke) {
+  const k = T().kader2, ordnung = ["Goalkeeper", "Defender", "Midfielder", "Attacker"];
+  return ordnung.map(pos => [pos, spieler.filter(p => p.pos === pos).sort((x, y) => (x.nr ?? 999) - (y.nr ?? 999))]).filter(([, l]) => l.length)
+    .map(([pos, l]) => `<div class="tag">${esc(k.pos[pos] || pos)}</div><ul class="kaderliste">` + l.map(p =>
+      `<li><details class="profil"><summary><img src="${esc(p.f)}" alt="" width="40" height="40" loading="lazy" onerror="this.style.visibility='hidden'"><span class="nr">${p.nr ?? ""}</span><span class="nm">${esc(p.n)}${p.p?.verl ? " 🚑" : ""}</span><span class="leise">${p.a ? esc(k.jahre(p.a)) : ""}</span></summary>${profilHtml(p, bloecke(p))}</details></li>`).join("") + "</ul>").join("");
 }
 function blKaderHtml() {
   if (!BL_KADER) { if (!BL_KADER_LAEDT) blKaderHolen(); return ""; }
   if (!BL_KADER.teams?.length) return "";
-  const k = T().kader2, ordnung = ["Goalkeeper", "Defender", "Midfielder", "Attacker"];
-  const verein = t => {
-    const gruppen = ordnung.map(pos => [pos, t.sp.filter(p => p.pos === pos).sort((x, y) => (x.nr ?? 999) - (y.nr ?? 999))]).filter(([, l]) => l.length);
-    return `<details class="blkader"><summary><img src="${esc(t.logo)}" alt="" width="28" height="28" loading="lazy" onerror="this.style.visibility='hidden'">${esc(t.n)}<span class="leise">${t.sp.length}</span></summary>`
-      + gruppen.map(([pos, l]) => `<div class="tag">${esc(k.pos[pos] || pos)}</div><ul class="kaderliste">` + l.map(p =>
-        `<li><details class="profil"><summary><img src="${esc(p.f)}" alt="" width="40" height="40" loading="lazy" onerror="this.style.visibility='hidden'"><span class="nr">${p.nr ?? ""}</span><span class="nm">${esc(p.n)}${p.p?.verl ? " 🚑" : ""}</span><span class="leise">${p.a ? esc(k.jahre(p.a)) : ""}</span></summary>${profilHtml(p)}</details></li>`).join("") + "</ul>").join("")
-      + "</details>";
-  };
+  const k = T().kader2, saison = k.prof.saison(BL_KADER.saison);
+  const verein = t => `<details class="blkader"><summary><img src="${esc(t.logo)}" alt="" width="28" height="28" loading="lazy" onerror="this.style.visibility='hidden'">${esc(t.n)}<span class="leise">${t.sp.length}</span></summary>`
+    + spielerListeHtml(t.sp, p => [[saison, p.p?.bl]]) + "</details>";
   return `<section class="karte"><h2>${esc(k.titel)} · ${esc(LIGEN.bl.name)}</h2>${BL_KADER.teams.map(verein).join("")}`
     + `<p class="leise" style="padding:8px 14px 12px;margin:0">${esc(k.quelle(kurzDatum(new Date(BL_KADER.stand))))}</p></section>`;
 }
@@ -1058,6 +1064,39 @@ function ligaKnopf(key, breite) {
   const L = LIGEN[key];
   const inhalt = L.logo ? `<img src="${L.logo}" alt="${esc(L.name)}" height="40" style="display:block;margin:auto;height:40px;width:auto">` : esc(L.name);
   return `<button class="blknopf" style="grid-column:span ${breite}" data-reiter="${key}" aria-pressed="${AKTIV === key}" aria-label="${esc(L.name)}" title="${esc(L.name)}">${inhalt}${ligaLaeuft(L, new Date()) ? '<span class="livepunkt">●</span>' : ""}</button>`;
+}
+
+// ---- Nationalmannschaft bei API-Football (data/nati-af.json, täglich vom GitHub-Abruf, siehe tools/kader.mjs):
+// Gruppentabelle der Nations League und Kader mit Profilen. Erst beim Öffnen des FLF-Reiters geladen.
+let NATI_AF = null, NATI_AF_LAEDT = false;
+async function natiAfHolen() {
+  NATI_AF_LAEDT = true;
+  try { const r = await fetch("data/nati-af.json", { cache: "no-cache" }); NATI_AF = r.ok ? await r.json() : {}; } catch (e) { NATI_AF = {}; }
+  render();
+}
+const WB_NAME = { "Friendlies": { de: "Freundschaftsspiele", en: "Friendlies", fr: "Matchs amicaux" },
+  "World Cup - Qualification Europe": { de: "WM-Qualifikation", en: "World Cup qualifying", fr: "Qualifications Coupe du monde" },
+  "Euro Championship - Qualification": { de: "EM-Qualifikation", en: "Euro qualifying", fr: "Qualifications Euro" } };
+const wbName = n => WB_NAME[n]?.[LANG] || n;
+function gruppenName(g) {   // „League C - Group D“
+  const m = (g || "").match(/League ([A-D]) - Group (\w+)/i); if (!m) return g || "";
+  return ({ de: `Liga ${m[1]} · Gruppe ${m[2]}`, fr: `Ligue ${m[1]} · Groupe ${m[2]}`, en: `League ${m[1]} · Group ${m[2]}` })[LANG];
+}
+function natiAfHtml(ohneTabelle) {   // Tabelle nur, wenn FuPa keine liefert
+  if (!NATI_AF) { if (!NATI_AF_LAEDT) natiAfHolen(); return ""; }
+  let html = "";
+  const tb = NATI_AF.tabelle;
+  if (tb?.zeilen?.length && !ohneTabelle) {
+    const zeilen = tb.zeilen.map(z => `<tr${z.id === 1102 ? ' class="wir"' : ""}><td>${z.rang}</td><td>${esc(landName(z.n))}</td><td>${z.sp}</td><td>${z.s}</td><td>${z.u}</td><td>${z.n2}</td><td>${z.tore}:${z.gegen}</td><td><b>${z.pkt}</b></td></tr>`).join("");
+    html += `<section class="karte"><h2>UEFA Nations League · ${esc(gruppenName(tb.gruppe))}</h2><div class="tabrahmen"><table><thead><tr><th>#</th>${T().kopf.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${zeilen}</tbody></table></div></section>`;
+  }
+  if (NATI_AF.sp?.length) {
+    const k = T().kader2;
+    html += `<section class="karte"><h2>${esc(k.titel)} · ${esc(landName("Luxembourg").replace(/^\S+ /, ""))}</h2>`
+      + spielerListeHtml(NATI_AF.sp, p => (p.p?.wb?.length ? p.p.wb : [{ n: "UEFA Nations League" }]).map(w => [`${wbName(w.n)} ${NATI_AF.saison}`, w]))
+      + `<p class="leise" style="padding:8px 14px 12px;margin:0">${esc(k.quelle(kurzDatum(new Date(NATI_AF.stand))))}</p></section>`;
+  }
+  return html;
 }
 
 // ---- Nationalmannschaft (Roude Léiw), Daten von FuPa ----
@@ -1104,6 +1143,7 @@ function natiHtml(now) {
       <thead><tr><th>#</th>${T().kopf.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${zeilen}</tbody></table></div></section>`;
   }
   if (gespielt.length) html += `<section class="karte"><h2>${T().natiErg}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
+  html += natiAfHtml(!!g?.tabelle?.length);
   // Strategischer Plan der FLF (vom Verein, 10.11.2026)
   html += `<section class="karte"><h2>FLF</h2><ul class="spiele linkliste"><li><a href="https://www.flf.lu/plan-strategique-83993v4" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().flfPlan[0])}</b><span>${esc(T().flfPlan[1])}</span></span><span class="lp">›</span></a></li></ul></section>`;
   return html + `<p class="leise" style="text-align:center;margin:0">${T().natiQuelle}</p>`;

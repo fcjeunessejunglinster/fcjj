@@ -21,3 +21,16 @@ console.log("Anfragen:", n, "· mit Profil:", bayern.sp.filter(s => s.p).length,
 // Note „0“ (kein Einsatz) → keine Note
 assert.equal(profil({ player: { id: 1 }, statistics: [{ league: { id: 78 }, team: { id: 5 }, games: { rating: "0" }, goals: {}, cards: {} }] }, 5).bl.note, null);
 console.log("Kader-Test ok");
+
+// ---- Nationalmannschaft (Luxemburg, API-Football id 1102)
+import { natiHolen } from "../tools/kader.mjs";
+globalThis.fetch = async u => new Response(JSON.stringify(
+  u.includes("leagues?id=5") ? lies("nati-nl") : u.includes("squads") ? lies("nati-kader") : u.includes("standings") ? lies("nati-tabelle")
+  : u.includes("page=2") ? lies("nati-spieler2") : lies("nati-spieler")));
+const nati = await natiHolen();
+console.log("Nati:", nati.saison, nati.sp.length, "Spieler,", nati.sp.filter(s => s.p).length, "mit Profil,", nati.tabelle.gruppe, nati.tabelle.zeilen.map(z => `${z.rang}. ${z.n} ${z.pkt}`).join(" | "));
+assert.equal(nati.tabelle.zeilen.length, 4);
+assert.ok(nati.tabelle.zeilen.some(z => z.id === 1102));
+const mitSp = nati.sp.find(s => s.p?.wb?.length);
+console.log(mitSp.n, mitSp.p.wb);
+console.log("Nati-Test ok");
