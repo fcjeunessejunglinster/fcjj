@@ -1,0 +1,19 @@
+name: probe
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir out && cd out
+          O="Origin: https://fcjeunessejunglinster.github.io"
+          for l in DE FR EN; do
+            curl -sS -D hdr-s-$l.txt -H "$O" -H "accept: application/json" "https://openholidaysapi.org/SchoolHolidays?countryIsoCode=LU&validFrom=2026-08-01&validTo=2027-08-31&languageIsoCode=$l" -o schul-$l.json || true
+            curl -sS -H "$O" -H "accept: application/json" "https://openholidaysapi.org/PublicHolidays?countryIsoCode=LU&validFrom=2026-08-01&validTo=2027-08-31&languageIsoCode=$l" -o feier-$l.json || true
+          done
+          curl -sS -H "accept: application/json" "https://openholidaysapi.org/Countries" -o countries.json || true
+          curl -sS -H "accept: application/json" "https://openholidaysapi.org/Subdivisions?countryIsoCode=LU" -o sub.json || true
+          cd .. && git init -q pd && cp out/* pd/ && cd pd && git add -A && git -c user.name=p -c user.email=p@p commit -qm p
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" HEAD:refs/heads/probe-daten
