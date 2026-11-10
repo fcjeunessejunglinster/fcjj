@@ -215,7 +215,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-10 k";
+const FASSUNG = "2026-11-10 l";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -258,6 +258,7 @@ const TEXTE = {
     sponsorJugend: "Partner unserer Jugend",
     unfall: { titel: "Sportunfall", text: ["Die C.S.M.S. ist eine gegenseitige Hilfsgesellschaft für **lizenzierte** Sportlerinnen und Sportler. Sie dient als ergänzende Unfallversicherung für medizinische Kosten nach Sportunfällen.", "Bei einem Sportunfall bitte an {MAIL} schreiben, um eine Meldung bei der C.S.M.S. auszufüllen und die Erstattung der Arztkosten zu beantragen.", "Das Formular muss vom behandelnden Arzt ausgefüllt und von Ihrem Sportverein unterzeichnet werden.", "Sie zahlen die medizinischen Rechnungen zunächst selbst und reichen die Originalrechnungen bei der CNS ein. Die Abrechnung der CNS mit der Kopie der Rechnungen schicken Sie dann an die C.S.M.S., welche die Differenz gemäß ihren Statuten zurückerstattet."], info: "ℹ️ Weitere Informationen (auf Französisch): {INFO}", frist: "⚠️ Achtung: Die Meldung muss innerhalb von 60 Tagen nach dem Unfall erfolgen." },
     cdj: { knopf: "🙋 Der Jugendkommission beitreten", text: "Die Jugendkommission (CDJ) sucht Eltern und Helfer, die mit anpacken." },
+    flfPlan: ["Strategischer Plan der FLF 2027–2031", "flf.lu (auf Französisch)"],
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht aktives Mitglied"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -315,6 +316,7 @@ const TEXTE = {
     sponsorJugend: "Our youth partner",
     unfall: { titel: "Sports accident", text: ["The C.S.M.S. is a mutual aid society for **licensed** athletes. It serves as supplementary accident insurance for medical costs after sports accidents.", "In case of a sports accident, please contact {MAIL} to fill in a declaration with the C.S.M.S. and request reimbursement of medical costs.", "The form must be filled in by the treating doctor and signed by your sports club.", "You first pay the medical bills yourself and submit the original bills to the CNS. You then send the CNS statement together with a copy of the bills to the C.S.M.S., which reimburses the difference in accordance with its statutes."], info: "ℹ️ More information (in French): {INFO}", frist: "⚠️ Please note: the declaration must be made within 60 days of the accident." },
     cdj: { knopf: "🙋 Join the youth commission", text: "The youth commission (CDJ) is looking for parents and helpers to lend a hand." },
+    flfPlan: ["FLF strategic plan 2027–2031", "flf.lu (in French)"],
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-active member"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -372,6 +374,7 @@ const TEXTE = {
     sponsorJugend: "Partenaire de nos jeunes",
     unfall: { titel: "Accident de sport", text: ["La C.S.M.S. est une société de secours mutuels pour les sportives et sportifs **licenciés**. Elle sert d’assurance accident complémentaire pour les frais médicaux après un accident de sport.", "En cas d’accident de sport, veuillez contacter {MAIL} afin de remplir une déclaration auprès de la C.S.M.S. pour demander le remboursement des frais médicaux.", "Le formulaire doit être rempli par le médecin traitant et signé par votre club sportif.", "Vous payez d’abord vous-même les factures médicales et vous remettez les factures originales à la CNS. Vous envoyez ensuite le décompte de la CNS avec la copie des factures à la C.S.M.S., qui rembourse la différence conformément à ses statuts."], info: "ℹ️ Informations supplémentaires : {INFO}", frist: "⚠️ Attention : la déclaration doit être effectuée dans un délai de 60 jours suivant l’accident." },
     cdj: { knopf: "🙋 Rejoindre la commission des jeunes", text: "La commission des jeunes (CDJ) cherche des parents et bénévoles pour donner un coup de main." },
+    flfPlan: ["Plan stratégique de la FLF 2027–2031", "flf.lu"],
     beitragTitel: "Cotisation", ausschluss: "Le non-paiement de la cotisation entraîne l’exclusion du club.", betraegeTitel: "Les cotisations s'élèvent à :", beitragArt: ["pour le 1er membre joueur", "pour le 2ème membre joueur", "à partir du 3ème membre joueur", "pour un membre non actif"], ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: ["Nous souhaitons profiter de cette occasion pour rappeler que le paiement de la cotisation est une condition préalable à la participation aux séances d’entraînement et aux matchs en tant que joueuse ou joueur.", "Il donne également droit à l’entrée gratuite aux matchs à domicile de nos équipes Seniors, ainsi qu’au droit de vote à l’Assemblée générale, conformément aux statuts du club."],
     links: "Liens utiles", linkListe: {
@@ -926,6 +929,8 @@ function natiHtml(now) {
       <thead><tr><th>#</th>${T().kopf.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${zeilen}</tbody></table></div></section>`;
   }
   if (gespielt.length) html += `<section class="karte"><h2>${T().natiErg}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
+  // Strategischer Plan der FLF (vom Verein, 10.11.2026)
+  html += `<section class="karte"><h2>FLF</h2><ul class="spiele linkliste"><li><a href="https://www.flf.lu/plan-strategique-83993v4" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().flfPlan[0])}</b><span>${esc(T().flfPlan[1])}</span></span><span class="lp">›</span></a></li></ul></section>`;
   return html + `<p class="leise" style="text-align:center;margin:0">${T().natiQuelle}</p>`;
 }
 
