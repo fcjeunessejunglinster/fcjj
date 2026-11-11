@@ -245,7 +245,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 c";
+const FASSUNG = "2026-11-11 d";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -715,10 +715,11 @@ const dok = p => p.startsWith("dokumente/") && INSTALLIERT ? `https://cdn.jsdeli
 const REGELN_KAT = { U7: "U7", U9: "U9", U11: "U11", U13: "U13", WU11: "U11", WU13: "U13" };
 const REGELN = Object.fromEntries(Object.entries(REGELN_KAT).map(([k, r]) => [k, `dokumente/regles-de-jeu-${r.toLowerCase()}.pdf`]));
 // Spielfeldgröße je Kategorie: Bild, Bildgröße, Bezeichnung (vom Verein, 11.11.2026)
+const FELD_U7 = { bild: "bilder/spielfeld-u7.jpg", b: 1089, h: 1239, n: "U7" };
 const FELD_U9 = { bild: "bilder/spielfeld-u9.jpg", b: 893, h: 1034, n: "U9" };
 const FELD_U11 = { bild: "bilder/spielfeld-u11.jpg", b: 1054, h: 1102, n: "U11" };
 const FELD_U13 = { bild: "bilder/spielfeld-u13.jpg", b: 808, h: 1036, n: "U13 / WU15" };
-const SPIELFELD = { U9: FELD_U9, U11: FELD_U11, WU11: FELD_U11, U13: FELD_U13, WU13: FELD_U13, WU15: FELD_U13 };
+const SPIELFELD = { U7: FELD_U7, U9: FELD_U9, U11: FELD_U11, WU11: FELD_U11, U13: FELD_U13, WU13: FELD_U13, WU15: FELD_U13 };
 const CDJ_URL = "https://fcjj.forms.app/membrecdj";
 const cdjHtml = () => `<section class="karte cdj"><a class="knopf" href="${CDJ_URL}" target="_blank" rel="noopener">${esc(T().cdj.knopf)}</a><span class="leise">${esc(T().cdj.text)}</span></section>`;
 function sponsorHtml(sp) {
