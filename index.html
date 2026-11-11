@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 z8";
+const FASSUNG = "2026-11-11 z9";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1339,6 +1339,10 @@ if (location.hash === "#liveticker") merk.set("reiter", "");
 // Leer = Chat aus (Knopf versteckt). Adresse des Workers, z. B. https://fcjj.<konto>.workers.dev
 const CHAT_URL = "https://fcjj1.gilles-emeringer.workers.dev";
 let CHAT = [];   // Verlauf nur im Speicher: [{rolle: "user"|"assistant", text}]
+// Termine und Infos, die nur der Chat kennt (nicht in der App angezeigt): [bis wann gültig (YYYY-MM-DD), Text]
+const CHAT_TERMINE = [
+  ["2027-01-28", "Ehrung der verdienten Sportlerinnen und Sportler der Gemeinde Junglinster (cérémonie de remise à l’honneur des sportifs méritants de la Commune de Junglinster): Donnerstag, 28. Januar 2027 um 18:30 Uhr im Centre polyvalent Gaston Stein in Junglinster."],
+];
 function chatKontext(now) {
   const de = TEXTE.de, z = [], datum = d => new Intl.DateTimeFormat("de-DE", { timeZone: TZ, weekday: "short", day: "numeric", month: "numeric", year: "numeric" }).format(d);
   const reiterName = AKTIV === "woche" ? "Unsere Woche" : D?.teams?.find(t => String(t.id) === AKTIV)?.reiter || AKTIV;
@@ -1365,6 +1369,7 @@ function chatKontext(now) {
   }
   const ev = kommendeEvents(now).slice(0, 12).map(e => `- ${sprachText(e.t)} (${eventDatum(e)})${e.fuer ? " für " + e.fuer : ""}${e.zusatz ? " – " + (typeof e.zusatz === "string" ? e.zusatz : e.zusatz.de) : ""}${e.chat ? " – " + e.chat : ""}`);
   if (ev.length) z.push("\n## Termine (Vereinsevents, LALUX Indoor Cup, Schulferien)\n" + ev.join("\n"));
+  z.push("\n## Weitere Termine (nur für den Chat, vom Verein)\n" + CHAT_TERMINE.filter(([bis]) => bis >= tagKey(now)).map(([, t]) => "- " + t).join("\n"));
   const ft = FERIEN.feier.filter(f => f.tag >= tagKey(now)).slice(0, 4).map(f => `${f.tag} ${f.t}`);
   if (ft.length) z.push("Feiertage: " + ft.join(", "));
   const n = (D?.nati?.spiele || []).filter(x => !vorbei(x, now)).slice(0, 3).map(x => `${datum(new Date(x.d))} ${uhr(new Date(x.d))} ${x.h.n} – ${x.a.n}${x.ort ? " · " + x.ort : ""}`);
