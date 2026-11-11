@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 s";
+const FASSUNG = "2026-11-11 t";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -730,7 +730,7 @@ function teamHtml(t, now) {
   // Spielfeldgröße als Bild, aufklappbar (vom Verein, 11.11.2026)
   const feld = SPIELFELD[t.kat];
   if (feld) html += `<details class="karte"><summary>📐 ${esc(T().spielfeld(feld.n))}</summary><img class="spielfeld" src="${feld.bild}" alt="${esc(T().spielfeld(feld.n))}" loading="lazy" width="${feld.b}" height="${feld.h}"></details>`;
-  if (REGELN[t.kat]) html += `<section class="karte"><h2>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</h2><ul class="spiele linkliste"><li><a href="${esc(dok(REGELN[t.kat]))}" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</b><span>${esc(T().regeln[1])}</span></span><span class="lp">›</span></a></li></ul></section>`;
+  if (REGELN[t.kat]) html += `<details class="karte"><summary>📘 ${esc(T().regeln[0](REGELN_KAT[t.kat]))}</summary><ul class="spiele linkliste"><li><a href="${esc(dok(REGELN[t.kat]))}" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</b><span>${esc(T().regeln[1])}</span></span><span class="lp">›</span></a></li></ul></details>`;
   if (SPONSOR_JUGEND.kats.includes(t.kat)) html += cdjHtml() + sponsorHtml(SPONSOR_JUGEND);
   return html;
 }
