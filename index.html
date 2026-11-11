@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 q";
+const FASSUNG = "2026-11-11 r";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1366,7 +1366,8 @@ function chatKontext(now) {
   const n = (D?.nati?.spiele || []).filter(x => !vorbei(x, now)).slice(0, 3).map(x => `${datum(new Date(x.d))} ${uhr(new Date(x.d))} ${x.h.n} – ${x.a.n}${x.ort ? " · " + x.ort : ""}`);
   if (n.length) z.push("\n## Nationalmannschaft Luxemburg, nächste Spiele\n- " + n.join("\n- "));
   z.push("\n## Cotisation (Mitgliedsbeitrag) 2026/27\n" + BEITRAEGE.map(([b, a]) => `- ${b} € ${de.beitragArt[a]}`).join("\n")
-    + `\nIBAN ${IBAN}. ${de.beitrag.join(" ")} ${de.ausschluss}`);
+    + `\nIBAN ${IBAN}. ${de.beitrag.join(" ")} ${de.ausschluss}`
+    + "\nVom Verein (11.11.2026): Jedes Mitglied des Vereins muss die Cotisation jedes Jahr zu Beginn der Saison bezahlen, um am Training und am Spielbetrieb teilnehmen zu können. Wird die Cotisation nicht bezahlt, führt das zum Ausschluss aus dem Verein.");
   // Abläufe, die der Verein dem Chat mitgibt (Wissen ergänzen: hier weitere Abschnitte anfügen)
   z.push(`\n## Lizenz beantragen (neues aktives Mitglied, Spielerin/Spieler) – Ablauf des Vereins (Stand 11.11.2026)
 1. Préinscription für neue Mitglieder: https://fcjj.forms.app/preinscription
