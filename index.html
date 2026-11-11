@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 o";
+const FASSUNG = "2026-11-11 p";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -751,7 +751,7 @@ const FELD_U9 = { bild: "bilder/spielfeld-u9.jpg", b: 893, h: 1034, n: "U9" };
 const FELD_U11 = { bild: "bilder/spielfeld-u11.jpg", b: 1054, h: 1102, n: "U11 / WU13" };
 const FELD_U13 = { bild: "bilder/spielfeld-u13.jpg", b: 808, h: 1036, n: "U13 / WU15" };
 const SPIELFELD = { U7: FELD_U7, U9: FELD_U9, U11: FELD_U11, WU11: FELD_U11, U13: FELD_U13, WU13: FELD_U11, WU15: FELD_U13 };   // WU13 auf dem U11-Feld (vom Verein, 11.11.2026)
-// Kontakt (vom Verein, 11.11.2026): Jugendkategorien → jeunes@fcjj.lu, alles andere → secretaire@fcjj.lu
+// Kontakt (vom Verein, 11.11.2026): Jugendkategorien → jeunes@fcjj.lu, alles andere → secretaire@fcjj.lu; Sportunfälle immer secretaire@
 const MAIL_JUGEND = "jeunes@fcjj.lu", MAIL_SEKRETARIAT = "secretaire@fcjj.lu";
 const mailLi = (adr, text) => `<li><a href="mailto:${adr}"><span class="lk">✉️</span><span class="lt"><b>${adr}</b><span>${esc(text)}</span></span><span class="lp">›</span></a></li>`;
 const kontaktHtml = () => `<section class="karte"><h2>${esc(T().kontakt2.titel)}</h2><ul class="spiele linkliste">${mailLi(MAIL_JUGEND, T().kontakt2.jugend)}${mailLi(MAIL_SEKRETARIAT, T().kontakt2.sonst)}</ul></section>`;
@@ -1342,7 +1342,7 @@ function chatKontext(now) {
   const reiterName = AKTIV === "woche" ? "Unsere Woche" : D?.teams?.find(t => String(t.id) === AKTIV)?.reiter || AKTIV;
   z.push(`Jetzt: ${datum(now)} ${uhr(now)} Uhr (Luxemburger Zeit). Sprache der App: ${LANG}. Geöffneter Reiter: ${reiterName}.`);
   z.push("Verein: FC Jeunesse Junglinster (FCJJ), Junglinster, Luxemburg, gegründet 1935. Website https://fcjj.lu · Kontakt https://fcjj.lu/contact · Vereinsshop https://form.jotform.com/242614644810352");
-  z.push("KONTAKTREGEL (hat Vorrang): Für alles, was die Jugendkategorien betrifft (BAM, PUP, POU, MIN, SCO, CAD, JUN, WU11, WU13, WU15), an jeunes@fcjj.lu verweisen; für alles andere (Seniors, Réserves, Veteranen, Verein, Cotisation, Sportunfall) an secretaire@fcjj.lu.");
+  z.push("KONTAKTREGEL (hat Vorrang): Für alles, was die Jugendkategorien betrifft (BAM, PUP, POU, MIN, SCO, CAD, JUN, WU11, WU13, WU15), an jeunes@fcjj.lu verweisen; für alles andere (Seniors, Réserves, Veteranen, Verein, Cotisation) an secretaire@fcjj.lu. Ausnahme: Sportunfälle (Meldung C.S.M.S.) gehen immer an secretaire@fcjj.lu, auch bei Jugendspielern.");
   z.push("App: Daten der FLF (Spiele, Ergebnisse, Tabellen), Uhrzeit „offen“ = Anstoß noch nicht festgelegt. Kabinen gelten bei Heimspielen in Junglinster (Zahl = Kabinennummer).");
   for (const t of D?.teams || []) {
     const sp = eigeneSpiele(t), k = KABINEN[t.reiter];
