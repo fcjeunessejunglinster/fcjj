@@ -23,3 +23,30 @@ for (let t = Date.parse("2026-11-16T00:00:00+01:00"); t < Date.parse("2026-11-23
 console.log("Anstöße pro Woche:", n);
 assert.ok(n > 100 && n < 200);
 console.log("Worker-Test ok");
+
+// ---- Chat „Frag die App“
+import { chat } from "../tools/cloudflare-worker.js";
+{
+  const kv = new Map();
+  const env = { ANTHROPIC_API_KEY: "sk-test", PUSH: { get: async k => kv.get(k) ?? null, put: async (k, v) => { kv.set(k, v); } } };
+  let gesendet = null;
+  globalThis.fetch = async (u, o) => { gesendet = { u, body: JSON.parse(o.body), h: o.headers };
+    return new Response(JSON.stringify({ content: [{ type: "text", text: "MIN 1 spielt am Samstag um 10:00." }] }), { status: 200 }); };
+  const frag = (x, origin = "https://fcjeunessejunglinster.github.io", ip = "1.2.3.4") => chat(new Request("https://fcjj.x.workers.dev/frage",
+    { method: "POST", headers: { origin, "cf-connecting-ip": ip, "content-type": "application/json" }, body: JSON.stringify(x) }), env);
+  let r = await frag({ frage: "Wann spielt MIN 1?", kontext: "## MIN 1 …", verlauf: [{ rolle: "assistant", text: "Hallo" }, { rolle: "user", text: "Hi" }, { rolle: "assistant", text: "Hallo!" }] });
+  const j = await r.json();
+  assert.equal(r.status, 200); assert.equal(j.antwort, "MIN 1 spielt am Samstag um 10:00."); assert.equal(j.rest, 19);
+  assert.equal(gesendet.u, "https://api.anthropic.com/v1/messages");
+  assert.equal(gesendet.h["x-api-key"], "sk-test");
+  assert.match(gesendet.body.system, /<vereinsdaten>\n## MIN 1/);
+  assert.deepEqual(gesendet.body.messages.map(m => m.role), ["user", "assistant", "user"]);   // Verlauf beginnt mit user
+  assert.equal((await frag({ frage: "x" }, "https://boese.example")).status, 403);
+  assert.equal((await frag({ frage: "" })).status, 400);
+  for (let i = 0; i < 19; i++) await frag({ frage: "x" });
+  assert.equal((await frag({ frage: "x" })).status, 429);                // 21. Frage vom selben Anschluss
+  assert.equal((await frag({ frage: "x" }, undefined, "5.6.7.8")).status, 200);   // anderes Handy geht noch
+  assert.equal((await chat(new Request("https://x/frage", { method: "OPTIONS" }), env)).status, 204);
+  assert.equal((await frag({ frage: "x" }).then(() => chat(new Request("https://x/frage", { method: "POST", headers: { origin: "https://fcjeunessejunglinster.github.io" }, body: "{}" }), { }))).status, 503);
+  console.log("Chat-Test ok");
+}

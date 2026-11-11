@@ -216,6 +216,19 @@ tr.wir td:first-child{box-shadow:inset 4px 0 var(--rot)}
 .kal code{font-size:12px;overflow-wrap:anywhere;color:var(--leise)}
 .hinweis{padding:14px;color:var(--leise)}
 footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
+#chat{width:min(560px,100vw);height:min(720px,100dvh);max-height:100dvh;max-width:100vw;margin:auto;padding:0;border:0;border-radius:14px;background:var(--bg);color:var(--text);display:none;flex-direction:column}
+#chat[open]{display:flex}
+#chat::backdrop{background:rgba(0,0,0,.45)}
+@media (max-width:600px){#chat{border-radius:0;height:100dvh;width:100vw}}
+.chatkopf{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:var(--karte);border-bottom:1px solid var(--linie)}
+#chatVerlauf{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:85%;padding:9px 12px;border-radius:14px;line-height:1.45;white-space:normal;overflow-wrap:anywhere}
+.msg.ich{align-self:flex-end;background:var(--rot);color:#fff;border-bottom-right-radius:4px}
+.msg.ki{align-self:flex-start;background:var(--karte);border:1px solid var(--linie);border-bottom-left-radius:4px}
+.msg.ki a{color:inherit}
+.chathinweis{margin:0;padding:6px 14px;font-size:12px}
+#chatForm{display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--karte);border-top:1px solid var(--linie)}
+#chatFrage{flex:1;resize:none;font:inherit;font-size:16px;padding:8px 10px;border-radius:10px;border:1px solid var(--linie);background:var(--bg);color:var(--text)}
 .teilen{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px 22px}
 .teilen .knopf{font-size:16px;padding:12px 22px}
 .unten-knoepfe{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
@@ -239,13 +252,16 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 </div></header>
 <nav id="reiter"><div class="innen raster" id="knoepfe"></div></nav>
 <main><div class="innen" id="inhalt"><p class="hinweis">Lade …</p></div></main>
-<div class="teilen"><div class="unten-knoepfe"><a class="knopf" id="shop" href="https://form.jotform.com/242614644810352" target="_blank" rel="noopener"></a><button class="knopf" id="teilen" type="button"></button></div><span class="ok" id="teilenOk" aria-live="polite"></span></div>
+<div class="teilen"><div class="unten-knoepfe"><a class="knopf" id="shop" href="https://form.jotform.com/242614644810352" target="_blank" rel="noopener"></a><button class="knopf" id="teilen" type="button"></button><button class="knopf" id="chatAuf" type="button" hidden></button></div><span class="ok" id="teilenOk" aria-live="polite"></span></div>
+<dialog id="chat" aria-labelledby="chatTitel"><div class="chatkopf"><b id="chatTitel"></b><button type="button" class="knopf" id="chatZu"></button></div>
+<div id="chatVerlauf" aria-live="polite"></div><p class="leise chathinweis" id="chatHinweis"></p>
+<form id="chatForm"><textarea id="chatFrage" rows="2" maxlength="500"></textarea><button class="knopf" id="chatSenden" type="submit"></button></form></dialog>
 <details class="karte hilfe innen" id="hilfe"><summary id="hilfeTitel"></summary><div id="hilfeText"></div></details>
 <footer id="fuss"></footer>
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 f";
+const FASSUNG = "2026-11-11 g";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -295,6 +311,10 @@ const TEXTE = {
     kader2: { titel: "Kader", pos: { Goalkeeper: "Tor", Defender: "Abwehr", Midfielder: "Mittelfeld", Attacker: "Angriff" }, jahre: a => `${a} J.`, prof: { geb: "Geboren", in: "in", verl: "🚑 verletzt", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Spiele", se: "Startelf", min: "Minuten", t: "Tore", v: "Vorlagen", gk: "Gegentore", par: "Paraden", g: "Gelb", r: "Rot", note: "Note", keine: "Noch kein Einsatz in dieser Saison" }, quelle: d => `Kader: API-Football, Stand ${d}` },
     matchball: "⚽ Einen Spielball sponsern",
     spielfeld: k => `Spielfeld ${k}`,
+    chat: { knopf: "💬 Frag die App", titel: "Frag die App", platzhalter: "Deine Frage zum Verein …", senden: "Senden", schliessen: "Schließen",
+      hallo: "Hallo! Frag mich etwas zum FCJJ, z. B. „Wann spielt MIN 1 am Samstag?“ oder „Was kostet die Cotisation?“",
+      hinweis: "KI-Antwort (Claude), kann Fehler enthalten. Verbindlich sind Trainer und fcjj.lu. Deine Frage wird an Anthropic geschickt; gib keine persönlichen Daten ein.",
+      denkt: "Einen Moment …", fehler: "Das hat nicht geklappt. Bitte später nochmal versuchen.", limit: "Für heute sind keine Fragen mehr möglich. Morgen geht es wieder." },
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht aktives Mitglied"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -359,6 +379,10 @@ const TEXTE = {
     kader2: { titel: "Squads", pos: { Goalkeeper: "Goalkeepers", Defender: "Defenders", Midfielder: "Midfielders", Attacker: "Forwards" }, jahre: a => `${a} yrs`, prof: { geb: "Born", in: "in", verl: "🚑 injured", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Apps", se: "Starts", min: "Minutes", t: "Goals", v: "Assists", gk: "Conceded", par: "Saves", g: "Yellow", r: "Red", note: "Rating", keine: "No appearances this season yet" }, quelle: d => `Squads: API-Football, as of ${d}` },
     matchball: "⚽ Sponsor a match ball",
     spielfeld: k => `Pitch ${k}`,
+    chat: { knopf: "💬 Ask the app", titel: "Ask the app", platzhalter: "Your question about the club …", senden: "Send", schliessen: "Close",
+      hallo: "Hi! Ask me anything about FCJJ, e.g. “When does MIN 1 play on Saturday?” or “How much is the membership fee?”",
+      hinweis: "AI answer (Claude), may contain mistakes. Coaches and fcjj.lu are authoritative. Your question is sent to Anthropic; don't enter personal data.",
+      denkt: "One moment …", fehler: "That didn't work. Please try again later.", limit: "No more questions possible today. Try again tomorrow." },
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-active member"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -423,6 +447,10 @@ const TEXTE = {
     kader2: { titel: "Effectifs", pos: { Goalkeeper: "Gardiens", Defender: "Défenseurs", Midfielder: "Milieux", Attacker: "Attaquants" }, jahre: a => `${a} ans`, prof: { geb: "Né le", in: "à", verl: "🚑 blessé", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Matchs", se: "titulaire", min: "Minutes", t: "Buts", v: "Passes déc.", gk: "Buts encaissés", par: "Arrêts", g: "Jaunes", r: "Rouges", note: "Note", keine: "Pas encore joué cette saison" }, quelle: d => `Effectifs : API-Football, état au ${d}` },
     matchball: "⚽ Sponsoriser un ballon de match",
     spielfeld: k => `Terrain ${k}`,
+    chat: { knopf: "💬 Demande à l’app", titel: "Demande à l’app", platzhalter: "Ta question sur le club …", senden: "Envoyer", schliessen: "Fermer",
+      hallo: "Bonjour ! Pose-moi une question sur le FCJJ, p. ex. « Quand joue MIN 1 samedi ? » ou « Combien coûte la cotisation ? »",
+      hinweis: "Réponse d’IA (Claude), peut contenir des erreurs. Les entraîneurs et fcjj.lu font foi. Ta question est envoyée à Anthropic ; n’indique pas de données personnelles.",
+      denkt: "Un instant …", fehler: "Ça n’a pas marché. Merci de réessayer plus tard.", limit: "Plus de questions possibles aujourd’hui. Réessaie demain." },
     beitragTitel: "Cotisation", ausschluss: "Le non-paiement de la cotisation entraîne l’exclusion du club.", betraegeTitel: "Les cotisations s'élèvent à :", beitragArt: ["pour le 1er membre joueur", "pour le 2ème membre joueur", "à partir du 3ème membre joueur", "pour un membre non actif"], ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: ["Nous souhaitons profiter de cette occasion pour rappeler que le paiement de la cotisation est une condition préalable à la participation aux séances d’entraînement et aux matchs en tant que joueuse ou joueur.", "Il donne également droit à l’entrée gratuite aux matchs à domicile de nos équipes Seniors, ainsi qu’au droit de vote à l’Assemblée générale, conformément aux statuts du club."],
     links: "Liens utiles", linkListe: {
@@ -1297,6 +1325,83 @@ function knoepfe(now) {
 let COUNTDOWN = false;
 // #liveticker: gleich den Reiter der Seniors öffnen.
 if (location.hash === "#liveticker") merk.set("reiter", "");
+// ---- Chat „Frag die App“: Fragen gehen an den Cloudflare-Worker (Schlüssel für Claude nur dort, Tageslimits dort).
+// Die App schickt eine Zusammenfassung ihrer Daten mit, damit Claude Vereinsfragen beantworten kann.
+// Leer = Chat aus (Knopf versteckt). Adresse des Workers, z. B. https://fcjj.<konto>.workers.dev
+const CHAT_URL = "";
+let CHAT = [];   // Verlauf nur im Speicher: [{rolle: "user"|"assistant", text}]
+function chatKontext(now) {
+  const de = TEXTE.de, z = [], datum = d => new Intl.DateTimeFormat("de-DE", { timeZone: TZ, weekday: "short", day: "numeric", month: "numeric", year: "numeric" }).format(d);
+  const reiterName = AKTIV === "woche" ? "Unsere Woche" : D?.teams?.find(t => String(t.id) === AKTIV)?.reiter || AKTIV;
+  z.push(`Jetzt: ${datum(now)} ${uhr(now)} Uhr (Luxemburger Zeit). Sprache der App: ${LANG}. Geöffneter Reiter: ${reiterName}.`);
+  z.push("Verein: FC Jeunesse Junglinster (FCJJ), Junglinster, Luxemburg, gegründet 1935. Website https://fcjj.lu · Kontakt https://fcjj.lu/contact · Sekretariat secretaire@fcjj.lu · Vereinsshop https://form.jotform.com/242614644810352");
+  z.push("App: Daten der FLF (Spiele, Ergebnisse, Tabellen), Uhrzeit „offen“ = Anstoß noch nicht festgelegt. Kabinen gelten bei Heimspielen in Junglinster (Zahl = Kabinennummer).");
+  for (const t of D?.teams || []) {
+    const sp = eigeneSpiele(t), k = KABINEN[t.reiter];
+    const kommend = sp.filter(x => !vorbei(x, now) && new Date(x.d) - now < 21 * 864e5).slice(0, 4);
+    const letzte = sp.filter(x => vorbei(x, now) && now - new Date(x.d) < 30 * 864e5).slice(-3);
+    const zeile = x => `${datum(new Date(x.d))} ${offen(x) ? "Uhrzeit offen" : uhr(new Date(x.d))} ${x.heim ? "Heim" : "Auswärts"}: ${x.h.n} – ${x.a.n}`
+      + (x.erg && x.hs != null && (x.gespielt || x.forfait) ? ` ${x.hs}:${x.as}` : "") + (x.ort ? ` · Ort: ${x.ort}${platzAdresse(x.ort) ? " (" + platzAdresse(x.ort) + ")" : ""}` : "") + ` · ${x.klasse}`;
+    const tb = Object.values(D.klassen).filter(kl => t.klassen?.includes(kl.id) && kl.tabelle?.length).map(kl => {
+      const r = kl.tabelle.find(r => t.ids.includes(r.id)); return r ? `${kl.n}: Platz ${r.pl} von ${kl.tabelle.length}, ${r.pkt} Punkte (${r.s}S ${r.u}U ${r.nl}N, Tore ${r.t}:${r.g})` : "";
+    }).filter(Boolean);
+    z.push(`\n## ${t.reiter} (${t.alter || t.kat}, FLF-Name ${t.n})` + (k ? ` · Kabinen bei Heimspielen: FCJJ ${k[0]}, Gäste ${k[1]}` : "")
+      + (REGELN[t.kat] ? ` · Spielregeln ${REGELN_KAT[t.kat]}: ${new URL(REGELN[t.kat], location.href).href}` : "")
+      + (SPIELFELD[t.kat] ? ` · Spielfeld-Skizze ${SPIELFELD[t.kat].n}: in der App unter „Spielfeld“` : "")
+      + `\nNächste Spiele: ${kommend.length ? "\n- " + kommend.map(zeile).join("\n- ") : "keine in den nächsten 3 Wochen"}`
+      + (letzte.length ? `\nLetzte Spiele:\n- ${letzte.map(zeile).join("\n- ")}` : "") + (tb.length ? `\nTabelle: ${tb.join("; ")}` : ""));
+  }
+  const ev = kommendeEvents(now).slice(0, 12).map(e => `- ${sprachText(e.t)} (${eventDatum(e)})${e.fuer ? " für " + e.fuer : ""}${e.zusatz ? " – " + sprachText(e.zusatz) : ""}`);
+  if (ev.length) z.push("\n## Termine (Vereinsevents, LALUX Indoor Cup, Schulferien)\n" + ev.join("\n"));
+  const ft = FERIEN.feier.filter(f => f.tag >= tagKey(now)).slice(0, 4).map(f => `${f.tag} ${f.t}`);
+  if (ft.length) z.push("Feiertage: " + ft.join(", "));
+  const n = (D?.nati?.spiele || []).filter(x => !vorbei(x, now)).slice(0, 3).map(x => `${datum(new Date(x.d))} ${uhr(new Date(x.d))} ${x.h.n} – ${x.a.n}${x.ort ? " · " + x.ort : ""}`);
+  if (n.length) z.push("\n## Nationalmannschaft Luxemburg, nächste Spiele\n- " + n.join("\n- "));
+  z.push("\n## Cotisation (Mitgliedsbeitrag) 2026/27\n" + BEITRAEGE.map(([b, a]) => `- ${b} € ${de.beitragArt[a]}`).join("\n")
+    + `\nIBAN ${IBAN}. ${de.beitrag.join(" ")} ${de.ausschluss}`);
+  z.push("\n## Sportunfall\n" + de.unfall.text.join(" ").replace("{MAIL}", UNFALL_MAIL) + " " + de.unfall.frist + " Infos: " + UNFALL_INFO);
+  z.push("\n## Links\n" + LINKS.map(l => `- ${de.linkListe[l.key][0]}: ${typeof l.url === "string" ? new URL(l.url, location.href).href : l.url.de}`).join("\n")
+    + `\n- Jugendkommission (CDJ) beitreten: ${CDJ_URL}\n- Spielball sponsern (Seniors): https://fcjj.lu/matchball/seniors\n- Strategischer Plan der FLF 2027–2031: https://www.flf.lu/plan-strategique-83993v4`);
+  const w = warnAktiv(now); if (w.length) z.push("\n## Aktuelle Wetterwarnungen MeteoLux\n" + w.map(x => `- ${x.titel} (${warnRegion(x)}): ${x.text}`).join("\n"));
+  return z.join("\n").slice(0, 38000);
+}
+function chatText(t) {   // Antwort sicher anzeigen: Links klickbar, **fett**, Zeilen
+  return esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/https?:\/\/[^\s<)]+[^\s<).,;:!?]/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`).replace(/\n/g, "<br>");
+}
+function chatZeigen() {
+  const c = T().chat, v = document.getElementById("chatVerlauf");
+  v.innerHTML = `<div class="msg ki">${esc(c.hallo)}</div>` + CHAT.map(m => `<div class="msg ${m.rolle === "user" ? "ich" : "ki"}">${m.rolle === "user" ? esc(m.text).replace(/\n/g, "<br>") : chatText(m.text)}</div>`).join("");
+  v.scrollTop = v.scrollHeight;
+}
+function chatTexte() {
+  const c = T().chat, b = document.getElementById("chatAuf");
+  b.hidden = !CHAT_URL; b.textContent = c.knopf;
+  document.getElementById("chatTitel").textContent = c.titel; document.getElementById("chatZu").textContent = "✕ " + c.schliessen;
+  document.getElementById("chatHinweis").textContent = c.hinweis; document.getElementById("chatFrage").placeholder = c.platzhalter;
+  document.getElementById("chatSenden").textContent = c.senden;
+}
+document.addEventListener("click", e => {
+  if (e.target.closest("#chatAuf")) { chatZeigen(); document.getElementById("chat").showModal(); document.getElementById("chatFrage").focus(); }
+  if (e.target.closest("#chatZu")) document.getElementById("chat").close();
+});
+document.addEventListener("keydown", e => { if (e.target.id === "chatFrage" && e.key === "Enter" && !e.shiftKey) { e.preventDefault(); document.getElementById("chatForm").requestSubmit(); } });
+document.addEventListener("submit", async e => {
+  if (e.target.id !== "chatForm") return;
+  e.preventDefault();
+  const feld = document.getElementById("chatFrage"), knopf = document.getElementById("chatSenden"), frage = feld.value.trim();
+  if (!frage || knopf.disabled) return;
+  const c = T().chat, verlauf = CHAT.slice(-6);
+  CHAT.push({ rolle: "user", text: frage }); feld.value = ""; knopf.disabled = true; chatZeigen();
+  const v = document.getElementById("chatVerlauf"); v.insertAdjacentHTML("beforeend", `<div class="msg ki leise" id="chatDenkt">${esc(c.denkt)}</div>`); v.scrollTop = v.scrollHeight;
+  try {
+    const r = await fetch(CHAT_URL + "/frage", { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ frage, verlauf, lang: LANG, kontext: chatKontext(new Date()) }) });
+    const j = await r.json().catch(() => ({}));
+    CHAT.push({ rolle: "assistant", text: r.ok && j.antwort ? j.antwort : r.status === 429 ? c.limit : c.fehler });
+  } catch (x) { CHAT.push({ rolle: "assistant", text: c.fehler }); }
+  knopf.disabled = false; chatZeigen(); feld.focus();
+});
+
 function render() {
   if (location.hash === "#liveticker" && D?.nati?.spiele?.some(sp => FUPA_NATI[sp.id] && !vorbei(sp, new Date())) && !merk.get("reiter")) { AKTIV = "nati"; merk.set("reiter", AKTIV); }
   if (location.hash === "#liveticker" && D?.teams && !merk.get("reiter")) { const s = D.teams.find(t => FUPA_WIDGET[t.reiter]); if (s) { AKTIV = String(s.id); merk.set("reiter", AKTIV); } }
@@ -1319,6 +1424,7 @@ function render() {
   const L = ligaDa(AKTIV) ? LIGEN[AKTIV] : null;
   if (L) document.getElementById("unterzeile").textContent = L.name + (L.spiele[0] ? " · " + L.spiele[0].leagueSeason + "/" + String(L.spiele[0].leagueSeason + 1).slice(2) : "");
   if (AKTIV === "links") document.getElementById("unterzeile").textContent = T().links;
+  chatTexte();
   if (Date.now() - WARN.geholt > 15 * 60e3 || WARN.lang !== LANG) warnHolen();
   ferienHolen();
   document.getElementById("inhalt").innerHTML = warnHtml(now) + (t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : L ? ligaHtml(AKTIV, now) : AKTIV === "links" ? linksHtml() : wocheHtml(now));
