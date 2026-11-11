@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 i";
+const FASSUNG = "2026-11-11 j";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1328,7 +1328,7 @@ if (location.hash === "#liveticker") merk.set("reiter", "");
 // ---- Chat „Frag die App“: Fragen gehen an den Cloudflare-Worker (Schlüssel für Claude nur dort, Tageslimits dort).
 // Die App schickt eine Zusammenfassung ihrer Daten mit, damit Claude Vereinsfragen beantworten kann.
 // Leer = Chat aus (Knopf versteckt). Adresse des Workers, z. B. https://fcjj.<konto>.workers.dev
-const CHAT_URL = "";   // vorübergehend aus (11.11.2026), bis der Schlüssel im Worker fcjj1 funktioniert: https://fcjj1.gilles-emeringer.workers.dev
+const CHAT_URL = "https://fcjj1.gilles-emeringer.workers.dev";
 let CHAT = [];   // Verlauf nur im Speicher: [{rolle: "user"|"assistant", text}]
 function chatKontext(now) {
   const de = TEXTE.de, z = [], datum = d => new Intl.DateTimeFormat("de-DE", { timeZone: TZ, weekday: "short", day: "numeric", month: "numeric", year: "numeric" }).format(d);
