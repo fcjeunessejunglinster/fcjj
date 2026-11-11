@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 z10";
+const FASSUNG = "2026-11-11 z11";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1339,6 +1339,10 @@ if (location.hash === "#liveticker") merk.set("reiter", "");
 // Leer = Chat aus (Knopf versteckt). Adresse des Workers, z. B. https://fcjj.<konto>.workers.dev
 const CHAT_URL = "https://fcjj1.gilles-emeringer.workers.dev";
 let CHAT = [];   // Verlauf nur im Speicher: [{rolle: "user"|"assistant", text}]
+// Allgemeines Wissen für den Chat, ohne Ablaufdatum (vom Verein)
+const CHAT_WISSEN = [
+  "Journée de la commémoration nationale (nationaler Gedenktag in Luxemburg): jedes Jahr an dem Sonntag, der dem 10. Oktober am nächsten liegt. 2026 war das Sonntag, der 11. Oktober; 2027 ist es Sonntag, der 10. Oktober.",
+];
 // Termine und Infos, die nur der Chat kennt (nicht in der App angezeigt): [bis wann gültig (YYYY-MM-DD), Text]
 const CHAT_TERMINE = [
   ["2026-12-09", "Konferenz „Digitalisatioun am Veräin – 360 Grad“ (Digitalisierung im Sportverein), organisiert vom FC Jeunesse Junglinster: Mittwoch, 9. Dezember 2026 um 19:00 Uhr in der Buvette Op Fréinen, Junglinster (Fußballplatz). Für alle interessierten Vereine der Gemeinde Junglinster und Sportvereine aus der Umgebung; in dieser Form die erste Konferenz in Luxemburg zu den Bedürfnissen von Sportvereinen. Themen: Kommunikation, Mitgliederverwaltung, Verwaltung der Mitarbeiter/Ehrenamtlichen, Organisation, digitales Bezahlen, Cybersicherheit, Künstliche Intelligenz (KI) im Verein. Eintritt gratis, höchstens 30 Teilnehmer, Anmeldeschluss 30. November 2026, Anmeldung: https://fcjj.forms.app/anmeldeformular (Plätze begrenzt). Präsentation: Gilles Emeringer."],
@@ -1370,6 +1374,7 @@ function chatKontext(now) {
   }
   const ev = kommendeEvents(now).slice(0, 12).map(e => `- ${sprachText(e.t)} (${eventDatum(e)})${e.fuer ? " für " + e.fuer : ""}${e.zusatz ? " – " + (typeof e.zusatz === "string" ? e.zusatz : e.zusatz.de) : ""}${e.chat ? " – " + e.chat : ""}`);
   if (ev.length) z.push("\n## Termine (Vereinsevents, LALUX Indoor Cup, Schulferien)\n" + ev.join("\n"));
+  z.push("\n## Allgemeines Wissen\n" + CHAT_WISSEN.map(t => "- " + t).join("\n"));
   z.push("\n## Weitere Termine (nur für den Chat, vom Verein)\n" + CHAT_TERMINE.filter(([bis]) => bis >= tagKey(now)).map(([, t]) => "- " + t).join("\n"));
   const ft = FERIEN.feier.filter(f => f.tag >= tagKey(now)).slice(0, 4).map(f => `${f.tag} ${f.t}`);
   if (ft.length) z.push("Feiertage: " + ft.join(", "));
