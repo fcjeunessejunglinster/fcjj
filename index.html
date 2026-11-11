@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 m";
+const FASSUNG = "2026-11-11 n";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1191,7 +1191,7 @@ function natiHtml(now) {
   if (gespielt.length) html += `<details class="karte"><summary>${T().natiErg}</summary><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></details>`;
   html += natiAfHtml(!!g?.tabelle?.length);
   // Strategischer Plan der FLF (vom Verein, 10.11.2026)
-  html += `<details class="karte"><summary>FLF</summary><ul class="spiele linkliste"><li><a href="https://www.flf.lu/plan-strategique-83993v4" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().flfPlan[0])}</b><span>${esc(T().flfPlan[1])}</span></span><span class="lp">›</span></a></li></ul></details>`;
+  html += `<details class="karte"><summary>${esc(T().flfPlan[0])}</summary><ul class="spiele linkliste"><li><a href="https://www.flf.lu/plan-strategique-83993v4" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().flfPlan[0])}</b><span>${esc(T().flfPlan[1])}</span></span><span class="lp">›</span></a></li></ul></details>`;
   return html + `<p class="leise" style="text-align:center;margin:0">${T().natiQuelle}</p>`;
 }
 
