@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 z12";
+const FASSUNG = "2026-11-11 z13";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -311,7 +311,7 @@ const TEXTE = {
     kader2: { titel: "Kader", pos: { Goalkeeper: "Tor", Defender: "Abwehr", Midfielder: "Mittelfeld", Attacker: "Angriff" }, jahre: a => `${a} J.`, prof: { geb: "Geboren", in: "in", verl: "🚑 verletzt", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Spiele", se: "Startelf", min: "Minuten", t: "Tore", v: "Vorlagen", gk: "Gegentore", par: "Paraden", g: "Gelb", r: "Rot", note: "Note", keine: "Noch kein Einsatz in dieser Saison" }, quelle: d => `Kader: API-Football, Stand ${d}` },
     matchball: "⚽ Einen Spielball sponsern",
     spielfeld: k => `Spielfeld ${k}`,
-    chat: { knopf: "💬 Frag die App", titel: "Frag die App", platzhalter: "Deine Frage zum Verein …", senden: "Senden", schliessen: "Schließen",
+    chat: { knopf: "💬 Frag die App ⚽️", titel: "Frag die App", platzhalter: "Deine Frage zum Verein …", senden: "Senden", schliessen: "Schließen",
       hallo: "Hallo! Frag mich etwas zum FCJJ, z. B. „Wann spielt MIN 1 am Samstag?“ oder „Was kostet die Cotisation?“",
       hinweis: "KI-Antwort (Claude), kann Fehler enthalten. Verbindlich sind Trainer und fcjj.lu. Deine Frage wird an Anthropic geschickt; gib keine persönlichen Daten ein.",
       denkt: "Einen Moment …", fehler: "Das hat nicht geklappt. Bitte später nochmal versuchen.", limit: "Für heute sind keine Fragen mehr möglich. Morgen geht es wieder." },
@@ -380,7 +380,7 @@ const TEXTE = {
     kader2: { titel: "Squads", pos: { Goalkeeper: "Goalkeepers", Defender: "Defenders", Midfielder: "Midfielders", Attacker: "Forwards" }, jahre: a => `${a} yrs`, prof: { geb: "Born", in: "in", verl: "🚑 injured", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Apps", se: "Starts", min: "Minutes", t: "Goals", v: "Assists", gk: "Conceded", par: "Saves", g: "Yellow", r: "Red", note: "Rating", keine: "No appearances this season yet" }, quelle: d => `Squads: API-Football, as of ${d}` },
     matchball: "⚽ Sponsor a match ball",
     spielfeld: k => `Pitch ${k}`,
-    chat: { knopf: "💬 Ask the app", titel: "Ask the app", platzhalter: "Your question about the club …", senden: "Send", schliessen: "Close",
+    chat: { knopf: "💬 Ask the app ⚽️", titel: "Ask the app", platzhalter: "Your question about the club …", senden: "Send", schliessen: "Close",
       hallo: "Hi! Ask me anything about FCJJ, e.g. “When does MIN 1 play on Saturday?” or “How much is the membership fee?”",
       hinweis: "AI answer (Claude), may contain mistakes. Coaches and fcjj.lu are authoritative. Your question is sent to Anthropic; don't enter personal data.",
       denkt: "One moment …", fehler: "That didn't work. Please try again later.", limit: "No more questions possible today. Try again tomorrow." },
@@ -449,7 +449,7 @@ const TEXTE = {
     kader2: { titel: "Effectifs", pos: { Goalkeeper: "Gardiens", Defender: "Défenseurs", Midfielder: "Milieux", Attacker: "Attaquants" }, jahre: a => `${a} ans`, prof: { geb: "Né le", in: "à", verl: "🚑 blessé", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Matchs", se: "titulaire", min: "Minutes", t: "Buts", v: "Passes déc.", gk: "Buts encaissés", par: "Arrêts", g: "Jaunes", r: "Rouges", note: "Note", keine: "Pas encore joué cette saison" }, quelle: d => `Effectifs : API-Football, état au ${d}` },
     matchball: "⚽ Sponsoriser un ballon de match",
     spielfeld: k => `Terrain ${k}`,
-    chat: { knopf: "💬 Demande à l’app", titel: "Demande à l’app", platzhalter: "Ta question sur le club …", senden: "Envoyer", schliessen: "Fermer",
+    chat: { knopf: "💬 Demande à l’app ⚽️", titel: "Demande à l’app", platzhalter: "Ta question sur le club …", senden: "Envoyer", schliessen: "Fermer",
       hallo: "Bonjour ! Pose-moi une question sur le FCJJ, p. ex. « Quand joue MIN 1 samedi ? » ou « Combien coûte la cotisation ? »",
       hinweis: "Réponse d’IA (Claude), peut contenir des erreurs. Les entraîneurs et fcjj.lu font foi. Ta question est envoyée à Anthropic ; n’indique pas de données personnelles.",
       denkt: "Un instant …", fehler: "Ça n’a pas marché. Merci de réessayer plus tard.", limit: "Plus de questions possibles aujourd’hui. Réessaie demain." },
