@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 w";
+const FASSUNG = "2026-11-11 x";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -315,7 +315,7 @@ const TEXTE = {
       hallo: "Hallo! Frag mich etwas zum FCJJ, z. B. „Wann spielt MIN 1 am Samstag?“ oder „Was kostet die Cotisation?“",
       hinweis: "KI-Antwort (Claude), kann Fehler enthalten. Verbindlich sind Trainer und fcjj.lu. Deine Frage wird an Anthropic geschickt; gib keine persönlichen Daten ein.",
       denkt: "Einen Moment …", fehler: "Das hat nicht geklappt. Bitte später nochmal versuchen.", limit: "Für heute sind keine Fragen mehr möglich. Morgen geht es wieder." },
-    kontakt2: { titel: "Kontakt", jugend: "Alles zu den Jugendkategorien", sonst: "Alle anderen Fragen" },
+    kontakt2: { titel: "Kontakt", sport: "Sportliche Fragen (oder direkt beim Trainer)", jugend: "Alles zu den Jugendkategorien", sonst: "Alle anderen Fragen" },
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht spielendes Mitglied (Non-joueur, reduzierter Beitrag)"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Die Cotisation ist von jedem Mitglied – auch von Non-joueurs (reduzierter Beitrag von 120 €) – jedes Jahr zu Beginn der Saison zu zahlen.", "Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -384,7 +384,7 @@ const TEXTE = {
       hallo: "Hi! Ask me anything about FCJJ, e.g. “When does MIN 1 play on Saturday?” or “How much is the membership fee?”",
       hinweis: "AI answer (Claude), may contain mistakes. Coaches and fcjj.lu are authoritative. Your question is sent to Anthropic; don't enter personal data.",
       denkt: "One moment …", fehler: "That didn't work. Please try again later.", limit: "No more questions possible today. Try again tomorrow." },
-    kontakt2: { titel: "Contact", jugend: "Everything about the youth categories", sonst: "All other questions" },
+    kontakt2: { titel: "Contact", sport: "Sporting questions (or ask the coach directly)", jugend: "Everything about the youth categories", sonst: "All other questions" },
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-playing member (non-joueur, reduced fee)"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["Every member – including non-playing members (reduced fee of €120) – pays the membership fee each year at the start of the season.", "We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -453,7 +453,7 @@ const TEXTE = {
       hallo: "Bonjour ! Pose-moi une question sur le FCJJ, p. ex. « Quand joue MIN 1 samedi ? » ou « Combien coûte la cotisation ? »",
       hinweis: "Réponse d’IA (Claude), peut contenir des erreurs. Les entraîneurs et fcjj.lu font foi. Ta question est envoyée à Anthropic ; n’indique pas de données personnelles.",
       denkt: "Un instant …", fehler: "Ça n’a pas marché. Merci de réessayer plus tard.", limit: "Plus de questions possibles aujourd’hui. Réessaie demain." },
-    kontakt2: { titel: "Contact", jugend: "Tout ce qui concerne les catégories jeunes", sonst: "Toutes les autres questions" },
+    kontakt2: { titel: "Contact", sport: "Questions sportives (ou directement à l’entraîneur)", jugend: "Tout ce qui concerne les catégories jeunes", sonst: "Toutes les autres questions" },
     beitragTitel: "Cotisation", ausschluss: "Le non-paiement de la cotisation entraîne l’exclusion du club.", betraegeTitel: "Les cotisations s'élèvent à :", beitragArt: ["pour le 1er membre joueur", "pour le 2ème membre joueur", "à partir du 3ème membre joueur", "pour un membre non-joueur (cotisation réduite)"], ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: ["La cotisation est à payer par chaque membre – y compris les non-joueurs (montant réduit de 120 €) – chaque année au début de la saison.", "Nous souhaitons profiter de cette occasion pour rappeler que le paiement de la cotisation est une condition préalable à la participation aux séances d’entraînement et aux matchs en tant que joueuse ou joueur.", "Il donne également droit à l’entrée gratuite aux matchs à domicile de nos équipes Seniors, ainsi qu’au droit de vote à l’Assemblée générale, conformément aux statuts du club."],
     links: "Liens utiles", linkListe: {
@@ -752,9 +752,9 @@ const FELD_U11 = { bild: "bilder/spielfeld-u11.jpg", b: 1054, h: 1102, n: "U11 /
 const FELD_U13 = { bild: "bilder/spielfeld-u13.jpg", b: 808, h: 1036, n: "U13 / WU15" };
 const SPIELFELD = { U7: FELD_U7, U9: FELD_U9, U11: FELD_U11, WU11: FELD_U11, U13: FELD_U13, WU13: FELD_U11, WU15: FELD_U13 };   // WU13 auf dem U11-Feld (vom Verein, 11.11.2026)
 // Kontakt (vom Verein, 11.11.2026): Jugendkategorien → jeunes@fcjj.lu, alles andere → secretaire@fcjj.lu; Sportunfälle immer secretaire@
-const MAIL_JUGEND = "jeunes@fcjj.lu", MAIL_SEKRETARIAT = "secretaire@fcjj.lu";
+const MAIL_JUGEND = "jeunes@fcjj.lu", MAIL_SEKRETARIAT = "secretaire@fcjj.lu", MAIL_SPORT = "directeursportif@fcjj.lu";   // Sportliches: Trainer oder Directeur sportif
 const mailLi = (adr, text) => `<li><a href="mailto:${adr}"><span class="lk">✉️</span><span class="lt"><b>${adr}</b><span>${esc(text)}</span></span><span class="lp">›</span></a></li>`;
-const kontaktHtml = () => `<section class="karte"><h2>${esc(T().kontakt2.titel)}</h2><ul class="spiele linkliste">${mailLi(MAIL_JUGEND, T().kontakt2.jugend)}${mailLi(MAIL_SEKRETARIAT, T().kontakt2.sonst)}</ul></section>`;
+const kontaktHtml = () => `<section class="karte"><h2>${esc(T().kontakt2.titel)}</h2><ul class="spiele linkliste">${mailLi(MAIL_SPORT, T().kontakt2.sport)}${mailLi(MAIL_JUGEND, T().kontakt2.jugend)}${mailLi(MAIL_SEKRETARIAT, T().kontakt2.sonst)}</ul></section>`;
 const CDJ_URL = "https://fcjj.forms.app/membrecdj";
 const cdjHtml = () => `<section class="karte cdj"><a class="knopf" href="${CDJ_URL}" target="_blank" rel="noopener">${esc(T().cdj.knopf)}</a><span class="leise">${esc(T().cdj.text)}</span><span class="leise">✉️ ${esc(T().kontakt2.jugend)}: <a href="mailto:${MAIL_JUGEND}">${MAIL_JUGEND}</a></span></section>`;
 function sponsorHtml(sp) {
@@ -1343,6 +1343,7 @@ function chatKontext(now) {
   z.push(`Jetzt: ${datum(now)} ${uhr(now)} Uhr (Luxemburger Zeit). Sprache der App: ${LANG}. Geöffneter Reiter: ${reiterName}.`);
   z.push("Verein: FC Jeunesse Junglinster (FCJJ), Junglinster, Luxemburg, gegründet 1935. Website https://fcjj.lu · Kontakt https://fcjj.lu/contact · Vereinsshop https://form.jotform.com/242614644810352");
   z.push("KONTAKTREGEL (hat Vorrang): Für alles, was die Jugendkategorien betrifft (BAM, PUP, POU, MIN, SCO, CAD, JUN, WU11, WU13, WU15), an jeunes@fcjj.lu verweisen; für alles andere (Seniors, Réserves, Veteranen, Verein, Cotisation) an secretaire@fcjj.lu. Ausnahme: Sportunfälle (Meldung C.S.M.S.) gehen immer an secretaire@fcjj.lu, auch bei Jugendspielern.");
+  z.push("SPORTLICHE FRAGEN (vom Verein, 11.11.2026, hat Vorrang vor der Kontaktregel): Für alle sportlichen Fragen (Training, Einteilung in Mannschaften/Kategorien, Spielzeit, Positionen, Entwicklung, Probetraining) bitte an den Trainer oder an directeursportif@fcjj.lu wenden.");
   z.push("SPIELORGANISATION UND TRAINER (vom Verein, 11.11.2026): Für Fragen zur Spielorganisation (Aufgebot/Convocation, Zu- und Absagen, Treffpunkt, Abfahrt, Fahrgemeinschaften, Trikots) und für die Kommunikation mit dem Trainer bitte die App SportEasy benutzen. Die FCJJ-App kennt keine Trainer, Aufgebote oder Treffpunkte; verweise dafür auf SportEasy. Jeder Spieler bekommt eine persönliche Einladung auf SportEasy in seine Mannschaft (es gibt keinen allgemeinen Link). Wer keine Einladung bekommen hat: Jugendkategorien → jeunes@fcjj.lu, sonst secretaire@fcjj.lu.");
   z.push("App: Daten der FLF (Spiele, Ergebnisse, Tabellen), Uhrzeit „offen“ = Anstoß noch nicht festgelegt. Kabinen gelten bei Heimspielen in Junglinster (Zahl = Kabinennummer).");
   for (const t of D?.teams || []) {
