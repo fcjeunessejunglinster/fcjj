@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-11T00:43:03.614Z",
+ "stand": "2026-11-11T11:18:49.237Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -370,6 +370,7 @@
    "n": "Jeunesse Junglinster",
    "kat": "RES",
    "klassen": [
+    19555,
     19563,
     19509,
     18924,
@@ -10413,7 +10414,7 @@
     },
     {
      "id": 6685085,
-     "d": "2026-11-29T00:00:01+01:00",
+     "d": "2026-11-29T10:30:00+01:00",
      "tag": 8,
      "h": {
       "id": 46194,
@@ -10428,24 +10429,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Grevenmacher, synth.)"
-    },
-    {
-     "id": 6685083,
-     "d": "2026-11-29T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 46337,
-      "n": "Union Mertert-Wasserbillig"
-     },
-     "a": {
-      "id": 45524,
-      "n": "Daring Echternach I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain au Parc (Mertert, synth.)"
     },
     {
      "id": 6685084,
@@ -10464,6 +10447,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Mensdorf, synth.)"
+    },
+    {
+     "id": 6685083,
+     "d": "2026-11-29T10:30:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 46337,
+      "n": "Union Mertert-Wasserbillig"
+     },
+     "a": {
+      "id": 45524,
+      "n": "Daring Echternach I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain au Parc (Mertert, synth.)"
     },
     {
      "id": 6685081,
@@ -11124,60 +11125,6 @@
      "ort": "Stade Prince Jean (Luxembourg, synth.)"
     },
     {
-     "id": 6689081,
-     "d": "2026-11-29T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 45838,
-      "n": "ENT Jeunesse Stengefort/Käerch II"
-     },
-     "a": {
-      "id": 45740,
-      "n": "Tricolore Gasperich II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Demy Steichen (Steinfort)"
-    },
-    {
-     "id": 6689082,
-     "d": "2026-11-29T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 46212,
-      "n": "FC Lorentzweiler II"
-     },
-     "a": {
-      "id": 44969,
-      "n": "Alliance Äischdall Hobscheid-Eischen"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Lorentzweiler, synth.)"
-    },
-    {
-     "id": 6689084,
-     "d": "2026-11-29T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 44907,
-      "n": "Jeunesse Junglinster II"
-     },
-     "a": {
-      "id": 46391,
-      "n": "AS Red Black Luxembourg II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Junglinster, synth.)"
-    },
-    {
      "id": 6689085,
      "d": "2026-11-29T00:00:01+01:00",
      "tag": 8,
@@ -11196,6 +11143,42 @@
      "ort": "Terrain 2 (Walferdange, synth.)"
     },
     {
+     "id": 6689082,
+     "d": "2026-11-29T09:30:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 46212,
+      "n": "FC Lorentzweiler II"
+     },
+     "a": {
+      "id": 44969,
+      "n": "Alliance Äischdall Hobscheid-Eischen"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Lorentzweiler, synth.)"
+    },
+    {
+     "id": 6689084,
+     "d": "2026-11-29T09:30:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 44907,
+      "n": "Jeunesse Junglinster II"
+     },
+     "a": {
+      "id": 46391,
+      "n": "AS Red Black Luxembourg II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
      "id": 6689083,
      "d": "2026-11-29T10:30:00+01:00",
      "tag": 8,
@@ -11212,6 +11195,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Beggen, synth.)"
+    },
+    {
+     "id": 6689081,
+     "d": "2026-11-29T10:30:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 45838,
+      "n": "ENT Jeunesse Stengefort/Käerch II"
+     },
+     "a": {
+      "id": 45740,
+      "n": "Tricolore Gasperich II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Demy Steichen (Steinfort)"
     }
    ],
    "start": "2026-09-27T10:30:00+02:00"
@@ -11729,7 +11730,7 @@
     },
     {
      "id": 6690081,
-     "d": "2026-11-29T00:00:01+01:00",
+     "d": "2026-11-29T09:30:00+01:00",
      "tag": 8,
      "h": {
       "id": 46172,
@@ -11747,7 +11748,7 @@
     },
     {
      "id": 6690085,
-     "d": "2026-11-29T00:00:01+01:00",
+     "d": "2026-11-29T09:30:00+01:00",
      "tag": 8,
      "h": {
       "id": 45325,
@@ -11765,7 +11766,7 @@
     },
     {
      "id": 6690084,
-     "d": "2026-11-29T00:00:01+01:00",
+     "d": "2026-11-29T09:30:00+01:00",
      "tag": 8,
      "h": {
       "id": 46376,
@@ -11783,7 +11784,7 @@
     },
     {
      "id": 6690083,
-     "d": "2026-11-29T00:00:01+01:00",
+     "d": "2026-11-29T10:30:00+01:00",
      "tag": 8,
      "h": {
       "id": 45966,
@@ -12314,24 +12315,6 @@
      "ort": "Terrain Op Birkelt (Larochette, synth.)"
     },
     {
-     "id": 6714085,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 45663,
-      "n": "Blo-Wäiss Medernach II"
-     },
-     "a": {
-      "id": 45601,
-      "n": "Marisca Mersch III"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Stegen, synth.)"
-    },
-    {
      "id": 6714081,
      "d": "2026-11-28T11:00:00+01:00",
      "tag": 8,
@@ -12384,6 +12367,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Parc des Sports (Diekirch, synth.)"
+    },
+    {
+     "id": 6714085,
+     "d": "2026-11-28T15:00:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 45663,
+      "n": "Blo-Wäiss Medernach II"
+     },
+     "a": {
+      "id": 45601,
+      "n": "Marisca Mersch III"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Stegen, synth.)"
     }
    ],
    "start": "2026-09-26T11:00:00+02:00"
@@ -13026,24 +13027,6 @@
      "ort": "Terrain Ralingen (synth.)"
     },
     {
-     "id": 6716084,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 46196,
-      "n": "CS Grevenmacher I"
-     },
-     "a": {
-      "id": 44902,
-      "n": "Jeunesse Junglinster I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Grevenmacher, synth.)"
-    },
-    {
      "id": 6716085,
      "d": "2026-11-28T00:00:01+01:00",
      "tag": 8,
@@ -13062,40 +13045,22 @@
      "ort": "Am Ga (Wormeldange, synth.)"
     },
     {
-     "id": 6716083,
-     "d": "2026-11-28T00:00:01+01:00",
+     "id": 6716084,
+     "d": "2026-11-28T11:00:00+01:00",
      "tag": 8,
      "h": {
-      "id": 45931,
-      "n": "FC Munsbach I"
+      "id": 46196,
+      "n": "CS Grevenmacher I"
      },
      "a": {
-      "id": 46271,
-      "n": "ENT Canach/Mensdorf I"
+      "id": 44902,
+      "n": "Jeunesse Junglinster I"
      },
      "hs": null,
      "as": null,
      "gespielt": false,
      "forfait": false,
-     "ort": "Terrain Munsbach (synth.)"
-    },
-    {
-     "id": 6716082,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 46278,
-      "n": "Union Mertert-Wasserbillig I"
-     },
-     "a": {
-      "id": 45523,
-      "n": "Daring Echternach I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain au Parc (Mertert, synth.)"
+     "ort": "Terrain 2 (Grevenmacher, synth.)"
     },
     {
      "id": 6716081,
@@ -13114,6 +13079,42 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Berbourg, synth.)"
+    },
+    {
+     "id": 6716083,
+     "d": "2026-11-28T11:00:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 45931,
+      "n": "FC Munsbach I"
+     },
+     "a": {
+      "id": 46271,
+      "n": "ENT Canach/Mensdorf I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Munsbach (synth.)"
+    },
+    {
+     "id": 6716082,
+     "d": "2026-11-28T15:00:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 46278,
+      "n": "Union Mertert-Wasserbillig I"
+     },
+     "a": {
+      "id": 45523,
+      "n": "Daring Echternach I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain au Parc (Mertert, synth.)"
     }
    ],
    "start": "2026-09-26T16:00:00+02:00"
@@ -13630,42 +13631,6 @@
      "ort": "Stade Josy Barthel II (synth.)"
     },
     {
-     "id": 6720085,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 46210,
-      "n": "FC Lorentzweiler II"
-     },
-     "a": {
-      "id": 46142,
-      "n": "Red Star Merl-Belair III"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Lorentzweiler, synth.)"
-    },
-    {
-     "id": 6720083,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 45932,
-      "n": "FC Munsbach II"
-     },
-     "a": {
-      "id": 45968,
-      "n": "Swift Hesperange II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Munsbach (synth.)"
-    },
-    {
      "id": 6720084,
      "d": "2026-11-28T00:00:01+01:00",
      "tag": 8,
@@ -13684,8 +13649,26 @@
      "ort": "Terrain 2 (Walferdange, synth.)"
     },
     {
+     "id": 6720083,
+     "d": "2026-11-28T10:00:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 45932,
+      "n": "FC Munsbach II"
+     },
+     "a": {
+      "id": 45968,
+      "n": "Swift Hesperange II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Munsbach (synth.)"
+    },
+    {
      "id": 6720081,
-     "d": "2026-11-28T00:00:01+01:00",
+     "d": "2026-11-28T10:30:00+01:00",
      "tag": 8,
      "h": {
       "id": 45891,
@@ -13700,6 +13683,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain Carrière (Senningerberg, synth.)"
+    },
+    {
+     "id": 6720085,
+     "d": "2026-11-28T14:00:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 46210,
+      "n": "FC Lorentzweiler II"
+     },
+     "a": {
+      "id": 46142,
+      "n": "Red Star Merl-Belair III"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Lorentzweiler, synth.)"
     }
    ],
    "start": "2026-09-26T15:00:00+02:00"
@@ -16743,6 +16744,24 @@
      "gespielt": true,
      "forfait": false,
      "ort": "Terrain 1 (Junglinster)"
+    },
+    {
+     "id": 9030077,
+     "d": "2026-11-17T20:00:00+01:00",
+     "tag": 17,
+     "h": {
+      "id": 44590,
+      "n": "FC Munsbach"
+     },
+     "a": {
+      "id": 44722,
+      "n": "Jeunesse Junglinster"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Munsbach (synth.)"
     }
    ],
    "start": "2026-07-11T19:00:00+02:00"
@@ -20132,7 +20151,7 @@
     },
     {
      "id": 6231031,
-     "d": "2026-11-29T00:00:01+01:00",
+     "d": "2026-11-29T11:00:00+01:00",
      "tag": 3,
      "h": {
       "id": 46415,
@@ -20150,7 +20169,7 @@
     },
     {
      "id": 6231033,
-     "d": "2026-11-29T00:00:01+01:00",
+     "d": "2026-11-29T11:00:00+01:00",
      "tag": 3,
      "h": {
       "id": 45153,
@@ -20168,7 +20187,7 @@
     },
     {
      "id": 6231032,
-     "d": "2026-11-29T00:15:00+01:00",
+     "d": "2026-11-29T11:00:00+01:00",
      "tag": 3,
      "h": {
       "id": 45293,
@@ -20484,26 +20503,8 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
-     "id": 6253032,
-     "d": "2026-11-29T00:15:00+01:00",
-     "tag": 3,
-     "h": {
-      "id": 45771,
-      "n": "FC Blo-Wäiss Izeg"
-     },
-     "a": {
-      "id": 44729,
-      "n": "Jeunesse Junglinster"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Albert Kongs (Itzig)"
-    },
-    {
      "id": 6253031,
-     "d": "2026-11-29T01:30:00+01:00",
+     "d": "2026-11-29T11:00:00+01:00",
      "tag": 3,
      "h": {
       "id": 46034,
@@ -20521,7 +20522,7 @@
     },
     {
      "id": 6253033,
-     "d": "2026-11-29T01:30:00+01:00",
+     "d": "2026-11-29T11:00:00+01:00",
      "tag": 3,
      "h": {
       "id": 45389,
@@ -20536,6 +20537,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain Munsbach (synth.)"
+    },
+    {
+     "id": 6253032,
+     "d": "2026-11-29T11:30:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 45771,
+      "n": "FC Blo-Wäiss Izeg"
+     },
+     "a": {
+      "id": 44729,
+      "n": "Jeunesse Junglinster"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Itzig, synth.)"
     },
     {
      "id": 6253043,
@@ -21310,26 +21329,8 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
-     "id": 3300032,
-     "d": "2026-11-29T00:00:01+01:00",
-     "tag": 3,
-     "h": {
-      "id": 46309,
-      "n": "FC Kehlen"
-     },
-     "a": {
-      "id": 46231,
-      "n": "Avenir Beggen"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Kehlen, synth.)"
-    },
-    {
      "id": 3300033,
-     "d": "2026-11-29T01:15:00+01:00",
+     "d": "2026-11-29T11:00:00+01:00",
      "tag": 3,
      "h": {
       "id": 45328,
@@ -21347,7 +21348,7 @@
     },
     {
      "id": 3300031,
-     "d": "2026-11-29T01:15:00+01:00",
+     "d": "2026-11-29T14:00:00+01:00",
      "tag": 3,
      "h": {
       "id": 44742,
@@ -21362,6 +21363,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 3300032,
+     "d": "2026-11-29T16:00:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 46309,
+      "n": "FC Kehlen"
+     },
+     "a": {
+      "id": 46231,
+      "n": "Avenir Beggen"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Kehlen, synth.)"
     },
     {
      "id": 3300041,
@@ -21663,24 +21682,6 @@
      "ort": "Terrain Carrière (Senningerberg, synth.)"
     },
     {
-     "id": 6316033,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 3,
-     "h": {
-      "id": 44734,
-      "n": "Jeunesse Junglinster I"
-     },
-     "a": {
-      "id": 45769,
-      "n": "ENT Izeg/Sandweiler I"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Junglinster, synth.)"
-    },
-    {
      "id": 6316031,
      "d": "2026-11-28T01:00:00+01:00",
      "tag": 3,
@@ -21715,6 +21716,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Berbourg, synth.)"
+    },
+    {
+     "id": 6316033,
+     "d": "2026-11-28T18:00:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 44734,
+      "n": "Jeunesse Junglinster I"
+     },
+     "a": {
+      "id": 45769,
+      "n": "ENT Izeg/Sandweiler I"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
      "id": 6316043,
@@ -22016,8 +22035,26 @@
      "ort": "Terrain 2 (Lorentzweiler, synth.)"
     },
     {
+     "id": 6324033,
+     "d": "2026-11-28T15:00:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 46268,
+      "n": "ENT Canach/Mensdorf/Munsbach II"
+     },
+     "a": {
+      "id": 46758,
+      "n": "ENT Ënnersauer-Mëllerdall II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Canach, synth.)"
+    },
+    {
      "id": 6324031,
-     "d": "2026-11-28T01:00:00+01:00",
+     "d": "2026-11-28T16:30:00+01:00",
      "tag": 3,
      "h": {
       "id": 46189,
@@ -22035,7 +22072,7 @@
     },
     {
      "id": 6324032,
-     "d": "2026-11-28T01:00:00+01:00",
+     "d": "2026-11-28T16:30:00+01:00",
      "tag": 3,
      "h": {
       "id": 45290,
@@ -22050,24 +22087,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Henri Bausch (Steinsel, synth.)"
-    },
-    {
-     "id": 6324033,
-     "d": "2026-11-28T15:00:00+01:00",
-     "tag": 3,
-     "h": {
-      "id": 46268,
-      "n": "ENT Canach/Mensdorf/Munsbach II"
-     },
-     "a": {
-      "id": 46758,
-      "n": "ENT Ënnersauer-Mëllerdall II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Canach, synth.)"
     },
     {
      "id": 6324042,
@@ -22388,7 +22407,7 @@
     },
     {
      "id": 6345033,
-     "d": "2026-11-28T00:00:01+01:00",
+     "d": "2026-11-28T14:30:00+01:00",
      "tag": 3,
      "h": {
       "id": 44755,
@@ -22406,7 +22425,7 @@
     },
     {
      "id": 6345032,
-     "d": "2026-11-28T01:30:00+01:00",
+     "d": "2026-11-28T16:00:00+01:00",
      "tag": 3,
      "h": {
       "id": 44738,
@@ -22721,42 +22740,6 @@
      "ort": "Terrain au Parc (Mertert, synth.)"
     },
     {
-     "id": 6353031,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 3,
-     "h": {
-      "id": 45896,
-      "n": "US Hostert II"
-     },
-     "a": {
-      "id": 46201,
-      "n": "US Moutfort-Medingen"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Carrière (Senningerberg, synth.)"
-    },
-    {
-     "id": 6353032,
-     "d": "2026-11-28T01:30:00+01:00",
-     "tag": 3,
-     "h": {
-      "id": 44739,
-      "n": "Jeunesse Junglinster II"
-     },
-     "a": {
-      "id": 46367,
-      "n": "ENT UMW/Berbourg/Biwer II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Junglinster, synth.)"
-    },
-    {
      "id": 6353033,
      "d": "2026-11-28T01:30:00+01:00",
      "tag": 3,
@@ -22773,6 +22756,42 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Prince Henri (Walferdange)"
+    },
+    {
+     "id": 6353032,
+     "d": "2026-11-28T14:00:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 44739,
+      "n": "Jeunesse Junglinster II"
+     },
+     "a": {
+      "id": 46367,
+      "n": "ENT UMW/Berbourg/Biwer II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 6353031,
+     "d": "2026-11-28T14:00:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 45896,
+      "n": "US Hostert II"
+     },
+     "a": {
+      "id": 46201,
+      "n": "US Moutfort-Medingen"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Carrière (Senningerberg, synth.)"
     },
     {
      "id": 6353042,
@@ -23074,26 +23093,8 @@
      "ort": "Terrain 2 (Lintgen, synth.)"
     },
     {
-     "id": 6358032,
-     "d": "2026-11-28T00:00:01+01:00",
-     "tag": 3,
-     "h": {
-      "id": 46216,
-      "n": "FC Lorentzweiler II"
-     },
-     "a": {
-      "id": 46179,
-      "n": "Blo-Wäiss Medernach II"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Lorentzweiler, synth.)"
-    },
-    {
      "id": 6358033,
-     "d": "2026-11-28T00:00:01+01:00",
+     "d": "2026-11-28T14:00:00+01:00",
      "tag": 3,
      "h": {
       "id": 45596,
@@ -23111,7 +23112,7 @@
     },
     {
      "id": 6358031,
-     "d": "2026-11-28T00:00:01+01:00",
+     "d": "2026-11-28T16:30:00+01:00",
      "tag": 3,
      "h": {
       "id": 44636,
@@ -23126,6 +23127,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Lintgen, synth.)"
+    },
+    {
+     "id": 6358032,
+     "d": "2026-11-28T17:30:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 46216,
+      "n": "FC Lorentzweiler II"
+     },
+     "a": {
+      "id": 46179,
+      "n": "Blo-Wäiss Medernach II"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Lorentzweiler, synth.)"
     },
     {
      "id": 6358042,
@@ -23380,7 +23399,7 @@
     },
     {
      "id": 6359031,
-     "d": "2026-11-28T00:00:01+01:00",
+     "d": "2026-11-28T14:30:00+01:00",
      "tag": 3,
      "h": {
       "id": 46193,
@@ -23393,7 +23412,8 @@
      "hs": null,
      "as": null,
      "gespielt": false,
-     "forfait": false
+     "forfait": false,
+     "ort": "Terrain 2 (Grevenmacher, synth.)"
     },
     {
      "id": 6359033,
