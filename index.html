@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 z16";
+const FASSUNG = "2026-11-11 z17";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1357,7 +1357,7 @@ function chatKontext(now) {
   z.push("Verein: FC Jeunesse Junglinster (FCJJ), Junglinster, Luxemburg, gegründet 1935. Website https://fcjj.lu · Kontakt https://fcjj.lu/contact · Vereinsshop https://form.jotform.com/242614644810352");
   z.push("KONTAKTREGEL (hat Vorrang): Für alles, was die Jugendkategorien betrifft (BAM, PUP, POU, MIN, SCO, CAD, JUN, WU11, WU13, WU15), an jeunes@fcjj.lu verweisen; für alles andere (Seniors, Réserves, Veteranen, Verein, Cotisation) an secretaire@fcjj.lu. Ausnahme: Sportunfälle (Meldung C.S.M.S.) gehen immer an secretaire@fcjj.lu, auch bei Jugendspielern.");
   z.push("SPORTLICHE FRAGEN (vom Verein, 11.11.2026, hat Vorrang vor der Kontaktregel): Für alle sportlichen Fragen (Training, Einteilung in Mannschaften/Kategorien, Spielzeit, Positionen, Entwicklung, Probetraining) bitte an den Trainer oder an directeursportif@fcjj.lu wenden.");
-  z.push("SPIELORGANISATION UND TRAINER (vom Verein, 11.11.2026): Für Fragen zur Spielorganisation (Aufgebot/Convocation, Zu- und Absagen, Treffpunkt, Abfahrt, Fahrgemeinschaften, Trikots) und für die Kommunikation mit dem Trainer bitte die App SportEasy benutzen. Die FCJJ-App kennt keine Trainer, Aufgebote oder Treffpunkte; verweise dafür auf SportEasy. SportEasy wird für die sportliche Organisation und die Kommunikation zwischen Spielern, Trainern und Eltern benutzt. Zugang zu SportEasy bekommt man nach der Einschreibung per E-Mail-Einladung; jeder Spieler wird persönlich in seine Mannschaft eingeladen (es gibt keinen allgemeinen Link). Wer keine Einladung bekommen hat: Jugendkategorien → jeunes@fcjj.lu, sonst secretaire@fcjj.lu.");
+  z.push("SPIELORGANISATION UND TRAINER (vom Verein, 11.11.2026): Für Fragen zur Spielorganisation (Aufgebot/Convocation, Zu- und Absagen, Treffpunkt, Abfahrt, Fahrgemeinschaften, Trikots) und für die Kommunikation mit dem Trainer bitte die App SportEasy benutzen. Die FCJJ-App kennt keine Trainer, Aufgebote oder Treffpunkte; verweise dafür auf SportEasy. SportEasy wird für die sportliche Organisation und die Kommunikation zwischen Spielern, Trainern und Eltern benutzt. Zugang zu SportEasy bekommt man nach der Einschreibung per E-Mail-Einladung; jeder Spieler wird persönlich in seine Mannschaft eingeladen (es gibt keinen allgemeinen Link). Wer keine Einladung bekommen hat, meldet sich bei directeursportif@fcjj.lu (gilt für alle Mannschaften, auch die Jugend).");
   z.push("App: Daten der FLF (Spiele, Ergebnisse, Tabellen), Uhrzeit „offen“ = Anstoß noch nicht festgelegt. Kabinen gelten bei Heimspielen in Junglinster (Zahl = Kabinennummer).");
   for (const t of D?.teams || []) {
     const sp = eigeneSpiele(t), k = KABINEN[t.reiter];
