@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 z19";
+const FASSUNG = "2026-11-11 z20";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -311,8 +311,8 @@ const TEXTE = {
     kader2: { titel: "Kader", pos: { Goalkeeper: "Tor", Defender: "Abwehr", Midfielder: "Mittelfeld", Attacker: "Angriff" }, jahre: a => `${a} J.`, prof: { geb: "Geboren", in: "in", verl: "🚑 verletzt", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Spiele", se: "Startelf", min: "Minuten", t: "Tore", v: "Vorlagen", gk: "Gegentore", par: "Paraden", g: "Gelb", r: "Rot", note: "Note", keine: "Noch kein Einsatz in dieser Saison" }, quelle: d => `Kader: API-Football, Stand ${d}` },
     matchball: "⚽ Einen Spielball sponsern",
     spielfeld: k => `Spielfeld ${k}`,
-    chat: { knopf: "💬 Frag die App ⚽️", titel: "Frag die App", platzhalter: "Deine Frage zum Verein …", senden: "Senden", schliessen: "Schließen",
-      hallo: "Hallo! Frag mich etwas zum FCJJ, z. B. „Wann spielt MIN 1 am Samstag?“ oder „Was kostet die Cotisation?“",
+    chat: { knopf: "💬 Frag Sami ⚽️", titel: "Frag Sami", platzhalter: "Deine Frage zum Verein …", senden: "Senden", schliessen: "Schließen",
+      hallo: "Hallo, ich bin Sami! Frag mich etwas zum FCJJ, z. B. „Wann spielt MIN 1 am Samstag?“ oder „Was kostet die Cotisation?“",
       hinweis: "KI-Antwort (Claude), kann Fehler enthalten. Verbindlich sind Trainer und fcjj.lu. Deine Frage wird an Anthropic geschickt; gib keine persönlichen Daten ein.",
       denkt: "Einen Moment …", fehler: "Das hat nicht geklappt. Bitte später nochmal versuchen.", limit: "Für heute sind keine Fragen mehr möglich. Morgen geht es wieder." },
     kontakt2: { titel: "Kontakt", sport: "Sportliche Fragen (oder direkt beim Trainer)", jugend: "Alles zu den Jugendkategorien", sonst: "Alle anderen Fragen" },
@@ -380,8 +380,8 @@ const TEXTE = {
     kader2: { titel: "Squads", pos: { Goalkeeper: "Goalkeepers", Defender: "Defenders", Midfielder: "Midfielders", Attacker: "Forwards" }, jahre: a => `${a} yrs`, prof: { geb: "Born", in: "in", verl: "🚑 injured", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Apps", se: "Starts", min: "Minutes", t: "Goals", v: "Assists", gk: "Conceded", par: "Saves", g: "Yellow", r: "Red", note: "Rating", keine: "No appearances this season yet" }, quelle: d => `Squads: API-Football, as of ${d}` },
     matchball: "⚽ Sponsor a match ball",
     spielfeld: k => `Pitch ${k}`,
-    chat: { knopf: "💬 Ask the app ⚽️", titel: "Ask the app", platzhalter: "Your question about the club …", senden: "Send", schliessen: "Close",
-      hallo: "Hi! Ask me anything about FCJJ, e.g. “When does MIN 1 play on Saturday?” or “How much is the membership fee?”",
+    chat: { knopf: "💬 Ask Sami ⚽️", titel: "Ask Sami", platzhalter: "Your question about the club …", senden: "Send", schliessen: "Close",
+      hallo: "Hi, I’m Sami! Ask me anything about FCJJ, e.g. “When does MIN 1 play on Saturday?” or “How much is the membership fee?”",
       hinweis: "AI answer (Claude), may contain mistakes. Coaches and fcjj.lu are authoritative. Your question is sent to Anthropic; don't enter personal data.",
       denkt: "One moment …", fehler: "That didn't work. Please try again later.", limit: "No more questions possible today. Try again tomorrow." },
     kontakt2: { titel: "Contact", sport: "Sporting questions (or ask the coach directly)", jugend: "Everything about the youth categories", sonst: "All other questions" },
@@ -449,8 +449,8 @@ const TEXTE = {
     kader2: { titel: "Effectifs", pos: { Goalkeeper: "Gardiens", Defender: "Défenseurs", Midfielder: "Milieux", Attacker: "Attaquants" }, jahre: a => `${a} ans`, prof: { geb: "Né le", in: "à", verl: "🚑 blessé", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Matchs", se: "titulaire", min: "Minutes", t: "Buts", v: "Passes déc.", gk: "Buts encaissés", par: "Arrêts", g: "Jaunes", r: "Rouges", note: "Note", keine: "Pas encore joué cette saison" }, quelle: d => `Effectifs : API-Football, état au ${d}` },
     matchball: "⚽ Sponsoriser un ballon de match",
     spielfeld: k => `Terrain ${k}`,
-    chat: { knopf: "💬 Demande à l’app ⚽️", titel: "Demande à l’app", platzhalter: "Ta question sur le club …", senden: "Envoyer", schliessen: "Fermer",
-      hallo: "Bonjour ! Pose-moi une question sur le FCJJ, p. ex. « Quand joue MIN 1 samedi ? » ou « Combien coûte la cotisation ? »",
+    chat: { knopf: "💬 Demande à Sami ⚽️", titel: "Demande à Sami", platzhalter: "Ta question sur le club …", senden: "Envoyer", schliessen: "Fermer",
+      hallo: "Bonjour, je suis Sami ! Pose-moi une question sur le FCJJ, p. ex. « Quand joue MIN 1 samedi ? » ou « Combien coûte la cotisation ? »",
       hinweis: "Réponse d’IA (Claude), peut contenir des erreurs. Les entraîneurs et fcjj.lu font foi. Ta question est envoyée à Anthropic ; n’indique pas de données personnelles.",
       denkt: "Un instant …", fehler: "Ça n’a pas marché. Merci de réessayer plus tard.", limit: "Plus de questions possibles aujourd’hui. Réessaie demain." },
     kontakt2: { titel: "Contact", sport: "Questions sportives (ou directement à l’entraîneur)", jugend: "Tout ce qui concerne les catégories jeunes", sonst: "Toutes les autres questions" },
@@ -1334,7 +1334,7 @@ function knoepfe(now) {
 let COUNTDOWN = false;
 // #liveticker: gleich den Reiter der Seniors öffnen.
 if (location.hash === "#liveticker") merk.set("reiter", "");
-// ---- Chat „Frag die App“: Fragen gehen an den Cloudflare-Worker (Schlüssel für Claude nur dort, Tageslimits dort).
+// ---- Chat „Ask Sami“: Fragen gehen an den Cloudflare-Worker (Schlüssel für Claude nur dort, Tageslimits dort).
 // Die App schickt eine Zusammenfassung ihrer Daten mit, damit Claude Vereinsfragen beantworten kann.
 // Leer = Chat aus (Knopf versteckt). Adresse des Workers, z. B. https://fcjj.<konto>.workers.dev
 const CHAT_URL = "https://fcjj1.gilles-emeringer.workers.dev";
@@ -1354,6 +1354,7 @@ const CHAT_TERMINE = [
 function chatKontext(now) {
   const de = TEXTE.de, z = [], datum = d => new Intl.DateTimeFormat("de-DE", { timeZone: TZ, weekday: "short", day: "numeric", month: "numeric", year: "numeric" }).format(d);
   const reiterName = AKTIV === "woche" ? "Unsere Woche" : D?.teams?.find(t => String(t.id) === AKTIV)?.reiter || AKTIV;
+  z.push("DEIN NAME: Du heißt Sami und bist der Chat-Assistent der FCJJ-App („Ask Sami“). Stell dich bei Bedarf als Sami vor.");
   z.push(`Jetzt: ${datum(now)} ${uhr(now)} Uhr (Luxemburger Zeit). Sprache der App: ${LANG}. Geöffneter Reiter: ${reiterName}.`);
   z.push("Verein: FC Jeunesse Junglinster (FCJJ), Junglinster, Luxemburg, gegründet 1935. Website https://fcjj.lu · Kontakt https://fcjj.lu/contact · Vereinsshop https://form.jotform.com/242614644810352");
   z.push("KONTAKTREGEL (hat Vorrang): Für alles, was die Jugendkategorien betrifft (BAM, PUP, POU, MIN, SCO, CAD, JUN, WU11, WU13, WU15), an jeunes@fcjj.lu verweisen; für alles andere (Seniors, Réserves, Veteranen, Verein, Cotisation) an secretaire@fcjj.lu. Ausnahme: Sportunfälle (Meldung C.S.M.S.) gehen immer an secretaire@fcjj.lu, auch bei Jugendspielern.");
