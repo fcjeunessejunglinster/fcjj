@@ -220,14 +220,14 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 #chat[open]{display:flex}
 #chat::backdrop{background:rgba(0,0,0,.45)}
 @media (max-width:600px){#chat{border-radius:0;height:100dvh;width:100vw}}
-.chatkopf{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:var(--karte);border-bottom:1px solid var(--linie)}
+.chatkopf{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;flex:none;background:var(--karte);border-bottom:1px solid var(--linie)}
 #chatVerlauf{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
 .msg{max-width:85%;padding:9px 12px;border-radius:14px;line-height:1.45;white-space:normal;overflow-wrap:anywhere}
 .msg.ich{align-self:flex-end;background:var(--rot);color:#fff;border-bottom-right-radius:4px}
 .msg.ki{align-self:flex-start;background:var(--karte);border:1px solid var(--linie);border-bottom-left-radius:4px}
 .msg.ki a{color:inherit}
 .chathinweis{margin:0;padding:6px 14px;font-size:12px}
-#chatForm{display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--karte);border-top:1px solid var(--linie)}
+#chatForm{flex:none;display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--karte);border-top:1px solid var(--linie)}
 #chatFrage{flex:1;resize:none;font:inherit;font-size:16px;padding:8px 10px;border-radius:10px;border:1px solid var(--linie);background:var(--bg);color:var(--text)}
 .teilen{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 14px 22px}
 .teilen .knopf{font-size:16px;padding:12px 22px}
@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 j";
+const FASSUNG = "2026-11-11 k";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1382,7 +1382,7 @@ function chatTexte() {
 }
 document.addEventListener("click", e => {
   if (e.target.closest("#chatAuf")) { chatZeigen(); document.getElementById("chat").showModal(); document.getElementById("chatFrage").focus(); }
-  if (e.target.closest("#chatZu")) document.getElementById("chat").close();
+  if (e.target.closest("#chatZu") || e.target.id === "chat") document.getElementById("chat").close();   // ✕ oder Tipp neben das Fenster
 });
 document.addEventListener("keydown", e => { if (e.target.id === "chatFrage" && e.key === "Enter" && !e.shiftKey) { e.preventDefault(); document.getElementById("chatForm").requestSubmit(); } });
 document.addEventListener("submit", async e => {
