@@ -245,7 +245,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 e";
+const FASSUNG = "2026-11-11 f";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -711,8 +711,8 @@ const SPONSOR_JUGEND = { bild: "bilder/sponsor-jugend.jpg", name: "SOPI Concept 
 // das Handy zeigt das PDF dann in einem eigenen Fenster mit „Fertig“ bzw. ✕ und man kommt zurück in die App.
 const dok = p => p.startsWith("dokumente/") && INSTALLIERT ? `https://cdn.jsdelivr.net/gh/fcjeunessejunglinster/fcjj@main/${p}` : p;
 // Spielregeln der FLF („Loosst eis Fussball spillen“) je Kategorie (vom Verein, 10.11.2026)
-// Mädchen: WU11 und WU13 spielen nach den Regeln U11 bzw. U13 (vom Verein, 10.11.2026).
-const REGELN_KAT = { U7: "U7", U9: "U9", U11: "U11", U13: "U13", WU11: "U11", WU13: "U13" };
+// Mädchen: WU11 und WU13 spielen nach den Regeln U11 (vom Verein, 10. und 11.11.2026).
+const REGELN_KAT = { U7: "U7", U9: "U9", U11: "U11", U13: "U13", WU11: "U11", WU13: "U11" };
 const REGELN = Object.fromEntries(Object.entries(REGELN_KAT).map(([k, r]) => [k, `dokumente/regles-de-jeu-${r.toLowerCase()}.pdf`]));
 // Spielfeldgröße je Kategorie: Bild, Bildgröße, Bezeichnung (vom Verein, 11.11.2026)
 const FELD_U7 = { bild: "bilder/spielfeld-u7.jpg", b: 1089, h: 1239, n: "U7" };
