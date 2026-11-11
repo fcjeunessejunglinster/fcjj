@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-11T14:16:39.103Z",
+ "stand": "2026-11-11T17:18:21.567Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -370,7 +370,6 @@
    "n": "Jeunesse Junglinster",
    "kat": "RES",
    "klassen": [
-    19555,
     19563,
     19509,
     18924,
@@ -16744,24 +16743,6 @@
      "gespielt": true,
      "forfait": false,
      "ort": "Terrain 1 (Junglinster)"
-    },
-    {
-     "id": 9030077,
-     "d": "2026-11-17T20:00:00+01:00",
-     "tag": 17,
-     "h": {
-      "id": 44590,
-      "n": "FC Munsbach"
-     },
-     "a": {
-      "id": 44722,
-      "n": "Jeunesse Junglinster"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Munsbach (synth.)"
     }
    ],
    "start": "2026-07-11T19:00:00+02:00"
@@ -23671,7 +23652,7 @@
     },
     {
      "id": 9202611211,
-     "d": "2026-11-21T10:30:00+01:00",
+     "d": "2026-11-21T12:30:00+01:00",
      "tag": 7,
      "h": {
       "id": 9000701,
@@ -23692,7 +23673,7 @@
        "Una Strassen I",
        "Sporting Bertrange I"
       ],
-      "zeitSicher": false
+      "zeitSicher": true
      }
     },
     {
@@ -23889,7 +23870,7 @@
     },
     {
      "id": 9202611212,
-     "d": "2026-11-21T10:30:00+01:00",
+     "d": "2026-11-21T09:30:00+01:00",
      "tag": 7,
      "h": {
       "id": 0,
@@ -23910,7 +23891,7 @@
        "FC Koeppchen Wormeldange II",
        "US Moutfort-Medingen"
       ],
-      "zeitSicher": false
+      "zeitSicher": true
      }
     },
     {
