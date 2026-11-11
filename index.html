@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 z7";
+const FASSUNG = "2026-11-11 z8";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1394,7 +1394,7 @@ Aufgaben:
 - Unterstützung der Teilnahme von FCJJ-Jugendmannschaften an internationalen Turnieren
 - Wohlbefinden der Kinder
 Mitmachen: ${CDJ_URL} · Kontakt: jeunes@fcjj.lu
-Nächste Sitzung (Meeting) der Jugendkommission: Mittwoch, 11.11.2026 um 19:00 Uhr (Ort steht nicht in den Daten → jeunes@fcjj.lu fragen).`);
+Nächste Sitzung (Meeting) der Jugendkommission: Mittwoch, 11.11.2026 um 19:00 Uhr in der Buvette 2 „op Freinen“.`);
   z.push("\n## Sportunfall\n" + de.unfall.text.join(" ").replace("{MAIL}", UNFALL_MAIL) + " " + de.unfall.frist + " Infos: " + UNFALL_INFO);
   z.push("\n## Links\n" + LINKS.map(l => `- ${de.linkListe[l.key][0]}: ${typeof l.url === "string" ? new URL(l.url, location.href).href : l.url.de}`).join("\n")
     + `\n- Jugendkommission (CDJ) beitreten: ${CDJ_URL}\n- Spielball sponsern (Seniors): https://fcjj.lu/matchball/seniors\n- Strategischer Plan der FLF 2027–2031: https://www.flf.lu/plan-strategique-83993v4`);
