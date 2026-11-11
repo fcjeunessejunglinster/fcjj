@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-10T22:18:26.452Z",
+ "stand": "2026-11-11T00:43:03.614Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -15458,9 +15458,9 @@
       "id": 44997,
       "n": "FC Mondercange"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 5,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Parc des Sports (Diekirch, synth.)"
     }
@@ -23924,7 +23924,7 @@
   }
  },
  "kategorien": {
-  "tag": "2026-11-10",
+  "tag": "2026-11-11",
   "saison": "20262027",
   "ids": {
    "1": "SEN",
