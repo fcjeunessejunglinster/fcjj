@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 z9";
+const FASSUNG = "2026-11-11 z10";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1341,6 +1341,7 @@ const CHAT_URL = "https://fcjj1.gilles-emeringer.workers.dev";
 let CHAT = [];   // Verlauf nur im Speicher: [{rolle: "user"|"assistant", text}]
 // Termine und Infos, die nur der Chat kennt (nicht in der App angezeigt): [bis wann gültig (YYYY-MM-DD), Text]
 const CHAT_TERMINE = [
+  ["2026-12-09", "Konferenz „Digitalisatioun am Veräin – 360 Grad“ (Digitalisierung im Sportverein), organisiert vom FC Jeunesse Junglinster: Mittwoch, 9. Dezember 2026 um 19:00 Uhr in der Buvette Op Fréinen, Junglinster (Fußballplatz). Für alle interessierten Vereine der Gemeinde Junglinster und Sportvereine aus der Umgebung; in dieser Form die erste Konferenz in Luxemburg zu den Bedürfnissen von Sportvereinen. Themen: Kommunikation, Mitgliederverwaltung, Verwaltung der Mitarbeiter/Ehrenamtlichen, Organisation, digitales Bezahlen, Cybersicherheit, Künstliche Intelligenz (KI) im Verein. Eintritt gratis, höchstens 30 Teilnehmer, Anmeldeschluss 30. November 2026, Anmeldung: https://fcjj.forms.app/anmeldeformular (Plätze begrenzt). Präsentation: Gilles Emeringer."],
   ["2027-01-28", "Ehrung der verdienten Sportlerinnen und Sportler der Gemeinde Junglinster (cérémonie de remise à l’honneur des sportifs méritants de la Commune de Junglinster): Donnerstag, 28. Januar 2027 um 18:30 Uhr im Centre polyvalent Gaston Stein in Junglinster."],
 ];
 function chatKontext(now) {
