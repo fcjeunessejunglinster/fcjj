@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 k";
+const FASSUNG = "2026-11-11 l";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1042,7 +1042,7 @@ function ligaHtml(key, now) {
   html += "</section>";
   if (L.tabelle?.length) {
     const zeilen = L.tabelle.map((z, i) => `<tr><td>${i + 1}</td><td>${esc(z.shortName || z.teamName)}</td><td>${z.matches}</td><td>${z.won}</td><td>${z.draw}</td><td>${z.lost}</td><td>${z.goals}:${z.opponentGoals}</td><td><b>${z.points}</b></td></tr>`).join("");
-    html += `<section class="karte"><h2>${T().blTab(L.name)}</h2><div class="tabrahmen"><table><thead><tr><th>#</th>${T().kopf.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${zeilen}</tbody></table></div></section>`;
+    html += `<details class="karte"><summary>${T().blTab(L.name)}</summary><div class="tabrahmen"><table><thead><tr><th>#</th>${T().kopf.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${zeilen}</tbody></table></div></details>`;
   }
   if (key === "bl") html += blKaderHtml();
   return html + `<p class="leise" style="text-align:center;margin:0">${T().blQuelle(L.name)}</p>`;
