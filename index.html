@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 z3";
+const FASSUNG = "2026-11-11 z4";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1230,13 +1230,9 @@ function wocheSpiele(now) {
 // ---- Events des Vereins (von Hand eingetragen). Neues Event = neue Zeile: von/bis als Datum, Titel, Zusatz optional.
 // kats: für welche Altersklassen (Schlüssel wie in D.teams[].kat) — das Event steht dann auch in deren Reitern.
 const EVENTS = [
-  // Kleeschen: Empfang ab ±16:15, Empfang der Mannschaften mit Geschenken je Kategorie (vom Verein, 11.11.2026)
+  // Kleeschen: in der App nur Datum und Kategorien; die Zeiten nur im Chat (vom Verein, 11.11.2026)
   { von: "2026-12-03", t: "Kleeschen", icon: "🎅", kats: ["U7", "U9", "U11", "U13", "WU11", "WU13"], fuer: "BAM · PUP · POU · MIN · WU11 · WU13",
-    zusatz: { de: "Empfang ab ca. 16:15", en: "Welcome from approx. 4:15 pm", fr: "Accueil à +/- 16h15" },
-    zeiten: { U7: "16:30 – 17:00", WU11: "16:30 – 17:00", WU13: "16:30 – 17:00", U9: "17:00 – 17:30", U11: "17:30 – 18:00" },
-    zeitenText: { de: "Empfang der Mannschaft mit Geschenken", en: "Team welcome with presents", fr: "Accueil de l’équipe avec remise des cadeaux" },
-    zeitenAlle: "Bambinis et Fillettes 16h30–17h00 · Pupilles 17h00–17h30 · Poussins 17h30–18h00",
-    zeitenChat: "Minimes (MIN) 18h00–18h30" },   // nur im Chat, nicht in der App (vom Verein, 11.11.2026)
+    chat: "Accueil Kleeschen à +/- 16h15. Accueil des équipes avec remise des cadeaux: Bambinis et Fillettes (= Mädchenteams WU11/WU13) 16h30–17h00 · Pupilles 17h00–17h30 · Poussins 17h30–18h00 · Minimes 18h00–18h30" },
   { von: "2027-01-09", bis: "2027-01-10", t: "WanterCup27", kats: ["U7", "U9", "U11", "U13", "WU11", "WU13"], fuer: "BAM · PUP · POU · MIN · WU11 · WU13" },
   // LALUX Indoor Cup 2026/27 (Calendrier général der FLF, vom Verein 10.11.2026). Nur in den Mannschaften und in der Woche,
   // nicht in der Übersicht „Save the date“ (nurTeam). Ab der 2. Runde nur für Qualifizierte (vom Verein, 10.11.2026). Orte und Uhrzeiten stehen nicht im Kalender.
@@ -1367,7 +1363,7 @@ function chatKontext(now) {
       + `\nNächste Spiele: ${kommend.length ? "\n- " + kommend.map(zeile).join("\n- ") : "keine in den nächsten 3 Wochen"}`
       + (letzte.length ? `\nLetzte Spiele:\n- ${letzte.map(zeile).join("\n- ")}` : "") + (tb.length ? `\nTabelle: ${tb.join("; ")}` : ""));
   }
-  const ev = kommendeEvents(now).slice(0, 12).map(e => `- ${sprachText(e.t)} (${eventDatum(e)})${e.fuer ? " für " + e.fuer : ""}${e.zusatz ? " – " + (typeof e.zusatz === "string" ? e.zusatz : e.zusatz.de) : ""}${e.zeitenAlle ? " – Empfang der Mannschaften mit Geschenken: " + e.zeitenAlle + (e.zeitenChat ? " · " + e.zeitenChat : "") + " (Fillettes = Mädchenteams WU11/WU13)" : ""}`);
+  const ev = kommendeEvents(now).slice(0, 12).map(e => `- ${sprachText(e.t)} (${eventDatum(e)})${e.fuer ? " für " + e.fuer : ""}${e.zusatz ? " – " + (typeof e.zusatz === "string" ? e.zusatz : e.zusatz.de) : ""}${e.chat ? " – " + e.chat : ""}`);
   if (ev.length) z.push("\n## Termine (Vereinsevents, LALUX Indoor Cup, Schulferien)\n" + ev.join("\n"));
   const ft = FERIEN.feier.filter(f => f.tag >= tagKey(now)).slice(0, 4).map(f => `${f.tag} ${f.t}`);
   if (ft.length) z.push("Feiertage: " + ft.join(", "));
