@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-11 p";
+const FASSUNG = "2026-11-11 q";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1367,6 +1367,16 @@ function chatKontext(now) {
   if (n.length) z.push("\n## Nationalmannschaft Luxemburg, nächste Spiele\n- " + n.join("\n- "));
   z.push("\n## Cotisation (Mitgliedsbeitrag) 2026/27\n" + BEITRAEGE.map(([b, a]) => `- ${b} € ${de.beitragArt[a]}`).join("\n")
     + `\nIBAN ${IBAN}. ${de.beitrag.join(" ")} ${de.ausschluss}`);
+  // Abläufe, die der Verein dem Chat mitgibt (Wissen ergänzen: hier weitere Abschnitte anfügen)
+  z.push(`\n## Lizenz beantragen (neues aktives Mitglied, Spielerin/Spieler) – Ablauf des Vereins (Stand 11.11.2026)
+1. Préinscription für neue Mitglieder: https://fcjj.forms.app/preinscription
+2. Ärztliche Untersuchung – muss VOR der Demande de licence gemacht sein:
+   - ab Poussins (POU, U11) und älter, auch WU11/WU13/WU15: Contrôle médico-sportif (Infos: https://guichet.public.lu/fr/citoyens/loisirs/activites-sportives/pratique-activite-sportive/controle-medico-sportif.html)
+   - Bambinis (BAM, U7) und Pupilles (PUP, U9): kein Contrôle médico-sportif nötig, es reicht ein Certificat d'aptitude sportive vom Hausarzt.
+3. Demande de licence ausfüllen: https://fcjj.forms.app/demandelicence
+4. Die Demande d'affiliation FLF (PDF: ${new URL("dokumente/demande-affiliation-flf.pdf", location.href).href}) ausfüllen, unterschreiben und der Demande de licence beifügen.
+5. Cotisation überweisen (Beträge und IBAN unten); sie ist Voraussetzung für Training und Spiele.
+Fragen dazu: Jugendkategorien → jeunes@fcjj.lu, sonst secretaire@fcjj.lu.`);
   z.push("\n## Sportunfall\n" + de.unfall.text.join(" ").replace("{MAIL}", UNFALL_MAIL) + " " + de.unfall.frist + " Infos: " + UNFALL_INFO);
   z.push("\n## Links\n" + LINKS.map(l => `- ${de.linkListe[l.key][0]}: ${typeof l.url === "string" ? new URL(l.url, location.href).href : l.url.de}`).join("\n")
     + `\n- Jugendkommission (CDJ) beitreten: ${CDJ_URL}\n- Spielball sponsern (Seniors): https://fcjj.lu/matchball/seniors\n- Strategischer Plan der FLF 2027–2031: https://www.flf.lu/plan-strategique-83993v4`);
