@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-12T01:58:03.075Z",
+ "stand": "2026-11-12T15:06:27.484Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -12314,24 +12314,6 @@
      "ort": "Terrain Op Birkelt (Larochette, synth.)"
     },
     {
-     "id": 6714081,
-     "d": "2026-11-28T11:00:00+01:00",
-     "tag": 8,
-     "h": {
-      "id": 45991,
-      "n": "Atert Bissen III"
-     },
-     "a": {
-      "id": 46112,
-      "n": "AS Rupensia Lusitanos Larochette"
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
-    },
-    {
      "id": 6714084,
      "d": "2026-11-28T11:00:00+01:00",
      "tag": 8,
@@ -12348,6 +12330,24 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Ettelbrück)"
+    },
+    {
+     "id": 6714081,
+     "d": "2026-11-28T12:30:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 45991,
+      "n": "Atert Bissen III"
+     },
+     "a": {
+      "id": 46112,
+      "n": "AS Rupensia Lusitanos Larochette"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
     },
     {
      "id": 6714083,
