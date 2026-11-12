@@ -80,7 +80,7 @@ export async function chat(req, env) {
   if (!env.ANTHROPIC_API_KEY) return chatJson({ fehler: "aus" }, 503);
   if ((req.headers.get("origin") || "") !== ORIGIN) return chatJson({ fehler: "herkunft" }, 403);
   let x; try { x = await req.json(); } catch (e) { return chatJson({ fehler: "json" }, 400); }
-  const frage = kurz(x.frage, 600).trim(), kontext = kurz(x.kontext, 40000);
+  const frage = kurz(x.frage, 600).trim(), kontext = kurz(x.kontext, 80000);
   if (!frage) return chatJson({ fehler: "leer" }, 400);
   const verlauf = (Array.isArray(x.verlauf) ? x.verlauf : []).slice(-6)
     .filter(m => (m.rolle === "user" || m.rolle === "assistant") && typeof m.text === "string")

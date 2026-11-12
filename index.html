@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-12 g";
+const FASSUNG = "2026-11-12 h";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1340,6 +1340,11 @@ if (location.hash === "#liveticker") merk.set("reiter", "");
 // Leer = Chat aus (Knopf versteckt). Adresse des Workers, z. B. https://fcjj.<konto>.workers.dev
 const CHAT_URL = "https://fcjj1.gilles-emeringer.workers.dev";
 let CHAT = [];   // Verlauf nur im Speicher: [{rolle: "user"|"assistant", text}]
+// Newsletter des Vereins für den Chat (Text der deutschen Fassung; PDF in dokumente/)
+const CHAT_NEWSLETTER = [
+  { titel: "Newsletter 1 – Saison 2026/27 (verschickt zu Saisonbeginn, Anfang September 2026; die genannten Termine im September sind also vorbei)", pdf: "dokumente/newsletter-1-2026-27.pdf",
+    text: "Auf einen Blick\n• Neues Logo – moderner Look, zurück zu unseren traditionellen Vereinsfarben\nTrainings starten wieder – bitte SportEasy prüfen und Verfügbarkeiten eintragen\nTerrain 2 erneuert + Terrain 3 neu – mehr Möglichkeiten für unsere Teams\nCotisations 2026/27 – die Schreiben kommen in den nächsten Tagen\nJugendkommission sucht Verstärkung – jede helfende Hand ist willkommen!\nBuvette & Cashless – bargeldloses Bezahlen wird weiter ausgebaut\nSpielfelder bitte nur zu den vorgesehenen Trainings- und Spielzeiten nutzen\nSave the dates: Season Opening, Lënster Maart & Wantercup 2027\nNeues\nVielleicht habt ihr es schon gesehen: Nach rund 20 Jahren haben wir unser Logo aufgefrischt und dabei bewusst wieder stärker auf die ursprünglichen Farben und die Identität unseres Vereins gesetzt. Keine Sorge: Unsere bestehenden Trikots und Sets bleiben natürlich weiterhin im\nEinsatz. Der Übergang erfolgt Schritt für Schritt über die nächsten Jahre. Bei neuen Bestellungen im Online-Shop wird ab sofort das neue Logo verwendet.\nMehr Platz und moderne Spielfelder\nUnser komplett erneuertes Terrain 2 wurde im Juli offiziell eingeweiht – gemeinsam mit\nVertretern der Gemeinde, der FLF und der Regierung. Fotos findet ihr auf unserem FacebookKanal. Zusammen mit dem neuen Terrain 3 haben wir nun mehr Platz und Flexibilität für unsere vielen Mannschaften. Die aktuellen Trainingszeiten aller Teams findet ihr auf www.fcjj.lu. Ein großes Dankeschön an die Gemeinde Junglinster, die uns diese Entwicklung ermöglicht!\nDie Trainings gehen wieder los!\nDie Sommerpause geht zu Ende und unsere Mannschaften starten nach und nach wieder mit dem Training. Bitte prüft, ob SportEasy funktioniert, und gebt so früh wie möglich an, ob eure\nKinder an Trainings und Spielen teilnehmen. Leider sehen wir noch zu oft den Status „Awaiting reply“ – für unsere Trainer macht das eine verlässliche Planung sehr schwierig. Eine rechtzeitige\nZu- oder Absage ist deshalb wirklich wichtig! Wer noch im Urlaub ist: einfach „Unavailable“ anklicken. Vielen Dank – und ein großes Dankeschön an alle Trainer für ihren Einsatz!\nUnsere Jugendkommission\nIn dieser Saison möchten wir unsere Jugendkommission wieder verstärken und suchen Eltern und Vereinsmitglieder, die Lust haben, sich einzubringen. Dabei gibt es keine Sprachbarrieren und keine Verpflichtung, ständig verfügbar zu sein. Jeder hilft so, wie es zeitlich möglich ist – regelmäßig oder auch nur punktuell. Zu den wichtigsten Aufgaben gehört die Unterstützung bei unseren großen Jugendveranstaltungen wie Kleeschen 2026, Wantercup und Summer Cup.\nGerade bei diesen Events sind die Eltern ein wichtiger Bestandteil. Darüber hinaus geht es darum, gemeinsam zu überlegen, wie wir Sport, Vereinsleben und Gemeinschaft für unsere Kinder noch besser gestalten können. Mehr Infos gibt’s beim Season Opening – sprecht uns gerne an oder meldet euch unter : jeunes@fcjj.lu !\nNutzung unserer Spielfelder\nEine organisatorische Information der Gemeinde: Unsere Spielfelder stehen dem FCJJ zu den vorgesehenen Trainings- und Spielzeiten zur Verfügung. Außerhalb dieser Zeiten sollen die Plätze nicht eigenständig genutzt werden. Bitte gebt diese Information auch an eure Kinder weiter.\nVielen Dank fürs Verständnis!\nCotisations & Administration\nDie Schreiben zu den Mitgliedsbeiträgen für 2026/27 werden in den nächsten Tagen verschickt.\nBitte erledigt die notwendigen administrativen Schritte und die Zahlung möglichst zeitnah. Bei\nFragen oder Schwierigkeiten könnt ihr euch selbstverständlich vertraulich bei uns melden – gemeinsam finden wir eine Lösung.\nBuvette & Cashless\nAuch in dieser Saison wird Tony wieder viel vor Ort sein und sich um unsere Buvette kümmern.\nGleichzeitig bauen wir unser Cashless Payment weiter aus: der September dient als\nÜbergangsmonat, ab Oktober möchten wir Zahlungen möglichst bargeldlos abwickeln. Das macht die Abrechnung schneller und unser Kassenmanagement deutlich einfacher.\nAuch im Sommer war etwas los\nAuch während der Sommerpause blieb es beim FCJJ aktiv: Beim De Lënster Kick trafen sich\nUnternehmen und Vereine aus der Region auf unserer Anlage, und auch bei Lënster Adventure war der FCJJ vertreten. Fotos und Eindrücke findet ihr auf unserem Facebook-Kanal.\nSave the dates – und helft mit!\n• Season Opening – Freitag, 11. September 2026: Gemeinsam starten wir bei Grillen, einem\nGlas und guten Gesprächen in die neue Saison. Wir freuen uns auf euch!\n• Lënster Maart – Freitag & Samstag, 25.–26. September 2026: Auch hier ist der FCJJ wieder vertreten und freut sich über Unterstützung.\n• Wantercup 2027 – Samstag & Sonntag, 9.–10. Januar 2027: Unser großes Hallenturnier für die Jugend soll natürlich auch 2027 wieder stattfinden.\nFür solche Veranstaltungen brauchen wir eure Hilfe – zum Beispiel stundenweise beim Catering,\nAuf- und Abbau oder bei der Organisation. Ohne genügend freiwillige Helfer können wir eine\nVeranstaltung wie den Wantercup leider nicht organisieren. Das wäre vor allem für unsere\nKinder sehr schade. Deshalb: Bitte macht mit – gemeinsam bekommen wir das hin!\nSponsor für Trainingsleibchen gesucht\nFür unsere Jugendmannschaften suchen wir noch einen Sponsor für neue Trainingsleibchen. Das\nSponsorenlogo würde gut sichtbar auf den Leibchen erscheinen. Interesse? Meldet euch gerne bei uns (sponsoring@fcjj.lu) !\nOb für Leibchen oder anderes Trainingsmaterial: Auch Material- oder Sachspenden von\nPrivatpersonen sind für unseren Verein und unsere Jugend eine große Unterstützung.\nAuf eine tolle Saison 2026/27!\nFCJJ - Vorstand" },
+];
 // Allgemeines Wissen für den Chat, ohne Ablaufdatum (vom Verein)
 const CHAT_WISSEN = [
   "Jugendkoordinator (coordinateur des jeunes) des FCJJ: coordinateur.jeunes@fcjj.lu – für Anliegen zur Jugend, die mit dem Trainerteam nicht geklärt werden konnten.",
@@ -1363,19 +1368,21 @@ function chatKontext(now) {
   z.push("KONTAKTREGEL (hat Vorrang): Für alles, was die Jugendkategorien betrifft (BAM, PUP, POU, MIN, SCO, CAD, JUN, WU11, WU13, WU15), an jeunes@fcjj.lu verweisen; für alles andere (Seniors, Réserves, Veteranen, Verein, Cotisation) an secretaire@fcjj.lu. Ausnahme: Sportunfälle (Meldung C.S.M.S.) gehen immer an secretaire@fcjj.lu, auch bei Jugendspielern.");
   z.push("SPORTLICHE FRAGEN (vom Verein, 11.11.2026, hat Vorrang vor der Kontaktregel): Für alle sportlichen Fragen (Training, Einteilung in Mannschaften/Kategorien, Spielzeit, Positionen, Entwicklung, Probetraining) bitte an den Trainer oder an directeursportif@fcjj.lu wenden.");
   z.push("SPIELORGANISATION UND TRAINER (vom Verein, 11.11.2026): Für Fragen zur Spielorganisation (Aufgebot/Convocation, Zu- und Absagen, Treffpunkt, Abfahrt, Fahrgemeinschaften, Trikots) und für die Kommunikation mit dem Trainer bitte die App SportEasy benutzen. Die FCJJ-App kennt keine Trainer, Aufgebote oder Treffpunkte; verweise dafür auf SportEasy. SportEasy ist eine Verwaltungs-App für Sportmannschaften und -vereine; sie bündelt die Organisation und die Kommunikation zwischen Trainern, Spielern, Eltern und Vereinsverantwortlichen. Der FCJJ benutzt sie für die sportliche Organisation und die Kommunikation zwischen Spielern, Trainern und Eltern. Zugang zu SportEasy bekommt man nach der Einschreibung per E-Mail-Einladung; jeder Spieler wird persönlich in seine Mannschaft eingeladen (es gibt keinen allgemeinen Link). Wer keine Einladung bekommen hat, meldet sich bei directeursportif@fcjj.lu (gilt für alle Mannschaften, auch die Jugend).");
+  z.push("Spielregeln (PDF der FLF): " + [...new Set(Object.values(REGELN))].map(u => new URL(u, location.href).href).join(" · ") + ". Spielfeld-Skizzen U7, U9, U11/WU13, U13/WU15: in der App unten im Reiter der Mannschaft unter „Spielfeld“.");
   z.push("App: Daten der FLF (Spiele, Ergebnisse, Tabellen), Uhrzeit „offen“ = Anstoß noch nicht festgelegt. Kabinen gelten bei Heimspielen in Junglinster (Zahl = Kabinennummer).");
+  const tz = [];   // Mannschaften kommen ans Ende (falls gekürzt werden muss, trifft es zuerst die Spiele)
   for (const t of D?.teams || []) {
     const sp = eigeneSpiele(t), k = KABINEN[t.reiter];
-    const kommend = sp.filter(x => !vorbei(x, now) && new Date(x.d) - now < 21 * 864e5).slice(0, 4);
-    const letzte = sp.filter(x => vorbei(x, now) && now - new Date(x.d) < 30 * 864e5).slice(-3);
-    const zeile = x => `${datum(new Date(x.d))} ${offen(x) ? "Uhrzeit offen" : uhr(new Date(x.d))} ${x.heim ? "Heim" : "Auswärts"}: ${x.h.n} – ${x.a.n}`
+    const kommend = sp.filter(x => !vorbei(x, now) && new Date(x.d) - now < 21 * 864e5).slice(0, 3);
+    const letzte = sp.filter(x => vorbei(x, now) && now - new Date(x.d) < 30 * 864e5).slice(-2);
+    const kurzN = n => n.replace(/^Jeunesse Junglinster/, "FCJJ");
+    const zeile = x => `${datum(new Date(x.d))} ${offen(x) ? "Uhrzeit offen" : uhr(new Date(x.d))} ${x.heim ? "Heim" : "Auswärts"}: ${kurzN(x.h.n)} – ${kurzN(x.a.n)}`
       + (x.erg && x.hs != null && (x.gespielt || x.forfait) ? ` ${x.hs}:${x.as}` : "") + (x.ort ? ` · Ort: ${x.ort}${platzAdresse(x.ort) ? " (" + platzAdresse(x.ort) + ")" : ""}` : "") + ` · ${x.klasse}`;
     const tb = Object.values(D.klassen).filter(kl => t.klassen?.includes(kl.id) && kl.tabelle?.length).map(kl => {
       const r = kl.tabelle.find(r => t.ids.includes(r.id)); return r ? `${kl.n}: Platz ${r.pl} von ${kl.tabelle.length}, ${r.pkt} Punkte (${r.s}S ${r.u}U ${r.nl}N, Tore ${r.t}:${r.g})` : "";
     }).filter(Boolean);
-    z.push(`\n## ${t.reiter} (${t.alter || t.kat}, FLF-Name ${t.n})` + (k ? ` · Kabinen bei Heimspielen: FCJJ ${k[0]}, Gäste ${k[1]}` : "")
-      + (REGELN[t.kat] ? ` · Spielregeln ${REGELN_KAT[t.kat]}: ${new URL(REGELN[t.kat], location.href).href}` : "")
-      + (SPIELFELD[t.kat] ? ` · Spielfeld-Skizze ${SPIELFELD[t.kat].n}: in der App unter „Spielfeld“` : "")
+    tz.push(`\n## ${t.reiter} (${t.alter || t.kat}, FLF-Name ${t.n})` + (k ? ` · Kabinen bei Heimspielen: FCJJ ${k[0]}, Gäste ${k[1]}` : "")
+      + (REGELN[t.kat] ? ` · Spielregeln ${REGELN_KAT[t.kat]}` : "")
       + `\nNächste Spiele: ${kommend.length ? "\n- " + kommend.map(zeile).join("\n- ") : "keine in den nächsten 3 Wochen"}`
       + (letzte.length ? `\nLetzte Spiele:\n- ${letzte.map(zeile).join("\n- ")}` : "") + (tb.length ? `\nTabelle: ${tb.join("; ")}` : ""));
   }
@@ -1391,6 +1398,7 @@ Ziel: Jedes Kind beim FC Jeunesse Junglinster soll mit Freude Fußball spielen, 
 6. Wir sind verlässlich: pünktlich erscheinen, Abwesenheiten frühzeitig über SportEasy melden, das Trainerteam über Verletzungen oder gesundheitliche Einschränkungen informieren, die für Training und Spiel wichtig sind.
 7. Wir respektieren die Privatsphäre der Kinder: vor dem Teilen von Fotos oder Videos anderer Kinder in sozialen Medien oder Gruppenchats die Zustimmung ihrer Erziehungsberechtigten einholen.
 Danke, dass ihr den Kindern vorlebt, wie Fair Play auch neben dem Platz aussieht.`);
+  for (const n of CHAT_NEWSLETTER) z.push(`\n## ${n.titel}\nPDF (DE/FR/EN): ${new URL(n.pdf, location.href).href}\n${n.text}`);
   z.push("\n## Allgemeines Wissen\n" + CHAT_WISSEN.map(t => "- " + t).join("\n"));
   z.push("\n## Weitere Termine (nur für den Chat, vom Verein)\n" + CHAT_TERMINE.filter(([bis]) => bis >= tagKey(now)).map(([, t]) => "- " + t).join("\n"));
   const ft = FERIEN.feier.filter(f => f.tag >= tagKey(now)).slice(0, 4).map(f => `${f.tag} ${f.t}`);
@@ -1439,7 +1447,8 @@ Nächste Sitzung (Meeting) der Jugendkommission: Mittwoch, 11.11.2026 um 19:00 U
   z.push("\n## Links\n" + LINKS.map(l => `- ${de.linkListe[l.key][0]}: ${typeof l.url === "string" ? new URL(l.url, location.href).href : l.url.de}`).join("\n")
     + `\n- Jugendkommission (CDJ) beitreten: ${CDJ_URL}\n- Spielball sponsern (Seniors): https://fcjj.lu/matchball/seniors\n- Strategischer Plan der FLF 2027–2031: https://www.flf.lu/plan-strategique-83993v4`);
   const w = warnAktiv(now); if (w.length) z.push("\n## Aktuelle Wetterwarnungen MeteoLux\n" + w.map(x => `- ${x.titel} (${warnRegion(x)}): ${x.text}`).join("\n"));
-  return z.join("\n").slice(0, 38000);
+  z.push("\n# MANNSCHAFTEN (Spiele, Kabinen, Tabellen)", ...tz);
+  return z.join("\n").slice(0, 39500);
 }
 function chatText(t) {   // Antwort sicher anzeigen: Links klickbar, **fett**, Zeilen
   return esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/https?:\/\/[^\s<)]+[^\s<).,;:!?]/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`).replace(/\n/g, "<br>");
