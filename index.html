@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-12 h";
+const FASSUNG = "2026-11-12 i";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1373,8 +1373,8 @@ function chatKontext(now) {
   const tz = [];   // Mannschaften kommen ans Ende (falls gekürzt werden muss, trifft es zuerst die Spiele)
   for (const t of D?.teams || []) {
     const sp = eigeneSpiele(t), k = KABINEN[t.reiter];
-    const kommend = sp.filter(x => !vorbei(x, now) && new Date(x.d) - now < 21 * 864e5).slice(0, 3);
-    const letzte = sp.filter(x => vorbei(x, now) && now - new Date(x.d) < 30 * 864e5).slice(-2);
+    const kommend = sp.filter(x => !vorbei(x, now) && new Date(x.d) - now < 21 * 864e5).slice(0, 4);
+    const letzte = sp.filter(x => vorbei(x, now) && now - new Date(x.d) < 30 * 864e5).slice(-3);
     const kurzN = n => n.replace(/^Jeunesse Junglinster/, "FCJJ");
     const zeile = x => `${datum(new Date(x.d))} ${offen(x) ? "Uhrzeit offen" : uhr(new Date(x.d))} ${x.heim ? "Heim" : "Auswärts"}: ${kurzN(x.h.n)} – ${kurzN(x.a.n)}`
       + (x.erg && x.hs != null && (x.gespielt || x.forfait) ? ` ${x.hs}:${x.as}` : "") + (x.ort ? ` · Ort: ${x.ort}${platzAdresse(x.ort) ? " (" + platzAdresse(x.ort) + ")" : ""}` : "") + ` · ${x.klasse}`;
@@ -1448,7 +1448,7 @@ Nächste Sitzung (Meeting) der Jugendkommission: Mittwoch, 11.11.2026 um 19:00 U
     + `\n- Jugendkommission (CDJ) beitreten: ${CDJ_URL}\n- Spielball sponsern (Seniors): https://fcjj.lu/matchball/seniors\n- Strategischer Plan der FLF 2027–2031: https://www.flf.lu/plan-strategique-83993v4`);
   const w = warnAktiv(now); if (w.length) z.push("\n## Aktuelle Wetterwarnungen MeteoLux\n" + w.map(x => `- ${x.titel} (${warnRegion(x)}): ${x.text}`).join("\n"));
   z.push("\n# MANNSCHAFTEN (Spiele, Kabinen, Tabellen)", ...tz);
-  return z.join("\n").slice(0, 39500);
+  return z.join("\n").slice(0, 78000);   // Worker nimmt bis 80000 Zeichen an
 }
 function chatText(t) {   // Antwort sicher anzeigen: Links klickbar, **fett**, Zeilen
   return esc(t).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/https?:\/\/[^\s<)]+[^\s<).,;:!?]/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`).replace(/\n/g, "<br>");
