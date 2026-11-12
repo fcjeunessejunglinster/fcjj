@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-12 a";
+const FASSUNG = "2026-11-12 b";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -338,7 +338,7 @@ const TEXTE = {
       tipp: "Die App öffnet sich dann wie eine normale App, im Vollbild und immer mit den neuesten Spielen. Sie braucht keinen App Store und keine Anmeldung.",
       schon: "Die App ist auf diesem Gerät schon installiert." }, wetterMittag: "um 14 Uhr",
     wetter: [["sonnig"], ["heiter"], ["bewölkt"], ["Nebel"], ["Niesel"], ["Regen"], ["Schnee"], ["Gewitter"]],
-    natiNaechste: "Nächste Länderspiele", tickets: "🎟️ Tickets für die Länderspiele kaufen", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
+    natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
     forfait: "Forfeit", laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
@@ -407,7 +407,7 @@ const TEXTE = {
       tipp: "It then opens like a normal app, full screen and always with the latest matches. No app store and no sign-up needed.",
       schon: "The app is already installed on this device." }, wetterMittag: "at 2 pm",
     wetter: [["sunny"], ["partly cloudy"], ["cloudy"], ["fog"], ["drizzle"], ["rain"], ["snow"], ["thunderstorm"]],
-    natiNaechste: "Upcoming internationals", tickets: "🎟️ Buy tickets for the internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
+    natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
     forfait: "Forfait", laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
@@ -476,7 +476,7 @@ const TEXTE = {
       tipp: "L'app s'ouvre alors comme une application normale, en plein écran et toujours avec les derniers matchs. Pas besoin d'App Store ni d'inscription.",
       schon: "L'app est déjà installée sur cet appareil." }, wetterMittag: "à 14 h",
     wetter: [["ensoleillé"], ["éclaircies"], ["nuageux"], ["brouillard"], ["bruine"], ["pluie"], ["neige"], ["orage"]],
-    natiNaechste: "Prochains matchs internationaux", tickets: "🎟️ Acheter des billets pour les matchs", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
+    natiNaechste: "Prochains matchs internationaux", natiErg: "Derniers résultats", natiUnter: "Équipe nationale", gruppe: "Groupe",
     natiQuelle: "Matchs internationaux via FuPa", natiKeine: "Aucun match international prévu pour le moment." },
 };
 let LANG = merk.get("lang") || (l => l.startsWith("en") ? "en" : l.startsWith("fr") ? "fr" : "de")((navigator.language || "").toLowerCase());
@@ -1188,7 +1188,7 @@ function natiHtml(now) {
   const ticker = heute && FUPA_NATI[heute.sp.id] ? FUPA_NATI[heute.sp.id]
     : location.hash === "#liveticker" ? FUPA_NATI[kommend.find(sp => FUPA_NATI[sp.id])?.id] : "";
   if (ticker) html += fupaHtml(ticker, heute ? heute.sp.d : "");
-  html += kommend.length ? naechsteKarte(kommend, now, `<div class="kal"><a class="knopf" href="https://ticket.luxembourg-ticket.lu/flf/webticket/eventlist" target="_blank" rel="noopener">${esc(T().tickets)}</a></div>`, T().natiNaechste) : `<section class="karte"><h2>${T().natiNaechste}</h2><p class="hinweis">${T().natiKeine}</p></section>`;
+  html += kommend.length ? naechsteKarte(kommend, now, "", T().natiNaechste) : `<section class="karte"><h2>${T().natiNaechste}</h2><p class="hinweis">${T().natiKeine}</p></section>`;
   const g = D.nati.gruppe;
   if (g?.tabelle?.length) {
     const zeilen = g.tabelle.map(z => `<tr class="${z.n === "Luxemburg" ? "wir" : ""}"><td>${z.pl}</td><td>${esc(land(z.n))}</td><td>${z.sp}</td><td>${z.s}</td><td>${z.u}</td><td>${z.nl}</td><td>${z.t}:${z.g}</td><td><b>${z.pkt}</b></td></tr>`).join("");
