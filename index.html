@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-12 e";
+const FASSUNG = "2026-11-12 f";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1380,6 +1380,16 @@ function chatKontext(now) {
   }
   const ev = kommendeEvents(now).slice(0, 12).map(e => `- ${sprachText(e.t)} (${eventDatum(e)})${e.fuer ? " für " + e.fuer : ""}${e.zusatz ? " – " + (typeof e.zusatz === "string" ? e.zusatz : e.zusatz.de) : ""}${e.chat ? " – " + e.chat : ""}`);
   if (ev.length) z.push("\n## Termine (Vereinsevents, LALUX Indoor Cup, Schulferien)\n" + ev.join("\n"));
+  z.push(`\n## Verhaltenskodex für Eltern (vom Verein, 12.11.2026)
+Ziel: Jedes Kind beim FC Jeunesse Junglinster soll mit Freude Fußball spielen, sich sicher fühlen und sich in seinem eigenen Tempo entwickeln können; Eltern und Begleitpersonen tragen dazu bei.
+1. Wir ermutigen und nehmen den Druck raus: Einsatz, Fortschritte und Teamgeist loben; Fehler gehören zum Lernen; nach dem Spiel zuerst fragen „Hattest du Spaß?“.
+2. Wir feuern fair an: die ganze Mannschaft unterstützen, Gegner, gegnerische Fans und Schiedsrichterteam respektvoll behandeln; keine Beleidigungen, Drohungen oder diskriminierenden Äußerungen.
+3. Wir überlassen das Coaching dem Trainerteam: von der Seitenlinie anfeuern, keine taktischen Anweisungen; Entscheidungen des Trainerteams zu Aufstellung, Positionen und Wechseln respektieren.
+4. Wir bleiben auch bei strittigen Entscheidungen respektvoll: Schiedsrichterentscheidungen akzeptieren, keine abwertenden Kommentare oder Diskussionen am Spielfeldrand.
+5. Wir klären Anliegen im persönlichen Gespräch: Fragen zu Spielzeit oder Entwicklung in Ruhe mit dem Trainerteam besprechen; bleibt ein Anliegen offen, an die Jugendkoordination wenden (jeunes@fcjj.lu); bei Gewalt, Mobbing oder Diskriminierung den Verein sofort informieren.
+6. Wir sind verlässlich: pünktlich erscheinen, Abwesenheiten frühzeitig über SportEasy melden, das Trainerteam über Verletzungen oder gesundheitliche Einschränkungen informieren, die für Training und Spiel wichtig sind.
+7. Wir respektieren die Privatsphäre der Kinder: vor dem Teilen von Fotos oder Videos anderer Kinder in sozialen Medien oder Gruppenchats die Zustimmung ihrer Erziehungsberechtigten einholen.
+Danke, dass ihr den Kindern vorlebt, wie Fair Play auch neben dem Platz aussieht.`);
   z.push("\n## Allgemeines Wissen\n" + CHAT_WISSEN.map(t => "- " + t).join("\n"));
   z.push("\n## Weitere Termine (nur für den Chat, vom Verein)\n" + CHAT_TERMINE.filter(([bis]) => bis >= tagKey(now)).map(([, t]) => "- " + t).join("\n"));
   const ft = FERIEN.feier.filter(f => f.tag >= tagKey(now)).slice(0, 4).map(f => `${f.tag} ${f.t}`);
