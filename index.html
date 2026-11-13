@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-13 d";
+const FASSUNG = "2026-11-13 e";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -563,8 +563,6 @@ const PLAETZE = {
   "Terrain 2 (Beggen, synth.)": { k: [49.6464, 6.1354], a: "Rue Henri Dunant, Beggen" },
   "Terrain 2 (Berbourg, synth.)": { k: [49.7313, 6.4007] },
   "Terrain 2 (Ettelbrück)": { k: [49.8427, 6.0941], a: "Stade Am Deich, Ettelbruck" },
-  "Terrain 2 (Grevenmacher, synth.)": { q: "Op Flohr, Grevenmacher", a: "Op Flohr, Grevenmacher" },
-  "Stade Op Flohr (Grevenmacher)": { q: "Op Flohr, Grevenmacher", a: "Op Flohr, Grevenmacher" },
   "Terrain 2 (Lintgen, synth.)": { k: [49.7215, 6.1218], a: "Stade Jean Donnersbach, Lintgen" },
   "Terrain 2 (Mensdorf, synth.)": { k: [49.6480, 6.2990], a: "Stade Op Birk, 33 Rue d'Uebersyren, Mensdorf" },
   "Terrain 2 (Mertzig, synth.)": { k: [49.8351, 6.0042], a: "Stade an de Burwiesen, Mertzig" },
@@ -581,8 +579,6 @@ const PLAETZE = {
   "Terrain rue de la Gare (Clemency)": { k: [49.5942, 5.8812] },
   "Terrain um Gréin (Remich, synth.)": { k: [49.5394, 6.3624] },
   // Hauptplatz des Vereins (sporteden.com); ob der Kunstrasen „Terrain 2“ genau dort liegt, ist nicht bestätigt.
-  "Terrain 2 (Mersch, synth.)": { q: "Stade Schintgespesch, Mersch" },
-  "Terrain 2 (Schieren, synth.)": { q: "Terrain Am Ge'er, Schieren" },
   // Ohne Ort im FLF-Namen: Platz von CS Oberkorn (Differdange), nicht Mersch.
   // Kunstrasen von Victoria Rosport auf der deutschen Seite der Sauer, in Ralingen (Rheinland-Pfalz), ca. 600 m vom
   // Stadion in Rosport – nicht Rollingen bei Mersch (Hinweis vom Verein 13.11.2026; OSM „FSV Ralingen“, dewiki Victoria Rosport)
@@ -591,6 +587,47 @@ const PLAETZE = {
   "Stade Albert Kongs (Itzig)": { k: [49.5861, 6.1670], a: "Stade Albert Kongs, 7a Rue des Promenades, Itzig" },
   "Terrain 2 (Itzig, synth.)": { k: [49.5861, 6.1670], a: "Stade Albert Kongs, 7a Rue des Promenades, Itzig" },
   "Terrain Ralingen (synth.)": { k: [49.8036, 6.5121], a: "Kunstrasen Ralingen (Deutschland), gegenüber Rosport" },
+  // 13.11.2026: alle übrigen Plätze auf feste Koordinaten (OpenStreetMap/Nominatim, Adressen von sporteden.com und
+  // Wikipedia), damit keine Namenssuche mehr falsch landet (vorher z. B. Itzig → Cents, Ralingen → Rollingen).
+  "Terrain 1 (Junglinster)": { k: [49.7028, 6.2438], a: "1, op de Freinen, Junglinster" },
+  "Terrain 2 (Junglinster, synth.)": { k: [49.7017, 6.2426], a: "1, op de Freinen, Junglinster" },
+  "Complexe sportif Reuler (synth.)": { k: [50.0624, 6.0344] },
+  "Heiligen Wiese (Bastendorf, synth)": { k: [49.8925, 6.1604] },
+  "Millewiss (Bastendorf)": { k: [49.8925, 6.1604] },
+  "Parc des Sports (Diekirch, synth.)": { k: [49.8657, 6.1466] },
+  "Stade Amadéo Barozzi (Dudelange, synth.)": { k: [49.4715, 6.0762], a: "Rue Reiteschkopp, Dudelange (Budersberg)" },
+  "Stade F. Schuman (Ehlerange)": { k: [49.5202, 5.9645] },
+  "Stade Feidt Frères (Brouch, synth.)": { k: [49.7389, 6.0232] },
+  "Stade Fr. Trausch (synth.)": { k: [49.6243, 6.0248], a: "Stade François Trausch, Mamer" },
+  "Stade Gaston Diderich (Luxembourg, synth.)": { k: [49.6226, 6.1319], a: "100, rue Laurent Ménager, Luxembourg-Pfaffenthal" },
+  "Stade Koericherberg (Hobscheid)": { k: [49.6809, 5.9214] },
+  "Terrain 2 (Hobscheid)": { k: [49.6805, 5.9221] },
+  "Stade Kuerzwénkel (Consdorf)": { k: [49.7875, 6.3428] },
+  "Stade Nic. Anzia (Useldange)": { k: [49.7705, 5.9843] },
+  "Stade Schintgespesch (Mersch)": { k: [49.7509, 6.1033], a: "3, rue Jean Majerus, Mersch" },
+  "Terrain 2 (Mersch, synth.)": { k: [49.7509, 6.1033], a: "3, rue Jean Majerus, Mersch" },
+  "Stade Schmitzgasse (Hupperdange)": { k: [50.0985, 6.0611] },
+  "Stade Um Krottepull (Gilsdorf)": { k: [49.8684, 6.1857] },
+  "Stade Victor Marchal (Tétange)": { k: [49.4757, 6.0374], a: "Rue Thomas Byrne, Tétange" },
+  "Stade de la Frontière d'Gennerwiss (Aspelt)": { k: [49.5174, 6.2296] },
+  "Terrain 2 (Biwer)": { k: [49.7009, 6.3796] },
+  "Terrain 2 (Canach, synth.)": { k: [49.6100, 6.3330] },
+  "Terrain 2 (Christnach, synth)": { k: [49.7913, 6.2760] },
+  "Terrain 2 (Erpeldange, synth.)": { k: [49.8619, 6.1157] },
+  "Terrain 2 (Koerich, synth.)": { k: [49.6645, 5.9499] },
+  "Terrain 2 (Lorentzweiler, synth.)": { k: [49.7006, 6.1391] },
+  "Terrain Breil (Echternach)": { k: [49.8085, 6.4158] },
+  "Terrain Breil (Echternach, synth.)": { k: [49.8085, 6.4158] },
+  "Terrain Hollerich (synth.)": { k: [49.6014, 6.1175] },
+  "Terrain Jos Durbach (Bous, synth.)": { k: [49.5550, 6.3357] },
+  "Terrain Kierlingerstrooss (Dalheim)": { k: [49.5418, 6.2642] },
+  "Terrain Munsbach (synth.)": { k: [49.6320, 6.2704], a: "Rue de Beyren, Munsbach" },
+  "Terrain Op Birkelt (Larochette, synth.)": { k: [49.7854, 6.2092] },
+  "Terrain synth. (Wincrange)": { k: [50.0578, 5.9228] },
+  "Terrain synth. Hamm": { k: [49.6112, 6.1635] },
+  "Terrain 2 (Grevenmacher, synth.)": { k: [49.6869, 6.4486], a: "Stade op Flohr, Rue du Stade, Grevenmacher" },
+  "Stade Op Flohr (Grevenmacher)": { k: [49.6869, 6.4486], a: "Stade op Flohr, Rue du Stade, Grevenmacher" },
+  "Terrain 2 (Schieren, synth.)": { k: [49.8238, 6.0927], a: "Terrain Am Ge'er, Schieren" },
   "Stade Camille Mersch (synth.)": { q: "Stade Camille Mersch, Oberkorn", wetter: [49.5134, 5.8898] },
 };
 const platzAdresse = ort => (ort && PLAETZE[ort]?.a) || "";
