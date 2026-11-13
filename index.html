@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-13 e";
+const FASSUNG = "2026-11-13 f";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -628,7 +628,8 @@ const PLAETZE = {
   "Terrain 2 (Grevenmacher, synth.)": { k: [49.6869, 6.4486], a: "Stade op Flohr, Rue du Stade, Grevenmacher" },
   "Stade Op Flohr (Grevenmacher)": { k: [49.6869, 6.4486], a: "Stade op Flohr, Rue du Stade, Grevenmacher" },
   "Terrain 2 (Schieren, synth.)": { k: [49.8238, 6.0927], a: "Terrain Am Ge'er, Schieren" },
-  "Stade Camille Mersch (synth.)": { q: "Stade Camille Mersch, Oberkorn", wetter: [49.5134, 5.8898] },
+  // CS Oberkorn: Rue Neuwies, L-4635 Differdange (vom Verein, 13.11.2026); Punkt = Sportplatz an der Rue Neuwies laut OSM
+  "Stade Camille Mersch (synth.)": { k: [49.5181, 5.9101], a: "Stade Camille Mersch, Rue Neuwies, L-4635 Differdange" },
 };
 const platzAdresse = ort => (ort && PLAETZE[ort]?.a) || "";
 function routeZiel(ort) {
