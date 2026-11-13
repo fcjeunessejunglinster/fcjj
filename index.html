@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-13 a";
+const FASSUNG = "2026-11-13 b";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -322,7 +322,7 @@ const TEXTE = {
       website: ["Offizielle Vereinsseite", "fcjj.lu"],
       dokumente: ["Offizielle Dokumente FCJJ", "Statuten, Charta, internes Reglement, Organigramm, Generalversammlungen"],
       kontakt: ["Kontakte FCJJ", "Ansprechpartner im Verein auf fcjj.lu"],
-      preinscription: ["Voranmeldung für neue Mitglieder", "Nur für Spielerinnen und Spieler mit Wohnsitz in der Gemeinde Junglinster"],
+      preinscription: ["Voranmeldung für neue Mitglieder", "Nur für Spielerinnen und Spieler mit Wohnsitz in der Gemeinde Junglinster (außer Seniors)"],
       medico: ["Sportmedizinische Untersuchung", "Contrôle médico-sportif: Infos und Formulare auf guichet.lu"],
       licence: ["Lizenzantrag für aktive Mitglieder des Vereins", "Online-Formular des Vereins – die unterschriebene Demande d'affiliation FLF (unten) beifügen"],
       affiliation: ["Demande d'affiliation FLF", "PDF ausdrucken, ausfüllen, unterschreiben und dem Lizenzantrag beifügen"] }, heuteSpielt: "Heute Spieltag", route: "Route", routeLang: "Route zum Platz",
@@ -391,7 +391,7 @@ const TEXTE = {
       website: ["Official club website", "fcjj.lu"],
       dokumente: ["Official FCJJ documents", "Statutes, charter, internal rules, organisation chart, general meetings"],
       kontakt: ["FCJJ contacts", "Who to contact at the club, on fcjj.lu"],
-      preinscription: ["Pre-registration for new members", "Limited to players living in the commune of Junglinster"],
+      preinscription: ["Pre-registration for new members", "Limited to players living in the commune of Junglinster (except the senior team)"],
       medico: ["Sports medical check-up", "Contrôle médico-sportif: information and forms on guichet.lu"],
       licence: ["Licence application for active club members", "The club's online form – attach the signed FLF affiliation form (below)"],
       affiliation: ["FLF affiliation form", "Print the PDF, fill it in, sign it and attach it to the licence application"] }, heuteSpielt: "Match day today", route: "Directions", routeLang: "Directions to the pitch",
@@ -460,7 +460,7 @@ const TEXTE = {
       website: ["Site officiel du club", "fcjj.lu"],
       dokumente: ["Documents officiels FCJJ", "Statuts, charte, règlement interne, organigramme, assemblées générales"],
       kontakt: ["Contacts FCJJ", "Interlocuteurs du club sur fcjj.lu"],
-      preinscription: ["Pré-inscription pour nouveaux membres", "Réservée aux joueuses et joueurs habitant la commune de Junglinster"],
+      preinscription: ["Pré-inscription pour nouveaux membres", "Réservée aux joueuses et joueurs habitant la commune de Junglinster (sauf équipe seniors)"],
       medico: ["Contrôle médico-sportif", "Informations et formulaires sur guichet.lu"],
       licence: ["Demande de licence pour membre actif du club", "Formulaire en ligne du club – y joindre la demande d'affiliation FLF signée (ci-dessous)"],
       affiliation: ["Demande d'affiliation FLF", "Imprimer le PDF, le remplir, le signer et le joindre à la demande de licence"] }, heuteSpielt: "Jour de match", route: "Itinéraire", routeLang: "Itinéraire jusqu'au terrain",
@@ -1412,7 +1412,7 @@ Danke, dass ihr den Kindern vorlebt, wie Fair Play auch neben dem Platz aussieht
     + "\nVom Verein (11.11.2026): Jedes Mitglied des Vereins muss die Cotisation jedes Jahr zu Beginn der Saison bezahlen, um am Training und am Spielbetrieb teilnehmen zu können. Wird die Cotisation nicht bezahlt, führt das zum Ausschluss aus dem Verein beziehungsweise zum Verlust der Mitgliedschaft. Auch Non-joueurs (nicht spielende Mitglieder) zahlen die Cotisation, mit reduziertem Betrag von 120 €.");
   // Abläufe, die der Verein dem Chat mitgibt (Wissen ergänzen: hier weitere Abschnitte anfügen)
   z.push(`\n## Lizenz beantragen (neues aktives Mitglied, Spielerin/Spieler) – Ablauf des Vereins (Stand 11.11.2026)
-1. Préinscription für neue Mitglieder: https://fcjj.forms.app/preinscription – WICHTIG: Die Voranmeldung neuer Mitglieder ist auf Spielerinnen und Spieler beschränkt, die in der Gemeinde Junglinster wohnen – das gilt für Kinder wie für Erwachsene (vom Verein, 11. und 13.11.2026).
+1. Préinscription für neue Mitglieder: https://fcjj.forms.app/preinscription – WICHTIG: Die Voranmeldung neuer Mitglieder ist auf Spielerinnen und Spieler beschränkt, die in der Gemeinde Junglinster wohnen (vom Verein, 11. und 13.11.2026). Ausnahme: die Seniors-Mannschaft – dafür gilt die Wohnsitz-Regel nicht.
 2. Ärztliche Untersuchung – muss VOR der Demande de licence gemacht sein:
    - ab Poussins (POU, U11) und älter, auch WU11/WU13/WU15: Contrôle médico-sportif (Infos: https://guichet.public.lu/fr/citoyens/loisirs/activites-sportives/pratique-activite-sportive/controle-medico-sportif.html)
    - Bambinis (BAM, U7) und Pupilles (PUP, U9): kein Contrôle médico-sportif nötig, es reicht ein Certificat d'aptitude sportive vom Hausarzt.
