@@ -46,6 +46,8 @@ jobs:
       - run: node tools/kader.mjs || true
         env:
           APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
+      # Fußball-News (RSS-Schlagzeilen), höchstens alle 50 Minuten. Fehler stören den FLF-Abruf nicht.
+      - run: node tools/news.mjs || true
       - name: Speichern, falls sich etwas geändert hat
         run: |
           git add -A data kalender
