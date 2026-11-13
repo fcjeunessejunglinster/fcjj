@@ -14,10 +14,6 @@ async function overpass(q) {
 const aus = [];
 for (const o of orte) {
   const e = { ...o, osm: null, nom: [] };
-  if (o.k) {
-    const els = await overpass(`[out:json][timeout:60];nwr(around:3000,${o.k[0]},${o.k[1]})[leisure~"^(pitch|stadium|sports_centre)$"][sport~"soccer|multi"];out center tags;`);
-    e.osm = els && els.map(x => ({ id: x.type[0] + x.id, lat: x.lat ?? x.center?.lat, lon: x.lon ?? x.center?.lon, t: x.tags }));
-  }
   for (const q of [`${o.name} ${o.stadt || ""}`.trim(), `stade ${o.stadt || ""}`.trim()]) {
     try { const r = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=lu&limit=5&q=${encodeURIComponent(q)}`, { headers: { "user-agent": "fcjj-app-probe/1.0 (github.com/fcjeunessejunglinster/fcjj)" }, signal: AbortSignal.timeout(30000) });
       if (r.ok) e.nom.push({ q, r: (await r.json()).map(x => ({ n: x.display_name, lat: +x.lat, lon: +x.lon, typ: x.type })) }); } catch (x) {}

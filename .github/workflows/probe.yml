@@ -5,14 +5,12 @@ permissions:
 jobs:
   p:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      - run: mkdir out && node .github/probe/orte.mjs
-        timeout-minutes: 40
-        continue-on-error: true
-      - if: always()
-        run: |
+      - run: mkdir out && timeout 900 node .github/probe/orte.mjs || true
+      - run: |
           git init -q pd && cp out/* pd/ && cd pd && git add -A && git -c user.name=p -c user.email=p@p commit -qm p
           git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" HEAD:refs/heads/probe-daten
