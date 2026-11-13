@@ -273,7 +273,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-13 k";
+const FASSUNG = "2026-11-13 l";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1023,11 +1023,17 @@ function fupaExtraHtml(w) {
 const FUPA_CLUB = "https://www.fupa.net/club/fc-jeunesse-junglinster";
 // Das Widget lädt erst nach Zustimmung (das Handy spricht dann direkt mit FuPa). Die App merkt sich „ja“.
 const fupaOk = () => merk.get("fupa") === "ja";
+// Liveticker aufklappbar (vom Verein, 13.11.2026): rund ums Spiel (15 Min. vorher bis 3 Std. nach Anstoß) von selbst offen,
+// sonst zu; was man selbst auf- oder zuklappt, bleibt so (FUPA_KLAPP je Widget).
+const FUPA_KLAPP = new Map();
+document.addEventListener("toggle", e => { const d = e.target; if (d.matches?.("details.fupa[data-ticker]")) FUPA_KLAPP.set(d.dataset.ticker, d.open); }, true);
 function fupaHtml(id, anstoss) {
-  return `<section class="karte fupa"><h2>${T().fupaTitel} · ${T().fupaVon}</h2>` + (fupaOk()
+  const a = Date.parse(anstoss), live = !isNaN(a) && a - 15 * 60e3 <= Date.now() && Date.now() <= a + 180 * 60e3;
+  const offen = FUPA_KLAPP.has(id) ? FUPA_KLAPP.get(id) : live;
+  return `<details class="karte fupa" data-ticker="${esc(id)}"${offen ? " open" : ""}><summary>${T().fupaTitel} · ${T().fupaVon}</summary>` + (fupaOk()
     ? `<div class="fupaplatz" data-fw="${esc(id)}" data-anstoss="${esc(anstoss)}"></div>`
     : `<div class="fupatext">${esc(T().fupaText)}</div><button class="knopf" data-fupa="ja">${esc(T().fupaAn)}</button><div class="klein">${esc(T().fupaMerk)}</div>`)
-    + `<div class="klein"><a href="${FUPA_CLUB}" target="_blank" rel="noopener">${esc(T().fupaApp)}</a></div></section>`;
+    + `<div class="klein"><a href="${FUPA_CLUB}" target="_blank" rel="noopener">${esc(T().fupaApp)}</a></div></details>`;
 }
 // Das Widget-Element bleibt über alle Neuaufbauten dasselbe (der Inhalt wird jede Minute neu gebaut) und wird nach jedem
 // Aufbau in seinen Platz gehängt. FuPas Skript erkennt neu eingehängte Elemente selbst und lädt ein gefülltes nicht neu.
