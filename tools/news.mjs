@@ -1,4 +1,5 @@
-// Fußball-News (Schlagzeilen) aus RSS-Feeds → data/news.json. Läuft im GitHub-Abruf, höchstens alle 50 Minuten.
+// Fußball-News (Schlagzeilen) aus RSS-Feeds → data/news.json. Läuft im GitHub-Abruf (die Feeds erlauben den Abruf
+// direkt aus dem Browser nicht), höchstens alle 50 Minuten.
 // Die App zeigt nur Schlagzeile, Quelle und Zeit mit Link zum Artikel beim Anbieter (keine Artikeltexte).
 // Feeds, die nicht antworten, werden übersprungen; ohne neue Daten bleibt der alte Stand.
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
@@ -16,6 +17,7 @@ export const FEEDS = {
     { q: "UEFA", url: "https://www.uefa.com/rss/uefachampionsleague/rss.xml" },
   ],
   fr: [
+    { q: "RMC Sport", url: "https://rmcsport.bfmtv.com/rss/football/" },
     { q: "L'Équipe", url: "https://dwh.lequipe.fr/api/edito/rss?path=/Football/" },
     { q: "UEFA", url: "https://fr.uefa.com/rss/uefachampionsleague/rss.xml" },
   ],
@@ -55,6 +57,9 @@ async function main() {
     neu[l] = alle.filter(n => !gesehen.has(n.u) && gesehen.add(n.u)).sort((a, b) => (b.d || "").localeCompare(a.d || "")).slice(0, PRO_SPRACHE);
     if (!neu[l].length && alt?.[l]) neu[l] = alt[l];   // nichts bekommen → alten Stand behalten
   }
+  // nur schreiben, wenn sich Schlagzeilen geändert haben (sonst gäbe es bei jedem Abruf eine Änderung im Repository)
+  if (alt && ["de", "en", "fr"].every(l => JSON.stringify(alt[l]) === JSON.stringify(neu[l]))) { console.log("News: unverändert"); return; }
   writeFileSync(OUT, JSON.stringify(neu) + "\n");
+  console.log("News:", ["de", "en", "fr"].map(l => `${l} ${neu[l].length}`).join(", "));
 }
 if (import.meta.url === `file://${process.argv[1]}`) await main().catch(e => console.error("News:", e.message));
