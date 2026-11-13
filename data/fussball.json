@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-13T21:18:12.603Z",
+ "stand": "2026-11-13T22:18:20.009Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -24345,10 +24345,9 @@
     },
     "hs": 0,
     "as": 1,
-    "gespielt": false,
+    "gespielt": true,
     "wett": "UEFA Nations League",
-    "runde": "C4",
-    "ort": "Stade de Luxembourg"
+    "runde": "C4"
    },
    {
     "id": 14856477,
@@ -24380,7 +24379,7 @@
      "s": 3,
      "u": 2,
      "nl": 0,
-     "t": 11,
+     "t": 12,
      "g": 1,
      "pkt": 11
     },
@@ -24405,7 +24404,7 @@
      "u": 1,
      "nl": 3,
      "t": 3,
-     "g": 9,
+     "g": 10,
      "pkt": 4
     },
     {
