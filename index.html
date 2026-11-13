@@ -267,7 +267,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-13 g";
+const FASSUNG = "2026-11-13 h";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -539,8 +539,8 @@ function zeile(sp, now, { wirH, wirA, erg, w, unten, attr = "", m, form }) {
     <span class="tm${wirA ? " wir" : ""}">${esc(sp.a.n)}${fa}</span><span class="unten">${unten}</span></li>`;
 }
 // Form vor einem Spiel: Ergebnisse der letzten 5 Ligaspiele der Mannschaft (Pokal und Freundschaftsspiele zählen nicht),
-// das neueste rechts – wie in der Koeppchen-App. Nur bei den Seniors (vom Verein, 13.11.2026).
-const FORM_KATS = ["SEN"];
+// das neueste rechts – wie in der Koeppchen-App. Nur bei Seniors und Réserves (vom Verein, 13.11.2026).
+const FORM_KATS = ["SEN", "RES"];   // Réserves dazu am 13.11.2026
 function formListe(teamId, vor) {
   const l = [];
   for (const k of Object.values(D.klassen)) if (k.typ !== "CUP" && k.typ !== "FM" && k.ergebnisse)
