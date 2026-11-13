@@ -273,7 +273,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-13 i";
+const FASSUNG = "2026-11-13 j";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -329,6 +329,7 @@ const TEXTE = {
       denkt: "Einen Moment …", fehler: "Das hat nicht geklappt. Bitte später nochmal versuchen.", limit: "Für heute sind keine Fragen mehr möglich. Morgen geht es wieder." },
     kontakt2: { titel: "Kontakt", sport: "Sportliche Fragen (oder direkt beim Trainer)", jugend: "Alles zu den Jugendkategorien", sonst: "Alle anderen Fragen" },
     formB: { S: "S", U: "U", N: "N" }, formText: n => `Letzte 5 Ligaspiele · ${n}`, formTitel: "Form der letzten 5 Ligaspiele (neuestes rechts): S Sieg, U Unentschieden, N Niederlage",
+    news: { titel: "Fußball-News", hinweis: "Schlagzeilen mit Link zum Artikel beim Anbieter" },
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein beziehungsweise zum Verlust der Mitgliedschaft.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht spielendes Mitglied (Non-joueur, reduzierter Beitrag)"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Die Cotisation ist von jedem Mitglied – auch von Non-joueurs (reduzierter Beitrag von 120 €) – jedes Jahr zu Beginn der Saison zu zahlen.", "Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -399,6 +400,7 @@ const TEXTE = {
       denkt: "One moment …", fehler: "That didn't work. Please try again later.", limit: "No more questions possible today. Try again tomorrow." },
     kontakt2: { titel: "Contact", sport: "Sporting questions (or ask the coach directly)", jugend: "Everything about the youth categories", sonst: "All other questions" },
     formB: { S: "W", U: "D", N: "L" }, formText: n => `Last 5 league games · ${n}`, formTitel: "Form, last 5 league games (newest on the right): W win, D draw, L loss",
+    news: { titel: "Football news", hinweis: "Headlines linking to the full article" },
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club or loss of membership.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-playing member (non-joueur, reduced fee)"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["Every member – including non-playing members (reduced fee of €120) – pays the membership fee each year at the start of the season.", "We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -469,6 +471,7 @@ const TEXTE = {
       denkt: "Un instant …", fehler: "Ça n’a pas marché. Merci de réessayer plus tard.", limit: "Plus de questions possibles aujourd’hui. Réessaie demain." },
     kontakt2: { titel: "Contact", sport: "Questions sportives (ou directement à l’entraîneur)", jugend: "Tout ce qui concerne les catégories jeunes", sonst: "Toutes les autres questions" },
     formB: { S: "V", U: "N", N: "D" }, formText: n => `5 derniers matchs de championnat · ${n}`, formTitel: "Forme des 5 derniers matchs de championnat (le plus récent à droite) : V victoire, N nul, D défaite",
+    news: { titel: "Actualités football", hinweis: "Titres avec lien vers l’article complet" },
     beitragTitel: "Cotisation", ausschluss: "Le non-paiement de la cotisation entraîne l’exclusion du club, respectivement la perte de la qualité de membre.", betraegeTitel: "Les cotisations s'élèvent à :", beitragArt: ["pour le 1er membre joueur", "pour le 2ème membre joueur", "à partir du 3ème membre joueur", "pour un membre non-joueur (cotisation réduite)"], ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: ["La cotisation est à payer par chaque membre – y compris les non-joueurs (montant réduit de 120 €) – chaque année au début de la saison.", "Nous souhaitons profiter de cette occasion pour rappeler que le paiement de la cotisation est une condition préalable à la participation aux séances d’entraînement et aux matchs en tant que joueuse ou joueur.", "Il donne également droit à l’entrée gratuite aux matchs à domicile de nos équipes Seniors, ainsi qu’au droit de vote à l’Assemblée générale, conformément aux statuts du club."],
     links: "Liens utiles", linkListe: {
@@ -1146,8 +1149,25 @@ function ligaHtml(key, now) {
     const zeilen = L.tabelle.map((z, i) => `<tr><td>${i + 1}</td><td>${esc(z.shortName || z.teamName)}</td><td>${z.matches}</td><td>${z.won}</td><td>${z.draw}</td><td>${z.lost}</td><td>${z.goals}:${z.opponentGoals}</td><td><b>${z.points}</b></td></tr>`).join("");
     html += `<details class="karte"><summary>${T().blTab(L.name)}</summary><div class="tabrahmen"><table><thead><tr><th>#</th>${T().kopf.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${zeilen}</tbody></table></div></details>`;
   }
-  if (key === "bl") html += blKaderHtml();
+  if (key === "bl") html += newsHtml() + blKaderHtml();
   return html + `<p class="leise" style="text-align:center;margin:0">${T().blQuelle(L.name)}</p>`;
+}
+// Fußball-News (data/news.json, vom GitHub-Abruf aus RSS: kicker auf Deutsch, BBC Sport und bundesliga.com auf Englisch,
+// RMC Sport auf Französisch). Nur Schlagzeilen, ein Tipp öffnet den Artikel beim Anbieter.
+let NEWS = null, NEWS_LAEDT = 0;
+async function newsHolen() {
+  NEWS_LAEDT = Date.now();
+  try { const r = await fetch("data/news.json", { cache: "no-cache" }); NEWS = r.ok ? await r.json() : {}; } catch (e) { NEWS = NEWS || {}; }
+  render();
+}
+function newsHtml() {
+  if (Date.now() - NEWS_LAEDT > 10 * 60e3) newsHolen();
+  const l = NEWS?.[LANG] || [];
+  if (!l.length) return "";
+  const zeit = d => d ? new Date(d).toLocaleString(LOC(), { timeZone: TZ, weekday: "short", hour: "2-digit", minute: "2-digit" }) : "";
+  return `<details class="karte"><summary>📰 ${esc(T().news.titel)}</summary><ul class="spiele linkliste">${l.slice(0, 10).map(n =>
+    `<li><a href="${esc(n.u)}" target="_blank" rel="noopener"><span class="lt"><b>${esc(n.t)}</b><span>${esc([n.q, zeit(n.d)].filter(Boolean).join(" · "))}</span></span><span class="lp">›</span></a></li>`).join("")}</ul>
+    <p class="leise" style="padding:8px 14px 12px;margin:0">${esc(T().news.hinweis)}</p></details>`;
 }
 // Kader der Bundesliga (data/bl-kader.json, wöchentlich vom GitHub-Abruf über API-Football geholt; siehe tools/kader.mjs).
 // Erst beim Öffnen des Reiters geladen; Spielerfotos erst beim Aufklappen eines Vereins.

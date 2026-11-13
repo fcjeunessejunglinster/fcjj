@@ -41,6 +41,8 @@ jobs:
         env:
           NEU_SUCHEN: ${{ inputs.neu_suchen && '1' || '' }}
       # Bundesliga-Kader (API-Football), höchstens alle 6 Tage. Fehler stören den FLF-Abruf nicht.
+      # Fußball-News (Schlagzeilen aus RSS), Fehler stören den Abruf nicht
+      - run: node tools/news.mjs || true
       - run: node tools/kader.mjs || true
         env:
           APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
