@@ -261,7 +261,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-13 b";
+const FASSUNG = "2026-11-13 c";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -584,6 +584,9 @@ const PLAETZE = {
   "Terrain 2 (Mersch, synth.)": { q: "Stade Schintgespesch, Mersch" },
   "Terrain 2 (Schieren, synth.)": { q: "Terrain Am Ge'er, Schieren" },
   // Ohne Ort im FLF-Namen: Platz von CS Oberkorn (Differdange), nicht Mersch.
+  // Kunstrasen von Victoria Rosport auf der deutschen Seite der Sauer, in Ralingen (Rheinland-Pfalz), ca. 600 m vom
+  // Stadion in Rosport – nicht Rollingen bei Mersch (Hinweis vom Verein 13.11.2026; OSM „FSV Ralingen“, dewiki Victoria Rosport)
+  "Terrain Ralingen (synth.)": { k: [49.8036, 6.5121], a: "Kunstrasen Ralingen (Deutschland), gegenüber Rosport" },
   "Stade Camille Mersch (synth.)": { q: "Stade Camille Mersch, Oberkorn", wetter: [49.5134, 5.8898] },
 };
 const platzAdresse = ort => (ort && PLAETZE[ort]?.a) || "";
