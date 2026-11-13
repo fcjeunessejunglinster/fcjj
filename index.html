@@ -178,6 +178,12 @@ ul.spiele li.sp{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1
 li.sp .tm{font-size:15px;line-height:1.2;overflow-wrap:anywhere}
 li.sp .tm.h{text-align:right}
 li.sp .tm.wir{font-weight:800}
+.form{display:flex;gap:3px;margin-top:5px;font-style:normal}
+li.sp .tm.h .form{justify-content:flex-end}
+.form i{font-style:normal;font-weight:700;font-size:11px;width:18px;height:18px;line-height:18px;text-align:center;border-radius:4px}
+.form i.S{background:var(--sieg);color:#fff}
+.form i.U{background:var(--grau);color:#111}
+.form i.N{background:var(--schwarz);color:var(--bg)}
 li.sp .mitte{min-width:64px;text-align:center;font-weight:800;font-size:19px;font-variant-numeric:tabular-nums;white-space:nowrap;
   border-radius:8px;padding:3px 8px;background:var(--bg);border:1px solid var(--linie)}
 li.sp .mitte.S{background:var(--sieg);border-color:var(--sieg);color:#fff}
@@ -261,7 +267,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-13 f";
+const FASSUNG = "2026-11-13 g";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -316,6 +322,7 @@ const TEXTE = {
       hinweis: "KI-Antwort (Claude), kann Fehler enthalten. Verbindlich sind Trainer und fcjj.lu. Deine Frage wird an Anthropic geschickt; gib keine persönlichen Daten ein.",
       denkt: "Einen Moment …", fehler: "Das hat nicht geklappt. Bitte später nochmal versuchen.", limit: "Für heute sind keine Fragen mehr möglich. Morgen geht es wieder." },
     kontakt2: { titel: "Kontakt", sport: "Sportliche Fragen (oder direkt beim Trainer)", jugend: "Alles zu den Jugendkategorien", sonst: "Alle anderen Fragen" },
+    formB: { S: "S", U: "U", N: "N" }, formTitel: "Form der letzten 5 Ligaspiele (neuestes rechts): S Sieg, U Unentschieden, N Niederlage",
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein beziehungsweise zum Verlust der Mitgliedschaft.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht spielendes Mitglied (Non-joueur, reduzierter Beitrag)"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Die Cotisation ist von jedem Mitglied – auch von Non-joueurs (reduzierter Beitrag von 120 €) – jedes Jahr zu Beginn der Saison zu zahlen.", "Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -385,6 +392,7 @@ const TEXTE = {
       hinweis: "AI answer (Claude), may contain mistakes. Coaches and fcjj.lu are authoritative. Your question is sent to Anthropic; don't enter personal data.",
       denkt: "One moment …", fehler: "That didn't work. Please try again later.", limit: "No more questions possible today. Try again tomorrow." },
     kontakt2: { titel: "Contact", sport: "Sporting questions (or ask the coach directly)", jugend: "Everything about the youth categories", sonst: "All other questions" },
+    formB: { S: "W", U: "D", N: "L" }, formTitel: "Form, last 5 league games (newest on the right): W win, D draw, L loss",
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club or loss of membership.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-playing member (non-joueur, reduced fee)"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["Every member – including non-playing members (reduced fee of €120) – pays the membership fee each year at the start of the season.", "We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -454,6 +462,7 @@ const TEXTE = {
       hinweis: "Réponse d’IA (Claude), peut contenir des erreurs. Les entraîneurs et fcjj.lu font foi. Ta question est envoyée à Anthropic ; n’indique pas de données personnelles.",
       denkt: "Un instant …", fehler: "Ça n’a pas marché. Merci de réessayer plus tard.", limit: "Plus de questions possibles aujourd’hui. Réessaie demain." },
     kontakt2: { titel: "Contact", sport: "Questions sportives (ou directement à l’entraîneur)", jugend: "Tout ce qui concerne les catégories jeunes", sonst: "Toutes les autres questions" },
+    formB: { S: "V", U: "N", N: "D" }, formTitel: "Forme des 5 derniers matchs de championnat (le plus récent à droite) : V victoire, N nul, D défaite",
     beitragTitel: "Cotisation", ausschluss: "Le non-paiement de la cotisation entraîne l’exclusion du club, respectivement la perte de la qualité de membre.", betraegeTitel: "Les cotisations s'élèvent à :", beitragArt: ["pour le 1er membre joueur", "pour le 2ème membre joueur", "à partir du 3ème membre joueur", "pour un membre non-joueur (cotisation réduite)"], ibanLabel: "Compte du club (IBAN)", kopieren: "Copier", kopiert2: "copié", markiert: "sélectionné – copiez-le",
     beitrag: ["La cotisation est à payer par chaque membre – y compris les non-joueurs (montant réduit de 120 €) – chaque année au début de la saison.", "Nous souhaitons profiter de cette occasion pour rappeler que le paiement de la cotisation est une condition préalable à la participation aux séances d’entraînement et aux matchs en tant que joueuse ou joueur.", "Il donne également droit à l’entrée gratuite aux matchs à domicile de nos équipes Seniors, ainsi qu’au droit de vote à l’Assemblée générale, conformément aux statuts du club."],
     links: "Liens utiles", linkListe: {
@@ -524,9 +533,26 @@ function mitte(sp, now, erg, w) {
   if (vorbei(sp, now)) return `<span class="mitte leise">${erg ? (sp.bem === "Arrêté" ? T().abgebr : "–") : T().gespielt}</span>`;
   return offen(sp) ? `<span class="mitte leise">${T().offen}</span>` : `<span class="mitte zeit">${uhr(new Date(sp.d))}</span>`;
 }
-function zeile(sp, now, { wirH, wirA, erg, w, unten, attr = "", m }) {
-  return `<li class="sp${attr ? " klick" : ""}"${attr}><span class="tm h${wirH ? " wir" : ""}">${esc(sp.h.n)}</span>${m ?? mitte(sp, now, erg, w)}
-    <span class="tm${wirA ? " wir" : ""}">${esc(sp.a.n)}</span><span class="unten">${unten}</span></li>`;
+function zeile(sp, now, { wirH, wirA, erg, w, unten, attr = "", m, form }) {
+  const fh = form ? formHtml(sp.h.id, sp.d) : "", fa = form ? formHtml(sp.a.id, sp.d) : "";
+  return `<li class="sp${attr ? " klick" : ""}"${attr}><span class="tm h${wirH ? " wir" : ""}">${esc(sp.h.n)}${fh}</span>${m ?? mitte(sp, now, erg, w)}
+    <span class="tm${wirA ? " wir" : ""}">${esc(sp.a.n)}${fa}</span><span class="unten">${unten}</span></li>`;
+}
+// Form vor einem Spiel: Ergebnisse der letzten 5 Ligaspiele der Mannschaft (Pokal und Freundschaftsspiele zählen nicht),
+// das neueste rechts – wie in der Koeppchen-App. Nur bei den Seniors (vom Verein, 13.11.2026).
+const FORM_KATS = ["SEN"];
+function formListe(teamId, vor) {
+  const l = [];
+  for (const k of Object.values(D.klassen)) if (k.typ !== "CUP" && k.typ !== "FM" && k.ergebnisse)
+    for (const x of k.spiele) if ((x.h.id === teamId || x.a.id === teamId) && (x.gespielt || x.forfait) && x.hs != null && x.d < vor) l.push(x);
+  return l.sort((a, b) => a.d.localeCompare(b.d)).slice(-5).map(x => {
+    const w = x.h.id === teamId ? x.hs : x.as, g = x.h.id === teamId ? x.as : x.hs;
+    return w > g ? "S" : w < g ? "N" : "U";
+  });
+}
+function formHtml(teamId, vor) {
+  const f = formListe(teamId, vor);
+  return f.length ? `<span class="form" title="${esc(T().formTitel)}">${f.map(x => `<i class="${x}">${T().formB[x]}</i>`).join("")}</span>` : "";
 }
 // Kabinen bei Heimspielen (vom Verein, 8.11.2026): [Heimmannschaft, Gäste]. Bambinis: keine Anzeige
 // (Bambinis werden spontan vergeben). Neue Mannschaft = neue Zeile, Schlüssel = Name des Reiters.
@@ -670,7 +696,7 @@ const zeitText = sp => offen(sp) ? T().zeitOffen : (sp.bam && !sp.bam.zeitSicher
 const wannText = sp => `${wt(new Date(sp.d))} ${kurzDatum(new Date(sp.d))} · ${zeitText(sp)}`;
 const schildText = sp => sp.bam ? "" : sp.typ === "CUP" ? T().cup : sp.typ === "FM" ? T().friendly : sp.wett === "Testspiele" ? T().friendly : "";
 const kopf = (titel, sp, rechts) => `<h2><span>${titel}</span>${rechts ? `<span class="schild">${esc(rechts)}</span>` : sp && schildText(sp) ? `<span class="schild">${esc(schildText(sp))}</span>` : ""}</h2>`;
-const kastenZeile = (sp, now, m) => `<ul class="spiele">${zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, w: wertung(sp), unten: "", m })}</ul>`.replace('<span class="unten"></span>', "");
+const kastenZeile = (sp, now, m) => `<ul class="spiele">${zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, w: wertung(sp), unten: "", m, form: FORM_KATS.includes(sp.team?.kat) && !vorbei(sp, now) })}</ul>`.replace('<span class="unten"></span>', "");
 let UMSCHALT = 0;   // Zeitpunkt, zu dem der Heute-Kasten umschaltet (Countdown, Anpfiff) — der Takt baut dann neu.
 function spieltagHeute(spiele, now) {
   const sp = spiele.find(s => tagKey(new Date(s.d)) === tagKey(now) && !(s.gespielt && s.hs != null) && !vorbei(s, now));
@@ -815,7 +841,7 @@ function naechsteKarte(kommend, now, unten = "", titel = T().naechste) {
       + kommend.slice(0, 5).map((sp, i) => {
         if (i) return spielLi(sp, now);
         const meta = [sp.ort ? "📍 " + sp.ort : "", kabine(sp, now), sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")].filter(Boolean);
-        return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, m: '<span class="mitte leise">–</span>',
+        return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, m: '<span class="mitte leise">–</span>', form: FORM_KATS.includes(sp.team?.kat),
           unten: `${artSchild(sp)}${esc(meta.join(" · "))}${routeLink(sp, now) ? " · " + routeLink(sp, now) : ""}` }).replace('class="sp"', 'class="sp erstes"');
       }).join("") + "</ul>";
   }
