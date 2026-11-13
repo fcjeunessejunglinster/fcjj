@@ -1,0 +1,14 @@
+name: probe
+on: workflow_dispatch
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - run: |
+          UA="fcjj-app-probe/1.0 (github.com/fcjeunessejunglinster/fcjj)"
+          curl -sS -m 30 -A "$UA" "https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=lu&limit=5&q=Rue+Neuwies,+Differdange" ; echo
+          sleep 2
+          curl -sS -m 30 -A "$UA" "https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=lu&limit=5&q=Stade+Camille+Mersch" ; echo
+          sleep 2
+          curl -sS -m 90 -A "$UA" --data-urlencode 'data=[out:json][timeout:60];way(around:200,49.525,5.882)["name"="Rue Neuwies"]->.s;nwr(around.s:400)[leisure~"pitch|stadium"];out center tags;' https://overpass-api.de/api/interpreter | head -c 4000 ; echo
