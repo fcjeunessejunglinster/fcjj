@@ -1,0 +1,1057 @@
+[
+ {
+  "ort": "Complexe sportif Reuler (synth.)",
+  "stadt": "Reuler",
+  "k": [
+   50.058,
+   6.038
+  ],
+  "name": "Complexe sportif Reuler",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Complexe sportif Reuler Reuler",
+    "r": []
+   },
+   {
+    "q": "stade Reuler",
+    "r": [
+     {
+      "n": "Stade Aloyse Meyer, Klatzewee, Mecher, Clervaux, Canton Clervaux, 9714, Lëtzebuerg",
+      "lat": 50.0520655,
+      "lon": 6.0215514,
+      "typ": "pitch"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Heiligen Wiese (Bastendorf, synth)",
+  "stadt": "Bastendorf",
+  "k": [
+   49.892,
+   6.165
+  ],
+  "name": "Heiligen Wiese",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Heiligen Wiese Bastendorf",
+    "r": []
+   },
+   {
+    "q": "stade Bastendorf",
+    "r": [
+     {
+      "n": "FC47 Bastendorf, An der Bamschoul, Bastendorf, Tandel, Canton Vianden, 9351, Lëtzebuerg",
+      "lat": 49.8925438,
+      "lon": 6.1603553,
+      "typ": "stadium"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Millewiss (Bastendorf)",
+  "stadt": "Bastendorf",
+  "k": [
+   49.892,
+   6.165
+  ],
+  "name": "Millewiss",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Millewiss Bastendorf",
+    "r": []
+   },
+   {
+    "q": "stade Bastendorf",
+    "r": [
+     {
+      "n": "FC47 Bastendorf, An der Bamschoul, Bastendorf, Tandel, Canton Vianden, 9351, Lëtzebuerg",
+      "lat": 49.8925438,
+      "lon": 6.1603553,
+      "typ": "stadium"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Parc des Sports (Diekirch, synth.)",
+  "stadt": "Diekirch",
+  "k": [
+   49.867,
+   6.155
+  ],
+  "name": "Parc des Sports",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Parc des Sports Diekirch",
+    "r": []
+   },
+   {
+    "q": "stade Diekirch",
+    "r": [
+     {
+      "n": "Stade an de Burwiesen, Rue de Dellen, Mertzig, Canton Diekirch, 9169, Lëtzebuerg",
+      "lat": 49.8350653,
+      "lon": 6.0048091,
+      "typ": "stadium"
+     },
+     {
+      "n": "Stade Am Deich, Rue du Deich, Ettelbruck, Canton Diekirch, 9013, Lëtzebuerg",
+      "lat": 49.8416144,
+      "lon": 6.0940079,
+      "typ": "stadium"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Stade Amadéo Barozzi (Dudelange, synth.)",
+  "stadt": "Dudelange",
+  "k": [
+   49.481,
+   6.088
+  ],
+  "name": "Stade Amadéo Barozzi",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Amadéo Barozzi Dudelange",
+    "r": [
+     {
+      "n": "Stade Amadéo Barozzi, Rue Reiteschkopp, Italien, Budersberg, Dudelange, Canton Esch-sur-Alzette, 3481, Lëtzebuerg",
+      "lat": 49.4714658,
+      "lon": 6.0762444,
+      "typ": "stadium"
+     }
+    ]
+   },
+   {
+    "q": "stade Dudelange",
+    "r": [
+     {
+      "n": "Stade, Rue Pierre Krier, Burange, Dudelange, Canton Esch-sur-Alzette, 3574, Lëtzebuerg",
+      "lat": 49.4893152,
+      "lon": 6.0864863,
+      "typ": "guidepost"
+     },
+     {
+      "n": "Stade Jos Nosbaum, Rue Saint-Martin, Italien, Budersberg, Dudelange, Canton Esch-sur-Alzette, 3520, Lëtzebuerg",
+      "lat": 49.4723699,
+      "lon": 6.0847909,
+      "typ": "stadium"
+     },
+     {
+      "n": "Stade J. F. Kennedy, Rue Pierre Krier, Burange, Dudelange, Canton Esch-sur-Alzette, 3504, Lëtzebuerg",
+      "lat": 49.489285,
+      "lon": 6.0895344,
+      "typ": "stadium"
+     },
+     {
+      "n": "Rue du Stade John F. Kennedy, Burange, Dudelange, Canton Esch-sur-Alzette, 3502, Lëtzebuerg",
+      "lat": 49.4889531,
+      "lon": 6.0908384,
+      "typ": "residential"
+     },
+     {
+      "n": "Rue du Stade John F. Kennedy, Burange, Dudelange, Canton Esch-sur-Alzette, 3502, Lëtzebuerg",
+      "lat": 49.4870344,
+      "lon": 6.0894255,
+      "typ": "living_street"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Stade F. Schuman (Ehlerange)",
+  "stadt": "Ehlerange",
+  "k": [
+   49.524,
+   5.966
+  ],
+  "name": "Stade F. Schuman",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade F. Schuman Ehlerange",
+    "r": []
+   },
+   {
+    "q": "stade Ehlerange",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Stade Feidt Frères (Brouch, synth.)",
+  "stadt": "Brouch",
+  "k": [
+   49.736,
+   6.023
+  ],
+  "name": "Stade Feidt Frères",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Feidt Frères Brouch",
+    "r": []
+   },
+   {
+    "q": "stade Brouch",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Stade Fr. Trausch (synth.)",
+  "stadt": "Mamer",
+  "k": [
+   49.627,
+   6.025
+  ],
+  "name": "Stade Fr. Trausch",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Fr. Trausch Mamer",
+    "r": []
+   },
+   {
+    "q": "stade Mamer",
+    "r": [
+     {
+      "n": "Stade Mathias Mamer, Allée des Présidents, Muhlenbach, Luxembourg, Canton Luxembourg, 1264, Lëtzebuerg",
+      "lat": 49.6317122,
+      "lon": 6.1147872,
+      "typ": "pitch"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Stade Gaston Diderich (Luxembourg, synth.)",
+  "stadt": "Luxembourg",
+  "k": [
+   49.6116,
+   6.1319
+  ],
+  "name": "Stade Gaston Diderich",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Gaston Diderich Luxembourg",
+    "r": [
+     {
+      "n": "Stade Gaston Diderich, Rue Michel Hülsemann, Pfaffenthal, Luxembourg, Canton Luxembourg, 1743, Lëtzebuerg",
+      "lat": 49.6225578,
+      "lon": 6.1318469,
+      "typ": "pitch"
+     }
+    ]
+   },
+   {
+    "q": "stade Luxembourg",
+    "r": [
+     {
+      "n": "Stade Josy-Barthel, Route d'Arlon, Belair, Luxembourg, Canton Luxembourg, 1537, Lëtzebuerg",
+      "lat": 49.6155569,
+      "lon": 6.1097568,
+      "typ": "stadium"
+     },
+     {
+      "n": "Stade, Rue Pierre Krier, Burange, Dudelange, Canton Esch-sur-Alzette, 3574, Lëtzebuerg",
+      "lat": 49.4893152,
+      "lon": 6.0864863,
+      "typ": "guidepost"
+     },
+     {
+      "n": "Stade de Luxembourg, 100, Boulevard de Kockelscheuer, Gasperich, Luxembourg, Canton Luxembourg, 1821, Lëtzebuerg",
+      "lat": 49.5770687,
+      "lon": 6.1141646,
+      "typ": "stadium"
+     },
+     {
+      "n": "Stade Jos Nosbaum, Rue Saint-Martin, Italien, Budersberg, Dudelange, Canton Esch-sur-Alzette, 3520, Lëtzebuerg",
+      "lat": 49.4723699,
+      "lon": 6.0847909,
+      "typ": "stadium"
+     },
+     {
+      "n": "Stade de la Frontière, Rue des Sports, Grenz, Esch-sur-Alzette, Canton Esch-sur-Alzette, 4324, Lëtzebuerg",
+      "lat": 49.4858646,
+      "lon": 5.9770344,
+      "typ": "stadium"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Stade Koericherberg (Hobscheid)",
+  "stadt": "Hobscheid",
+  "k": [
+   49.689,
+   5.915
+  ],
+  "name": "Stade Koericherberg",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Koericherberg Hobscheid",
+    "r": []
+   },
+   {
+    "q": "stade Hobscheid",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Stade Kuerzwénkel (Consdorf)",
+  "stadt": "Consdorf",
+  "k": [
+   49.78,
+   6.34
+  ],
+  "name": "Stade Kuerzwénkel",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Kuerzwénkel Consdorf",
+    "r": []
+   },
+   {
+    "q": "stade Consdorf",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Stade Nic. Anzia (Useldange)",
+  "stadt": "Useldange",
+  "k": [
+   49.77,
+   5.982
+  ],
+  "name": "Stade Nic. Anzia",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Nic. Anzia Useldange",
+    "r": [
+     {
+      "n": "Stade Nic. Anzia, N 22, Useldange, Canton Redange, 8705, Lëtzebuerg",
+      "lat": 49.7705062,
+      "lon": 5.9842637,
+      "typ": "pitch"
+     }
+    ]
+   },
+   {
+    "q": "stade Useldange",
+    "r": [
+     {
+      "n": "Stade Nic. Anzia, N 22, Useldange, Canton Redange, 8705, Lëtzebuerg",
+      "lat": 49.7705062,
+      "lon": 5.9842637,
+      "typ": "pitch"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Stade Schintgespesch (Mersch)",
+  "stadt": "Mersch",
+  "k": [
+   49.751,
+   6.106
+  ],
+  "name": "Stade Schintgespesch",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Schintgespesch Mersch",
+    "r": []
+   },
+   {
+    "q": "stade Mersch",
+    "r": [
+     {
+      "n": "Stade Jean Donnersbach, Rue de la Gare, Prettingen, Lintgen, Canton Mersch, 7448, Lëtzebuerg",
+      "lat": 49.7208525,
+      "lon": 6.1218247,
+      "typ": "pitch"
+     },
+     {
+      "n": "Stade Am Lëtschert, Beau-Site, Betzemillen, Boevange-sur-Attert, Helperknapp, Canton Mersch, 8711, Lëtzebuerg",
+      "lat": 49.77121,
+      "lon": 6.0175564,
+      "typ": "stadium"
+     },
+     {
+      "n": "Stade Nic. Anzia, N 22, Useldange, Canton Redange, 8705, Lëtzebuerg",
+      "lat": 49.7705062,
+      "lon": 5.9842637,
+      "typ": "pitch"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Stade Schmitzgasse (Hupperdange)",
+  "stadt": "Hupperdange",
+  "k": [
+   50.096,
+   6.059
+  ],
+  "name": "Stade Schmitzgasse",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Schmitzgasse Hupperdange",
+    "r": []
+   },
+   {
+    "q": "stade Hupperdange",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Stade Um Krottepull (Gilsdorf)",
+  "stadt": "Gilsdorf",
+  "k": [
+   49.865,
+   6.18
+  ],
+  "name": "Stade Um Krottepull",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Um Krottepull Gilsdorf",
+    "r": []
+   },
+   {
+    "q": "stade Gilsdorf",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Stade Victor Marchal (Tétange)",
+  "stadt": "Tétange",
+  "k": [
+   49.476,
+   6.042
+  ],
+  "name": "Stade Victor Marchal",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Victor Marchal Tétange",
+    "r": [
+     {
+      "n": "Stade Victor Marchal, Rue Thomas Byrne, Tétange, Kayl, Canton Esch-sur-Alzette, 3786, Lëtzebuerg",
+      "lat": 49.4756618,
+      "lon": 6.0373929,
+      "typ": "pitch"
+     }
+    ]
+   },
+   {
+    "q": "stade Tétange",
+    "r": [
+     {
+      "n": "Stade Victor Marchal, Rue Thomas Byrne, Tétange, Kayl, Canton Esch-sur-Alzette, 3761, Lëtzebuerg",
+      "lat": 49.4756618,
+      "lon": 6.0373929,
+      "typ": "pitch"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Stade de la Frontière d'Gennerwiss (Aspelt)",
+  "stadt": "Aspelt",
+  "k": [
+   49.523,
+   6.225
+  ],
+  "name": "Stade de la Frontière d'Gennerwiss",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade de la Frontière d'Gennerwiss Aspelt",
+    "r": []
+   },
+   {
+    "q": "stade Aspelt",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 1 (Junglinster)",
+  "stadt": "Junglinster",
+  "k": [
+   49.707,
+   6.253
+  ],
+  "name": "Terrain 1",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 1 Junglinster",
+    "r": []
+   },
+   {
+    "q": "stade Junglinster",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Biwer)",
+  "stadt": "Biwer",
+  "k": [
+   49.706,
+   6.372
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Biwer",
+    "r": []
+   },
+   {
+    "q": "stade Biwer",
+    "r": [
+     {
+      "n": "FC Jeunesse Biwer, Schoulstrooss, Biwerbach, Biwer, Canton Grevenmacher, 6833, Lëtzebuerg",
+      "lat": 49.7001042,
+      "lon": 6.380598,
+      "typ": "stadium"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Canach, synth.)",
+  "stadt": "Canach",
+  "k": [
+   49.607,
+   6.326
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Canach",
+    "r": []
+   },
+   {
+    "q": "stade Canach",
+    "r": [
+     {
+      "n": "Stade Fernand Weber, CR 144, Canach, Lenningen, Canton Remich, 5414, Lëtzebuerg",
+      "lat": 49.6100174,
+      "lon": 6.3332921,
+      "typ": "stadium"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Christnach, synth)",
+  "stadt": "Christnach",
+  "k": [
+   49.788,
+   6.273
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Christnach",
+    "r": []
+   },
+   {
+    "q": "stade Christnach",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Erpeldange, synth.)",
+  "stadt": "Erpeldange",
+  "k": [
+   49.865,
+   6.115
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Erpeldange",
+    "r": []
+   },
+   {
+    "q": "stade Erpeldange",
+    "r": [
+     {
+      "n": "Stade \"Am Pëtz\", 25, Am Pëtz, Zone économique et commerciale Wiltz - Weidingen, Weidingen, Wiltz, Canton Wiltz, 9579, Lëtzebuerg",
+      "lat": 49.9741111,
+      "lon": 5.9424137,
+      "typ": "stadium"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Hobscheid)",
+  "stadt": "Hobscheid",
+  "k": [
+   49.689,
+   5.915
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Hobscheid",
+    "r": []
+   },
+   {
+    "q": "stade Hobscheid",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Junglinster, synth.)",
+  "stadt": "Junglinster",
+  "k": [
+   49.707,
+   6.253
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Junglinster",
+    "r": []
+   },
+   {
+    "q": "stade Junglinster",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Koerich, synth.)",
+  "stadt": "Koerich",
+  "k": [
+   49.67,
+   5.95
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Koerich",
+    "r": []
+   },
+   {
+    "q": "stade Koerich",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Lorentzweiler, synth.)",
+  "stadt": "Lorentzweiler",
+  "k": [
+   49.701,
+   6.142
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Lorentzweiler",
+    "r": []
+   },
+   {
+    "q": "stade Lorentzweiler",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain Breil (Echternach)",
+  "stadt": "Echternach",
+  "k": [
+   49.812,
+   6.418
+  ],
+  "name": "Terrain Breil",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain Breil Echternach",
+    "r": []
+   },
+   {
+    "q": "stade Echternach",
+    "r": [
+     {
+      "n": "Rue du Stade, Rosport, Rosport-Mompach, Canton Echternach, 6580, Lëtzebuerg",
+      "lat": 49.8074237,
+      "lon": 6.5058723,
+      "typ": "residential"
+     },
+     {
+      "n": "Stade Martbusch, Beim Maartbësch, Berdorf, Canton Echternach, 6550, Lëtzebuerg",
+      "lat": 49.8276549,
+      "lon": 6.3427963,
+      "typ": "pitch"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Terrain Breil (Echternach, synth.)",
+  "stadt": "Echternach",
+  "k": [
+   49.812,
+   6.418
+  ],
+  "name": "Terrain Breil",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain Breil Echternach",
+    "r": []
+   },
+   {
+    "q": "stade Echternach",
+    "r": [
+     {
+      "n": "Rue du Stade, Rosport, Rosport-Mompach, Canton Echternach, 6580, Lëtzebuerg",
+      "lat": 49.8074237,
+      "lon": 6.5058723,
+      "typ": "residential"
+     },
+     {
+      "n": "Stade Martbusch, Beim Maartbësch, Berdorf, Canton Echternach, 6550, Lëtzebuerg",
+      "lat": 49.8276549,
+      "lon": 6.3427963,
+      "typ": "pitch"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Terrain Hollerich (synth.)",
+  "stadt": "Hollerich",
+  "k": [
+   49.603,
+   6.114
+  ],
+  "name": "Terrain Hollerich",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain Hollerich Hollerich",
+    "r": []
+   },
+   {
+    "q": "stade Hollerich",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain Jos Durbach (Bous, synth.)",
+  "stadt": "Bous",
+  "k": [
+   49.554,
+   6.329
+  ],
+  "name": "Terrain Jos Durbach",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain Jos Durbach Bous",
+    "r": []
+   },
+   {
+    "q": "stade Bous",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain Kierlingerstrooss (Dalheim)",
+  "stadt": "Dalheim",
+  "k": [
+   49.541,
+   6.26
+  ],
+  "name": "Terrain Kierlingerstrooss",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain Kierlingerstrooss Dalheim",
+    "r": []
+   },
+   {
+    "q": "stade Dalheim",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain Munsbach (synth.)",
+  "stadt": "Munsbach",
+  "k": [
+   49.633,
+   6.265
+  ],
+  "name": "Terrain Munsbach",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain Munsbach Munsbach",
+    "r": []
+   },
+   {
+    "q": "stade Munsbach",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain Op Birkelt (Larochette, synth.)",
+  "stadt": "Larochette",
+  "k": [
+   49.784,
+   6.219
+  ],
+  "name": "Terrain Op Birkelt",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain Op Birkelt Larochette",
+    "r": []
+   },
+   {
+    "q": "stade Larochette",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain synth. (Wincrange)",
+  "stadt": "Wincrange",
+  "k": [
+   50.053,
+   5.919
+  ],
+  "name": "Terrain synthétique",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain synthétique Wincrange",
+    "r": []
+   },
+   {
+    "q": "stade Wincrange",
+    "r": []
+   }
+  ]
+ },
+ {
+  "ort": "Terrain synth. Hamm",
+  "stadt": "Hamm",
+  "k": [
+   49.607,
+   6.169
+  ],
+  "name": "Terrain synthétique",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain synthétique Hamm",
+    "r": []
+   },
+   {
+    "q": "stade Hamm",
+    "r": [
+     {
+      "n": "Stade Hans Sowa, Langefeld, Hamm, Luxembourg, Canton Luxembourg, 2328, Lëtzebuerg",
+      "lat": 49.6102911,
+      "lon": 6.1621227,
+      "typ": "pitch"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Stade Camille Mersch (synth.)",
+  "stadt": "Oberkorn",
+  "k": [
+   49.514,
+   5.896
+  ],
+  "name": "Stade Camille Mersch",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Stade Camille Mersch Oberkorn",
+    "r": []
+   },
+   {
+    "q": "stade Oberkorn",
+    "r": [
+     {
+      "n": "Stade Municipal de la Ville de Differdange, Rue Jeannot Kremer, Oberkorn, Differdange, Canton Esch-sur-Alzette, 4624, Lëtzebuerg",
+      "lat": 49.5133491,
+      "lon": 5.8898187,
+      "typ": "stadium"
+     },
+     {
+      "n": "Stade Jaminet, Um Biergwee, Oberkorn, Differdange, Canton Esch-sur-Alzette, 4522, Lëtzebuerg",
+      "lat": 49.5073788,
+      "lon": 5.8949838,
+      "typ": "pitch"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Grevenmacher, synth.)",
+  "stadt": "Grevenmacher",
+  "k": [
+   49.678,
+   6.44
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Grevenmacher",
+    "r": []
+   },
+   {
+    "q": "stade Grevenmacher",
+    "r": [
+     {
+      "n": "Stade op Flohr, Rue du Stade, Grevenmacher, Canton Grevenmacher, 6725, Lëtzebuerg",
+      "lat": 49.686874,
+      "lon": 6.4485758,
+      "typ": "pitch"
+     },
+     {
+      "n": "Rue du Stade, Grevenmacher, Canton Grevenmacher, 6725, Lëtzebuerg",
+      "lat": 49.6875076,
+      "lon": 6.448655,
+      "typ": "residential"
+     },
+     {
+      "n": "Rue du Stade, Grevenmacher, Canton Grevenmacher, 6751, Lëtzebuerg",
+      "lat": 49.6859236,
+      "lon": 6.4471923,
+      "typ": "residential"
+     },
+     {
+      "n": "Pizzeria du Stade, 65, Rue du Stade, Grevenmacher, Canton Grevenmacher, 6725, Lëtzebuerg",
+      "lat": 49.6877961,
+      "lon": 6.4476253,
+      "typ": "restaurant"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Mersch, synth.)",
+  "stadt": "Mersch",
+  "k": [
+   49.751,
+   6.106
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Mersch",
+    "r": []
+   },
+   {
+    "q": "stade Mersch",
+    "r": [
+     {
+      "n": "Stade Jean Donnersbach, Rue de la Gare, Prettingen, Lintgen, Canton Mersch, 7448, Lëtzebuerg",
+      "lat": 49.7208525,
+      "lon": 6.1218247,
+      "typ": "pitch"
+     },
+     {
+      "n": "Stade Am Lëtschert, Beau-Site, Betzemillen, Boevange-sur-Attert, Helperknapp, Canton Mersch, 8711, Lëtzebuerg",
+      "lat": 49.77121,
+      "lon": 6.0175564,
+      "typ": "stadium"
+     },
+     {
+      "n": "Stade Nic. Anzia, N 22, Useldange, Canton Redange, 8705, Lëtzebuerg",
+      "lat": 49.7705062,
+      "lon": 5.9842637,
+      "typ": "pitch"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "ort": "Terrain 2 (Schieren, synth.)",
+  "stadt": "Schieren",
+  "k": [
+   49.831,
+   6.099
+  ],
+  "name": "Terrain 2",
+  "osm": null,
+  "nom": [
+   {
+    "q": "Terrain 2 Schieren",
+    "r": []
+   },
+   {
+    "q": "stade Schieren",
+    "r": []
+   }
+  ]
+ }
+]
