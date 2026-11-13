@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-13T01:07:53.148Z",
+ "stand": "2026-11-13T19:46:43.196Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -24343,8 +24343,8 @@
      "id": "Estland",
      "n": "Estland"
     },
-    "hs": null,
-    "as": null,
+    "hs": 0,
+    "as": 0,
     "gespielt": false,
     "wett": "UEFA Nations League",
     "runde": "C4",
@@ -24388,13 +24388,13 @@
      "pl": 2,
      "id": "Estland",
      "n": "Estland",
-     "sp": 4,
+     "sp": 5,
      "s": 1,
-     "u": 3,
+     "u": 4,
      "nl": 0,
      "t": 2,
      "g": 1,
-     "pkt": 6
+     "pkt": 7
     },
     {
      "pl": 3,
@@ -24412,13 +24412,13 @@
      "pl": 4,
      "id": "Luxemburg",
      "n": "Luxemburg",
-     "sp": 4,
+     "sp": 5,
      "s": 1,
-     "u": 0,
+     "u": 1,
      "nl": 3,
      "t": 2,
      "g": 7,
-     "pkt": 3
+     "pkt": 4
     }
    ]
   }
