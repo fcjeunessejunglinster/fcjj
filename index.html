@@ -273,7 +273,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-13 j";
+const FASSUNG = "2026-11-13 k";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -329,7 +329,7 @@ const TEXTE = {
       denkt: "Einen Moment …", fehler: "Das hat nicht geklappt. Bitte später nochmal versuchen.", limit: "Für heute sind keine Fragen mehr möglich. Morgen geht es wieder." },
     kontakt2: { titel: "Kontakt", sport: "Sportliche Fragen (oder direkt beim Trainer)", jugend: "Alles zu den Jugendkategorien", sonst: "Alle anderen Fragen" },
     formB: { S: "S", U: "U", N: "N" }, formText: n => `Letzte 5 Ligaspiele · ${n}`, formTitel: "Form der letzten 5 Ligaspiele (neuestes rechts): S Sieg, U Unentschieden, N Niederlage",
-    news: { titel: "Fußball-News", hinweis: "Schlagzeilen mit Link zum Artikel beim Anbieter" },
+    news: { titel: "Fußball-News", hinweis: "Schlagzeilen vom kicker mit Link zum Artikel" },
     beitragTitel: "Mitgliedsbeitrag", ausschluss: "Die Nichtzahlung des Beitrags führt zum Ausschluss aus dem Verein beziehungsweise zum Verlust der Mitgliedschaft.", betraegeTitel: "Die Beiträge betragen:", beitragArt: ["für das 1. spielende Mitglied", "für das 2. spielende Mitglied", "ab dem 3. spielenden Mitglied", "für ein nicht spielendes Mitglied (Non-joueur, reduzierter Beitrag)"], ibanLabel: "Konto des Vereins (IBAN)", kopieren: "Kopieren", kopiert2: "kopiert", markiert: "markiert – jetzt kopieren",
     beitrag: ["Die Cotisation ist von jedem Mitglied – auch von Non-joueurs (reduzierter Beitrag von 120 €) – jedes Jahr zu Beginn der Saison zu zahlen.", "Wir möchten diese Gelegenheit nutzen, daran zu erinnern, dass die Zahlung des Mitgliedsbeitrags Voraussetzung für die Teilnahme an Training und Spielen als Spielerin oder Spieler ist.", "Er gibt außerdem freien Eintritt zu den Heimspielen unserer Seniors-Mannschaften sowie das Stimmrecht in der Generalversammlung, gemäß den Statuten des Vereins."],
     links: "Nützliche Links", linkListe: {
@@ -400,7 +400,7 @@ const TEXTE = {
       denkt: "One moment …", fehler: "That didn't work. Please try again later.", limit: "No more questions possible today. Try again tomorrow." },
     kontakt2: { titel: "Contact", sport: "Sporting questions (or ask the coach directly)", jugend: "Everything about the youth categories", sonst: "All other questions" },
     formB: { S: "W", U: "D", N: "L" }, formText: n => `Last 5 league games · ${n}`, formTitel: "Form, last 5 league games (newest on the right): W win, D draw, L loss",
-    news: { titel: "Football news", hinweis: "Headlines linking to the full article" },
+    news: { titel: "Football news", hinweis: "Headlines from BBC Sport, linking to the full article" },
     beitragTitel: "Membership fee", ausschluss: "Non-payment of the membership fee leads to exclusion from the club or loss of membership.", betraegeTitel: "The fees are:", beitragArt: ["for the 1st playing member", "for the 2nd playing member", "from the 3rd playing member", "for a non-playing member (non-joueur, reduced fee)"], ibanLabel: "Club account (IBAN)", kopieren: "Copy", kopiert2: "copied", markiert: "selected – copy it now",
     beitrag: ["Every member – including non-playing members (reduced fee of €120) – pays the membership fee each year at the start of the season.", "We would like to take this opportunity to remind everyone that paying the membership fee is a prerequisite for taking part in training sessions and matches as a player.", "It also gives free entry to the home matches of our Seniors teams, as well as the right to vote at the General Assembly, in accordance with the club's statutes."],
     links: "Useful links", linkListe: {
@@ -1152,7 +1152,7 @@ function ligaHtml(key, now) {
   if (key === "bl") html += newsHtml() + blKaderHtml();
   return html + `<p class="leise" style="text-align:center;margin:0">${T().blQuelle(L.name)}</p>`;
 }
-// Fußball-News (data/news.json, vom GitHub-Abruf aus RSS: kicker auf Deutsch, BBC Sport und bundesliga.com auf Englisch,
+// Fußball-News (data/news.json, vom GitHub-Abruf aus RSS: kicker auf Deutsch, BBC Sport auf Englisch,
 // RMC Sport auf Französisch). Nur Schlagzeilen, ein Tipp öffnet den Artikel beim Anbieter.
 let NEWS = null, NEWS_LAEDT = 0;
 async function newsHolen() {

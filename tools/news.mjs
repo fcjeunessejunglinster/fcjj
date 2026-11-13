@@ -11,10 +11,10 @@ export const FEEDS = {
     { q: "kicker", url: "https://newsfeed.kicker.de/news/champions-league" },
     { q: "kicker", url: "https://newsfeed.kicker.de/news/europa-league" },
   ],
+  // Englisch nur BBC Sport (vom Verein, 13.11.2026)
   en: [
-    { q: "bundesliga.com", url: "https://www.bundesliga.com/rss/en/rss-news.rss" },
     { q: "BBC Sport", url: "https://feeds.bbci.co.uk/sport/football/european/rss.xml" },
-    { q: "UEFA", url: "https://www.uefa.com/rss/uefachampionsleague/rss.xml" },
+    { q: "BBC Sport", url: "https://feeds.bbci.co.uk/sport/football/rss.xml" },
   ],
   fr: [
     { q: "RMC Sport", url: "https://rmcsport.bfmtv.com/rss/football/" },
@@ -45,8 +45,9 @@ async function holen(f) {
 }
 async function main() {
   const alt = existsSync(OUT) ? JSON.parse(readFileSync(OUT, "utf8")) : null;
-  if (alt && !process.env.NEWS_JETZT && Date.now() - Date.parse(alt.stand) < 50 * 60e3) { console.log("News: aktuell genug"); return; }
-  const neu = { stand: new Date().toISOString() };
+  const cfg = JSON.stringify(FEEDS).length + ":" + Object.values(FEEDS).flat().map(f => f.url).join("|").length;
+  if (alt && alt.cfg === cfg && !process.env.NEWS_JETZT && Date.now() - Date.parse(alt.stand) < 50 * 60e3) { console.log("News: aktuell genug"); return; }
+  const neu = { stand: new Date().toISOString(), cfg };
   for (const [l, feeds] of Object.entries(FEEDS)) {
     const alle = [];
     for (const f of feeds) {
@@ -58,7 +59,7 @@ async function main() {
     if (!neu[l].length && alt?.[l]) neu[l] = alt[l];   // nichts bekommen → alten Stand behalten
   }
   // nur schreiben, wenn sich Schlagzeilen geändert haben (sonst gäbe es bei jedem Abruf eine Änderung im Repository)
-  if (alt && ["de", "en", "fr"].every(l => JSON.stringify(alt[l]) === JSON.stringify(neu[l]))) { console.log("News: unverändert"); return; }
+  if (alt && alt.cfg === cfg && ["de", "en", "fr"].every(l => JSON.stringify(alt[l]) === JSON.stringify(neu[l]))) { console.log("News: unverändert"); return; }
   writeFileSync(OUT, JSON.stringify(neu) + "\n");
   console.log("News:", ["de", "en", "fr"].map(l => `${l} ${neu[l].length}`).join(", "));
 }
