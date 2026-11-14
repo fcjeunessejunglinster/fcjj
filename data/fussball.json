@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T19:14:19.027Z",
+ "stand": "2026-11-14T19:48:21.291Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -20788,9 +20788,9 @@
       "id": 44732,
       "n": "Jeunesse Junglinster"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 1,
+     "as": 3,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 3 (Weidingen, synth.)"
     },
