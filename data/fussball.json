@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T19:48:21.291Z",
+ "stand": "2026-11-14T20:03:29.610Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -23336,9 +23336,9 @@
       "id": 46193,
       "n": "CS Grevenmacher II"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 8,
+     "as": 4,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain Maartbësch (Berdorf)"
     },
