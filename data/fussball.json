@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T18:18:28.162Z",
+ "stand": "2026-11-14T19:14:19.027Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -12219,7 +12219,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Walferdange, synth.)"
     },
@@ -21584,9 +21584,9 @@
       "id": 46398,
       "n": "AS Red Black Luxembourg II"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 3,
+     "as": 5,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Itzig, synth.)"
     },
@@ -21955,9 +21955,9 @@
       "id": 44735,
       "n": "Jeunesse Junglinster II"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 0,
+     "as": 7,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain Ralingen (synth.)"
     },
