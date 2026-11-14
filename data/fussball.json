@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T15:33:19.345Z",
+ "stand": "2026-11-14T15:48:16.237Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -22624,9 +22624,9 @@
       "id": 44739,
       "n": "Jeunesse Junglinster II"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 4,
+     "as": 2,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain Am Brill (Moutfort, synth.)"
     },
