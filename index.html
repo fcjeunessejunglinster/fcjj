@@ -275,7 +275,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-14 e";
+const FASSUNG = "2026-11-14 f";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1592,6 +1592,17 @@ Ziel: Jedes Kind beim FC Jeunesse Junglinster soll mit Freude Fußball spielen, 
 6. Wir sind verlässlich: pünktlich erscheinen, Abwesenheiten frühzeitig über SportEasy melden, das Trainerteam über Verletzungen oder gesundheitliche Einschränkungen informieren, die für Training und Spiel wichtig sind.
 7. Wir respektieren die Privatsphäre der Kinder: vor dem Teilen von Fotos oder Videos anderer Kinder in sozialen Medien oder Gruppenchats die Zustimmung ihrer Erziehungsberechtigten einholen.
 Danke, dass ihr den Kindern vorlebt, wie Fair Play auch neben dem Platz aussieht.`);
+  z.push(`\n## 10 conseils pour les supporteurs des joueurs du FCJJ (vom Verein, 14.11.2026; bei Fragen dazu genau diese 10 Punkte nennen, übersetzt in die Sprache der Frage)
+1. Encourager
+2. Être à l’écoute de votre enfant
+3. Accepter l’erreur
+4. Respecter adversaires et parents
+5. Valoriser les bonnes attitudes
+6. Ne pas donner d’instructions
+7. Faire confiance et respecter l’entraîneur
+8. Contrôlez vos émotions
+9. Accompagner
+10. Respecter l’arbitre`);
   for (const n of CHAT_NEWSLETTER) z.push(`\n## ${n.titel}\nPDF (DE/FR/EN): ${new URL(n.pdf, location.href).href}\n${n.text}`);
   z.push("\n## Allgemeines Wissen\n" + CHAT_WISSEN.map(t => "- " + t).join("\n"));
   z.push("\n## Weitere Termine (nur für den Chat, vom Verein)\n" + CHAT_TERMINE.filter(([bis]) => bis >= tagKey(now)).map(([, t]) => "- " + t).join("\n"));
