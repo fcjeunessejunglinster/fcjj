@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T20:33:35.921Z",
+ "stand": "2026-11-14T22:33:14.725Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -10191,7 +10191,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Mensdorf, synth.)"
     },
@@ -20656,6 +20656,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 46225,
+     "n": "FC Lorentzweiler",
+     "sp": 1,
+     "s": 1,
+     "u": 0,
+     "nl": 0,
+     "t": 7,
+     "g": 2,
+     "pkt": 3
+    },
+    {
+     "pl": 2,
      "id": 45382,
      "n": "ENT Walferdange/Lintgen/Steinsel",
      "sp": 1,
@@ -20667,7 +20679,7 @@
      "pkt": 3
     },
     {
-     "pl": 2,
+     "pl": 3,
      "id": 44732,
      "n": "Jeunesse Junglinster",
      "sp": 1,
@@ -20679,31 +20691,7 @@
      "pkt": 3
     },
     {
-     "pl": 3,
-     "id": 46746,
-     "n": "ENT Schieren/Colmarberg/Erpeldange II",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
      "pl": 4,
-     "id": 46225,
-     "n": "FC Lorentzweiler",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 5,
      "id": 46357,
      "n": "ENT Biwer/Berbourg/UMW",
      "sp": 0,
@@ -20715,7 +20703,7 @@
      "pkt": 0
     },
     {
-     "pl": 6,
+     "pl": 5,
      "id": 45920,
      "n": "FC Wiltz 71",
      "sp": 1,
@@ -20727,7 +20715,7 @@
      "pkt": 0
     },
     {
-     "pl": 7,
+     "pl": 6,
      "id": 46518,
      "n": "ENT Feulen/Grevels/Heiderscheid",
      "sp": 1,
@@ -20736,6 +20724,18 @@
      "nl": 1,
      "t": 2,
      "g": 6,
+     "pkt": 0
+    },
+    {
+     "pl": 7,
+     "id": 46746,
+     "n": "ENT Schieren/Colmarberg/Erpeldange II",
+     "sp": 1,
+     "s": 0,
+     "u": 0,
+     "nl": 1,
+     "t": 2,
+     "g": 7,
      "pkt": 0
     }
    ],
@@ -20770,9 +20770,9 @@
       "id": 46746,
       "n": "ENT Schieren/Colmarberg/Erpeldange II"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 7,
+     "as": 2,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Lorentzweiler, synth.)"
     },
