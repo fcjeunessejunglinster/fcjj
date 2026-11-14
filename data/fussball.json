@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T17:33:16.494Z",
+ "stand": "2026-11-14T18:18:28.162Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -20656,15 +20656,15 @@
    "tabelle": [
     {
      "pl": 1,
-     "id": 45920,
-     "n": "FC Wiltz 71",
-     "sp": 0,
-     "s": 0,
+     "id": 45382,
+     "n": "ENT Walferdange/Lintgen/Steinsel",
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
+     "t": 6,
+     "g": 2,
+     "pkt": 3
     },
     {
      "pl": 2,
@@ -20692,18 +20692,6 @@
     },
     {
      "pl": 4,
-     "id": 46518,
-     "n": "ENT Feulen/Grevels/Heiderscheid",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 5,
      "id": 46746,
      "n": "ENT Schieren/Colmarberg/Erpeldange II",
      "sp": 0,
@@ -20715,7 +20703,7 @@
      "pkt": 0
     },
     {
-     "pl": 6,
+     "pl": 5,
      "id": 44732,
      "n": "Jeunesse Junglinster",
      "sp": 0,
@@ -20727,15 +20715,27 @@
      "pkt": 0
     },
     {
-     "pl": 7,
-     "id": 45382,
-     "n": "ENT Walferdange/Lintgen/Steinsel",
+     "pl": 6,
+     "id": 45920,
+     "n": "FC Wiltz 71",
      "sp": 0,
      "s": 0,
      "u": 0,
      "nl": 0,
      "t": 0,
      "g": 0,
+     "pkt": 0
+    },
+    {
+     "pl": 7,
+     "id": 46518,
+     "n": "ENT Feulen/Grevels/Heiderscheid",
+     "sp": 1,
+     "s": 0,
+     "u": 0,
+     "nl": 1,
+     "t": 2,
+     "g": 6,
      "pkt": 0
     }
    ],
@@ -20752,9 +20752,9 @@
       "id": 45382,
       "n": "ENT Walferdange/Lintgen/Steinsel"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 2,
+     "as": 6,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain In Bertzent (Niederfeulen, synth.)"
     },
@@ -21484,13 +21484,13 @@
      "pl": 1,
      "id": 45899,
      "n": "US Hostert II",
-     "sp": 0,
-     "s": 0,
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
+     "t": 3,
+     "g": 1,
+     "pkt": 3
     },
     {
      "pl": 2,
@@ -21506,18 +21506,6 @@
     },
     {
      "pl": 3,
-     "id": 46355,
-     "n": "ENT Biwer/Berbourg/UMW",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 4,
      "id": 46398,
      "n": "AS Red Black Luxembourg II",
      "sp": 0,
@@ -21529,7 +21517,7 @@
      "pkt": 0
     },
     {
-     "pl": 5,
+     "pl": 4,
      "id": 44734,
      "n": "Jeunesse Junglinster I",
      "sp": 0,
@@ -21541,7 +21529,7 @@
      "pkt": 0
     },
     {
-     "pl": 6,
+     "pl": 5,
      "id": 45769,
      "n": "ENT Izeg/Sandweiler I",
      "sp": 0,
@@ -21550,6 +21538,18 @@
      "nl": 0,
      "t": 0,
      "g": 0,
+     "pkt": 0
+    },
+    {
+     "pl": 6,
+     "id": 46355,
+     "n": "ENT Biwer/Berbourg/UMW",
+     "sp": 1,
+     "s": 0,
+     "u": 0,
+     "nl": 1,
+     "t": 1,
+     "g": 3,
      "pkt": 0
     }
    ],
@@ -21837,40 +21837,28 @@
      "pl": 1,
      "id": 46189,
      "n": "CS Grevenmacher",
-     "sp": 0,
-     "s": 0,
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
+     "t": 15,
+     "g": 3,
+     "pkt": 3
     },
     {
      "pl": 2,
      "id": 46219,
      "n": "FC Lorentzweiler",
-     "sp": 0,
-     "s": 0,
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
+     "t": 6,
+     "g": 4,
+     "pkt": 3
     },
     {
      "pl": 3,
-     "id": 46268,
-     "n": "ENT Canach/Mensdorf/Munsbach II",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 4,
      "id": 46758,
      "n": "ENT Ënnersauer-Mëllerdall II",
      "sp": 0,
@@ -21882,7 +21870,7 @@
      "pkt": 0
     },
     {
-     "pl": 5,
+     "pl": 4,
      "id": 44735,
      "n": "Jeunesse Junglinster II",
      "sp": 0,
@@ -21894,15 +21882,27 @@
      "pkt": 0
     },
     {
-     "pl": 6,
+     "pl": 5,
      "id": 45290,
      "n": "ENT Lintgen/Walferdange/Steinsel II",
-     "sp": 0,
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 4,
+     "g": 6,
+     "pkt": 0
+    },
+    {
+     "pl": 6,
+     "id": 46268,
+     "n": "ENT Canach/Mensdorf/Munsbach II",
+     "sp": 1,
+     "s": 0,
+     "u": 0,
+     "nl": 1,
+     "t": 3,
+     "g": 15,
      "pkt": 0
     }
    ],
@@ -22200,20 +22200,20 @@
     },
     {
      "pl": 2,
-     "id": 46192,
-     "n": "CS Grevenmacher I",
-     "sp": 0,
-     "s": 0,
+     "id": 46353,
+     "n": "ENT Biwer/Berbourg/UMW I",
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
+     "t": 2,
      "g": 0,
-     "pkt": 0
+     "pkt": 3
     },
     {
      "pl": 3,
-     "id": 46353,
-     "n": "ENT Biwer/Berbourg/UMW I",
+     "id": 45396,
+     "n": "FC Koeppchen Wormeldange",
      "sp": 0,
      "s": 0,
      "u": 0,
@@ -22236,14 +22236,14 @@
     },
     {
      "pl": 5,
-     "id": 45396,
-     "n": "FC Koeppchen Wormeldange",
-     "sp": 0,
+     "id": 46192,
+     "n": "CS Grevenmacher I",
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
+     "nl": 1,
      "t": 0,
-     "g": 0,
+     "g": 2,
      "pkt": 0
     },
     {
@@ -22552,6 +22552,18 @@
     },
     {
      "pl": 2,
+     "id": 45896,
+     "n": "US Hostert II",
+     "sp": 1,
+     "s": 1,
+     "u": 0,
+     "nl": 0,
+     "t": 4,
+     "g": 2,
+     "pkt": 3
+    },
+    {
+     "pl": 3,
      "id": 46201,
      "n": "US Moutfort-Medingen",
      "sp": 1,
@@ -22563,27 +22575,15 @@
      "pkt": 3
     },
     {
-     "pl": 3,
-     "id": 45896,
-     "n": "US Hostert II",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
      "pl": 4,
      "id": 45374,
      "n": "Résidence Walferdange II",
-     "sp": 0,
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 2,
+     "g": 4,
      "pkt": 0
     },
     {
@@ -22893,6 +22893,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 46116,
+     "n": "AS Rupensia Lusitanos Larochette",
+     "sp": 1,
+     "s": 1,
+     "u": 0,
+     "nl": 0,
+     "t": 14,
+     "g": 1,
+     "pkt": 3
+    },
+    {
+     "pl": 2,
      "id": 46216,
      "n": "FC Lorentzweiler II",
      "sp": 1,
@@ -22904,21 +22916,9 @@
      "pkt": 3
     },
     {
-     "pl": 2,
-     "id": 46116,
-     "n": "AS Rupensia Lusitanos Larochette",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
      "pl": 3,
-     "id": 46179,
-     "n": "Blo-Wäiss Medernach II",
+     "id": 45596,
+     "n": "Marisca Mersch II",
      "sp": 0,
      "s": 0,
      "u": 0,
@@ -22941,18 +22941,6 @@
     },
     {
      "pl": 5,
-     "id": 45596,
-     "n": "Marisca Mersch II",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 6,
      "id": 44737,
      "n": "Jeunesse Junglinster III",
      "sp": 1,
@@ -22961,6 +22949,18 @@
      "nl": 1,
      "t": 1,
      "g": 8,
+     "pkt": 0
+    },
+    {
+     "pl": 6,
+     "id": 46179,
+     "n": "Blo-Wäiss Medernach II",
+     "sp": 1,
+     "s": 0,
+     "u": 0,
+     "nl": 1,
+     "t": 1,
+     "g": 14,
      "pkt": 0
     }
    ],
@@ -23246,15 +23246,15 @@
    "tabelle": [
     {
      "pl": 1,
-     "id": 44911,
-     "n": "Jeunesse Junglinster IV",
-     "sp": 0,
-     "s": 0,
+     "id": 46761,
+     "n": "ENT UMW/Biwer/Berbourg III",
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
+     "t": 7,
+     "g": 4,
+     "pkt": 3
     },
     {
      "pl": 2,
@@ -23270,8 +23270,8 @@
     },
     {
      "pl": 3,
-     "id": 46761,
-     "n": "ENT UMW/Biwer/Berbourg III",
+     "id": 44703,
+     "n": "US Berdorf-Consdorf 01",
      "sp": 0,
      "s": 0,
      "u": 0,
@@ -23282,8 +23282,8 @@
     },
     {
      "pl": 4,
-     "id": 44703,
-     "n": "US Berdorf-Consdorf 01",
+     "id": 44911,
+     "n": "Jeunesse Junglinster IV",
      "sp": 0,
      "s": 0,
      "u": 0,
@@ -23296,12 +23296,12 @@
      "pl": 5,
      "id": 44757,
      "n": "Victoria Rosport II",
-     "sp": 0,
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 4,
+     "g": 7,
      "pkt": 0
     }
    ],
