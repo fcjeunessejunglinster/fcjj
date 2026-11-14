@@ -275,7 +275,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-14 a";
+const FASSUNG = "2026-11-14 b";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1496,7 +1496,7 @@ function chatKontext(now) {
   z.push("DEIN NAME: Du heißt Sami und bist der Chat-Assistent der FCJJ-App („Ask Sami“). Stell dich bei Bedarf als Sami vor.");
   z.push(`Jetzt: ${datum(now)} ${uhr(now)} Uhr (Luxemburger Zeit). Sprache der App: ${LANG}. Geöffneter Reiter: ${reiterName}.`);
   z.push("Verein: FC Jeunesse Junglinster (FCJJ), Junglinster, Luxemburg, gegründet 1935. Website https://fcjj.lu · Kontakt https://fcjj.lu/contact · Vereinsshop https://form.jotform.com/242614644810352");
-  z.push("KONTAKTREGEL (hat Vorrang): Für alles, was die Jugendkategorien betrifft (BAM, PUP, POU, MIN, SCO, CAD, JUN, WU11, WU13, WU15), an jeunes@fcjj.lu verweisen; für alles andere (Seniors, Réserves, Veteranen, Verein, Cotisation) an secretaire@fcjj.lu. Ausnahme: Sportunfälle (Meldung C.S.M.S.) gehen immer an secretaire@fcjj.lu, auch bei Jugendspielern.");
+  z.push("KONTAKTREGEL (hat Vorrang): Für alles, was die Jugendkategorien betrifft (BAM, PUP, POU, MIN, SCO, CAD, JUN, WU11, WU13, WU15), an jeunes@fcjj.lu verweisen; für alles andere (Seniors, Réserves, Veteranen, Verein, Cotisation) an secretaire@fcjj.lu. Ausnahme: Sportunfälle (Meldung C.S.M.S.) gehen immer an secretaire@fcjj.lu, auch bei Jugendspielern. Ausnahme: Fragen zu Zahlungen (Cotisation bezahlen, Überweisung, Beträge, Rückerstattung, Rechnungen) gehen an den Trésorier: tresorier@fcjj.lu (vom Verein, 14.11.2026).");
   z.push("SPORTLICHE FRAGEN (vom Verein, 11.11.2026, hat Vorrang vor der Kontaktregel): Für alle sportlichen Fragen (Training, Einteilung in Mannschaften/Kategorien, Spielzeit, Positionen, Entwicklung, Probetraining) bitte an den Trainer oder an directeursportif@fcjj.lu wenden.");
   z.push("SPIELORGANISATION UND TRAINER (vom Verein, 11.11.2026): Für Fragen zur Spielorganisation (Aufgebot/Convocation, Zu- und Absagen, Treffpunkt, Abfahrt, Fahrgemeinschaften, Trikots) und für die Kommunikation mit dem Trainer bitte die App SportEasy benutzen. Die FCJJ-App kennt keine Trainer, Aufgebote oder Treffpunkte; verweise dafür auf SportEasy. SportEasy ist eine Verwaltungs-App für Sportmannschaften und -vereine; sie bündelt die Organisation und die Kommunikation zwischen Trainern, Spielern, Eltern und Vereinsverantwortlichen. Der FCJJ benutzt sie für die sportliche Organisation und die Kommunikation zwischen Spielern, Trainern und Eltern. Zugang zu SportEasy bekommt man nach der Einschreibung per E-Mail-Einladung; jeder Spieler wird persönlich in seine Mannschaft eingeladen (es gibt keinen allgemeinen Link). Wer keine Einladung bekommen hat, meldet sich bei directeursportif@fcjj.lu (gilt für alle Mannschaften, auch die Jugend).");
   z.push("Spielregeln (PDF der FLF): " + [...new Set(Object.values(REGELN))].map(u => new URL(u, location.href).href).join(" · ") + ". Spielfeld-Skizzen U7, U9, U11/WU13, U13/WU15: in der App unten im Reiter der Mannschaft unter „Spielfeld“.");
@@ -1548,7 +1548,7 @@ Danke, dass ihr den Kindern vorlebt, wie Fair Play auch neben dem Platz aussieht
 3. Demande de licence ausfüllen: https://fcjj.forms.app/demandelicence
 4. Die Demande d'affiliation FLF (PDF: ${new URL("dokumente/demande-affiliation-flf.pdf", location.href).href}) ausfüllen, unterschreiben und der Demande de licence beifügen.
 5. Cotisation überweisen (Beträge und IBAN unten); sie ist Voraussetzung für Training und Spiele.
-Fragen dazu: Jugendkategorien → jeunes@fcjj.lu, sonst secretaire@fcjj.lu.`);
+Fragen dazu: Jugendkategorien → jeunes@fcjj.lu, sonst secretaire@fcjj.lu; Fragen zur Zahlung → tresorier@fcjj.lu.`);
   z.push(`\n## Commission des jeunes / Jugendkommission / Youth commission (CDJ) – vom Verein (11.11.2026)
 Ziel: Jedes Kind beim FC Jeunesse Junglinster soll Fußball in einem sicheren, positiven, gut organisierten und inklusiven Umfeld genießen können.
 Missions et actions de la CDJ (vom Verein, 12.11.2026):
