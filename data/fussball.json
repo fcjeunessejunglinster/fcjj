@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T16:18:25.601Z",
+ "stand": "2026-11-14T16:33:16.622Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -22977,9 +22977,9 @@
       "id": 46179,
       "n": "Blo-Wäiss Medernach II"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 14,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain Op Birkelt (Larochette, synth.)"
     },
@@ -23318,9 +23318,9 @@
       "id": 46761,
       "n": "ENT UMW/Biwer/Berbourg III"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 4,
+     "as": 7,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain Ralingen (synth.)"
     },
