@@ -88,7 +88,9 @@ li.event .evd{font-size:14px;color:var(--text);font-variant-numeric:tabular-nums
 .events{border:2px solid var(--rot)}
 .raster button.blknopf{padding:5px 4px;position:relative}
 .raster button.blknopf[aria-pressed="true"]{background:var(--karte);color:var(--text);border:2px solid var(--schwarz)}
-.tagpunkt{position:absolute;top:4px;right:4px;width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
+.tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
+.tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
+.tagpunkt.aus{background:#1f9d4d}
 .raster button[aria-pressed="true"] .tagpunkt{box-shadow:0 0 0 2px var(--schwarz)}
 .raster button.nati[aria-pressed="true"] .tagpunkt{box-shadow:0 0 0 2px var(--karte)}
 .blknopf .livepunkt{color:var(--rot);font-size:14px;position:absolute;top:4px;right:8px}
@@ -273,7 +275,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-13 l";
+const FASSUNG = "2026-11-14 a";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -339,7 +341,7 @@ const TEXTE = {
       preinscription: ["Voranmeldung für neue Mitglieder", "Nur für Spielerinnen und Spieler mit Wohnsitz in der Gemeinde Junglinster (außer Seniors)"],
       medico: ["Sportmedizinische Untersuchung", "Contrôle médico-sportif: Infos und Formulare auf guichet.lu"],
       licence: ["Lizenzantrag für aktive Mitglieder des Vereins", "Online-Formular des Vereins – die unterschriebene Demande d'affiliation FLF (unten) beifügen"],
-      affiliation: ["Demande d'affiliation FLF", "PDF ausdrucken, ausfüllen, unterschreiben und dem Lizenzantrag beifügen"] }, heuteSpielt: "Heute Spieltag", route: "Route", routeLang: "Route zum Platz",
+      affiliation: ["Demande d'affiliation FLF", "PDF ausdrucken, ausfüllen, unterschreiben und dem Lizenzantrag beifügen"] }, heuteHeim: "Heute Heimspiel", heuteAus: "Heute Auswärtsspiel", heuteSpielt: "Heute Spieltag", route: "Route", routeLang: "Route zum Platz",
     hilfe: { titel: "📲 Hilfe: App aufs Handy holen", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Diese Seite in <b>Safari</b> öffnen (nicht in Chrome oder in WhatsApp).",
         "Unten auf das <b>Teilen-Symbol</b> tippen (Quadrat mit Pfeil nach oben ⬆️).",
@@ -410,7 +412,7 @@ const TEXTE = {
       preinscription: ["Pre-registration for new members", "Limited to players living in the commune of Junglinster (except the senior team)"],
       medico: ["Sports medical check-up", "Contrôle médico-sportif: information and forms on guichet.lu"],
       licence: ["Licence application for active club members", "The club's online form – attach the signed FLF affiliation form (below)"],
-      affiliation: ["FLF affiliation form", "Print the PDF, fill it in, sign it and attach it to the licence application"] }, heuteSpielt: "Match day today", route: "Directions", routeLang: "Directions to the pitch",
+      affiliation: ["FLF affiliation form", "Print the PDF, fill it in, sign it and attach it to the licence application"] }, heuteHeim: "Home game today", heuteAus: "Away game today", heuteSpielt: "Match day today", route: "Directions", routeLang: "Directions to the pitch",
     hilfe: { titel: "📲 Help: put the app on your phone", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Open this page in <b>Safari</b> (not in Chrome or WhatsApp).",
         "Tap the <b>Share icon</b> at the bottom (square with an arrow ⬆️).",
@@ -481,7 +483,7 @@ const TEXTE = {
       preinscription: ["Pré-inscription pour nouveaux membres", "Réservée aux joueuses et joueurs habitant la commune de Junglinster (sauf équipe seniors)"],
       medico: ["Contrôle médico-sportif", "Informations et formulaires sur guichet.lu"],
       licence: ["Demande de licence pour membre actif du club", "Formulaire en ligne du club – y joindre la demande d'affiliation FLF signée (ci-dessous)"],
-      affiliation: ["Demande d'affiliation FLF", "Imprimer le PDF, le remplir, le signer et le joindre à la demande de licence"] }, heuteSpielt: "Jour de match", route: "Itinéraire", routeLang: "Itinéraire jusqu'au terrain",
+      affiliation: ["Demande d'affiliation FLF", "Imprimer le PDF, le remplir, le signer et le joindre à la demande de licence"] }, heuteHeim: "Match à domicile aujourd’hui", heuteAus: "Match à l’extérieur aujourd’hui", heuteSpielt: "Jour de match", route: "Itinéraire", routeLang: "Itinéraire jusqu'au terrain",
     hilfe: { titel: "📲 Aide : installer l'app sur le téléphone", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Ouvrir cette page dans <b>Safari</b> (pas dans Chrome ni dans WhatsApp).",
         "Toucher l'<b>icône Partager</b> en bas (carré avec une flèche ⬆️).",
@@ -1439,16 +1441,22 @@ function spannen(n) {
   const rest = n % je || je;
   return Array.from({ length: n }, (_, i) => i >= n - rest ? 60 / rest : 60 / je);
 }
-// Roter Punkt am Reiter, wenn die Mannschaft heute spielt (der ganze Spieltag, auch nach dem Spiel).
-const SPIELTAG_PUNKT = '<span class="tagpunkt" aria-hidden="true"></span>';
+// Punkt am Reiter, wenn die Mannschaft heute spielt (der ganze Spieltag, auch nach dem Spiel):
+// rot = Heimspiel, grün = Auswärtsspiel, beide Punkte bei beidem am selben Tag (vom Verein, 14.11.2026).
 const heuteSpieltag = (spiele, now) => spiele.some(sp => tagKey(new Date(sp.d)) === tagKey(now));
+function heuteArt(spiele, now, istHeim = sp => sp.heim) {
+  const h = spiele.filter(sp => tagKey(new Date(sp.d)) === tagKey(now));
+  return { heim: h.some(sp => istHeim(sp)), aus: h.some(sp => !istHeim(sp)) };
+}
+const tagPunkte = a => !a.heim && !a.aus ? "" : `<span class="tagpunkte" aria-hidden="true">${a.heim ? '<span class="tagpunkt"></span>' : ""}${a.aus ? '<span class="tagpunkt aus"></span>' : ""}</span>`;
+const tagTitel = a => a.heim && a.aus ? `${T().heuteHeim} · ${T().heuteAus}` : a.heim ? T().heuteHeim : a.aus ? T().heuteAus : "";
 function knoepfe(now) {
   const n = wocheSpiele(now).length, s = spannen(D.teams.length);
-  const heuteT = new Set(D.teams.filter(t => heuteSpieltag(eigeneSpiele(t), now)).map(t => t.id));
-  const heuteN = D.nati?.spiele?.length && heuteSpieltag(D.nati.spiele, now);
+  const artT = new Map(D.teams.map(t => [t.id, heuteArt(eigeneSpiele(t), now)]));
+  const artN = heuteArt(D.nati?.spiele || [], now, sp => /Luxemb/i.test(sp.h.n));
   const k = [`<button class="woche" data-reiter="woche" aria-pressed="${AKTIV === "woche"}">${T().woche} <small>· ${T().spiele(n)}</small></button>`]
-    .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}"${heuteT.has(t.id) ? ` title="${esc(T().heuteSpielt)}"` : ""}>${esc(t.reiter)}${heuteT.has(t.id) ? SPIELTAG_PUNKT : ""}</button>`))
-    .concat(D.nati?.spiele?.length ? [`<button class="nati" style="grid-column:span ${60 / (1 + ligaKeys().length)}" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="FLF" title="FLF"><img src="bilder/flf.png" alt="FLF" width="31" height="40" style="display:block;margin:auto">${heuteN ? SPIELTAG_PUNKT : ""}</button>`] : [])
+    .concat(D.teams.map((t, i) => `<button data-reiter="${t.id}" style="grid-column:span ${s[i]}" aria-pressed="${String(t.id) === AKTIV}"${tagTitel(artT.get(t.id)) ? ` title="${esc(tagTitel(artT.get(t.id)))}"` : ""}>${esc(t.reiter)}${tagPunkte(artT.get(t.id))}</button>`))
+    .concat(D.nati?.spiele?.length ? [`<button class="nati" style="grid-column:span ${60 / (1 + ligaKeys().length)}" data-reiter="nati" aria-pressed="${AKTIV === "nati"}" aria-label="FLF" title="FLF"><img src="bilder/flf.png" alt="FLF" width="31" height="40" style="display:block;margin:auto">${tagPunkte(artN)}</button>`] : [])
     .concat(ligaKeys().map(k => ligaKnopf(k, 60 / (ligaKeys().length + (D.nati?.spiele?.length ? 1 : 0)))))
     .concat([`<button class="woche" data-reiter="links" aria-pressed="${AKTIV === "links"}">🔗 ${T().links}</button>`]);
   document.getElementById("knoepfe").innerHTML = k.join("");
