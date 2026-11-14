@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T20:03:29.610Z",
+ "stand": "2026-11-14T20:18:36.375Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -20668,30 +20668,18 @@
     },
     {
      "pl": 2,
-     "id": 46225,
-     "n": "FC Lorentzweiler",
-     "sp": 0,
-     "s": 0,
+     "id": 44732,
+     "n": "Jeunesse Junglinster",
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
+     "t": 3,
+     "g": 1,
+     "pkt": 3
     },
     {
      "pl": 3,
-     "id": 46357,
-     "n": "ENT Biwer/Berbourg/UMW",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 4,
      "id": 46746,
      "n": "ENT Schieren/Colmarberg/Erpeldange II",
      "sp": 0,
@@ -20703,9 +20691,21 @@
      "pkt": 0
     },
     {
+     "pl": 4,
+     "id": 46225,
+     "n": "FC Lorentzweiler",
+     "sp": 0,
+     "s": 0,
+     "u": 0,
+     "nl": 0,
+     "t": 0,
+     "g": 0,
+     "pkt": 0
+    },
+    {
      "pl": 5,
-     "id": 44732,
-     "n": "Jeunesse Junglinster",
+     "id": 46357,
+     "n": "ENT Biwer/Berbourg/UMW",
      "sp": 0,
      "s": 0,
      "u": 0,
@@ -20718,12 +20718,12 @@
      "pl": 6,
      "id": 45920,
      "n": "FC Wiltz 71",
-     "sp": 0,
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 1,
+     "g": 3,
      "pkt": 0
     },
     {
@@ -21482,6 +21482,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 46398,
+     "n": "AS Red Black Luxembourg II",
+     "sp": 1,
+     "s": 1,
+     "u": 0,
+     "nl": 0,
+     "t": 5,
+     "g": 3,
+     "pkt": 3
+    },
+    {
+     "pl": 2,
      "id": 45899,
      "n": "US Hostert II",
      "sp": 1,
@@ -21493,21 +21505,9 @@
      "pkt": 3
     },
     {
-     "pl": 2,
+     "pl": 3,
      "id": 46003,
      "n": "Yellow Boys Weiler-la-Tour I",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 3,
-     "id": 46398,
-     "n": "AS Red Black Luxembourg II",
      "sp": 0,
      "s": 0,
      "u": 0,
@@ -21532,12 +21532,12 @@
      "pl": 5,
      "id": 45769,
      "n": "ENT Izeg/Sandweiler I",
-     "sp": 0,
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 3,
+     "g": 5,
      "pkt": 0
     },
     {
@@ -21847,6 +21847,18 @@
     },
     {
      "pl": 2,
+     "id": 44735,
+     "n": "Jeunesse Junglinster II",
+     "sp": 1,
+     "s": 1,
+     "u": 0,
+     "nl": 0,
+     "t": 7,
+     "g": 0,
+     "pkt": 3
+    },
+    {
+     "pl": 3,
      "id": 46219,
      "n": "FC Lorentzweiler",
      "sp": 1,
@@ -21858,31 +21870,7 @@
      "pkt": 3
     },
     {
-     "pl": 3,
-     "id": 46758,
-     "n": "ENT Ënnersauer-Mëllerdall II",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
      "pl": 4,
-     "id": 44735,
-     "n": "Jeunesse Junglinster II",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 5,
      "id": 45290,
      "n": "ENT Lintgen/Walferdange/Steinsel II",
      "sp": 1,
@@ -21891,6 +21879,18 @@
      "nl": 1,
      "t": 4,
      "g": 6,
+     "pkt": 0
+    },
+    {
+     "pl": 5,
+     "id": 46758,
+     "n": "ENT Ënnersauer-Mëllerdall II",
+     "sp": 1,
+     "s": 0,
+     "u": 0,
+     "nl": 1,
+     "t": 0,
+     "g": 7,
      "pkt": 0
     },
     {
@@ -23246,6 +23246,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 44703,
+     "n": "US Berdorf-Consdorf 01",
+     "sp": 1,
+     "s": 1,
+     "u": 0,
+     "nl": 0,
+     "t": 8,
+     "g": 4,
+     "pkt": 3
+    },
+    {
+     "pl": 2,
      "id": 46761,
      "n": "ENT UMW/Biwer/Berbourg III",
      "sp": 1,
@@ -23257,31 +23269,7 @@
      "pkt": 3
     },
     {
-     "pl": 2,
-     "id": 46193,
-     "n": "CS Grevenmacher II",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
      "pl": 3,
-     "id": 44703,
-     "n": "US Berdorf-Consdorf 01",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 4,
      "id": 44911,
      "n": "Jeunesse Junglinster IV",
      "sp": 0,
@@ -23293,7 +23281,7 @@
      "pkt": 0
     },
     {
-     "pl": 5,
+     "pl": 4,
      "id": 44757,
      "n": "Victoria Rosport II",
      "sp": 1,
@@ -23302,6 +23290,18 @@
      "nl": 1,
      "t": 4,
      "g": 7,
+     "pkt": 0
+    },
+    {
+     "pl": 5,
+     "id": 46193,
+     "n": "CS Grevenmacher II",
+     "sp": 1,
+     "s": 0,
+     "u": 0,
+     "nl": 1,
+     "t": 4,
+     "g": 8,
      "pkt": 0
     }
    ],
