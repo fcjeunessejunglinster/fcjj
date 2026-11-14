@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T15:48:16.237Z",
+ "stand": "2026-11-14T16:18:25.601Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -22188,30 +22188,18 @@
    "tabelle": [
     {
      "pl": 1,
-     "id": 45396,
-     "n": "FC Koeppchen Wormeldange",
-     "sp": 0,
-     "s": 0,
+     "id": 44738,
+     "n": "Jeunesse Junglinster I",
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
+     "t": 9,
+     "g": 2,
+     "pkt": 3
     },
     {
      "pl": 2,
-     "id": 46022,
-     "n": "Union Remich/Bous I",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 3,
      "id": 46192,
      "n": "CS Grevenmacher I",
      "sp": 0,
@@ -22223,7 +22211,7 @@
      "pkt": 0
     },
     {
-     "pl": 4,
+     "pl": 3,
      "id": 46353,
      "n": "ENT Biwer/Berbourg/UMW I",
      "sp": 0,
@@ -22235,9 +22223,21 @@
      "pkt": 0
     },
     {
+     "pl": 4,
+     "id": 44755,
+     "n": "Victoria Rosport I",
+     "sp": 0,
+     "s": 0,
+     "u": 0,
+     "nl": 0,
+     "t": 0,
+     "g": 0,
+     "pkt": 0
+    },
+    {
      "pl": 5,
-     "id": 44738,
-     "n": "Jeunesse Junglinster I",
+     "id": 45396,
+     "n": "FC Koeppchen Wormeldange",
      "sp": 0,
      "s": 0,
      "u": 0,
@@ -22248,14 +22248,14 @@
     },
     {
      "pl": 6,
-     "id": 44755,
-     "n": "Victoria Rosport I",
-     "sp": 0,
+     "id": 46022,
+     "n": "Union Remich/Bous I",
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 2,
+     "g": 9,
      "pkt": 0
     }
    ],
@@ -22540,6 +22540,30 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 46367,
+     "n": "ENT UMW/Berbourg/Biwer II",
+     "sp": 1,
+     "s": 1,
+     "u": 0,
+     "nl": 0,
+     "t": 11,
+     "g": 1,
+     "pkt": 3
+    },
+    {
+     "pl": 2,
+     "id": 46201,
+     "n": "US Moutfort-Medingen",
+     "sp": 1,
+     "s": 1,
+     "u": 0,
+     "nl": 0,
+     "t": 4,
+     "g": 2,
+     "pkt": 3
+    },
+    {
+     "pl": 3,
      "id": 45896,
      "n": "US Hostert II",
      "sp": 0,
@@ -22551,33 +22575,9 @@
      "pkt": 0
     },
     {
-     "pl": 2,
-     "id": 46169,
-     "n": "Alisontia Steinsel II",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 3,
-     "id": 46201,
-     "n": "US Moutfort-Medingen",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
      "pl": 4,
-     "id": 46367,
-     "n": "ENT UMW/Berbourg/Biwer II",
+     "id": 45374,
+     "n": "Résidence Walferdange II",
      "sp": 0,
      "s": 0,
      "u": 0,
@@ -22590,24 +22590,24 @@
      "pl": 5,
      "id": 44739,
      "n": "Jeunesse Junglinster II",
-     "sp": 0,
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 2,
+     "g": 4,
      "pkt": 0
     },
     {
      "pl": 6,
-     "id": 45374,
-     "n": "Résidence Walferdange II",
-     "sp": 0,
+     "id": 46169,
+     "n": "Alisontia Steinsel II",
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 1,
+     "g": 11,
      "pkt": 0
     }
    ],
@@ -22642,9 +22642,9 @@
       "id": 46367,
       "n": "ENT UMW/Berbourg/Biwer II"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 1,
+     "as": 11,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Henri Bausch (Steinsel, synth.)"
     },
@@ -22660,9 +22660,9 @@
       "id": 45896,
       "n": "US Hostert II"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 2,
+     "as": 4,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Walferdange, synth.)"
     },
@@ -22893,15 +22893,15 @@
    "tabelle": [
     {
      "pl": 1,
-     "id": 45596,
-     "n": "Marisca Mersch II",
-     "sp": 0,
-     "s": 0,
+     "id": 46216,
+     "n": "FC Lorentzweiler II",
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
+     "t": 8,
+     "g": 1,
+     "pkt": 3
     },
     {
      "pl": 2,
@@ -22929,8 +22929,8 @@
     },
     {
      "pl": 4,
-     "id": 46216,
-     "n": "FC Lorentzweiler II",
+     "id": 44636,
+     "n": "Minerva Lintgen",
      "sp": 0,
      "s": 0,
      "u": 0,
@@ -22941,8 +22941,8 @@
     },
     {
      "pl": 5,
-     "id": 44636,
-     "n": "Minerva Lintgen",
+     "id": 45596,
+     "n": "Marisca Mersch II",
      "sp": 0,
      "s": 0,
      "u": 0,
@@ -22955,12 +22955,12 @@
      "pl": 6,
      "id": 44737,
      "n": "Jeunesse Junglinster III",
-     "sp": 0,
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 1,
+     "g": 8,
      "pkt": 0
     }
    ],
