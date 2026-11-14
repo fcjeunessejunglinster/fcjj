@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T00:56:31.319Z",
+ "stand": "2026-11-14T09:03:20.510Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -13175,7 +13175,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain Carrière (Senningerberg, synth.)"
     },
