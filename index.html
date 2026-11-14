@@ -275,7 +275,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-14 d";
+const FASSUNG = "2026-11-14 e";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -321,7 +321,7 @@ const TEXTE = {
     flfPlan: ["Strategischer Plan der FLF 2027–2031", "flf.lu (auf Französisch)"],
     warn: { titel: "Wetterwarnung", land: "ganzes Land", nord: "Norden", sued: "Süden", quelle: "Quelle: MeteoLux" },
     ferien: "Schulferien", feiertag: "Feiertag",
-    regeln: [k => `Spielregeln ${k}`, "FLF · PDF auf Französisch"],
+    regeln: [k => `Spielregeln ${k}`, "FLF · PDF auf Französisch"], lois: ["Spielregeln", "Lois du Jeu – FLF (Fußballgesetze, Regelkatalog)", "flf.lu"],
     kader2: { titel: "Kader", pos: { Goalkeeper: "Tor", Defender: "Abwehr", Midfielder: "Mittelfeld", Attacker: "Angriff" }, jahre: a => `${a} J.`, prof: { geb: "Geboren", in: "in", verl: "🚑 verletzt", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Spiele", se: "Startelf", min: "Minuten", t: "Tore", v: "Vorlagen", gk: "Gegentore", par: "Paraden", g: "Gelb", r: "Rot", note: "Note", keine: "Noch kein Einsatz in dieser Saison" }, quelle: d => `Kader: API-Football, Stand ${d}` },
     matchball: "⚽ Einen Spielball sponsern",
     spielfeld: k => `Spielfeld ${k}`,
@@ -392,7 +392,7 @@ const TEXTE = {
     flfPlan: ["FLF strategic plan 2027–2031", "flf.lu (in French)"],
     warn: { titel: "Weather warning", land: "whole country", nord: "north", sued: "south", quelle: "Source: MeteoLux" },
     ferien: "School holidays", feiertag: "Public holiday",
-    regeln: [k => `Rules of play ${k}`, "FLF · PDF in French"],
+    regeln: [k => `Rules of play ${k}`, "FLF · PDF in French"], lois: ["Rules of play", "Laws of the Game – FLF", "flf.lu"],
     kader2: { titel: "Squads", pos: { Goalkeeper: "Goalkeepers", Defender: "Defenders", Midfielder: "Midfielders", Attacker: "Forwards" }, jahre: a => `${a} yrs`, prof: { geb: "Born", in: "in", verl: "🚑 injured", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Apps", se: "Starts", min: "Minutes", t: "Goals", v: "Assists", gk: "Conceded", par: "Saves", g: "Yellow", r: "Red", note: "Rating", keine: "No appearances this season yet" }, quelle: d => `Squads: API-Football, as of ${d}` },
     matchball: "⚽ Sponsor a match ball",
     spielfeld: k => `Pitch ${k}`,
@@ -463,7 +463,7 @@ const TEXTE = {
     flfPlan: ["Plan stratégique de la FLF 2027–2031", "flf.lu"],
     warn: { titel: "Avertissement météo", land: "tout le pays", nord: "nord", sued: "sud", quelle: "Source : MeteoLux" },
     ferien: "Vacances scolaires", feiertag: "Jour férié",
-    regeln: [k => `Règles de jeu ${k}`, "FLF · PDF"],
+    regeln: [k => `Règles de jeu ${k}`, "FLF · PDF"], lois: ["Règles de jeu", "Lois du Jeu – FLF", "flf.lu"],
     kader2: { titel: "Effectifs", pos: { Goalkeeper: "Gardiens", Defender: "Défenseurs", Midfielder: "Milieux", Attacker: "Attaquants" }, jahre: a => `${a} ans`, prof: { geb: "Né le", in: "à", verl: "🚑 blessé", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Matchs", se: "titulaire", min: "Minutes", t: "Buts", v: "Passes déc.", gk: "Buts encaissés", par: "Arrêts", g: "Jaunes", r: "Rouges", note: "Note", keine: "Pas encore joué cette saison" }, quelle: d => `Effectifs : API-Football, état au ${d}` },
     matchball: "⚽ Sponsoriser un ballon de match",
     spielfeld: k => `Terrain ${k}`,
@@ -830,7 +830,11 @@ function teamHtml(t, now) {
   // Spielfeldgröße als Bild, aufklappbar (vom Verein, 11.11.2026)
   const feld = SPIELFELD[t.kat];
   if (feld) html += `<details class="karte"><summary>📐 ${esc(T().spielfeld(feld.n))}</summary><img class="spielfeld" src="${feld.bild}" alt="${esc(T().spielfeld(feld.n))}" loading="lazy" width="${feld.b}" height="${feld.h}"></details>`;
-  if (REGELN[t.kat]) html += `<details class="karte"><summary>📘 ${esc(T().regeln[0](REGELN_KAT[t.kat]))}</summary><ul class="spiele linkliste"><li><a href="${esc(dok(REGELN[t.kat]))}" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</b><span>${esc(T().regeln[1])}</span></span><span class="lp">›</span></a></li></ul></details>`;
+  {   // Spielregeln: Spielform der Jugend (PDF) und die Lois du Jeu der FLF (Link vom Verein, 14.11.2026)
+    const lo = T().lois, lauf = `<li><a href="${LOIS_FLF}" target="_blank" rel="noopener"><span class="lk">⚖️</span><span class="lt"><b>${esc(lo[1])}</b><span>${esc(lo[2])}</span></span><span class="lp">›</span></a></li>`;
+    const jugend = REGELN[t.kat] ? `<li><a href="${esc(dok(REGELN[t.kat]))}" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</b><span>${esc(T().regeln[1])}</span></span><span class="lp">›</span></a></li>` : "";
+    html += `<details class="karte"><summary>📘 ${esc(REGELN[t.kat] ? T().regeln[0](REGELN_KAT[t.kat]) : lo[0])}</summary><ul class="spiele linkliste">${jugend}${lauf}</ul></details>`;
+  }
   if (SPONSOR_JUGEND.kats.includes(t.kat)) html += cdjHtml() + sponsorHtml(SPONSOR_JUGEND);
   return html;
 }
@@ -843,6 +847,7 @@ const SPONSOR_JUGEND = { bild: "bilder/sponsor-jugend.jpg", name: "SOPI Concept 
 const dok = p => p.startsWith("dokumente/") && INSTALLIERT ? `https://cdn.jsdelivr.net/gh/fcjeunessejunglinster/fcjj@main/${p}` : p;
 // Spielregeln der FLF („Loosst eis Fussball spillen“) je Kategorie (vom Verein, 10.11.2026)
 // Mädchen: WU11 und WU13 spielen nach den Regeln U11 (vom Verein, 10. und 11.11.2026).
+const LOIS_FLF = "https://www.flf.lu/lois-du-jeu-92857v4";   // Lois du Jeu auf flf.lu
 const REGELN_KAT = { U7: "U7", U9: "U9", U11: "U11", U13: "U13", WU11: "U11", WU13: "U11" };
 const REGELN = Object.fromEntries(Object.entries(REGELN_KAT).map(([k, r]) => [k, `dokumente/regles-de-jeu-${r.toLowerCase()}.pdf`]));
 // Spielfeldgröße je Kategorie: Bild, Bildgröße, Bezeichnung (vom Verein, 11.11.2026)
@@ -1543,6 +1548,7 @@ async function loisKontext(frage, verlauf) {
     const pdf = new URL(LOIS_PDF, location.href).href;
     return `\n## Spielregeln: Catalogue des Lois de Jeu de la FLF 2026/27 (Lois du Jeu de l'IFAB, Cas pratiques, Consignes pédagogiques; ab 1.7.2026; Commission des Lois du Jeu du CAF)
 Ganzer Katalog (PDF, französisch): ${pdf}
+Lois du Jeu auf der FLF-Seite: ${LOIS_FLF}
 Regelfragen damit beantworten, in der Sprache der Frage (die Fälle unten sind französisch; übersetzen). Die Nummer nennen (z. B. „Loi 12 / 46“). Steht der Fall nicht unten, allgemein nach den IFAB-Regeln antworten, das ehrlich sagen und auf das PDF verweisen. Für die Jugend (BAM bis MIN, WU11, WU13) gelten zusätzlich die eigenen Spielformen der FLF (Règles de jeu U7/U9/U11/U13 unter Links).
 ${f.length ? "Passende Fälle aus dem Katalog:\n" + f.join("\n") : "(Kein passender Fall gefunden.)"}`;
   } catch (e) { return ""; }
