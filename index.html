@@ -88,6 +88,7 @@ li.event .evd{font-size:14px;color:var(--text);font-variant-numeric:tabular-nums
 .events{border:2px solid var(--rot)}
 .raster button.blknopf{padding:5px 4px;position:relative}
 .raster button.blknopf[aria-pressed="true"]{background:var(--karte);color:var(--text);border:2px solid var(--schwarz)}
+ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
 .tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
 .tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
 .tagpunkt.aus{background:#1f9d4d}
@@ -275,7 +276,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-14 f";
+const FASSUNG = "2026-11-14 g";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -321,6 +322,7 @@ const TEXTE = {
     flfPlan: ["Strategischer Plan der FLF 2027–2031", "flf.lu (auf Französisch)"],
     warn: { titel: "Wetterwarnung", land: "ganzes Land", nord: "Norden", sued: "Süden", quelle: "Quelle: MeteoLux" },
     ferien: "Schulferien", feiertag: "Feiertag",
+    conseils: ["10 Tipps für die Fans unserer Spieler", ["Anfeuern", "Ihrem Kind zuhören", "Fehler akzeptieren", "Gegner und Eltern respektieren", "Gutes Verhalten wertschätzen", "Keine Anweisungen geben", "Dem Trainer vertrauen und ihn respektieren", "Gefühle im Griff behalten", "Begleiten", "Den Schiedsrichter respektieren"]], 
     regeln: [k => `Spielregeln ${k}`, "FLF · PDF auf Französisch"], lois: ["Spielregeln", "Lois du Jeu – FLF (Fußballgesetze, Regelkatalog)", "flf.lu"],
     kader2: { titel: "Kader", pos: { Goalkeeper: "Tor", Defender: "Abwehr", Midfielder: "Mittelfeld", Attacker: "Angriff" }, jahre: a => `${a} J.`, prof: { geb: "Geboren", in: "in", verl: "🚑 verletzt", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Spiele", se: "Startelf", min: "Minuten", t: "Tore", v: "Vorlagen", gk: "Gegentore", par: "Paraden", g: "Gelb", r: "Rot", note: "Note", keine: "Noch kein Einsatz in dieser Saison" }, quelle: d => `Kader: API-Football, Stand ${d}` },
     matchball: "⚽ Einen Spielball sponsern",
@@ -392,6 +394,7 @@ const TEXTE = {
     flfPlan: ["FLF strategic plan 2027–2031", "flf.lu (in French)"],
     warn: { titel: "Weather warning", land: "whole country", nord: "north", sued: "south", quelle: "Source: MeteoLux" },
     ferien: "School holidays", feiertag: "Public holiday",
+    conseils: ["10 tips for supporters of our players", ["Encourage", "Listen to your child", "Accept mistakes", "Respect opponents and parents", "Value good attitudes", "Don’t give instructions", "Trust and respect the coach", "Control your emotions", "Be there for them", "Respect the referee"]], 
     regeln: [k => `Rules of play ${k}`, "FLF · PDF in French"], lois: ["Rules of play", "Laws of the Game – FLF", "flf.lu"],
     kader2: { titel: "Squads", pos: { Goalkeeper: "Goalkeepers", Defender: "Defenders", Midfielder: "Midfielders", Attacker: "Forwards" }, jahre: a => `${a} yrs`, prof: { geb: "Born", in: "in", verl: "🚑 injured", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Apps", se: "Starts", min: "Minutes", t: "Goals", v: "Assists", gk: "Conceded", par: "Saves", g: "Yellow", r: "Red", note: "Rating", keine: "No appearances this season yet" }, quelle: d => `Squads: API-Football, as of ${d}` },
     matchball: "⚽ Sponsor a match ball",
@@ -463,6 +466,7 @@ const TEXTE = {
     flfPlan: ["Plan stratégique de la FLF 2027–2031", "flf.lu"],
     warn: { titel: "Avertissement météo", land: "tout le pays", nord: "nord", sued: "sud", quelle: "Source : MeteoLux" },
     ferien: "Vacances scolaires", feiertag: "Jour férié",
+    conseils: ["10 conseils pour les supporteurs des joueurs du FCJJ", ["Encourager", "Être à l’écoute de votre enfant", "Accepter l’erreur", "Respecter adversaires et parents", "Valoriser les bonnes attitudes", "Ne pas donner d’instructions", "Faire confiance et respecter l’entraîneur", "Contrôlez vos émotions", "Accompagner", "Respecter l’arbitre"]], 
     regeln: [k => `Règles de jeu ${k}`, "FLF · PDF"], lois: ["Règles de jeu", "Lois du Jeu – FLF", "flf.lu"],
     kader2: { titel: "Effectifs", pos: { Goalkeeper: "Gardiens", Defender: "Défenseurs", Midfielder: "Milieux", Attacker: "Attaquants" }, jahre: a => `${a} ans`, prof: { geb: "Né le", in: "à", verl: "🚑 blessé", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Matchs", se: "titulaire", min: "Minutes", t: "Buts", v: "Passes déc.", gk: "Buts encaissés", par: "Arrêts", g: "Jaunes", r: "Rouges", note: "Note", keine: "Pas encore joué cette saison" }, quelle: d => `Effectifs : API-Football, état au ${d}` },
     matchball: "⚽ Sponsoriser un ballon de match",
@@ -835,6 +839,8 @@ function teamHtml(t, now) {
     const jugend = REGELN[t.kat] ? `<li><a href="${esc(dok(REGELN[t.kat]))}" target="_blank" rel="noopener"><span class="lk">📘</span><span class="lt"><b>${esc(T().regeln[0](REGELN_KAT[t.kat]))}</b><span>${esc(T().regeln[1])}</span></span><span class="lp">›</span></a></li>` : "";
     html += `<details class="karte"><summary>📘 ${esc(REGELN[t.kat] ? T().regeln[0](REGELN_KAT[t.kat]) : lo[0])}</summary><ul class="spiele linkliste">${jugend}${lauf}</ul></details>`;
   }
+  // 10 conseils pour les supporteurs (vom Verein, 14.11.2026), aufklappbar in allen Jugend-Reitern
+  if (SPONSOR_JUGEND.kats.includes(t.kat)) html += `<details class="karte conseils"><summary>📣 ${esc(T().conseils[0])}</summary><ol class="conseils">${T().conseils[1].map(x => `<li>${esc(x)}</li>`).join("")}</ol></details>`;
   if (SPONSOR_JUGEND.kats.includes(t.kat)) html += cdjHtml() + sponsorHtml(SPONSOR_JUGEND);
   return html;
 }
