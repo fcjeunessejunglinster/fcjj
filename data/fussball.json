@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-14T16:48:41.316Z",
+ "stand": "2026-11-14T17:18:27.785Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -21919,9 +21919,9 @@
       "id": 46189,
       "n": "CS Grevenmacher"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 3,
+     "as": 15,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Canach, synth.)"
     },
@@ -21937,9 +21937,9 @@
       "id": 45290,
       "n": "ENT Lintgen/Walferdange/Steinsel II"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 6,
+     "as": 4,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Lorentzweiler, synth.)"
     },
