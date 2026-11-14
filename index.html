@@ -275,7 +275,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-14 c";
+const FASSUNG = "2026-11-14 d";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1490,7 +1490,64 @@ const CHAT_TERMINE = [
   ["2026-12-09", "Konferenz „Digitalisatioun am Veräin – 360 Grad“ (Digitalisierung im Sportverein), organisiert vom FC Jeunesse Junglinster: Mittwoch, 9. Dezember 2026 um 19:00 Uhr in der Buvette Op Fréinen, Junglinster (Fußballplatz). Für alle interessierten Vereine der Gemeinde Junglinster und Sportvereine aus der Umgebung; in dieser Form die erste Konferenz in Luxemburg zu den Bedürfnissen von Sportvereinen. Themen: Kommunikation, Mitgliederverwaltung, Verwaltung der Mitarbeiter/Ehrenamtlichen, Organisation, digitales Bezahlen, Cybersicherheit, Künstliche Intelligenz (KI) im Verein. Eintritt gratis, höchstens 30 Teilnehmer, Anmeldeschluss 30. November 2026, Anmeldung: https://fcjj.forms.app/anmeldeformular (Plätze begrenzt). Präsentation: Gilles Emeringer."],
   ["2027-01-28", "Ehrung der verdienten Sportlerinnen und Sportler der Gemeinde Junglinster (cérémonie de remise à l’honneur des sportifs méritants de la Commune de Junglinster): Donnerstag, 28. Januar 2027 um 18:30 Uhr im Centre polyvalent Gaston Stein in Junglinster."],
 ];
-function chatKontext(now) {
+// Catalogue des Lois de Jeu der FLF 2026/27 (550 Fragen und Antworten, französisch; vom Verein, 14.11.2026).
+// Zu groß für jede Frage: die App sucht die passendsten Fälle (Stichwörter, auch auf Deutsch/Englisch/Luxemburgisch) und schickt nur diese mit.
+const LOIS_URL = "dokumente/lois-du-jeu-flf-2026-27.json", LOIS_PDF = "dokumente/lois-du-jeu-flf-2026-27.pdf";
+const LOIS_KAPITEL = ["", "Terrain", "Ballon", "Joueurs", "Équipements des joueurs", "Arbitre", "Autres arbitres", "Durée d’un match", "Coup d’envoi et reprise du jeu", "Ballon en jeu et hors du jeu", "Issue d’un match", "Hors-jeu", "Fautes et incorrections", "Coups francs", "Penalty", "Rentrée de touche", "Coup de pied de but", "Corner"];
+const LOIS_WOERTER = {   // Stichwort (ohne Akzente, klein) → französische Begriffe aus dem Katalog
+  abseits: "hors-jeu", offside: "hors-jeu", offsaid: "hors-jeu", elfmeter: "penalty", strafstoss: "penalty", penalti: "penalty", elfer: "penalty",
+  einwurf: "rentree touche", "throw-in": "rentree touche", throw: "rentree touche", ecke: "corner", eckball: "corner", eckstoss: "corner",
+  abstoss: "coup pied but", "goal kick": "coup pied but", freistoss: "coup franc", "free kick": "coup franc", indirekt: "indirect", direkt: "direct",
+  gelb: "carton jaune avertissement", yellow: "carton jaune avertissement", giel: "carton jaune avertissement", verwarnung: "avertissement",
+  rot: "carton rouge exclusion", red: "carton rouge exclusion", rout: "carton rouge exclusion", platzverweis: "exclusion", "zeitstrafe": "exclusion temporaire", "sin bin": "exclusion temporaire",
+  hand: "main bras", handball: "main bras", handspiel: "main bras", torwart: "gardien", goalkeeper: "gardien", keeper: "gardien", goalie: "gardien", tormann: "gardien",
+  schiedsrichter: "arbitre", referee: "arbitre", schiri: "arbitre", arbitter: "arbitre", linienrichter: "arbitre assistant", assistent: "arbitre assistant",
+  tor: "but", goal: "but", gool: "but", ball: "ballon", spieler: "joueur", player: "joueur", spiller: "joueur", auswechslung: "remplacement remplacant", wechsel: "remplacement",
+  substitution: "remplacement", ersatzspieler: "remplacant", trainer: "officiel equipe entraineur", coach: "officiel equipe entraineur", foul: "faute", fault: "faute",
+  anstoss: "coup envoi", "kick-off": "coup envoi", kickoff: "coup envoi", schiedsrichterball: "balle terre", "dropped ball": "balle terre",
+  nachspielzeit: "temps additionnel", verlaengerung: "prolongation", "extra time": "prolongation", elfmeterschiessen: "tirs au but", shootout: "tirs au but",
+  spielzeit: "duree match", halbzeit: "mi-temps", "half-time": "mi-temps", pause: "mi-temps", vorteil: "avantage", advantage: "avantage",
+  ausruestung: "equipement", trikot: "maillot equipement", schienbeinschoner: "protege-tibias", "shin": "protege-tibias", schmuck: "bijoux", schuhe: "chaussures",
+  platz: "terrain", feld: "terrain", pitch: "terrain", linie: "ligne", strafraum: "surface reparation", "penalty area": "surface reparation", torraum: "surface but",
+  verletzung: "blessure blesse soins", verletzt: "blessure blesse", injury: "blessure blesse", spuck: "cracher", spit: "cracher", gegner: "adversaire", opponent: "adversaire", hands: "main bras", strofraum: "surface reparation", "back pass": "gardien main deliberement pied coequipier", backpass: "gardien main deliberement pied coequipier", "pick up": "main", ruckpass: "gardien main deliberement pied coequipier", "zurueckgespielt": "gardien main deliberement pied coequipier", wechseln: "remplacement remplacant", "kopfball": "tete", "header": "tete", "schlag": "frapper", "treten": "donner coup pied", "kick": "coup pied", beleidigung: "propos injurieux", tackling: "tacle",
+  simulation: "simulation", schwalbe: "simulation", mauer: "mur", wall: "mur", abbruch: "arreter definitivement", var: "assistance video", rueckpass: "gardien main deliberement pied coequipier",
+  zuschauer: "spectateur", fans: "spectateur", unterbrechung: "interrompt", spielfortsetzung: "reprise jeu", restart: "reprise jeu",
+};
+const LOIS_STOPP = new Set("le la les un une des de du d l et ou a au aux en dans sur par pour que qui quoi est il elle on ce cette ces se sa son ses ne pas plus si lors apres avant comment quel quelle quels quelles peut doit faut the a an of to is are what when how can der die das ein eine ist und oder wie wann was wer kann muss darf den dem des im am mit bei vom zum zur ech wat wéi ass an op".split(" "));
+const losNorm = x => x.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’']/g, " ");
+const losWoerter = x => losNorm(x).split(/[^a-z0-9-]+/).filter(w => w.length > 1 && !LOIS_STOPP.has(w)).map(w => w.slice(0, 6));
+let LOIS = null, LOIS_IDF = null;
+async function loisLaden() {
+  if (LOIS) return LOIS;
+  const r = await fetch(LOIS_URL); if (!r.ok) throw new Error(r.status);
+  LOIS = (await r.json()).map(o => ({ ...o, w: new Set(losWoerter(o.q + " " + o.q + " " + o.a + " " + LOIS_KAPITEL[o.l])) }));
+  const df = new Map(); for (const o of LOIS) for (const w of o.w) df.set(w, (df.get(w) || 0) + 1);
+  LOIS_IDF = w => Math.log(1 + LOIS.length / (df.get(w) || 0.5));
+  return LOIS;
+}
+function loisSuchen(text, max = 10, zeichen = 9000) {
+  let t = losNorm(text);
+  const extra = Object.entries(LOIS_WOERTER).filter(([k]) => new RegExp(`(^|[^a-z])${k.replace(/[-]/g, "\\-")}`).test(t)).map(([, v]) => v);
+  const ws = [...new Set([...losWoerter(text), ...losWoerter(extra.join(" "))])].filter(w => LOIS_IDF(w) > 0.4);
+  if (!ws.length) return [];
+  const gew = LOIS.map(o => [ws.reduce((s, w) => s + (o.w.has(w) ? LOIS_IDF(w) : 0), 0), o]).filter(x => x[0] > 2.5).sort((a, b) => b[0] - a[0]);
+  const aus = []; let n = 0;
+  for (const [, o] of gew) { const z = `[${o.n} – ${LOIS_KAPITEL[o.l]}] F: ${o.q}\nR: ${o.a}`; if (aus.length >= max || n + z.length > zeichen) break; aus.push(z); n += z.length; }
+  return aus;
+}
+async function loisKontext(frage, verlauf) {
+  try {
+    await loisLaden();
+    const vorher = verlauf.filter(m => m.rolle === "user").slice(-1).map(m => m.text).join(" ");
+    let f = loisSuchen(frage); if (f.length < 3 && vorher) f = loisSuchen(frage + " " + vorher);
+    const pdf = new URL(LOIS_PDF, location.href).href;
+    return `\n## Spielregeln: Catalogue des Lois de Jeu de la FLF 2026/27 (Lois du Jeu de l'IFAB, Cas pratiques, Consignes pédagogiques; ab 1.7.2026; Commission des Lois du Jeu du CAF)
+Ganzer Katalog (PDF, französisch): ${pdf}
+Regelfragen damit beantworten, in der Sprache der Frage (die Fälle unten sind französisch; übersetzen). Die Nummer nennen (z. B. „Loi 12 / 46“). Steht der Fall nicht unten, allgemein nach den IFAB-Regeln antworten, das ehrlich sagen und auf das PDF verweisen. Für die Jugend (BAM bis MIN, WU11, WU13) gelten zusätzlich die eigenen Spielformen der FLF (Règles de jeu U7/U9/U11/U13 unter Links).
+${f.length ? "Passende Fälle aus dem Katalog:\n" + f.join("\n") : "(Kein passender Fall gefunden.)"}`;
+  } catch (e) { return ""; }
+}
+function chatKontext(now, regeln = "") {
   const de = TEXTE.de, z = [], datum = d => new Intl.DateTimeFormat("de-DE", { timeZone: TZ, weekday: "short", day: "numeric", month: "numeric", year: "numeric" }).format(d);
   const reiterName = AKTIV === "woche" ? "Unsere Woche" : D?.teams?.find(t => String(t.id) === AKTIV)?.reiter || AKTIV;
   z.push("DEIN NAME: Du heißt Sami und bist der Chat-Assistent der FCJJ-App („Ask Sami“). Stell dich bei Bedarf als Sami vor.");
@@ -1578,6 +1635,7 @@ Nächste Sitzung (Meeting) der Jugendkommission: Mittwoch, 11.11.2026 um 19:00 U
   z.push("\n## Links\n" + LINKS.map(l => `- ${de.linkListe[l.key][0]}: ${typeof l.url === "string" ? new URL(l.url, location.href).href : l.url.de}`).join("\n")
     + `\n- Jugendkommission (CDJ) beitreten: ${CDJ_URL}\n- Spielball sponsern (Seniors): https://fcjj.lu/matchball/seniors\n- Strategischer Plan der FLF 2027–2031: https://www.flf.lu/plan-strategique-83993v4`);
   const w = warnAktiv(now); if (w.length) z.push("\n## Aktuelle Wetterwarnungen MeteoLux\n" + w.map(x => `- ${x.titel} (${warnRegion(x)}): ${x.text}`).join("\n"));
+  if (regeln) z.push(regeln);
   z.push("\n# MANNSCHAFTEN (Spiele, Kabinen, Tabellen)", ...tz);
   return z.join("\n").slice(0, 78000);   // Worker nimmt bis 80000 Zeichen an
 }
@@ -1611,7 +1669,7 @@ document.addEventListener("submit", async e => {
   const v = document.getElementById("chatVerlauf"); v.insertAdjacentHTML("beforeend", `<div class="msg ki leise" id="chatDenkt">${esc(c.denkt)}</div>`); v.scrollTop = v.scrollHeight;
   try {
     const r = await fetch(CHAT_URL + "/frage", { method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ frage, verlauf, lang: LANG, kontext: chatKontext(new Date()) }) });
+      body: JSON.stringify({ frage, verlauf, lang: LANG, kontext: chatKontext(new Date(), await loisKontext(frage, verlauf)) }) });
     const j = await r.json().catch(() => ({}));
     CHAT.push({ rolle: "assistant", text: r.ok && j.antwort ? j.antwort : r.status === 429 ? c.limit : c.fehler });
   } catch (x) { CHAT.push({ rolle: "assistant", text: c.fehler }); }
