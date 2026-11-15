@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-15T14:18:26.085Z",
+ "stand": "2026-11-15T15:18:10.674Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -21231,9 +21231,9 @@
       "id": 46231,
       "n": "Avenir Beggen"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 0,
+     "as": 4,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Mamer, synth.)"
     },
