@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-15T12:03:19.625Z",
+ "stand": "2026-11-15T12:18:26.935Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -12877,7 +12877,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
@@ -19952,13 +19952,13 @@
      "pl": 1,
      "id": 45973,
      "n": "Atert Bissen",
-     "sp": 0,
-     "s": 0,
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
+     "t": 1,
      "g": 0,
-     "pkt": 0
+     "pkt": 3
     },
     {
      "pl": 2,
@@ -19986,18 +19986,6 @@
     },
     {
      "pl": 4,
-     "id": 46426,
-     "n": "F91 Dudelange I",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 5,
      "id": 45153,
      "n": "Jeunesse Junglinster",
      "sp": 0,
@@ -20009,7 +19997,7 @@
      "pkt": 0
     },
     {
-     "pl": 6,
+     "pl": 5,
      "id": 45293,
      "n": "Racing FC Union Luxembourg",
      "sp": 0,
@@ -20018,6 +20006,18 @@
      "nl": 0,
      "t": 0,
      "g": 0,
+     "pkt": 0
+    },
+    {
+     "pl": 6,
+     "id": 46426,
+     "n": "F91 Dudelange I",
+     "sp": 1,
+     "s": 0,
+     "u": 0,
+     "nl": 1,
+     "t": 0,
+     "g": 1,
      "pkt": 0
     }
    ],
@@ -20052,9 +20052,9 @@
       "id": 45973,
       "n": "Atert Bissen"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 0,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Amadéo Barozzi (Dudelange, synth.)"
     },
@@ -20303,15 +20303,15 @@
    "tabelle": [
     {
      "pl": 1,
-     "id": 45389,
-     "n": "ENT Wormeldange/Munsbach/Hostert",
-     "sp": 0,
-     "s": 0,
+     "id": 46034,
+     "n": "ENT Région Moselle",
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
+     "t": 17,
+     "g": 1,
+     "pkt": 3
     },
     {
      "pl": 2,
@@ -20327,18 +20327,6 @@
     },
     {
      "pl": 3,
-     "id": 46034,
-     "n": "ENT Région Moselle",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 4,
      "id": 46241,
      "n": "Avenir Beggen",
      "sp": 0,
@@ -20350,7 +20338,7 @@
      "pkt": 0
     },
     {
-     "pl": 5,
+     "pl": 4,
      "id": 44729,
      "n": "Jeunesse Junglinster",
      "sp": 0,
@@ -20362,7 +20350,7 @@
      "pkt": 0
     },
     {
-     "pl": 6,
+     "pl": 5,
      "id": 45148,
      "n": "US Sandweiler",
      "sp": 0,
@@ -20371,6 +20359,18 @@
      "nl": 0,
      "t": 0,
      "g": 0,
+     "pkt": 0
+    },
+    {
+     "pl": 6,
+     "id": 45389,
+     "n": "ENT Wormeldange/Munsbach/Hostert",
+     "sp": 1,
+     "s": 0,
+     "u": 0,
+     "nl": 1,
+     "t": 1,
+     "g": 17,
      "pkt": 0
     }
    ],
