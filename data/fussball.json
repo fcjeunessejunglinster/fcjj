@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-15T18:18:25.029Z",
+ "stand": "2026-11-15T19:18:32.854Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -1812,9 +1812,9 @@
       "id": 44894,
       "n": "US Sandweiler"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 1,
+     "as": 2,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Victor Marchal (Tétange)"
     },
