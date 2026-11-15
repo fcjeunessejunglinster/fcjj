@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-15T10:33:24.148Z",
+ "stand": "2026-11-15T12:03:19.625Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -11633,7 +11633,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Strassen, synth.)"
     },
@@ -20405,9 +20405,9 @@
       "id": 46034,
       "n": "ENT Région Moselle"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 1,
+     "as": 17,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain Munsbach (synth.)"
     },
