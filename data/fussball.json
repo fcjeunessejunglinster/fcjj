@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-15T17:03:19.435Z",
+ "stand": "2026-11-15T17:48:51.733Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -1740,9 +1740,9 @@
       "id": 45165,
       "n": "CS Oberkorn"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 2,
+     "as": 3,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain rue de la Gare (Clemency)"
     },
@@ -1776,9 +1776,9 @@
       "id": 44978,
       "n": "Red Boys Aspelt"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 6,
+     "as": 4,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade des Mineurs (Lasauvage)"
     },
@@ -1830,9 +1830,9 @@
       "id": 44915,
       "n": "Etoile Sportive Schouweiler"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 6,
+     "as": 3,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Kuerzwénkel (Consdorf)"
     },
