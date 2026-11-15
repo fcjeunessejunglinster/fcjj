@@ -276,7 +276,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-14 h";
+const FASSUNG = "2026-11-15 a";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1610,6 +1610,14 @@ Danke, dass ihr den Kindern vorlebt, wie Fair Play auch neben dem Platz aussieht
 8. Contrôlez vos émotions
 9. Accompagner
 10. Respecter l’arbitre`);
+  z.push(`\n## Conflit d’intérêts / Interessenkonflikt / Conflict of interest (vom Verein, 15.11.2026; so erklären)
+A conflict of interest (conflit d’intérêts) arises when someone making a decision for the club has a personal, family, financial or professional interest that could influence their judgment, or could reasonably appear to do so. It can arise even when everyone is acting in good faith.
+Example: if a board member’s partner owns a company bidding to supply FCJJ’s kits, the board member should disclose the relationship and step out of the decision. The other board members can assess the offer using the same criteria as the other bids, such as price, quality and delivery.
+How a club should handle it:
+1. Declare it early. Tell the chair or secretary before the item is discussed. Ask board members to disclose relevant ongoing interests when they join and update them when circumstances change.
+2. Step out of the decision. The person with the conflict should leave the discussion and vote on that item and avoid influencing the decision beforehand.
+3. Check the quorum. Confirm that enough eligible members remain to decide under the club’s statutes. If they cannot validly decide, defer the item and follow the procedure in the statutes.
+4. Record it in the minutes. Note the interest declared, who withdrew, who took part in the decision and the reason for the outcome.`);
   for (const n of CHAT_NEWSLETTER) z.push(`\n## ${n.titel}\nPDF (DE/FR/EN): ${new URL(n.pdf, location.href).href}\n${n.text}`);
   z.push("\n## Allgemeines Wissen\n" + CHAT_WISSEN.map(t => "- " + t).join("\n"));
   z.push("\n## Weitere Termine (nur für den Chat, vom Verein)\n" + CHAT_TERMINE.filter(([bis]) => bis >= tagKey(now)).map(([, t]) => "- " + t).join("\n"));
