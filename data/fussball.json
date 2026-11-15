@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-15T12:48:24.925Z",
+ "stand": "2026-11-15T13:03:19.777Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -20423,9 +20423,9 @@
       "id": 44729,
       "n": "Jeunesse Junglinster"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 3,
+     "as": 3,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Sandweiler, synth.)"
     },
