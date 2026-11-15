@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-15T12:18:26.935Z",
+ "stand": "2026-11-15T12:48:24.925Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -20070,9 +20070,9 @@
       "id": 46415,
       "n": "ENT Red Black Red Star Luxembourg I"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 2,
+     "as": 3,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
@@ -21213,9 +21213,9 @@
       "id": 44742,
       "n": "Jeunesse Junglinster"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 1,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain rue de Mersch (Kopstal)"
     },
