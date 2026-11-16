@@ -34,6 +34,8 @@ Die **Bambinis** stehen nicht im FLF-Extranet, nur als PDF auf flf.lu. Sie werde
 
 - Reihenfolge und Namen der Reiter: `KATS` in `tools/abruf.mjs`.
 - Aussehen: oben in `index.html` (Farben unter `:root`). Nach jeder Änderung `FASSUNG` unten hochzählen.
+- Video-Highlights zu einem Spiel: in `data/videos.json` die Spiel-id (aus `data/fussball.json`) mit dem Link eintragen,
+  z. B. `"1006101": "https://drive.google.com/…"`. Der Link erscheint beim Spiel als „🎬 Highlights“.
 - App aufs Handy: Seite in Safari öffnen → Teilen → *Zum Home-Bildschirm*.
 
 Test: `node test/abruf.mjs <fussball.json mit FLF-Daten>`.
