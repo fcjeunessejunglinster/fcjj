@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-16T01:08:16.466Z",
+ "stand": "2026-11-16T11:18:21.653Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -24365,7 +24365,8 @@
     "as": null,
     "gespielt": false,
     "wett": "UEFA Nations League",
-    "runde": "C4"
+    "runde": "C4",
+    "ort": "Laugardalsvöllur"
    }
   ],
   "gruppe": {
