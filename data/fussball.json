@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-16T19:18:17.042Z",
+ "stand": "2026-11-16T20:18:27.874Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -22230,27 +22230,27 @@
     },
     {
      "pl": 3,
-     "id": 45396,
-     "n": "FC Koeppchen Wormeldange",
-     "sp": 0,
+     "id": 44755,
+     "n": "Victoria Rosport I",
+     "sp": 1,
      "s": 0,
-     "u": 0,
+     "u": 1,
      "nl": 0,
      "t": 0,
      "g": 0,
-     "pkt": 0
+     "pkt": 1
     },
     {
      "pl": 4,
-     "id": 44755,
-     "n": "Victoria Rosport I",
-     "sp": 0,
+     "id": 45396,
+     "n": "FC Koeppchen Wormeldange",
+     "sp": 1,
      "s": 0,
-     "u": 0,
+     "u": 1,
      "nl": 0,
      "t": 0,
      "g": 0,
-     "pkt": 0
+     "pkt": 1
     },
     {
      "pl": 5,
