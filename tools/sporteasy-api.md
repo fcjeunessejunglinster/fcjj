@@ -30,7 +30,8 @@ Achtung: enthält auch Anwesenheiten mit E-Mail, Telefon, Geburtsdatum der Kinde
 - `action_slug_name` (z. B. `football_goal`), `action_localized_name`
 - `time` in **Sekunden** seit Anpfiff der Halbzeit?/des Spiels (zu prüfen), `period` (1, 2)
 - `opponent`: `opponent_left` / `opponent_right` (welche Seite)
-- `profile`: Torschütze (nur bei eigener Mannschaft, sonst null) – nur Vorname weitergeben, wenn überhaupt
+- `profile`: Torschütze (nur bei eigener Mannschaft, sonst null) – **nur den Vornamen** weitergeben (vom Verein, 16.11.2026),
+  ohne das 🟡-Zeichen davor; nie Nachname, E-Mail, Telefon, Geburtsdatum
 - `is_missed`
 
 ## Anmeldung
