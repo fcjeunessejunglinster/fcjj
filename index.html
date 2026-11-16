@@ -276,7 +276,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-16 a";
+const FASSUNG = "2026-11-16 b";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -343,7 +343,7 @@ const TEXTE = {
       preinscription: ["Voranmeldung für neue Mitglieder", "Nur für Spielerinnen und Spieler mit Wohnsitz in der Gemeinde Junglinster (außer Seniors)"],
       medico: ["Sportmedizinische Untersuchung", "Contrôle médico-sportif: Infos und Formulare auf guichet.lu"],
       licence: ["Lizenzantrag für aktive Mitglieder des Vereins", "Online-Formular des Vereins – die unterschriebene Demande d'affiliation FLF (unten) beifügen"],
-      affiliation: ["Demande d'affiliation FLF", "PDF ausdrucken, ausfüllen, unterschreiben und dem Lizenzantrag beifügen"] }, heuteHeim: "Heute Heimspiel", heuteAus: "Heute Auswärtsspiel", heuteSpielt: "Heute Spieltag", route: "Route", routeLang: "Route zum Platz", video: "Highlights", videoLang: "Highlights vom Spiel ansehen",
+      affiliation: ["Demande d'affiliation FLF", "PDF ausdrucken, ausfüllen, unterschreiben und dem Lizenzantrag beifügen"] }, heuteHeim: "Heute Heimspiel", heuteAus: "Heute Auswärtsspiel", heuteSpielt: "Heute Spieltag", route: "Route", routeLang: "Route zum Platz", video: "Highlights", videoLang: "Highlights vom Spiel ansehen", seLive: "Live-Ticker auf SportEasy",
     hilfe: { titel: "📲 Hilfe: App aufs Handy holen", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Diese Seite in <b>Safari</b> öffnen (nicht in Chrome oder in WhatsApp).",
         "Unten auf das <b>Teilen-Symbol</b> tippen (Quadrat mit Pfeil nach oben ⬆️).",
@@ -415,7 +415,7 @@ const TEXTE = {
       preinscription: ["Pre-registration for new members", "Limited to players living in the commune of Junglinster (except the senior team)"],
       medico: ["Sports medical check-up", "Contrôle médico-sportif: information and forms on guichet.lu"],
       licence: ["Licence application for active club members", "The club's online form – attach the signed FLF affiliation form (below)"],
-      affiliation: ["FLF affiliation form", "Print the PDF, fill it in, sign it and attach it to the licence application"] }, heuteHeim: "Home game today", heuteAus: "Away game today", heuteSpielt: "Match day today", route: "Directions", routeLang: "Directions to the pitch", video: "Highlights", videoLang: "Watch the match highlights",
+      affiliation: ["FLF affiliation form", "Print the PDF, fill it in, sign it and attach it to the licence application"] }, heuteHeim: "Home game today", heuteAus: "Away game today", heuteSpielt: "Match day today", route: "Directions", routeLang: "Directions to the pitch", video: "Highlights", videoLang: "Watch the match highlights", seLive: "Live feed on SportEasy",
     hilfe: { titel: "📲 Help: put the app on your phone", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Open this page in <b>Safari</b> (not in Chrome or WhatsApp).",
         "Tap the <b>Share icon</b> at the bottom (square with an arrow ⬆️).",
@@ -487,7 +487,7 @@ const TEXTE = {
       preinscription: ["Pré-inscription pour nouveaux membres", "Réservée aux joueuses et joueurs habitant la commune de Junglinster (sauf équipe seniors)"],
       medico: ["Contrôle médico-sportif", "Informations et formulaires sur guichet.lu"],
       licence: ["Demande de licence pour membre actif du club", "Formulaire en ligne du club – y joindre la demande d'affiliation FLF signée (ci-dessous)"],
-      affiliation: ["Demande d'affiliation FLF", "Imprimer le PDF, le remplir, le signer et le joindre à la demande de licence"] }, heuteHeim: "Match à domicile aujourd’hui", heuteAus: "Match à l’extérieur aujourd’hui", heuteSpielt: "Jour de match", route: "Itinéraire", routeLang: "Itinéraire jusqu'au terrain", video: "Résumé vidéo", videoLang: "Voir le résumé vidéo du match",
+      affiliation: ["Demande d'affiliation FLF", "Imprimer le PDF, le remplir, le signer et le joindre à la demande de licence"] }, heuteHeim: "Match à domicile aujourd’hui", heuteAus: "Match à l’extérieur aujourd’hui", heuteSpielt: "Jour de match", route: "Itinéraire", routeLang: "Itinéraire jusqu'au terrain", video: "Résumé vidéo", videoLang: "Voir le résumé vidéo du match", seLive: "Direct sur SportEasy",
     hilfe: { titel: "📲 Aide : installer l'app sur le téléphone", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Ouvrir cette page dans <b>Safari</b> (pas dans Chrome ni dans WhatsApp).",
         "Toucher l'<b>icône Partager</b> en bas (carré avec une flèche ⬆️).",
@@ -714,6 +714,11 @@ const videoUrl = sp => VIDEOS[sp.id] || "";
 const videoLink = sp => videoUrl(sp) ? `<a class="route" href="${esc(videoUrl(sp))}" target="_blank" rel="noopener">🎬 ${T().video}</a>` : "";
 const videoKnopf = sp => videoUrl(sp) ? `<a class="knopf routeknopf" href="${esc(videoUrl(sp))}" target="_blank" rel="noopener">🎬 ${T().videoLang}</a>` : "";
 
+// SportEasy-Seite je Mannschaft: data/sporteasy.json, { "<Reiter, z. B. MIN 1>": "https://….sporteasy.net" }.
+// Am Spieltag erscheint im Heute-Kasten ein Knopf zum Live-Ticker (SportEasy hat keine öffentliche Schnittstelle).
+let SPORTEASY = {};
+const seKnopf = t => SPORTEASY[t.reiter] ? `<a class="knopf routeknopf" href="${esc(SPORTEASY[t.reiter])}" target="_blank" rel="noopener">📡 ${T().seLive}</a>` : "";
+
 function spielLi(sp, now, mitTeam) {
   const d = new Date(sp.d);
   const meta = [sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")];
@@ -744,7 +749,7 @@ function spieltagHeute(spiele, now) {
 function spieltagMorgen(spiele, now) {
   return spiele.find(s => tagKey(new Date(s.d)) === tagPlus(tagKey(now), 1) && !vorbei(s, now)) || null;
 }
-function heuteHtml(h, now, kinder) {
+function heuteHtml(h, now, kinder, extra = "") {
   const sp = h.sp, d = new Date(sp.d), rest = d - now;
   const min = !h.begonnen && !offen(sp) && rest > 0 && rest <= 15 * 60e3 ? Math.ceil(rest / 60e3) : 0;
   if (!h.begonnen && !offen(sp)) UMSCHALT = +d - (min ? 0 : 15 * 60e3);
@@ -754,7 +759,7 @@ function heuteHtml(h, now, kinder) {
   const satz = kinder ? (!h.begonnen && !min ? T().trinken : h.begonnen ? T().daumen : T().glueck) : h.begonnen ? T().ergKommt : "";
   return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
-    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
+    ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${extra}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
     ${satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : ""}</div></section>`;
 }
 function morgenHtml(sp, now) {
@@ -832,7 +837,7 @@ function teamHtml(t, now) {
   const heute = spieltagHeute(spiele, now), morgen = kinder && !heute && spieltagMorgen(spiele, now);
   // #liveticker in der Adresse zeigt den Ticker auch außerhalb des Spieltags (zum Ausprobieren).
   const tickerTest = location.hash === "#liveticker" && FUPA_WIDGET[t.reiter];
-  let html = (heute ? heuteHtml(heute, now, kinder) + (FUPA_WIDGET[t.reiter] ? fupaHtml(FUPA_WIDGET[t.reiter], heute.sp.d) : "") : tickerTest ? fupaHtml(FUPA_WIDGET[t.reiter], "") : "")
+  let html = (heute ? heuteHtml(heute, now, kinder, seKnopf(t)) + (FUPA_WIDGET[t.reiter] ? fupaHtml(FUPA_WIDGET[t.reiter], heute.sp.d) : "") : tickerTest ? fupaHtml(FUPA_WIDGET[t.reiter], "") : "")
     + (morgen ? morgenHtml(morgen, now) : "") + letztesHtml(t, spiele, now, aktuell, kinder);
   html += naechsteKarte(kommend, now, kalenderKnopf(t)) + eventsKarte(now, t.kat);
   if (aktuell) html += tabelleKarte(aktuell, t);
@@ -1842,6 +1847,7 @@ function hilfeAufbauen() {
 }
 
 async function laden() {
+  try { const v = await fetch("data/sporteasy.json?t=" + Date.now(), { cache: "no-store" }); if (v.ok) { SPORTEASY = await v.json(); merk.set("sporteasy", JSON.stringify(SPORTEASY)); } } catch (e) {}
   try { const v = await fetch("data/videos.json?t=" + Date.now(), { cache: "no-store" }); if (v.ok) { VIDEOS = await v.json(); merk.set("videos", JSON.stringify(VIDEOS)); } } catch (e) {}
   try {
     const r = await fetch("data/fussball.json?t=" + Date.now(), { cache: "no-store" });
@@ -1854,6 +1860,7 @@ async function laden() {
   render();
 }
 try { VIDEOS = JSON.parse(merk.get("videos")) || {}; } catch (e) {}
+try { SPORTEASY = JSON.parse(merk.get("sporteasy")) || {}; } catch (e) {}
 try { D = JSON.parse(merk.get("data")); if (D) render(); } catch (e) {}
 laden();
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") laden(); });
