@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-16T18:18:22.243Z",
+ "stand": "2026-11-16T19:18:17.042Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -22326,9 +22326,9 @@
       "id": 45396,
       "n": "FC Koeppchen Wormeldange"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 0,
+     "as": 0,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain Ralingen (synth.)"
     },
@@ -24381,10 +24381,9 @@
     },
     "hs": 3,
     "as": 0,
-    "gespielt": false,
+    "gespielt": true,
     "wett": "UEFA Nations League",
-    "runde": "C4",
-    "ort": "Laugardalsvöllur"
+    "runde": "C4"
    }
   ],
   "gruppe": {
@@ -24407,12 +24406,12 @@
      "id": "Estland",
      "n": "Estland",
      "sp": 6,
-     "s": 2,
-     "u": 4,
+     "s": 3,
+     "u": 3,
      "nl": 0,
-     "t": 4,
+     "t": 5,
      "g": 2,
-     "pkt": 10
+     "pkt": 12
     },
     {
      "pl": 3,
@@ -24420,11 +24419,11 @@
      "n": "Bulgarien",
      "sp": 6,
      "s": 1,
-     "u": 2,
-     "nl": 3,
+     "u": 1,
+     "nl": 4,
      "t": 4,
-     "g": 11,
-     "pkt": 5
+     "g": 12,
+     "pkt": 4
     },
     {
      "pl": 4,
