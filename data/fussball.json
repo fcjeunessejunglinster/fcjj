@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-16T11:18:21.653Z",
+ "stand": "2026-11-16T15:38:01.649Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -21506,26 +21506,26 @@
     },
     {
      "pl": 3,
-     "id": 46003,
-     "n": "Yellow Boys Weiler-la-Tour I",
-     "sp": 0,
-     "s": 0,
+     "id": 44734,
+     "n": "Jeunesse Junglinster I",
+     "sp": 1,
+     "s": 1,
      "u": 0,
      "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
+     "t": 3,
+     "g": 2,
+     "pkt": 3
     },
     {
      "pl": 4,
-     "id": 44734,
-     "n": "Jeunesse Junglinster I",
-     "sp": 0,
+     "id": 46003,
+     "n": "Yellow Boys Weiler-la-Tour I",
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 2,
+     "g": 3,
      "pkt": 0
     },
     {
@@ -21602,9 +21602,9 @@
       "id": 46003,
       "n": "Yellow Boys Weiler-la-Tour I"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 3,
+     "as": 2,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
