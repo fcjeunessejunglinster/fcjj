@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-16T15:38:01.649Z",
+ "stand": "2026-11-16T17:18:19.798Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -17061,6 +17061,24 @@
      "ort": "Terrain 2 (Mertzig, synth.)"
     },
     {
+     "id": 9030096,
+     "d": "2026-11-23T19:30:00+01:00",
+     "tag": 23,
+     "h": {
+      "id": 46725,
+      "n": "Tricolore Gasperich"
+     },
+     "a": {
+      "id": 44726,
+      "n": "Jeunesse Junglinster"
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Emile Bintner (Luxembourg, synth.)"
+    },
+    {
      "id": 9029913,
      "d": "2027-02-12T20:00:00+01:00",
      "tag": 12,
@@ -24361,8 +24379,8 @@
      "id": "Luxemburg",
      "n": "Luxemburg"
     },
-    "hs": null,
-    "as": null,
+    "hs": 0,
+    "as": 0,
     "gespielt": false,
     "wett": "UEFA Nations League",
     "runde": "C4",
@@ -24376,49 +24394,49 @@
      "pl": 1,
      "id": "Island",
      "n": "Island",
-     "sp": 5,
+     "sp": 6,
      "s": 3,
-     "u": 2,
+     "u": 3,
      "nl": 0,
      "t": 12,
      "g": 1,
-     "pkt": 11
+     "pkt": 12
     },
     {
      "pl": 2,
      "id": "Estland",
      "n": "Estland",
-     "sp": 5,
-     "s": 2,
+     "sp": 6,
+     "s": 3,
      "u": 3,
      "nl": 0,
-     "t": 3,
+     "t": 4,
      "g": 1,
-     "pkt": 9
+     "pkt": 12
     },
     {
      "pl": 3,
      "id": "Bulgarien",
      "n": "Bulgarien",
-     "sp": 5,
+     "sp": 6,
      "s": 1,
      "u": 1,
-     "nl": 3,
+     "nl": 4,
      "t": 3,
-     "g": 10,
+     "g": 11,
      "pkt": 4
     },
     {
      "pl": 4,
      "id": "Luxemburg",
      "n": "Luxemburg",
-     "sp": 5,
+     "sp": 6,
      "s": 1,
-     "u": 0,
+     "u": 1,
      "nl": 4,
      "t": 2,
      "g": 8,
-     "pkt": 3
+     "pkt": 4
     }
    ]
   }

@@ -62,4 +62,13 @@ SUMMARY:⚽ Sporting Mertzig – FCJJ Veteranen (Freundschaftsspiel)
 LOCATION:Terrain 2 (Mertzig\, synth.)
 DESCRIPTION:Amicaux 2\, Spieltag 16
 END:VEVENT
+BEGIN:VEVENT
+UID:flf-9030096-44726@fcjj-app
+DTSTAMP:20260701T000000Z
+DTSTART:20261123T183000Z
+DTEND:20261123T203000Z
+SUMMARY:⚽ Tricolore Gasperich – FCJJ Veteranen (Freundschaftsspiel)
+LOCATION:Stade Emile Bintner (Luxembourg\, synth.)
+DESCRIPTION:Amicaux 2\, Spieltag 23
+END:VEVENT
 END:VCALENDAR
