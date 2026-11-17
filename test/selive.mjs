@@ -27,7 +27,7 @@ globalThis.fetch = async (url, opt = {}) => {
     { id: 3, start_at: `${heute}T18:00:00+01:00`, name: "Training" } ] });
   if (u.endsWith("/events/last-next/")) return json({ last_event: null, next_event: null });
   if (u.endsWith("/events/1/live-stats/events/")) return json({ results: [
-    { action_slug_name: "football_goal", time: 30, period: 1, opponent: "opponent_right", is_missed: false, profile: { first_name: "Kind", last_name: "Geheim" } },
+    { action_slug_name: "football_goal", time: 30, period: 1, opponent: "opponent_right", is_missed: false, profile: { first_name: "Gegnerin", last_name: "Geheim" } },
     { action_slug_name: "football_goal", time: 12, period: 1, opponent: "opponent_left", is_missed: false, profile: { first_name: "Kind", last_name: "Geheim" } },
     { action_slug_name: "football_goal", time: 40, period: 2, opponent: "opponent_left", is_missed: true },
     { action_slug_name: "football_yellow_card", time: 5, period: 2, opponent: "opponent_left" },
@@ -49,7 +49,8 @@ assert.equal(a.j.spiele.length, 1);
 const sp = a.j.spiele[0];
 assert.deepEqual([sp.links.tore, sp.rechts.tore, sp.links.wir], [2, 1, true]);
 assert.deepEqual(sp.tore.map(t => [t.halb, t.min, t.seite]), [[1, 12, "links"], [1, 30, "rechts"], [2, 3, "links"]]);
-assert.ok(!JSON.stringify(a.j).includes("Geheim"), "keine Spielernamen");
+assert.deepEqual(sp.tore.map(t => t.name), ["Kind", null, null]);   // Vorname nur bei FCJJ-Toren (drittes Tor ohne Spielerin eingetragen)
+assert.ok(!JSON.stringify(a.j).includes("Geheim") && !JSON.stringify(a.j).includes("Gegnerin"), "kein Nachname, keine Gegnernamen");
 // falsches Passwort → Fehler, kein Absturz
 angemeldet = false;
 assert.equal((await holen("WU13", { SE_USER: "app@fcjj.lu", SE_PASSWORD: "falsch" })).s, 502);
