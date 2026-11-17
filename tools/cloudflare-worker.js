@@ -6,6 +6,8 @@
 //  - Worker anlegen, diesen Code einfügen, Deploy.
 //  - Settings → Variables and Secrets → Secret GITHUB_TOKEN (Fine-grained Token, nur Repo fcjj, Actions: Read and write).
 //  - Settings → Trigger Events → Cron Trigger „*/15 * * * *“.
+//  - Live-Stand SportEasy (Jugend): Secrets SE_USER und SE_PASSWORD (eigenes SportEasy-Konto nur für die App, Mitglied der
+//    Jugendteams, keine Admin-Rechte). Ohne die beiden Secrets bleibt der Live-Kasten in der App unsichtbar.
 //  - Chat „Frag die App“: Secret ANTHROPIC_API_KEY (console.anthropic.com), KV-Speicher als Binding PUSH (für die Tageslimits).
 // Prüfen: Adresse des Workers im Browser öffnen → zeigt Token, Chat und den nächsten Anstoß.
 
@@ -100,6 +102,89 @@ export async function chat(req, env) {
   return chatJson({ antwort, rest: z.rest });
 }
 
+// ---------------------------------------------------------------- Live-Stand von SportEasy (nur Jugend)
+// SportEasy hat keine offizielle Schnittstelle. Der Worker meldet sich mit dem App-Konto an (Secrets SE_USER, SE_PASSWORD),
+// holt die heutigen Spiele einer Jugendkategorie samt eingetragener Tore und gibt nur Mannschaften, Spielstand und
+// Torminuten weiter — keine Spielernamen, Anwesenheiten oder Nachrichten. Antworten werden 60 s zwischengespeichert.
+const SE_API = "https://api.sporteasy.net";
+const SE_TEAMS = { U7: 3783742, U9: 3783744, U11: 3783745, U13: 3783746, U15: 3783747, U17: 3783765, U19: 3783766,
+  WU11: 3783752, WU13: 3783759, WU15: 3783764 };
+const SE_KOPF = { accept: "application/json", "user-agent": "Mozilla/5.0 (FCJJ-App)",
+  origin: "https://app.sporteasy.net", referer: "https://app.sporteasy.net/" };
+const liveCors = { "access-control-allow-origin": ORIGIN, "access-control-allow-methods": "GET, OPTIONS", "access-control-max-age": "86400" };
+const liveJson = (x, status = 200, max = 0) => new Response(JSON.stringify(x), { status,
+  headers: { ...liveCors, "content-type": "application/json", "cache-control": `public, max-age=${max}` } });
+const lxTag = d => new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Luxembourg" }).format(d);
+
+function keksAus(res, alt = "") {
+  const m = new Map(alt.split("; ").filter(Boolean).map(k => [k.split("=")[0], k]));
+  const liste = res.headers.getSetCookie ? res.headers.getSetCookie() : (res.headers.get("set-cookie") || "").split(/,(?=\s*[^;,=\s]+=)/);
+  for (const c of liste) { const p = c.split(";")[0].trim(); if (p.includes("=")) m.set(p.split("=")[0], p); }
+  return [...m.values()].join("; ");
+}
+const keksWert = (keks, name) => (keks.split("; ").find(k => k.startsWith(name + "=")) || "").slice(name.length + 1);
+
+async function seAnmelden(env) {
+  const c = await fetch(SE_API + "/v2.1/account/csrf/", { headers: SE_KOPF });
+  let keks = keksAus(c), csrf = keksWert(keks, "csrftoken");
+  try { const j = await c.json(); csrf = csrf || j.csrftoken || j.csrf_token || j.token || ""; } catch (e) {}
+  const r = await fetch(SE_API + "/v2.1/account/authenticate/", { method: "POST",
+    headers: { ...SE_KOPF, "content-type": "application/json", "x-csrftoken": csrf, cookie: keks },
+    body: JSON.stringify({ username: env.SE_USER, password: env.SE_PASSWORD }) });
+  keks = keksAus(r, keks);
+  let token = "";
+  try { const j = await r.json(); token = j.token || j.access_token || j.key || ""; } catch (e) {}
+  console.log("SportEasy-Anmeldung:", r.status);
+  if (!r.ok) return null;
+  const sitzung = { keks, token };
+  SE_SITZUNG = sitzung;
+  if (env.PUSH) await env.PUSH.put("se:sitzung", JSON.stringify(sitzung), { expirationTtl: 6 * 3600 });
+  return sitzung;
+}
+let SE_SITZUNG = null;   // Anmeldung im Speicher (und in KV, damit nicht jeder Worker neu anmeldet)
+async function seHolen(env, pfad) {
+  let s = SE_SITZUNG;
+  if (!s && env.PUSH) try { s = JSON.parse(await env.PUSH.get("se:sitzung")); } catch (e) {}
+  for (let versuch = 0; versuch < 2; versuch++) {
+    if (!s) s = await seAnmelden(env);
+    if (!s) return { status: 401, j: null };
+    const h = { ...SE_KOPF, cookie: s.keks };
+    if (s.token && !s.keks.includes("sessionid=")) h.authorization = "Token " + s.token;
+    const r = await fetch(SE_API + pfad, { headers: h });
+    if (r.status === 401 || r.status === 403) { s = SE_SITZUNG = null; if (env.PUSH) await env.PUSH.delete("se:sitzung"); continue; }
+    return { status: r.status, j: r.ok ? await r.json() : null };
+  }
+  return { status: 401, j: null };
+}
+export async function live(req, env) {
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: liveCors });
+  const kat = new URL(req.url).searchParams.get("kat") || "", team = SE_TEAMS[kat];
+  if (!team) return liveJson({ fehler: "kat" }, 400);
+  if (!env.SE_USER || !env.SE_PASSWORD) return liveJson({ fehler: "aus" }, 503, 300);
+  const cache = caches.default, schluessel = new Request(`https://fcjj-live.intern/${kat}`);
+  const alt = await cache.match(schluessel);
+  if (alt) return alt;
+  const liste = await seHolen(env, `/v2.1/teams/${team}/events/`);
+  if (!liste.j) return liveJson({ fehler: "sporteasy", status: liste.status }, 502, 30);
+  const ln = await seHolen(env, `/v2.1/teams/${team}/events/last-next/`);
+  const alle = new Map();
+  for (const e of [...(liste.j.results || []), ln.j?.last_event, ln.j?.next_event]) if (e?.id) alle.set(e.id, e);
+  const heute = lxTag(new Date()), spiele = [];
+  const seite = x => ({ n: x.full_name || x.short_name || "", tore: x.score == null || x.score === "" ? null : +x.score, wir: !!x.is_current_team, heim: !!x.is_home });
+  for (const e of alle.values()) {
+    if (!e.opponent_left || !e.opponent_right || e.is_cancelled || lxTag(new Date(e.start_at)) !== heute) continue;
+    const sp = { start: e.start_at, links: seite(e.opponent_left), rechts: seite(e.opponent_right), tore: [] };
+    const ls = await seHolen(env, `/v2.1/teams/${team}/events/${e.id}/live-stats/events/`);
+    for (const a of ls.j?.results || []) if (a.action_slug_name === "football_goal" && !a.is_missed)
+      sp.tore.push({ min: a.time ?? null, halb: a.period ?? null, seite: a.opponent === "opponent_left" ? "links" : "rechts" });
+    sp.tore.sort((a, b) => (a.halb ?? 0) - (b.halb ?? 0) || (a.min ?? 0) - (b.min ?? 0));
+    spiele.push(sp);
+  }
+  const antwort = liveJson({ stand: new Date().toISOString(), spiele }, 200, 60);
+  await cache.put(schluessel, antwort.clone());
+  return antwort;
+}
+
 export default {
   async scheduled(event, env, ctx) {
     if (abrufFaellig(new Date(event.scheduledTime))) ctx.waitUntil(anstossen(env));
@@ -107,11 +192,12 @@ export default {
   // Statusseite (verrät nichts Geheimes, stößt nichts an).
   async fetch(req, env) {
     if (new URL(req.url).pathname === "/frage") return chat(req, env);
+    if (new URL(req.url).pathname === "/live") return live(req, env);
     const jetzt = new Date();
     let naechster = null;
     for (let t = Math.ceil(jetzt / 9e5) * 9e5, i = 0; i < 4 * 24 * 8; t += 9e5, i++) if (abrufFaellig(new Date(t))) { naechster = new Date(t); break; }
     const zeit = d => d.toLocaleString("de-DE", { timeZone: "Europe/Luxembourg", weekday: "short", day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" });
-    return new Response(`FCJJ-App: Abruf-Anstoß und Chat\n\nToken: ${env.GITHUB_TOKEN ? "vorhanden ✓" : "FEHLT ✗"}\nChat (ANTHROPIC_API_KEY): ${env.ANTHROPIC_API_KEY ? "vorhanden ✓" : "FEHLT ✗"}\nTageslimits (KV PUSH): ${env.PUSH ? "verbunden ✓" : "FEHLT ✗"}\nNächster Anstoß: ${naechster ? zeit(naechster) : "–"}\n`,
+    return new Response(`FCJJ-App: Abruf-Anstoß, Chat und SportEasy-Live\n\nToken: ${env.GITHUB_TOKEN ? "vorhanden ✓" : "FEHLT ✗"}\nChat (ANTHROPIC_API_KEY): ${env.ANTHROPIC_API_KEY ? "vorhanden ✓" : "FEHLT ✗"}\nTageslimits (KV PUSH): ${env.PUSH ? "verbunden ✓" : "FEHLT ✗"}\nSportEasy-Live (SE_USER, SE_PASSWORD): ${env.SE_USER && env.SE_PASSWORD ? "vorhanden ✓" : "FEHLT ✗"}\nNächster Anstoß: ${naechster ? zeit(naechster) : "–"}\n`,
       { headers: { "content-type": "text/plain; charset=utf-8" } });
   },
 };
