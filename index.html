@@ -1061,7 +1061,7 @@ function fupaExtraHtml(w) {
     + `</details>`;
 }
 const FUPA_CLUB = "https://www.fupa.net/club/fc-jeunesse-junglinster";
-// Live-Stand von SportEasy für die Jugend (über den Worker /live; nur Spielstand und Torminuten, keine Namen).
+// Live-Stand von SportEasy für die Jugend (über den Worker /live; Spielstand, Torminuten und bei FCJJ-Toren nur der Vorname).
 // Am Spieltag von 15 Min. vor bis 3 Std. nach Anstoß; der Aufbau jede Minute holt neu. Ohne Antwort bleibt der Kasten unsichtbar.
 const SE_LIVE_KATS = ["U7", "U9", "U11", "U13", "U15", "U17", "U19", "WU11", "WU13", "WU15"];
 const SE_LIVE = new Map();   // Kategorie → { zeit, spiele, laeuft }
@@ -1085,7 +1085,7 @@ function seLiveHtml(s) {
   const l = zahl(L, "links"), r = zahl(R, "rechts");
   if (l == null && r == null) return kopf + `<div class="klein">${esc(T().seLiveLeer)}</div>`;
   const kurz = x => x.wir ? "FCJJ" : x.n.split("/")[0].trim();
-  const tore = s.tore.length ? `<div class="selive-tore">${s.tore.map(t => `⚽ ${t.min != null ? t.min + "'" + (t.halb > 1 ? ` (H${t.halb})` : "") + " " : ""}${esc(kurz(t.seite === "links" ? L : R))}`).join(" · ")}</div>` : "";
+  const tore = s.tore.length ? `<div class="selive-tore">${s.tore.map(t => `⚽ ${t.min != null ? t.min + "'" + (t.halb > 1 ? ` (H${t.halb})` : "") + " " : ""}${esc((t.seite === "links" ? L : R).wir && t.name ? t.name : kurz(t.seite === "links" ? L : R))}`).join(" · ")}</div>` : "";
   return kopf + `<div class="selive-stand"><span>${esc(name(L))}</span><b>${l ?? 0} : ${r ?? 0}</b><span>${esc(name(R))}</span></div>${tore}<div class="klein">${esc(T().seLiveHinweis)}</div>`;
 }
 async function seLiveHolen(kat) {
