@@ -104,8 +104,9 @@ export async function chat(req, env) {
 
 // ---------------------------------------------------------------- Live-Stand von SportEasy (nur Jugend)
 // SportEasy hat keine offizielle Schnittstelle. Der Worker meldet sich mit dem App-Konto an (Secrets SE_USER, SE_PASSWORD),
-// holt die heutigen Spiele einer Jugendkategorie samt eingetragener Tore und gibt nur Mannschaften, Spielstand und
-// Torminuten weiter — keine Spielernamen, Anwesenheiten oder Nachrichten. Antworten werden 60 s zwischengespeichert.
+// holt die heutigen Spiele einer Jugendkategorie samt eingetragener Tore und gibt nur Mannschaften, Spielstand,
+// Torminuten und bei FCJJ-Toren den Vornamen der Torschützin/des Torschützen weiter (kein Nachname, keine Gegnernamen;
+// vom Verein, 17.11.2026) — keine Anwesenheiten oder Nachrichten. Antworten werden 60 s zwischengespeichert.
 const SE_API = "https://api.sporteasy.net";
 const SE_TEAMS = { U7: 3783742, U9: 3783744, U11: 3783745, U13: 3783746, U15: 3783747, U17: 3783765, U19: 3783766,
   WU11: 3783752, WU13: 3783759, WU15: 3783764 };
@@ -175,8 +176,11 @@ export async function live(req, env) {
     if (!e.opponent_left || !e.opponent_right || e.is_cancelled || lxTag(new Date(e.start_at)) !== heute) continue;
     const sp = { start: e.start_at, links: seite(e.opponent_left), rechts: seite(e.opponent_right), tore: [] };
     const ls = await seHolen(env, `/v2.1/teams/${team}/events/${e.id}/live-stats/events/`);
-    for (const a of ls.j?.results || []) if (a.action_slug_name === "football_goal" && !a.is_missed)
-      sp.tore.push({ min: a.time ?? null, halb: a.period ?? null, seite: a.opponent === "opponent_left" ? "links" : "rechts" });
+    for (const a of ls.j?.results || []) if (a.action_slug_name === "football_goal" && !a.is_missed) {
+      const s = a.opponent === "opponent_left" ? "links" : "rechts", wir = sp[s].wir;
+      const name = wir && a.profile?.first_name ? String(a.profile.first_name).trim().split(/\s+/)[0].slice(0, 20) : null;
+      sp.tore.push({ min: a.time ?? null, halb: a.period ?? null, seite: s, name });
+    }
     sp.tore.sort((a, b) => (a.halb ?? 0) - (b.halb ?? 0) || (a.min ?? 0) - (b.min ?? 0));
     spiele.push(sp);
   }
