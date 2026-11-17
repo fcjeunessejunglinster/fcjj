@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-17T02:58:28.622Z",
+ "stand": "2026-11-17T11:18:54.970Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -22923,6 +22923,18 @@
     },
     {
      "pl": 2,
+     "id": 45596,
+     "n": "Marisca Mersch II",
+     "sp": 1,
+     "s": 1,
+     "u": 0,
+     "nl": 0,
+     "t": 11,
+     "g": 2,
+     "pkt": 3
+    },
+    {
+     "pl": 3,
      "id": 46216,
      "n": "FC Lorentzweiler II",
      "sp": 1,
@@ -22934,31 +22946,7 @@
      "pkt": 3
     },
     {
-     "pl": 3,
-     "id": 45596,
-     "n": "Marisca Mersch II",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
      "pl": 4,
-     "id": 44636,
-     "n": "Minerva Lintgen",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 5,
      "id": 44737,
      "n": "Jeunesse Junglinster III",
      "sp": 1,
@@ -22967,6 +22955,18 @@
      "nl": 1,
      "t": 1,
      "g": 8,
+     "pkt": 0
+    },
+    {
+     "pl": 5,
+     "id": 44636,
+     "n": "Minerva Lintgen",
+     "sp": 1,
+     "s": 0,
+     "u": 0,
+     "nl": 1,
+     "t": 2,
+     "g": 11,
      "pkt": 0
     },
     {
@@ -23031,9 +23031,9 @@
       "id": 44636,
       "n": "Minerva Lintgen"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 11,
+     "as": 2,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Mersch, synth.)"
     },
