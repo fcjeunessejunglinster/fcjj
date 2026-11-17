@@ -73,6 +73,15 @@ header .innen>div:nth-child(2){min-width:0}
 .kasten .zusatz{font-size:14px;color:var(--leise)}
 .kasten .zusatz b{color:var(--text)}
 .fupa{border:2px solid var(--rot)}
+.selive{margin:10px 0;padding:10px 12px;border:2px solid var(--rot);border-radius:12px}
+.selive-kopf{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--rot);margin-bottom:6px}
+.selive-stand{display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:700}
+.selive-stand b{font-size:26px;font-weight:900;white-space:nowrap}
+.selive-stand span{flex:1;min-width:0;overflow-wrap:anywhere}
+.selive-stand span:first-child{text-align:right}
+.selive-stand span:last-child{text-align:left}
+.selive-tore{font-size:13px;margin-top:6px}
+.selive .klein{font-size:12px;color:var(--leise);margin-top:4px}
 .fupa .fupatext{padding:12px 14px 0;font-size:14px;color:var(--leise)}
 .fupa .fupatext a{color:var(--text)}
 .fupa .knopf{margin:12px 14px 4px}
@@ -343,7 +352,7 @@ const TEXTE = {
       preinscription: ["Voranmeldung für neue Mitglieder", "Nur für Spielerinnen und Spieler mit Wohnsitz in der Gemeinde Junglinster (außer Seniors)"],
       medico: ["Sportmedizinische Untersuchung", "Contrôle médico-sportif: Infos und Formulare auf guichet.lu"],
       licence: ["Lizenzantrag für aktive Mitglieder des Vereins", "Online-Formular des Vereins – die unterschriebene Demande d'affiliation FLF (unten) beifügen"],
-      affiliation: ["Demande d'affiliation FLF", "PDF ausdrucken, ausfüllen, unterschreiben und dem Lizenzantrag beifügen"] }, heuteHeim: "Heute Heimspiel", heuteAus: "Heute Auswärtsspiel", heuteSpielt: "Heute Spieltag", route: "Route", routeLang: "Route zum Platz", video: "Highlights", videoLang: "Highlights vom Spiel ansehen", seLive: "Live-Ticker auf SportEasy",
+      affiliation: ["Demande d'affiliation FLF", "PDF ausdrucken, ausfüllen, unterschreiben und dem Lizenzantrag beifügen"] }, heuteHeim: "Heute Heimspiel", heuteAus: "Heute Auswärtsspiel", heuteSpielt: "Heute Spieltag", route: "Route", routeLang: "Route zum Platz", video: "Highlights", videoLang: "Highlights vom Spiel ansehen", seLive: "Live-Ticker auf SportEasy", seLiveTitel: "Live-Stand · SportEasy", seLiveLeer: "Noch kein Spielstand auf SportEasy eingetragen.", seLiveHinweis: "Von Trainer oder Eltern in SportEasy eingetragen – ohne Gewähr.",
     hilfe: { titel: "📲 Hilfe: App aufs Handy holen", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Diese Seite in <b>Safari</b> öffnen (nicht in Chrome oder in WhatsApp).",
         "Unten auf das <b>Teilen-Symbol</b> tippen (Quadrat mit Pfeil nach oben ⬆️).",
@@ -415,7 +424,7 @@ const TEXTE = {
       preinscription: ["Pre-registration for new members", "Limited to players living in the commune of Junglinster (except the senior team)"],
       medico: ["Sports medical check-up", "Contrôle médico-sportif: information and forms on guichet.lu"],
       licence: ["Licence application for active club members", "The club's online form – attach the signed FLF affiliation form (below)"],
-      affiliation: ["FLF affiliation form", "Print the PDF, fill it in, sign it and attach it to the licence application"] }, heuteHeim: "Home game today", heuteAus: "Away game today", heuteSpielt: "Match day today", route: "Directions", routeLang: "Directions to the pitch", video: "Highlights", videoLang: "Watch the match highlights", seLive: "Live feed on SportEasy",
+      affiliation: ["FLF affiliation form", "Print the PDF, fill it in, sign it and attach it to the licence application"] }, heuteHeim: "Home game today", heuteAus: "Away game today", heuteSpielt: "Match day today", route: "Directions", routeLang: "Directions to the pitch", video: "Highlights", videoLang: "Watch the match highlights", seLive: "Live feed on SportEasy", seLiveTitel: "Live score · SportEasy", seLiveLeer: "No score entered on SportEasy yet.", seLiveHinweis: "Entered in SportEasy by coaches or parents – unofficial.",
     hilfe: { titel: "📲 Help: put the app on your phone", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Open this page in <b>Safari</b> (not in Chrome or WhatsApp).",
         "Tap the <b>Share icon</b> at the bottom (square with an arrow ⬆️).",
@@ -487,7 +496,7 @@ const TEXTE = {
       preinscription: ["Pré-inscription pour nouveaux membres", "Réservée aux joueuses et joueurs habitant la commune de Junglinster (sauf équipe seniors)"],
       medico: ["Contrôle médico-sportif", "Informations et formulaires sur guichet.lu"],
       licence: ["Demande de licence pour membre actif du club", "Formulaire en ligne du club – y joindre la demande d'affiliation FLF signée (ci-dessous)"],
-      affiliation: ["Demande d'affiliation FLF", "Imprimer le PDF, le remplir, le signer et le joindre à la demande de licence"] }, heuteHeim: "Match à domicile aujourd’hui", heuteAus: "Match à l’extérieur aujourd’hui", heuteSpielt: "Jour de match", route: "Itinéraire", routeLang: "Itinéraire jusqu'au terrain", video: "Résumé vidéo", videoLang: "Voir le résumé vidéo du match", seLive: "Direct sur SportEasy",
+      affiliation: ["Demande d'affiliation FLF", "Imprimer le PDF, le remplir, le signer et le joindre à la demande de licence"] }, heuteHeim: "Match à domicile aujourd’hui", heuteAus: "Match à l’extérieur aujourd’hui", heuteSpielt: "Jour de match", route: "Itinéraire", routeLang: "Itinéraire jusqu'au terrain", video: "Résumé vidéo", videoLang: "Voir le résumé vidéo du match", seLive: "Direct sur SportEasy", seLiveTitel: "Score en direct · SportEasy", seLiveLeer: "Pas encore de score saisi sur SportEasy.", seLiveHinweis: "Saisi dans SportEasy par l’entraîneur ou les parents – sans garantie.",
     hilfe: { titel: "📲 Aide : installer l'app sur le téléphone", iphone: "iPhone / iPad", android: "Android",
       iosSchritte: ["Ouvrir cette page dans <b>Safari</b> (pas dans Chrome ni dans WhatsApp).",
         "Toucher l'<b>icône Partager</b> en bas (carré avec une flèche ⬆️).",
@@ -837,7 +846,7 @@ function teamHtml(t, now) {
   const heute = spieltagHeute(spiele, now), morgen = kinder && !heute && spieltagMorgen(spiele, now);
   // #liveticker in der Adresse zeigt den Ticker auch außerhalb des Spieltags (zum Ausprobieren).
   const tickerTest = location.hash === "#liveticker" && FUPA_WIDGET[t.reiter];
-  let html = (heute ? heuteHtml(heute, now, kinder, seKnopf(t)) + (FUPA_WIDGET[t.reiter] ? fupaHtml(FUPA_WIDGET[t.reiter], heute.sp.d) : "") : tickerTest ? fupaHtml(FUPA_WIDGET[t.reiter], "") : "")
+  let html = (heute ? heuteHtml(heute, now, kinder, seKnopf(t) + seLivePlatz(t, heute.sp)) + (FUPA_WIDGET[t.reiter] ? fupaHtml(FUPA_WIDGET[t.reiter], heute.sp.d) : "") : tickerTest ? fupaHtml(FUPA_WIDGET[t.reiter], "") : "")
     + (morgen ? morgenHtml(morgen, now) : "") + letztesHtml(t, spiele, now, aktuell, kinder);
   html += naechsteKarte(kommend, now, kalenderKnopf(t)) + eventsKarte(now, t.kat);
   if (aktuell) html += tabelleKarte(aktuell, t);
@@ -1052,6 +1061,50 @@ function fupaExtraHtml(w) {
     + `</details>`;
 }
 const FUPA_CLUB = "https://www.fupa.net/club/fc-jeunesse-junglinster";
+// Live-Stand von SportEasy für die Jugend (über den Worker /live; nur Spielstand und Torminuten, keine Namen).
+// Am Spieltag von 15 Min. vor bis 3 Std. nach Anstoß; der Aufbau jede Minute holt neu. Ohne Antwort bleibt der Kasten unsichtbar.
+const SE_LIVE_KATS = ["U7", "U9", "U11", "U13", "U15", "U17", "U19", "WU11", "WU13", "WU15"];
+const SE_LIVE = new Map();   // Kategorie → { zeit, spiele, laeuft }
+function seLivePlatz(t, sp) {
+  const a = Date.parse(sp.d), jetzt = Date.now();
+  if (!CHAT_URL || !SE_LIVE_KATS.includes(t.kat) || isNaN(a) || jetzt < a - 15 * 60e3 || jetzt > a + 180 * 60e3) return "";
+  return `<div class="selive" hidden data-kat="${esc(t.kat)}" data-anstoss="${esc(sp.d)}" data-gegner="${esc(gegner(sp).n)}"></div>`;
+}
+function seLiveSpiel(spiele, el) {
+  const a = Date.parse(el.dataset.anstoss), g = el.dataset.gegner.toLowerCase();
+  const woerter = n => n.toLowerCase().split(/[^a-z0-9à-ÿ]+/).filter(w => w.length > 3 && !["jeunesse", "junglinster"].includes(w));
+  const passt = s => woerter((s.links.wir ? s.rechts : s.links).n).some(w => g.includes(w));
+  const nah = spiele.filter(s => Math.abs(Date.parse(s.start) - a) <= 90 * 60e3);
+  return nah.find(passt) || (nah.length === 1 && spiele.length === 1 ? nah[0] : null);
+}
+function seLiveHtml(s) {
+  const kopf = `<div class="selive-kopf">📡 ${esc(T().seLiveTitel)}</div>`;
+  if (!s) return kopf + `<div class="klein">${esc(T().seLiveLeer)}</div>`;
+  const L = s.links, R = s.rechts, name = x => x.wir ? "FCJJ" : x.n;
+  const zahl = (x, seite) => x.tore != null ? x.tore : s.tore.length ? s.tore.filter(t => t.seite === seite).length : null;
+  const l = zahl(L, "links"), r = zahl(R, "rechts");
+  if (l == null && r == null) return kopf + `<div class="klein">${esc(T().seLiveLeer)}</div>`;
+  const kurz = x => x.wir ? "FCJJ" : x.n.split("/")[0].trim();
+  const tore = s.tore.length ? `<div class="selive-tore">${s.tore.map(t => `⚽ ${t.min != null ? t.min + "'" + (t.halb > 1 ? ` (H${t.halb})` : "") + " " : ""}${esc(kurz(t.seite === "links" ? L : R))}`).join(" · ")}</div>` : "";
+  return kopf + `<div class="selive-stand"><span>${esc(name(L))}</span><b>${l ?? 0} : ${r ?? 0}</b><span>${esc(name(R))}</span></div>${tore}<div class="klein">${esc(T().seLiveHinweis)}</div>`;
+}
+async function seLiveHolen(kat) {
+  const x = SE_LIVE.get(kat);
+  if (x && (x.laeuft || Date.now() - x.zeit < 55e3)) return;
+  SE_LIVE.set(kat, { ...(x || { zeit: 0, spiele: null }), laeuft: true });
+  let spiele = null;
+  try { const r = await fetch(CHAT_URL + "/live?kat=" + encodeURIComponent(kat)); if (r.ok) spiele = (await r.json()).spiele || []; } catch (e) {}
+  SE_LIVE.set(kat, { zeit: Date.now(), spiele, laeuft: false });
+  seLiveEinsetzen(false);
+}
+function seLiveEinsetzen(holen = true) {
+  for (const el of document.querySelectorAll(".selive[data-kat]")) {
+    const x = SE_LIVE.get(el.dataset.kat);
+    if (holen) seLiveHolen(el.dataset.kat);
+    if (!x || x.spiele == null) { el.hidden = true; continue; }
+    el.innerHTML = seLiveHtml(seLiveSpiel(x.spiele, el)); el.hidden = false;
+  }
+}
 // Das Widget lädt erst nach Zustimmung (das Handy spricht dann direkt mit FuPa). Die App merkt sich „ja“.
 const fupaOk = () => merk.get("fupa") === "ja";
 // Liveticker aufklappbar (vom Verein, 13.11.2026): rund ums Spiel (15 Min. vorher bis 3 Std. nach Anstoß) von selbst offen,
@@ -1755,6 +1808,7 @@ function render() {
   if (L) ligaHolenFaellig(AKTIV, now);
   for (const s of document.querySelectorAll("#inhalt details > summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
   fupaEinsetzen();
+  seLiveEinsetzen();
   const stand = new Date(D.stand);
   document.getElementById("teilen").textContent = T().teilen;
   document.getElementById("shop").textContent = T().shop;
