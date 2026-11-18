@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-18T11:18:15.076Z",
+ "stand": "2026-11-18T17:18:20.776Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -23665,7 +23665,7 @@
        "Alisontia Steinsel I",
        "FC Mamer 32 I"
       ],
-      "zeitSicher": true
+      "zeitSicher": false
      }
     },
     {
@@ -23696,7 +23696,7 @@
     },
     {
      "id": 9202611281,
-     "d": "2026-11-28T10:30:00+01:00",
+     "d": "2026-11-28T11:00:00+01:00",
      "tag": 8,
      "h": {
       "id": 0,
@@ -23717,7 +23717,7 @@
        "US Hostert I",
        "US Sandweiler I"
       ],
-      "zeitSicher": false
+      "zeitSicher": true
      }
     }
    ],
@@ -23862,7 +23862,7 @@
     },
     {
      "id": 9202611142,
-     "d": "2026-11-14T11:00:00+01:00",
+     "d": "2026-11-14T10:30:00+01:00",
      "tag": 6,
      "h": {
       "id": 0,
@@ -23883,7 +23883,7 @@
        "Daring Echternach I",
        "FC Munsbach"
       ],
-      "zeitSicher": true
+      "zeitSicher": false
      }
     },
     {
@@ -23935,7 +23935,7 @@
        "Daring Echternach I",
        "ENT Biwer/Berbourg I"
       ],
-      "zeitSicher": false
+      "zeitSicher": true
      }
     }
    ],
