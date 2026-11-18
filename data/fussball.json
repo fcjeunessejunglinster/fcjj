@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-18T02:29:24.719Z",
+ "stand": "2026-11-18T11:18:15.076Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -10317,7 +10317,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain au Parc (Mertert, synth.)"
     },
@@ -10975,7 +10975,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Beggen, synth.)"
     },
@@ -11651,7 +11651,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Henri Bausch (Steinsel, synth.)"
     },
@@ -12895,7 +12895,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Berbourg, synth.)"
     },
@@ -20333,6 +20333,18 @@
     },
     {
      "pl": 2,
+     "id": 46241,
+     "n": "Avenir Beggen",
+     "sp": 1,
+     "s": 1,
+     "u": 0,
+     "nl": 0,
+     "t": 15,
+     "g": 0,
+     "pkt": 3
+    },
+    {
+     "pl": 3,
      "id": 44729,
      "n": "Jeunesse Junglinster",
      "sp": 1,
@@ -20344,7 +20356,7 @@
      "pkt": 1
     },
     {
-     "pl": 3,
+     "pl": 4,
      "id": 45148,
      "n": "US Sandweiler",
      "sp": 1,
@@ -20356,27 +20368,15 @@
      "pkt": 1
     },
     {
-     "pl": 4,
-     "id": 46241,
-     "n": "Avenir Beggen",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
      "pl": 5,
      "id": 45771,
      "n": "FC Blo-Wäiss Izeg",
-     "sp": 0,
+     "sp": 1,
      "s": 0,
      "u": 0,
-     "nl": 0,
+     "nl": 1,
      "t": 0,
-     "g": 0,
+     "g": 15,
      "pkt": 0
     },
     {
@@ -20405,9 +20405,9 @@
       "id": 45771,
       "n": "FC Blo-Wäiss Izeg"
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 15,
+     "as": 0,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Beggen, synth.)"
     },
