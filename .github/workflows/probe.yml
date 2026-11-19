@@ -7,16 +7,9 @@ jobs:
     steps:
       - run: |
           mkdir out; cd out
-          curl -sS -m 60 https://extranet.flf.lu/app/main.b8d3c03ed8622c48c305.js -o main.js || true
-          grep -o '.\{120\}[Ll]ogo.\{160\}' main.js | head -60 > logo-ctx.txt || true
-          grep -o '[a-zA-Z]*\(Logo\|logo\|Image\|image\|Picture\|picture\)[a-zA-Z]*' main.js | sort | uniq -c | sort -rn | head -60 > logo-words.txt || true
-          grep -o '"[^"]*/api/[^"]*"' main.js | sort -u > api.txt || true
-          q() { curl -sS -m 30 -X POST https://extranet.flf.lu/api/graphql -H 'content-type: application/json' -d "$2" -o "$1.json" -w "%{http_code}\n" >> codes.txt 2>&1 || true; }
-          q intro '{"query":"{__type(name:\"Team\"){fields{name}}}"}'
-          q g1 '{"query":"{ clubs { id logo } }"}'
-          q g2 '{"query":"query($c: MatchCriteria){ matches(criteria:$c){ homeTeam{ id logo } } }","variables":{"c":{"teamId":44720}}}'
-          q g3 '{"query":"{ club(id: 1) { id } }"}'
-          ls -la
+          for id in 500062 1 99999999; do curl -sS -m 30 -D h$id.txt -o l$id.bin "https://extranet.flf.lu/api/export/clublogo/$id"; file l$id.bin >> info.txt; done
+          curl -sS -m 30 -X POST https://extranet.flf.lu/api/graphql -H 'content-type: application/json' -d '{"query":"query($c: MatchCriteria){ rankings(criteria:$c){ team{ id name clubId1 } } }","variables":{"c":{"teamId":44720}}}' -o r.json
+          ls -la >> info.txt
       - run: |
-          cd out && rm -f main.js && git init -q && git checkout -q -b probe-daten && git add . && git -c user.name=probe -c user.email=p@x commit -qm probe
+          cd out && git init -q && git checkout -q -b probe-daten && git add . && git -c user.name=probe -c user.email=p@x commit -qm probe
           git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" probe-daten
