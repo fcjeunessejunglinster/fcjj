@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-19T08:48:36.188Z",
+ "stand": "2026-11-19T11:18:43.405Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -5488,7 +5488,8 @@
      "hs": null,
      "as": null,
      "gespielt": false,
-     "forfait": false
+     "forfait": false,
+     "ort": "Terrain Breil (Echternach, synth.)"
     },
     {
      "id": 1012101,
@@ -22260,7 +22261,7 @@
     },
     {
      "id": 6231043,
-     "d": "2026-12-06T00:15:00+01:00",
+     "d": "2026-12-06T11:00:00+01:00",
      "tag": 4,
      "h": {
       "id": 45973,
@@ -22280,7 +22281,7 @@
     },
     {
      "id": 6231042,
-     "d": "2026-12-06T00:15:00+01:00",
+     "d": "2026-12-06T11:00:00+01:00",
      "tag": 4,
      "h": {
       "id": 46426,
@@ -22663,7 +22664,7 @@
     },
     {
      "id": 6253041,
-     "d": "2026-12-06T01:30:00+01:00",
+     "d": "2026-12-06T11:00:00+01:00",
      "tag": 4,
      "h": {
       "id": 46241,
@@ -23077,26 +23078,6 @@
      "ort": "Terrain 2 (Lorentzweiler, synth.)"
     },
     {
-     "id": 3276054,
-     "d": "2026-12-05T00:00:01+01:00",
-     "tag": 5,
-     "h": {
-      "id": 46357,
-      "n": "ENT Biwer/Berbourg/UMW",
-      "c": 500013
-     },
-     "a": {
-      "id": 45920,
-      "n": "FC Wiltz 71",
-      "c": 500124
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Berbourg, synth.)"
-    },
-    {
      "id": 3276053,
      "d": "2026-12-05T00:00:01+01:00",
      "tag": 5,
@@ -23135,6 +23116,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 3276054,
+     "d": "2026-12-05T16:30:00+01:00",
+     "tag": 5,
+     "h": {
+      "id": 46357,
+      "n": "ENT Biwer/Berbourg/UMW",
+      "c": 500013
+     },
+     "a": {
+      "id": 45920,
+      "n": "FC Wiltz 71",
+      "c": 500124
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Berbourg, synth.)"
     },
     {
      "id": 3276061,
@@ -23540,26 +23541,6 @@
      "ort": "Terrain 2 (Hobscheid)"
     },
     {
-     "id": 3300043,
-     "d": "2026-12-06T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 46231,
-      "n": "Avenir Beggen",
-      "c": 500005
-     },
-     "a": {
-      "id": 44742,
-      "n": "Jeunesse Junglinster",
-      "c": 500062
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Beggen, synth.)"
-    },
-    {
      "id": 3300042,
      "d": "2026-12-06T00:00:01+01:00",
      "tag": 4,
@@ -23578,6 +23559,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Mamer, synth.)"
+    },
+    {
+     "id": 3300043,
+     "d": "2026-12-06T14:00:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 46231,
+      "n": "Avenir Beggen",
+      "c": 500005
+     },
+     "a": {
+      "id": 44742,
+      "n": "Jeunesse Junglinster",
+      "c": 500062
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Beggen, synth.)"
     },
     {
      "id": 3300051,
@@ -24688,26 +24689,6 @@
      "forfait": false
     },
     {
-     "id": 6345043,
-     "d": "2026-12-05T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 46353,
-      "n": "ENT Biwer/Berbourg/UMW I",
-      "c": 500013
-     },
-     "a": {
-      "id": 45396,
-      "n": "FC Koeppchen Wormeldange",
-      "c": 1003703
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Streetwheels Arena (Berbourg)"
-    },
-    {
      "id": 6345041,
      "d": "2026-12-05T00:00:01+01:00",
      "tag": 4,
@@ -24726,6 +24707,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain um Gréin (Remich, synth.)"
+    },
+    {
+     "id": 6345043,
+     "d": "2026-12-05T14:30:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 46353,
+      "n": "ENT Biwer/Berbourg/UMW I",
+      "c": 500013
+     },
+     "a": {
+      "id": 45396,
+      "n": "FC Koeppchen Wormeldange",
+      "c": 1003703
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Berbourg, synth.)"
     },
     {
      "id": 6345052,
