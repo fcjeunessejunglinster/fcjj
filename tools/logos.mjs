@@ -1,7 +1,7 @@
 // Vereinslogos von der FLF → logos/<Vereinsnummer>.<svg|png|jpg> und data/logos.json ({nummer: datei|null}).
 // Quelle: https://extranet.flf.lu/api/export/clublogo/<Vereinsnummer> (dieselbe Adresse nutzt das FLF-Extranet).
 // Läuft im GitHub-Abruf nach tools/abruf.mjs. Neue Vereine sofort, bekannte höchstens alle 14 Tage neu
-// (pro Lauf höchstens 40 Abrufe). Ohne Logo liefert die FLF einen grauen Kreis: das gilt als „kein Logo“ (null).
+// (Auffrischen höchstens 40 pro Lauf). Ohne Logo liefert die FLF einen grauen Kreis: das gilt als „kein Logo“ (null).
 import { readFileSync, writeFileSync, existsSync, mkdirSync, unlinkSync } from "node:fs";
 
 const BASIS = "https://extranet.flf.lu/api/export/clublogo/";
@@ -25,7 +25,8 @@ async function main() {
   mkdirSync(DIR, { recursive: true });
   const jetzt = Date.now();
   const offen = vereine(d).filter(id => !(id in neu.logos) || jetzt - (neu.geholt[id] || 0) > ALT)
-    .sort((a, b) => (a in neu.logos) - (b in neu.logos) || (neu.geholt[a] || 0) - (neu.geholt[b] || 0)).slice(0, MAX);
+    .sort((a, b) => (a in neu.logos) - (b in neu.logos) || (neu.geholt[a] || 0) - (neu.geholt[b] || 0))
+    .filter((id, i) => !(id in neu.logos) || i < MAX);   // neue Vereine alle, Auffrischen höchstens MAX pro Lauf
   let n = 0;
   for (const id of offen) {
     try {
