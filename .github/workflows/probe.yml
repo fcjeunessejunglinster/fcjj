@@ -7,12 +7,16 @@ jobs:
     steps:
       - run: |
           mkdir out; cd out
-          q() { curl -sS -m 30 -X POST https://extranet.flf.lu/api/graphql -H 'content-type: application/json' -d "$2" > "$1.json" || true; }
-          q types '{"query":"{__schema{types{name kind fields{name type{name kind ofType{name kind}}}}}}"}'
-          q queries '{"query":"{__schema{queryType{fields{name args{name type{name kind ofType{name}}} type{name kind ofType{name}}}}}}"}'
-          curl -sS -m 30 https://extranet.flf.lu/match -o match.html || true
-          grep -o '[^"'"'"' ]*\(logo\|Logo\|emblem\|crest\|/images\?/\|\.png\|\.svg\)[^"'"'"' ]*' match.html | sort -u | head -50 > assets.txt || true
+          curl -sS -m 60 https://extranet.flf.lu/app/main.b8d3c03ed8622c48c305.js -o main.js || true
+          grep -o '.\{120\}[Ll]ogo.\{160\}' main.js | head -60 > logo-ctx.txt || true
+          grep -o '[a-zA-Z]*\(Logo\|logo\|Image\|image\|Picture\|picture\)[a-zA-Z]*' main.js | sort | uniq -c | sort -rn | head -60 > logo-words.txt || true
+          grep -o '"[^"]*/api/[^"]*"' main.js | sort -u > api.txt || true
+          q() { curl -sS -m 30 -X POST https://extranet.flf.lu/api/graphql -H 'content-type: application/json' -d "$2" -o "$1.json" -w "%{http_code}\n" >> codes.txt 2>&1 || true; }
+          q intro '{"query":"{__type(name:\"Team\"){fields{name}}}"}'
+          q g1 '{"query":"{ clubs { id logo } }"}'
+          q g2 '{"query":"query($c: MatchCriteria){ matches(criteria:$c){ homeTeam{ id logo } } }","variables":{"c":{"teamId":44720}}}'
+          q g3 '{"query":"{ club(id: 1) { id } }"}'
           ls -la
       - run: |
-          cd out && git init -q && git checkout -q -b probe-daten && git add . && git -c user.name=probe -c user.email=p@x commit -qm probe
+          cd out && rm -f main.js && git init -q && git checkout -q -b probe-daten && git add . && git -c user.name=probe -c user.email=p@x commit -qm probe
           git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" probe-daten
