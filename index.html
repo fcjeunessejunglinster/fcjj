@@ -190,8 +190,9 @@ ul.spiele li.sp{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1
 li.sp .tm{font-size:15px;line-height:1.2;overflow-wrap:anywhere}
 li.sp .tm.h{text-align:right}
 li.sp .tm.wir{font-weight:800}
-img.vlogo{display:block;width:28px;height:28px;object-fit:contain;margin:0 0 4px}
-li.sp .tm.h img.vlogo{margin-left:auto}
+img.vlogo{width:22px;height:22px;object-fit:contain;flex:none}
+li.sp .tnm{display:flex;align-items:center;gap:6px}
+li.sp .tm.h .tnm{justify-content:flex-end;text-align:right}
 span.tn{display:flex;align-items:center;gap:8px}
 span.tn img.vlogo{width:20px;height:20px;margin:0;flex:none}
 .form{display:flex;gap:3px;margin-top:5px;font-style:normal;background:none;border:0;padding:2px 0;cursor:pointer;font:inherit;color:inherit}
@@ -289,7 +290,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-19 a";
+const FASSUNG = "2026-11-19 b";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -583,8 +584,8 @@ function logoHtml(t) {
 function zeile(sp, now, { wirH, wirA, erg, w, unten, attr = "", m, form }) {
   const fh = form ? formHtml(sp.h.id, sp.d, sp.id) : "", fa = form ? formHtml(sp.a.id, sp.d, sp.id) : "";
   const offen = form && [sp.h, sp.a].find(t => FORM_OFFEN === `${sp.id}:${t.id}`);
-  return `<li class="sp${attr ? " klick" : ""}"${attr}><span class="tm h${wirH ? " wir" : ""}">${logoHtml(sp.h)}${esc(sp.h.n)}${fh}</span>${m ?? mitte(sp, now, erg, w)}
-    <span class="tm${wirA ? " wir" : ""}">${logoHtml(sp.a)}${esc(sp.a.n)}${fa}</span>${offen ? formTextHtml(offen, sp.d) : ""}<span class="unten">${unten}</span></li>`;
+  return `<li class="sp${attr ? " klick" : ""}"${attr}><span class="tm h${wirH ? " wir" : ""}"><span class="tnm">${esc(sp.h.n)}${logoHtml(sp.h)}</span>${fh}</span>${m ?? mitte(sp, now, erg, w)}
+    <span class="tm${wirA ? " wir" : ""}"><span class="tnm">${logoHtml(sp.a)}${esc(sp.a.n)}</span>${fa}</span>${offen ? formTextHtml(offen, sp.d) : ""}<span class="unten">${unten}</span></li>`;
 }
 // Form vor einem Spiel: Ergebnisse der letzten 5 Ligaspiele der Mannschaft (Pokal und Freundschaftsspiele zählen nicht),
 // das neueste rechts – wie in der Koeppchen-App. Nur bei Seniors und Réserves (vom Verein, 13.11.2026).
