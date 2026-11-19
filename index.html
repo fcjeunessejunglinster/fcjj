@@ -25,6 +25,20 @@
   --bg:#121212; --karte:#1c1c1c; --text:#eee; --leise:#a2a29c; --linie:#2e2e2e;
   --schwarz:#eee; --rotHell:#3a1416; --sieg:#4cb873; --remis:#cdb85a; --nl:#ef6b62;
   --kopf:#000; color-scheme:dark}}
+/* Geheimer „Stealth mode“: 5× auf das Logo oben links tippen (an/aus; vom Verein, 19.11.2026). Neon-Nacht-Look, eigene Gestaltung. */
+html.stealth{--bg:#0d0716;--karte:#1a0f2b;--text:#f6eeff;--leise:#b9a6d6;--linie:#3a2558;--schwarz:#ff2e88;--rot:#ff2e88;--rotHell:#3b0f2e;
+  --grau:#5b4680;--sieg:#2de2e6;--remis:#ffb347;--nl:#ff5470;--kopf:#120822;--kopfText:#fff;color-scheme:dark}
+html.stealth body{background:radial-gradient(120% 60% at 50% 0%,#3a0d4d 0%,#0d0716 60%) fixed,#0d0716}
+html.stealth header{background:linear-gradient(180deg,#ff8a3d 0%,#ff3d7f 45%,#7b2ff7 100%);border-bottom:3px solid #2de2e6;box-shadow:0 4px 30px #ff2e8866}
+html.stealth header h1{font-style:italic;font-weight:900;letter-spacing:.03em;text-shadow:0 0 10px #ff2e88,0 2px 0 #3a0d4d}
+html.stealth header img{box-shadow:0 0 0 2px #2de2e6,0 0 18px #2de2e6}
+html.stealth .karte{border-color:#4a2a70;box-shadow:0 0 0 1px #ff2e8822,0 6px 24px #00000066}
+html.stealth .karte h2,html.stealth details.karte>summary{color:#2de2e6;text-shadow:0 0 8px #2de2e655}
+html.stealth button[aria-pressed="true"]{background:linear-gradient(135deg,#ff2e88,#7b2ff7)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 0 14px #ff2e88aa}
+html.stealth .knopf{color:#fff}
+.stealthinfo{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 80px);transform:translateX(-50%);z-index:99;padding:10px 18px;border-radius:999px;
+  background:#120822;color:#fff;font-weight:800;font-style:italic;letter-spacing:.04em;border:2px solid #2de2e6;box-shadow:0 0 22px #ff2e88;animation:stealthein 2.2s ease forwards;pointer-events:none;white-space:nowrap}
+@keyframes stealthein{0%{opacity:0;transform:translate(-50%,-10px)}12%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;touch-action:manipulation}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -192,6 +206,8 @@ li.sp .tm.h{text-align:right}
 li.sp .tm.wir{font-weight:800}
 img.vlogo{width:22px;height:22px;object-fit:contain;flex:none}
 li.sp .tnm{display:flex;align-items:center;gap:6px}
+@media (prefers-color-scheme:dark){img.vlogo{background:#fff;border-radius:6px;padding:2px}}
+html.stealth img.vlogo{background:#fff;border-radius:6px;padding:2px}
 li.sp .tm.h .tnm{justify-content:flex-end;text-align:right}
 span.tn{display:flex;align-items:center;gap:8px}
 span.tn img.vlogo{width:20px;height:20px;margin:0;flex:none}
@@ -290,7 +306,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-19 b";
+const FASSUNG = "2026-11-19 c";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1941,6 +1957,23 @@ async function laden() {
 }
 try { VIDEOS = JSON.parse(merk.get("videos")) || {}; } catch (e) {}
 try { LOGOS = JSON.parse(merk.get("logos")) || {}; } catch (e) {}
+// Stealth mode: 5× schnell auf das Logo oben links tippen schaltet den Neon-Look an oder aus (gespeichert).
+{
+  const an = x => { document.documentElement.classList.toggle("stealth", x); document.querySelector('meta[name="theme-color"]')?.setAttribute("content", x ? "#ff3d7f" : "#111111"); };
+  an(merk.get("stealth") === "1");
+  let tipps = [];
+  document.querySelector("header img")?.addEventListener("click", () => {
+    const jetzt = Date.now(); tipps = [...tipps.filter(t => jetzt - t < 2500), jetzt];
+    if (tipps.length < 5) return;
+    tipps = [];
+    const x = !document.documentElement.classList.contains("stealth");
+    an(x); merk.set("stealth", x ? "1" : "0");
+    navigator.vibrate?.(x ? [40, 40, 80] : 40);
+    const d = document.createElement("div"); d.className = "stealthinfo"; d.textContent = x ? "🌴 STEALTH MODE ON" : "STEALTH MODE OFF";
+    document.body.append(d); setTimeout(() => d.remove(), 2300);
+  });
+}
+
 try { SPORTEASY = JSON.parse(merk.get("sporteasy")) || {}; } catch (e) {}
 try { D = JSON.parse(merk.get("data")); if (D) render(); } catch (e) {}
 laden();
