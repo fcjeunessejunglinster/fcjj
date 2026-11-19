@@ -90,8 +90,9 @@ export function spiel(m) {
   const ohne = m.division?.showResult === false;
   return {
     id: x.id, d: x.matchDate, tag: x.gameday,
-    h: { id: m.homeTeam.id, n: m.homeTeam.name },
-    a: { id: m.awayTeam.id, n: m.awayTeam.name },
+    // c = Vereinsnummer bei der FLF (für das Vereinslogo, tools/logos.mjs)
+    h: { id: m.homeTeam.id, n: m.homeTeam.name, ...(m.homeTeam.clubId1 ? { c: m.homeTeam.clubId1 } : {}) },
+    a: { id: m.awayTeam.id, n: m.awayTeam.name, ...(m.awayTeam.clubId1 ? { c: m.awayTeam.clubId1 } : {}) },
     hs: ohne ? null : final ? x.finalHomeScore : x.homeScore,
     as: ohne ? null : final ? x.finalAwayScore : x.awayScore,
     gespielt: !!x.isPlayed || (final && !x.isForfait),

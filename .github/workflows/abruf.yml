@@ -43,12 +43,15 @@ jobs:
       # Bundesliga-Kader (API-Football), höchstens alle 6 Tage. Fehler stören den FLF-Abruf nicht.
       # Fußball-News (Schlagzeilen aus RSS), Fehler stören den Abruf nicht
       - run: node tools/news.mjs || true
+      # Vereinslogos von der FLF (neue sofort, sonst alle 14 Tage), Fehler stören den Abruf nicht
+      - run: node tools/logos.mjs || true
       - run: node tools/kader.mjs || true
         env:
           APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
       - name: Speichern, falls sich etwas geändert hat
         run: |
-          git add -A data kalender
+          mkdir -p logos
+          git add -A data kalender logos
           if git diff --cached --quiet; then echo "keine Änderung"; exit 0; fi
           git config user.name "flf-abruf"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
