@@ -1,0 +1,18 @@
+name: probe
+on: { push: { paths: [".github/workflows/probe.yml"] }, workflow_dispatch: {} }
+permissions: { contents: write }
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir out; cd out
+          q() { curl -sS -m 30 -X POST https://extranet.flf.lu/api/graphql -H 'content-type: application/json' -d "$2" > "$1.json" || true; }
+          q types '{"query":"{__schema{types{name kind fields{name type{name kind ofType{name kind}}}}}}"}'
+          q queries '{"query":"{__schema{queryType{fields{name args{name type{name kind ofType{name}}} type{name kind ofType{name}}}}}}"}'
+          curl -sS -m 30 https://extranet.flf.lu/match -o match.html || true
+          grep -o '[^"'"'"' ]*\(logo\|Logo\|emblem\|crest\|/images\?/\|\.png\|\.svg\)[^"'"'"' ]*' match.html | sort -u | head -50 > assets.txt || true
+          ls -la
+      - run: |
+          cd out && git init -q && git checkout -q -b probe-daten && git add . && git -c user.name=probe -c user.email=p@x commit -qm probe
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" probe-daten
