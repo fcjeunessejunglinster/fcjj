@@ -111,10 +111,10 @@ li.event .evd{font-size:14px;color:var(--text);font-variant-numeric:tabular-nums
 .events{border:2px solid var(--rot)}
 .raster button.blknopf{padding:5px 4px;position:relative}
 .raster button.blknopf[aria-pressed="true"]{background:var(--karte);color:var(--text);border:2px solid var(--schwarz)}
-ul.spiele li.buvzeile{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px}
+ul.spiele li.buvzeile{display:block;padding:10px 14px}
 .buvzeile .klein{color:var(--leise);margin:2px 0 4px}.buvst{font-size:.85rem;font-weight:700}.buvst.rot{color:var(--rot)}.buvst.orange{color:#c76a00}.buvst.gruen{color:var(--sieg)}
-.buvzeile>div:first-child{flex:1;min-width:0}.buvaktion{flex:none;text-align:right;max-width:45%}.buvaktion .knopf{padding:5px 10px;width:auto;font-size:.8rem;border-radius:8px;min-height:0}.buvich{display:block;font-size:.85rem;font-weight:700;color:var(--sieg)}
-.buvab{background:none;border:1px solid var(--linie);border-radius:8px;padding:4px 9px;color:var(--text);font:inherit;font-size:.78rem;cursor:pointer;margin-top:4px}
+.buvaktion{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}.buvaktion .knopf{padding:5px 10px;width:auto;font-size:.8rem;border-radius:8px;min-height:0}.buvich{font-size:.85rem;font-weight:700;color:var(--sieg);margin-right:6px}
+.buvab{background:none;border:1px solid var(--linie);border-radius:8px;padding:4px 9px;color:var(--text);font:inherit;font-size:.78rem;cursor:pointer}
 .buvdlg{border:0;border-radius:16px;padding:18px;width:min(420px,calc(100vw - 32px));background:var(--karte);color:var(--text)}
 .buvdlg::backdrop{background:#0008}.buvdlg h3{margin:0 0 8px}.buvdlg label{display:block;font-size:.9rem;font-weight:600;margin:10px 0}
 .buvdlg input{display:block;width:100%;margin-top:4px;padding:10px;border:1px solid var(--linie);border-radius:8px;font:inherit;background:var(--bg);color:var(--text)}
@@ -315,7 +315,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-20 c";
+const FASSUNG = "2026-11-20 d";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1616,7 +1616,7 @@ function buvetteKarte(now, team) {
     const knopf = mein ? `<span class="buvich">${b.ich}</span> <button type="button" class="buvab" data-buv-ab="${x.id}">${b.ab}</button>`
       : n != null && n < BUV.max ? `<button type="button" class="knopf buvan" data-buv-an="${x.id}">${b.an}</button>` : "";
     const v = new Date(x.von);
-    return `<li class="buvzeile"><div><b>${wt(v)} ${kurzDatum(v)} · ${uhr(v)}–${uhr(new Date(x.bis))}</b><div class="klein">${x.spiele.map(sp => `${esc(sp.team)} – ${esc(sp.gegner)}`).join("<br>")}</div>${st}</div><div class="buvaktion">${knopf}</div></li>`;
+    return `<li class="buvzeile"><div><b>${wt(v)} ${kurzDatum(v)} · ${uhr(v)}–${uhr(new Date(x.bis))}</b><div class="klein">${x.spiele.map(sp => `${esc(sp.team)} – ${esc(sp.gegner)}`).join("<br>")}</div></div><div class="buvaktion">${st}<span>${knopf}</span></div></li>`;
   }).join("");
   return `<details class="karte buvette"${team || offen ? " open" : ""}><summary>${b.titel}${geladen ? ` · ${esc(b.sum(offen))}` : ""}</summary><p class="hinweis">${esc(b.text)}</p><ul class="spiele">${zeilen}</ul></details>`;
 }
