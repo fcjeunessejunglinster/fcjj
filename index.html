@@ -111,6 +111,14 @@ li.event .evd{font-size:14px;color:var(--text);font-variant-numeric:tabular-nums
 .events{border:2px solid var(--rot)}
 .raster button.blknopf{padding:5px 4px;position:relative}
 .raster button.blknopf[aria-pressed="true"]{background:var(--karte);color:var(--text);border:2px solid var(--schwarz)}
+.buvzeile{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid var(--linie)}
+.buvzeile .klein{color:var(--leise);margin:2px 0 4px}.buvst{font-size:.85rem;font-weight:700}.buvst.rot{color:var(--rot)}.buvst.orange{color:#c76a00}.buvst.gruen{color:var(--sieg)}
+.buvzeile>div:first-child{flex:1;min-width:0}.buvaktion{flex:none;text-align:right;max-width:45%}.buvaktion .knopf{padding:8px 14px;width:auto}.buvich{display:block;font-size:.85rem;font-weight:700;color:var(--sieg)}
+.buvab{background:none;border:1px solid var(--linie);border-radius:8px;padding:6px 10px;color:var(--text);font:inherit;font-size:.85rem;cursor:pointer;margin-top:4px}
+.buvdlg{border:0;border-radius:16px;padding:18px;width:min(420px,calc(100vw - 32px));background:var(--karte);color:var(--text)}
+.buvdlg::backdrop{background:#0008}.buvdlg h3{margin:0 0 8px}.buvdlg label{display:block;font-size:.9rem;font-weight:600;margin:10px 0}
+.buvdlg input{display:block;width:100%;margin-top:4px;padding:10px;border:1px solid var(--linie);border-radius:8px;font:inherit;background:var(--bg);color:var(--text)}
+.buvfehler{color:var(--rot);font-weight:700;min-height:1em;margin:4px 0}.buvknoepfe{display:flex;gap:10px;justify-content:flex-end}.buvknoepfe .knopf{width:auto;padding:10px 18px}
 ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
 .tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
 .tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
@@ -298,6 +306,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 <nav id="reiter"><div class="innen raster" id="knoepfe"></div></nav>
 <main><div class="innen" id="inhalt"><p class="hinweis">Lade …</p></div></main>
 <div class="teilen"><div class="unten-knoepfe"><a class="knopf" id="shop" href="https://form.jotform.com/242614644810352" target="_blank" rel="noopener"></a><button class="knopf" id="teilen" type="button"></button><button class="knopf" id="chatAuf" type="button" hidden></button></div><span class="ok" id="teilenOk" aria-live="polite"></span></div>
+<dialog id="buvDlg" class="buvdlg" aria-label="Buvette"></dialog>
 <dialog id="chat" aria-labelledby="chatTitel"><div class="chatkopf"><b id="chatTitel"></b><button type="button" class="knopf" id="chatZu"></button></div>
 <div id="chatVerlauf" aria-live="polite"></div><p class="leise chathinweis" id="chatHinweis"></p>
 <form id="chatForm"><textarea id="chatFrage" rows="2" maxlength="500"></textarea><button class="knopf" id="chatSenden" type="submit"></button></form></dialog>
@@ -306,7 +315,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-20 a";
+const FASSUNG = "2026-11-20 b";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -357,6 +366,7 @@ const TEXTE = {
     kader2: { titel: "Kader", pos: { Goalkeeper: "Tor", Defender: "Abwehr", Midfielder: "Mittelfeld", Attacker: "Angriff" }, jahre: a => `${a} J.`, prof: { geb: "Geboren", in: "in", verl: "🚑 verletzt", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Spiele", se: "Startelf", min: "Minuten", t: "Tore", v: "Vorlagen", gk: "Gegentore", par: "Paraden", g: "Gelb", r: "Rot", note: "Note", keine: "Noch kein Einsatz in dieser Saison" }, quelle: d => `Kader: API-Football, Stand ${d}` },
     matchball: "⚽ Einen Spielball sponsern",
     spielfeld: k => `Spielfeld ${k}`,
+    buv: { titel: "🍺 Buvette-Helfer", sum: n => n ? `${n} ${n === 1 ? "Schicht sucht" : "Schichten suchen"} noch Hilfe` : "alle Schichten besetzt", text: "Bei Heimspielen der Jugend öffnet die Buvette 30 Minuten vor dem ersten Spiel und schließt 30 Minuten nach dem letzten. Pro Schicht braucht es mindestens 1, ideal 2 Personen. Danke für eure Hilfe!", frei: "Hilfe gesucht", eins: "1 weitere Person willkommen", voll: "besetzt", an: "Eintragen", ich: "Du bist eingetragen ✓", ab: "Austragen", abFrage: "Wirklich austragen?", name: "Vor- und Nachname", tel: "Telefon (für den Verein)", notiz: "Bemerkung (optional, z. B. erst ab 14:30)", senden: "Eintragen", zu: "Abbrechen", privat: "Name und Telefon sieht nur der Verein, nicht die anderen Nutzer der App.", danke: "Danke! Du bist eingetragen.", fehler: { voll: "Diese Schicht ist inzwischen besetzt.", daten: "Bitte Namen und eine gültige Telefonnummer angeben.", limit: "Zu viele Eintragungen heute. Bitte morgen noch einmal versuchen.", sonst: "Das hat nicht geklappt. Bitte später noch einmal versuchen." }, keine: "Keine Heimspiele der Jugend in den nächsten Wochen." },
     chat: { knopf: "💬 Frag Sami ⚽️", titel: "Frag Sami", platzhalter: "Deine Frage zum Verein …", senden: "Senden", schliessen: "Schließen",
       hallo: "Hallo, ich bin Sami! Frag mich etwas zum FCJJ, z. B. „Wann spielt MIN 1 am Samstag?“ oder „Was kostet die Cotisation?“",
       hinweis: "KI-Antwort (Claude), kann Fehler enthalten. Verbindlich sind Trainer und fcjj.lu. Deine Frage wird an Anthropic geschickt; gib keine persönlichen Daten ein.",
@@ -429,6 +439,7 @@ const TEXTE = {
     kader2: { titel: "Squads", pos: { Goalkeeper: "Goalkeepers", Defender: "Defenders", Midfielder: "Midfielders", Attacker: "Forwards" }, jahre: a => `${a} yrs`, prof: { geb: "Born", in: "in", verl: "🚑 injured", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Apps", se: "Starts", min: "Minutes", t: "Goals", v: "Assists", gk: "Conceded", par: "Saves", g: "Yellow", r: "Red", note: "Rating", keine: "No appearances this season yet" }, quelle: d => `Squads: API-Football, as of ${d}` },
     matchball: "⚽ Sponsor a match ball",
     spielfeld: k => `Pitch ${k}`,
+    buv: { titel: "🍺 Buvette helpers", sum: n => n ? `${n} ${n === 1 ? "shift still needs" : "shifts still need"} help` : "all shifts covered", text: "At youth home games the buvette opens 30 minutes before the first game and closes 30 minutes after the last one. Each shift needs at least 1, ideally 2 people. Thank you for helping!", frei: "Help needed", eins: "1 more person welcome", voll: "covered", an: "Sign up", ich: "You’re signed up ✓", ab: "Cancel", abFrage: "Really cancel?", name: "First and last name", tel: "Phone (for the club)", notiz: "Note (optional, e.g. only from 2:30 pm)", senden: "Sign up", zu: "Close", privat: "Only the club sees your name and phone number, not the other app users.", danke: "Thank you! You’re signed up.", fehler: { voll: "This shift is already covered.", daten: "Please enter your name and a valid phone number.", limit: "Too many sign-ups today. Please try again tomorrow.", sonst: "That didn’t work. Please try again later." }, keine: "No youth home games in the coming weeks." },
     chat: { knopf: "💬 Ask Sami ⚽️", titel: "Ask Sami", platzhalter: "Your question about the club …", senden: "Send", schliessen: "Close",
       hallo: "Hi, I’m Sami! Ask me anything about FCJJ, e.g. “When does MIN 1 play on Saturday?” or “How much is the membership fee?”",
       hinweis: "AI answer (Claude), may contain mistakes. Coaches and fcjj.lu are authoritative. Your question is sent to Anthropic; don't enter personal data.",
@@ -501,6 +512,7 @@ const TEXTE = {
     kader2: { titel: "Effectifs", pos: { Goalkeeper: "Gardiens", Defender: "Défenseurs", Midfielder: "Milieux", Attacker: "Attaquants" }, jahre: a => `${a} ans`, prof: { geb: "Né le", in: "à", verl: "🚑 blessé", saison: s => `Bundesliga ${s}/${String(s + 1).slice(2)}`, sp: "Matchs", se: "titulaire", min: "Minutes", t: "Buts", v: "Passes déc.", gk: "Buts encaissés", par: "Arrêts", g: "Jaunes", r: "Rouges", note: "Note", keine: "Pas encore joué cette saison" }, quelle: d => `Effectifs : API-Football, état au ${d}` },
     matchball: "⚽ Sponsoriser un ballon de match",
     spielfeld: k => `Terrain ${k}`,
+    buv: { titel: "🍺 Bénévoles buvette", sum: n => n ? `${n} ${n === 1 ? "créneau cherche" : "créneaux cherchent"} encore de l’aide` : "tous les créneaux sont couverts", text: "Lors des matchs à domicile des jeunes, la buvette ouvre 30 minutes avant le premier match et ferme 30 minutes après le dernier. Il faut au moins 1, idéalement 2 personnes par créneau. Merci pour votre aide !", frei: "Aide recherchée", eins: "1 personne de plus bienvenue", voll: "couvert", an: "S’inscrire", ich: "Tu es inscrit(e) ✓", ab: "Se désinscrire", abFrage: "Vraiment se désinscrire ?", name: "Prénom et nom", tel: "Téléphone (pour le club)", notiz: "Remarque (facultatif, p. ex. seulement à partir de 14h30)", senden: "S’inscrire", zu: "Fermer", privat: "Seul le club voit ton nom et ton téléphone, pas les autres utilisateurs de l’app.", danke: "Merci ! Tu es inscrit(e).", fehler: { voll: "Ce créneau est déjà couvert.", daten: "Merci d’indiquer ton nom et un numéro de téléphone valide.", limit: "Trop d’inscriptions aujourd’hui. Réessaie demain.", sonst: "Cela n’a pas marché. Réessaie plus tard." }, keine: "Pas de matchs à domicile des jeunes dans les prochaines semaines." },
     chat: { knopf: "💬 Demande à Sami ⚽️", titel: "Demande à Sami", platzhalter: "Ta question sur le club …", senden: "Envoyer", schliessen: "Fermer",
       hallo: "Bonjour, je suis Sami ! Pose-moi une question sur le FCJJ, p. ex. « Quand joue MIN 1 samedi ? » ou « Combien coûte la cotisation ? »",
       hinweis: "Réponse d’IA (Claude), peut contenir des erreurs. Les entraîneurs et fcjj.lu font foi. Ta question est envoyée à Anthropic ; n’indique pas de données personnelles.",
@@ -896,7 +908,7 @@ function teamHtml(t, now) {
   const tickerTest = location.hash === "#liveticker" && FUPA_WIDGET[t.reiter];
   let html = (heute ? heuteHtml(heute, now, kinder, seKnopf(t) + seLivePlatz(t, heute.sp)) + (FUPA_WIDGET[t.reiter] ? fupaHtml(FUPA_WIDGET[t.reiter], heute.sp.d) : "") : tickerTest ? fupaHtml(FUPA_WIDGET[t.reiter], "") : "")
     + (morgen ? morgenHtml(morgen, now) : "") + letztesHtml(t, spiele, now, aktuell, kinder);
-  html += naechsteKarte(kommend, now, kalenderKnopf(t)) + eventsKarte(now, t.kat);
+  html += naechsteKarte(kommend, now, kalenderKnopf(t)) + (BUVETTE_DAUER[t.kat] ? buvetteKarte(now, t) : "") + eventsKarte(now, t.kat);
   if (aktuell) html += tabelleKarte(aktuell, t);
   if (gespielt.length) html += `<section class="karte"><h2>${T().ergebnisse}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
   if (aktuell) html += `<details class="karte"><summary>${T().alleKlasse}</summary>${klassenSpiele(aktuell, t, now)}</details>`;
@@ -1549,6 +1561,104 @@ function eventsKarte(now, kat) {
   return `<section class="karte events"><h2>${T().events} · Save the date</h2><ul class="spiele">${liste.map(e => eventZeile(e, now, true, kat)).join("")}</ul></section>`;
 }
 
+// Buvette-Schichten aus den App-Daten (gleicher Code in index.html und im Worker):
+// Heimspiele der Jugend in Junglinster, je Tag nach Anstoßzeit in Blöcke geteilt. Die Buvette öffnet 30 min vor dem
+// ersten Spiel und schließt 30 min nach dem Ende des letzten Spiels (vom Verein, 20.11.2026). Schicht-ID: JJJJMMTT-HHMM.
+const BUVETTE_DAUER = { U7: 90, U9: 90, U11: 75, WU11: 75, U13: 85, WU13: 75, U15: 85, WU15: 85, U17: 95, U19: 105 };
+function buvetteSchichten(d, ab = Date.now()) {
+  const lx = t => Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Luxembourg", year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date(t)).map(x => [x.type, x.value]));
+  const team = new Map();
+  for (const t of d.teams || []) if (BUVETTE_DAUER[t.kat]) for (const id of [...t.ids, ...(t.mit || [])]) team.set(id, t);
+  const tage = new Map();
+  for (const k of Object.values(d.klassen || {})) for (const sp of k.spiele || []) {
+    const t = team.get(sp.h.id), an = Date.parse(sp.d);
+    if (!t || (sp.ort && !/Junglinster/i.test(sp.ort)) || an + BUVETTE_DAUER[t.kat] * 6e4 + 18e5 < ab) continue;
+    const p = lx(an), tag = p.year + p.month + p.day;
+    if (+p.hour < 6) continue;   // Anstoß vor 6 Uhr = Uhrzeit noch nicht festgelegt: erst eintragbar, wenn die FLF die Zeit hat
+    if (!tage.has(tag)) tage.set(tag, []);
+    tage.get(tag).push({ an, ende: an + BUVETTE_DAUER[t.kat] * 6e4, id: tag + "-" + p.hour + p.minute, team: t.reiter, gegner: sp.a.n, ort: sp.ort || "" });
+  }
+  const aus = [];
+  for (const liste of tage.values()) {
+    liste.sort((a, b) => a.an - b.an);
+    const bloecke = [];
+    for (const s of liste) { const b = bloecke[bloecke.length - 1]; if (b && b.an === s.an) b.spiele.push(s); else bloecke.push({ id: s.id, an: s.an, spiele: [s] }); }
+    const schluss = Math.max(...liste.map(s => s.ende)) + 18e5;
+    bloecke.forEach((b, i) => aus.push({ id: b.id, von: i ? b.an : b.an - 18e5, bis: bloecke[i + 1] ? bloecke[i + 1].an : schluss,
+      spiele: b.spiele.map(s => ({ team: s.team, gegner: s.gegner })), ort: b.spiele[0].ort }));
+  }
+  return aus.filter(s => s.bis > ab).sort((a, b) => a.von - b.von);
+}
+
+// Buvette-Helfer (vom Verein, 20.11.2026): Belegung und Eintragen über den Worker (/buvette), Schlüssel zum Austragen nur auf dem eigenen Handy.
+const BUV_URL = "https://fcjj1.gilles-emeringer.workers.dev/buvette";   // derselbe Worker wie der Chat
+let BUV = { belegt: {}, max: 2, geholt: 0, ids: "" }, BUV_LAEDT = false, BUV_MEIN = {};
+try { BUV_MEIN = JSON.parse(merk.get("buvette")) || {}; } catch (e) {}
+async function buvHolen(ids) {
+  const key = ids.join(",");
+  if (!ids.length || BUV_LAEDT || (key === BUV.ids && Date.now() - BUV.geholt < 60e3)) return;
+  BUV_LAEDT = true;
+  try { const r = await fetch(BUV_URL + "?ids=" + key, { cache: "no-store" }); if (r.ok) { const j = await r.json(); BUV = { belegt: j.belegt || {}, max: j.max || 2, geholt: Date.now(), ids: key }; render(); } }
+  catch (e) {} finally { BUV_LAEDT = false; }
+}
+function buvetteKarte(now, team) {
+  if (!D) return "";
+  const alle = buvetteSchichten(D, +now).filter(x => x.von - now < (team ? 28 : 14) * 864e5);
+  const liste = team ? alle.filter(x => x.spiele.some(sp => sp.team === team.reiter)) : alle;
+  if (!liste.length) return "";
+  buvHolen(alle.map(x => x.id));
+  const b = T().buv, geladen = BUV.ids && liste.every(x => x.id in BUV.belegt);
+  const offen = liste.filter(x => (BUV.belegt[x.id] || 0) < 1).length;
+  const zeilen = liste.map(x => {
+    const n = BUV.belegt[x.id], mein = BUV_MEIN[x.id];
+    const st = n == null ? "" : n >= BUV.max ? `<span class="buvst gruen">🟢 ${n}/${BUV.max} · ${b.voll}</span>` : n ? `<span class="buvst orange">🟠 ${n}/${BUV.max} · ${b.eins}</span>` : `<span class="buvst rot">🔴 0/${BUV.max} · ${b.frei}</span>`;
+    const knopf = mein ? `<span class="buvich">${b.ich}</span> <button type="button" class="buvab" data-buv-ab="${x.id}">${b.ab}</button>`
+      : n != null && n < BUV.max ? `<button type="button" class="knopf buvan" data-buv-an="${x.id}">${b.an}</button>` : "";
+    const v = new Date(x.von);
+    return `<li class="buvzeile"><div><b>${wt(v)} ${kurzDatum(v)} · ${uhr(v)}–${uhr(new Date(x.bis))}</b><div class="klein">${x.spiele.map(sp => `${esc(sp.team)} – ${esc(sp.gegner)}`).join("<br>")}</div>${st}</div><div class="buvaktion">${knopf}</div></li>`;
+  }).join("");
+  return `<details class="karte buvette"${team || offen ? " open" : ""}><summary>${b.titel}${geladen ? ` · ${esc(b.sum(offen))}` : ""}</summary><p class="hinweis">${esc(b.text)}</p><ul class="spiele">${zeilen}</ul></details>`;
+}
+function buvDialog(id) {
+  const x = buvetteSchichten(D).find(s => s.id === id); if (!x) return;
+  const b = T().buv, v = new Date(x.von), dlg = document.getElementById("buvDlg");
+  dlg.innerHTML = `<form method="dialog" id="buvForm"><h3>${b.titel}</h3><p><b>${wt(v)} ${kurzDatum(v)} · ${uhr(v)}–${uhr(new Date(x.bis))}</b><br><span class="klein">${x.spiele.map(sp => esc(sp.team) + " – " + esc(sp.gegner)).join("<br>")}</span></p>
+    <label>${b.name}<input name="name" required minlength="3" maxlength="60" autocomplete="name"></label>
+    <label>${b.tel}<input name="tel" required type="tel" maxlength="30" autocomplete="tel"></label>
+    <label>${b.notiz}<input name="notiz" maxlength="120"></label>
+    <p class="klein">🔒 ${b.privat}</p><p class="buvfehler" role="alert"></p>
+    <div class="buvknoepfe"><button type="button" class="buvab" value="zu" id="buvZu">${b.zu}</button><button class="knopf" type="submit">${b.senden}</button></div></form>`;
+  dlg.dataset.id = id; dlg.showModal(); dlg.querySelector("input").focus();
+  dlg.querySelector("#buvZu").onclick = () => dlg.close();
+  dlg.querySelector("form").onsubmit = async e => {
+    e.preventDefault();
+    const f = new FormData(e.target), knopf = e.target.querySelector("[type=submit]"), fehler = e.target.querySelector(".buvfehler");
+    knopf.disabled = true; fehler.textContent = "";
+    try {
+      const r = await fetch(BUV_URL, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ id, name: f.get("name"), tel: f.get("tel"), notiz: f.get("notiz") }) });
+      const j = await r.json().catch(() => ({}));
+      if (r.ok && j.token) {
+        BUV_MEIN[id] = j.token; merk.set("buvette", JSON.stringify(BUV_MEIN)); BUV.belegt[id] = j.belegt;
+        dlg.close(); render(); setTimeout(() => alert(b.danke), 50);
+      } else { fehler.textContent = b.fehler[j.fehler] || b.fehler.sonst; if (j.belegt != null) BUV.belegt[id] = j.belegt; }
+    } catch (err) { fehler.textContent = b.fehler.sonst; }
+    knopf.disabled = false;
+  };
+}
+async function buvAustragen(id) {
+  if (!confirm(T().buv.abFrage)) return;
+  try {
+    const r = await fetch(BUV_URL, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ aktion: "ab", id, token: BUV_MEIN[id] }) });
+    const j = await r.json().catch(() => ({}));
+    if (r.ok || r.status === 404) { delete BUV_MEIN[id]; merk.set("buvette", JSON.stringify(BUV_MEIN)); if (j.belegt != null) BUV.belegt[id] = j.belegt; BUV.geholt = 0; render(); }
+    else alert(T().buv.fehler.sonst);
+  } catch (e) { alert(T().buv.fehler.sonst); }
+}
+document.addEventListener("click", e => {
+  const an = e.target.closest("[data-buv-an]"), ab = e.target.closest("[data-buv-ab]");
+  if (an) buvDialog(an.dataset.buvAn); else if (ab) buvAustragen(ab.dataset.buvAb);
+});
 function wocheHtml(now) {
   const tage = wocheTage(now), spiele = wocheSpiele(now);
   const heim = spiele.filter(sp => sp.heim).length;
@@ -1561,7 +1671,7 @@ function wocheHtml(now) {
     if (!liste.length && !ev.length && !ft) continue;
     html += `<div class="tag">${esc(langDatum(new Date(tag + "T12:00:00Z")))}${tag === tagKey(now) ? T().heuteKurz : ""}${ft ? ` · 🎉 ${esc(ft.t)}` : ""}</div><ul class="spiele">${ev.map(e => eventZeile(e, now, false)).join("")}${liste.map(sp => spielLi(sp, now, true)).join("")}</ul>`;
   }
-  return html + "</section>" + eventsKarte(now);
+  return html + "</section>" + buvetteKarte(now) + eventsKarte(now);
 }
 
 // ---- Oberfläche ----
