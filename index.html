@@ -319,7 +319,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-20 m";
+const FASSUNG = "2026-11-20 n";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1622,7 +1622,7 @@ function buvetteKarte(now) {
   let tag = "";
   const zeilen = liste.map(x => {
     const n = BUV.belegt[x.id], mein = BUV_MEIN[x.id];
-    const st = n == null ? "" : n >= BUV.max ? `<span class="buvst gruen">👍 ${n}/${BUV.max} · ${b.voll}</span>` : n ? `<span class="buvst orange">🟠 ${n}/${BUV.max} · ${b.eins}</span>` : `<span class="buvst rot">🔴 0/${BUV.max} · ${b.frei}</span>`;
+    const st = n == null ? "" : n >= BUV.max ? `<span class="buvst gruen">🟢 ${n}/${BUV.max} · ${b.voll}</span>` : n ? `<span class="buvst orange">🟠 ${n}/${BUV.max} · ${b.eins}</span>` : `<span class="buvst rot">🔴 0/${BUV.max} · ${b.frei}</span>`;
     const knopf = mein ? `<span class="buvich">${b.ich}</span> <button type="button" class="buvab" data-buv-ab="${x.id}">${b.ab}</button>`
       : n != null && n < BUV.max ? `<button type="button" class="knopf buvan" data-buv-an="${x.id}">${b.an}</button>` : "";
     const v = new Date(x.von), t = tagKey(v), kopf = t !== tag ? `</ul><div class="tag">${esc(langDatum(new Date(t + "T12:00:00Z")))}</div><ul class="spiele">` : "";
@@ -1631,7 +1631,7 @@ function buvetteKarte(now) {
   }).join("");
   // Übersicht: leere, halb und ganz besetzte Schichten (vom Verein, 20.11.2026)
   const zahl = f => liste.filter(x => f(BUV.belegt[x.id] || 0)).length;
-  const uebersicht = geladen ? `<p class="buvuebersicht"><span class="buvst rot">🔴 ${zahl(n => n < 1)} ${b.leer}</span><span class="buvst orange">🟠 ${zahl(n => n >= 1 && n < BUV.max)} ${b.halb}</span><span class="buvst gruen">👍 ${zahl(n => n >= BUV.max)} ${b.ganz}</span></p>` : "";
+  const uebersicht = geladen ? `<p class="buvuebersicht"><span class="buvst rot">🔴 ${zahl(n => n < 1)} ${b.leer}</span><span class="buvst orange">🟠 ${zahl(n => n >= 1 && n < BUV.max)} ${b.halb}</span><span class="buvst gruen">🟢 ${zahl(n => n >= BUV.max)} ${b.ganz}</span></p>` : "";
   return `<section class="karte buvette"><h2>${b.titel}</h2>${uebersicht}<p class="hinweis">${esc(b.text)}</p>${zeilen.replace(/^<\/ul>/, "")}</ul></section>`;
 }
 function buvDialog(id) {
