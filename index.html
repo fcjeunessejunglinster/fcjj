@@ -319,7 +319,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-20 l";
+const FASSUNG = "2026-11-20 m";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1978,7 +1978,7 @@ function render() {
   chatTexte();
   if (Date.now() - WARN.geholt > 15 * 60e3 || WARN.lang !== LANG) warnHolen();
   ferienHolen();
-  document.getElementById("inhalt").innerHTML = (AKTIV === "buvette" || AKTIV === "nati" || L ? "" : warnHtml(now)) + (t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : L ? ligaHtml(AKTIV, now) : AKTIV === "links" ? linksHtml() : AKTIV === "buvette" ? buvetteKarte(now) : wocheHtml(now));
+  document.getElementById("inhalt").innerHTML = (AKTIV === "buvette" || AKTIV === "nati" || AKTIV === "links" || L ? "" : warnHtml(now)) + (t ? teamHtml(t, now) : AKTIV === "nati" ? natiHtml(now) : L ? ligaHtml(AKTIV, now) : AKTIV === "links" ? linksHtml() : AKTIV === "buvette" ? buvetteKarte(now) : wocheHtml(now));
   if (L) ligaHolenFaellig(AKTIV, now);
   for (const s of document.querySelectorAll("#inhalt details > summary")) if (offenAuf.includes(s.textContent)) s.parentElement.open = true;
   fupaEinsetzen();
