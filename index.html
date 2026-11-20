@@ -306,7 +306,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-19 c";
+const FASSUNG = "2026-11-20 a";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -858,9 +858,17 @@ function tabelleKarte(k, t) {
   if (!k?.tabelle?.length) return "";
   const ids = new Set(t.ids);
   const zeilen = k.tabelle.map(z => `<tr class="${ids.has(z.id) ? "wir" : ""}"><td>${z.pl}</td><td><span class="tn">${logoHtml(z)}<span>${esc(z.n)}${erster(t, z) ? " 🥇" : ""}</span></span></td><td>${z.sp}</td><td>${z.s}</td><td>${z.u}</td><td>${z.nl}</td><td>${z.t}:${z.g}</td><td><b>${z.pkt}</b></td></tr>`).join("");
-  return `<section class="karte"><h2>${T().tabelle} · ${esc(k.n)}</h2><div class="tabrahmen"><table>
-    <thead><tr><th>#</th>${T().kopf.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${zeilen}</tbody></table></div></section>`;
+  // Auf- und zuklappbar (vom Verein, 20.11.2026): offen, bis man sie zuklappt; das bleibt gespeichert (je Tabelle).
+  return `<details class="karte tabkarte" data-tab="${esc(k.n)}"${TAB_ZU.has(k.n) ? "" : " open"}><summary>${T().tabelle} · ${esc(k.n)}</summary><div class="tabrahmen"><table>
+    <thead><tr><th>#</th>${T().kopf.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${zeilen}</tbody></table></div></details>`;
 }
+let TAB_ZU = new Set();
+try { TAB_ZU = new Set(JSON.parse(merk.get("tabzu")) || []); } catch (e) {}
+document.addEventListener("toggle", e => {
+  const d = e.target; if (!d.matches?.("details.tabkarte")) return;
+  if (d.open) TAB_ZU.delete(d.dataset.tab); else TAB_ZU.add(d.dataset.tab);
+  merk.set("tabzu", JSON.stringify([...TAB_ZU]));
+}, true);
 function klassenSpiele(k, t, now) {
   const ids = new Set(t.ids), tage = new Map();
   for (const sp of k.spiele) { const key = sp.tag ? T().spieltag + " " + sp.tag : T().ohneTag; if (!tage.has(key)) tage.set(key, []); tage.get(key).push(sp); }
