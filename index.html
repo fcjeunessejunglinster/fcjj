@@ -315,7 +315,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-20 d";
+const FASSUNG = "2026-11-20 e";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1604,7 +1604,7 @@ async function buvHolen(ids) {
 }
 function buvetteKarte(now, team) {
   if (!D) return "";
-  const alle = buvetteSchichten(D, +now).filter(x => x.von - now < (team ? 28 : 14) * 864e5);
+  const alle = buvetteSchichten(D, +now).filter(x => x.von - now < 7 * 864e5);   // nur die nächsten 7 Tage (vom Verein, 20.11.2026)
   const liste = team ? alle.filter(x => x.spiele.some(sp => sp.team === team.reiter)) : alle;
   if (!liste.length) return "";
   buvHolen(alle.map(x => x.id));
