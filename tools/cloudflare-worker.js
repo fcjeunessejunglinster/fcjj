@@ -219,7 +219,7 @@ function buvetteSchichten(d, ab = Date.now()) {
     const p = lx(an), tag = p.year + p.month + p.day;
     if (+p.hour < 6) continue;   // Anstoß vor 6 Uhr = Uhrzeit noch nicht festgelegt: erst eintragbar, wenn die FLF die Zeit hat
     if (!tage.has(tag)) tage.set(tag, []);
-    tage.get(tag).push({ an, ende: an + BUVETTE_DAUER[t.kat] * 6e4, id: tag + "-" + p.hour + p.minute, team: t.reiter, gegner: sp.a.n, ort: sp.ort || "" });
+    tage.get(tag).push({ an, ende: an + BUVETTE_DAUER[t.kat] * 6e4, id: tag + "-" + p.hour + p.minute, team: t.reiter, gegner: sp.a.n, h: sp.h, a: sp.a, ort: sp.ort || "" });
   }
   const aus = [];
   for (const liste of tage.values()) {
@@ -228,7 +228,7 @@ function buvetteSchichten(d, ab = Date.now()) {
     for (const s of liste) { const b = bloecke[bloecke.length - 1]; if (b && b.an === s.an) b.spiele.push(s); else bloecke.push({ id: s.id, an: s.an, spiele: [s] }); }
     const schluss = Math.max(...liste.map(s => s.ende)) + 18e5;
     bloecke.forEach((b, i) => aus.push({ id: b.id, von: i ? b.an : b.an - 18e5, bis: bloecke[i + 1] ? bloecke[i + 1].an : schluss,
-      spiele: b.spiele.map(s => ({ team: s.team, gegner: s.gegner })), ort: b.spiele[0].ort }));
+      spiele: b.spiele.map(s => ({ team: s.team, gegner: s.gegner, h: s.h, a: s.a })), ort: b.spiele[0].ort }));
   }
   return aus.filter(s => s.bis > ab).sort((a, b) => a.von - b.von);
 }

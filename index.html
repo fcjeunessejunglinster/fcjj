@@ -121,6 +121,7 @@ ul.spiele li.buvzeile{display:block;padding:10px 14px}
 .buvfehler{color:var(--rot);font-weight:700;min-height:1em;margin:4px 0}.buvknoepfe{display:flex;gap:10px;justify-content:flex-end}.buvknoepfe .knopf{width:auto;padding:10px 18px}
 .buvzahl{display:inline-block;min-width:1.4em;padding:0 5px;border-radius:999px;background:var(--rot);color:#fff;font-weight:800;font-size:.75rem;line-height:1.4em}
 .buvette .tag:first-of-type{margin-top:4px}
+.buvspiel{display:flex;align-items:center;gap:6px;margin:3px 0}.buvspiel>span{white-space:nowrap}.buvspiel>span:last-child{white-space:normal;min-width:0;overflow-wrap:anywhere}.buvspiel img.vlogo{width:20px;height:20px}
 ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
 .tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
 .tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
@@ -317,7 +318,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-20 h";
+const FASSUNG = "2026-11-20 i";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1579,7 +1580,7 @@ function buvetteSchichten(d, ab = Date.now()) {
     const p = lx(an), tag = p.year + p.month + p.day;
     if (+p.hour < 6) continue;   // Anstoß vor 6 Uhr = Uhrzeit noch nicht festgelegt: erst eintragbar, wenn die FLF die Zeit hat
     if (!tage.has(tag)) tage.set(tag, []);
-    tage.get(tag).push({ an, ende: an + BUVETTE_DAUER[t.kat] * 6e4, id: tag + "-" + p.hour + p.minute, team: t.reiter, gegner: sp.a.n, ort: sp.ort || "" });
+    tage.get(tag).push({ an, ende: an + BUVETTE_DAUER[t.kat] * 6e4, id: tag + "-" + p.hour + p.minute, team: t.reiter, gegner: sp.a.n, h: sp.h, a: sp.a, ort: sp.ort || "" });
   }
   const aus = [];
   for (const liste of tage.values()) {
@@ -1588,7 +1589,7 @@ function buvetteSchichten(d, ab = Date.now()) {
     for (const s of liste) { const b = bloecke[bloecke.length - 1]; if (b && b.an === s.an) b.spiele.push(s); else bloecke.push({ id: s.id, an: s.an, spiele: [s] }); }
     const schluss = Math.max(...liste.map(s => s.ende)) + 18e5;
     bloecke.forEach((b, i) => aus.push({ id: b.id, von: i ? b.an : b.an - 18e5, bis: bloecke[i + 1] ? bloecke[i + 1].an : schluss,
-      spiele: b.spiele.map(s => ({ team: s.team, gegner: s.gegner })), ort: b.spiele[0].ort }));
+      spiele: b.spiele.map(s => ({ team: s.team, gegner: s.gegner, h: s.h, a: s.a })), ort: b.spiele[0].ort }));
   }
   return aus.filter(s => s.bis > ab).sort((a, b) => a.von - b.von);
 }
@@ -1620,12 +1621,12 @@ function buvetteKarte(now) {
   let tag = "";
   const zeilen = liste.map(x => {
     const n = BUV.belegt[x.id], mein = BUV_MEIN[x.id];
-    const st = n == null ? "" : n >= BUV.max ? `<span class="buvst gruen">🟢 ${n}/${BUV.max} · ${b.voll}</span>` : n ? `<span class="buvst orange">🟠 ${n}/${BUV.max} · ${b.eins}</span>` : `<span class="buvst rot">🔴 0/${BUV.max} · ${b.frei}</span>`;
+    const st = n == null ? "" : n >= BUV.max ? `<span class="buvst gruen">👍 ${n}/${BUV.max} · ${b.voll}</span>` : n ? `<span class="buvst orange">🟠 ${n}/${BUV.max} · ${b.eins}</span>` : `<span class="buvst rot">🔴 0/${BUV.max} · ${b.frei}</span>`;
     const knopf = mein ? `<span class="buvich">${b.ich}</span> <button type="button" class="buvab" data-buv-ab="${x.id}">${b.ab}</button>`
       : n != null && n < BUV.max ? `<button type="button" class="knopf buvan" data-buv-an="${x.id}">${b.an}</button>` : "";
     const v = new Date(x.von), t = tagKey(v), kopf = t !== tag ? `</ul><div class="tag">${esc(langDatum(new Date(t + "T12:00:00Z")))}</div><ul class="spiele">` : "";
     tag = t;
-    return `${kopf}<li class="buvzeile"><div><b>${uhr(v)}–${uhr(new Date(x.bis))}</b><div class="klein">${x.spiele.map(sp => `${esc(sp.team)} – ${esc(sp.gegner)}`).join("<br>")}</div></div><div class="buvaktion">${st}<span>${knopf}</span></div></li>`;
+    return `${kopf}<li class="buvzeile"><div><b>${uhr(v)}–${uhr(new Date(x.bis))}</b><div class="klein">${x.spiele.map(sp => `<div class="buvspiel">${logoHtml(sp.h)}<span>${esc(sp.team)}</span> – ${logoHtml(sp.a)}<span>${esc(sp.gegner)}</span></div>`).join("")}</div></div><div class="buvaktion">${st}<span>${knopf}</span></div></li>`;
   }).join("");
   return `<section class="karte buvette"><h2>${b.titel}${geladen ? ` · ${esc(b.sum(offen))}` : ""}</h2><p class="hinweis">${esc(b.text)}</p>${zeilen.replace(/^<\/ul>/, "")}</ul></section>`;
 }
