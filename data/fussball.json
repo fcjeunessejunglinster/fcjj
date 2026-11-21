@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-21T19:48:46.583Z",
+ "stand": "2026-11-21T20:18:30.887Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -22789,6 +22789,18 @@
     },
     {
      "pl": 4,
+     "id": 45920,
+     "n": "FC Wiltz 71",
+     "sp": 2,
+     "s": 1,
+     "u": 0,
+     "nl": 1,
+     "t": 4,
+     "g": 4,
+     "pkt": 3
+    },
+    {
+     "pl": 5,
      "id": 46357,
      "n": "ENT Biwer/Berbourg/UMW",
      "sp": 0,
@@ -22800,27 +22812,15 @@
      "pkt": 0
     },
     {
-     "pl": 5,
-     "id": 45920,
-     "n": "FC Wiltz 71",
-     "sp": 1,
-     "s": 0,
-     "u": 0,
-     "nl": 1,
-     "t": 1,
-     "g": 3,
-     "pkt": 0
-    },
-    {
      "pl": 6,
      "id": 46746,
      "n": "ENT Schieren/Colmarberg/Erpeldange II",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
-     "t": 2,
-     "g": 7,
+     "nl": 2,
+     "t": 3,
+     "g": 10,
      "pkt": 0
     },
     {
@@ -23664,14 +23664,14 @@
     },
     {
      "pl": 2,
-     "id": 45899,
-     "n": "US Hostert II",
-     "sp": 1,
+     "id": 45769,
+     "n": "ENT Izeg/Sandweiler I",
+     "sp": 2,
      "s": 1,
      "u": 0,
-     "nl": 0,
-     "t": 3,
-     "g": 1,
+     "nl": 1,
+     "t": 8,
+     "g": 7,
      "pkt": 3
     },
     {
@@ -23688,6 +23688,18 @@
     },
     {
      "pl": 4,
+     "id": 45899,
+     "n": "US Hostert II",
+     "sp": 2,
+     "s": 1,
+     "u": 0,
+     "nl": 1,
+     "t": 5,
+     "g": 6,
+     "pkt": 3
+    },
+    {
+     "pl": 5,
      "id": 46003,
      "n": "Yellow Boys Weiler-la-Tour I",
      "sp": 2,
@@ -23699,7 +23711,7 @@
      "pkt": 1
     },
     {
-     "pl": 5,
+     "pl": 6,
      "id": 46355,
      "n": "ENT Biwer/Berbourg/UMW",
      "sp": 2,
@@ -23709,18 +23721,6 @@
      "t": 2,
      "g": 4,
      "pkt": 1
-    },
-    {
-     "pl": 6,
-     "id": 45769,
-     "n": "ENT Izeg/Sandweiler I",
-     "sp": 1,
-     "s": 0,
-     "u": 0,
-     "nl": 1,
-     "t": 3,
-     "g": 5,
-     "pkt": 0
     }
    ],
    "spiele": [
@@ -24035,6 +24035,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 46189,
+     "n": "CS Grevenmacher",
+     "sp": 2,
+     "s": 2,
+     "u": 0,
+     "nl": 0,
+     "t": 25,
+     "g": 4,
+     "pkt": 6
+    },
+    {
+     "pl": 2,
      "id": 44735,
      "n": "Jeunesse Junglinster II",
      "sp": 2,
@@ -24046,51 +24058,39 @@
      "pkt": 6
     },
     {
-     "pl": 2,
-     "id": 46189,
-     "n": "CS Grevenmacher",
-     "sp": 1,
-     "s": 1,
-     "u": 0,
-     "nl": 0,
-     "t": 15,
-     "g": 3,
-     "pkt": 3
-    },
-    {
      "pl": 3,
      "id": 46219,
      "n": "FC Lorentzweiler",
-     "sp": 1,
-     "s": 1,
+     "sp": 2,
+     "s": 2,
      "u": 0,
      "nl": 0,
-     "t": 6,
+     "t": 13,
      "g": 4,
-     "pkt": 3
+     "pkt": 6
     },
     {
      "pl": 4,
      "id": 45290,
      "n": "ENT Lintgen/Walferdange/Steinsel II",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
-     "t": 4,
-     "g": 6,
+     "nl": 2,
+     "t": 5,
+     "g": 16,
      "pkt": 0
     },
     {
      "pl": 5,
      "id": 46758,
      "n": "ENT Ënnersauer-Mëllerdall II",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
+     "nl": 2,
      "t": 0,
-     "g": 7,
+     "g": 14,
      "pkt": 0
     },
     {
@@ -25578,6 +25578,18 @@
     },
     {
      "pl": 2,
+     "id": 44757,
+     "n": "Victoria Rosport II",
+     "sp": 2,
+     "s": 1,
+     "u": 0,
+     "nl": 1,
+     "t": 10,
+     "g": 11,
+     "pkt": 3
+    },
+    {
+     "pl": 3,
      "id": 46761,
      "n": "ENT UMW/Biwer/Berbourg III",
      "sp": 2,
@@ -25589,27 +25601,15 @@
      "pkt": 3
     },
     {
-     "pl": 3,
+     "pl": 4,
      "id": 44911,
      "n": "Jeunesse Junglinster IV",
-     "sp": 0,
-     "s": 0,
-     "u": 0,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 0
-    },
-    {
-     "pl": 4,
-     "id": 44757,
-     "n": "Victoria Rosport II",
      "sp": 1,
      "s": 0,
      "u": 0,
      "nl": 1,
      "t": 4,
-     "g": 7,
+     "g": 6,
      "pkt": 0
     },
     {
