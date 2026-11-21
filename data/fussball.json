@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-21T14:36:43.969Z",
+ "stand": "2026-11-21T14:48:14.925Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -24564,9 +24564,9 @@
       "n": "Victoria Rosport I",
       "c": 500103
      },
-     "hs": 2,
-     "as": 1,
-     "gespielt": true,
+     "hs": null,
+     "as": null,
+     "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Berbourg, synth.)"
     },
@@ -24946,9 +24946,9 @@
       "n": "Jeunesse Junglinster II",
       "c": 500062
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 3,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain Carrière (Senningerberg, synth.)"
     },
