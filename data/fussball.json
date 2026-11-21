@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-21T15:33:33.788Z",
+ "stand": "2026-11-21T16:18:16.248Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -24418,6 +24418,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 46353,
+     "n": "ENT Biwer/Berbourg/UMW I",
+     "sp": 2,
+     "s": 2,
+     "u": 0,
+     "nl": 0,
+     "t": 4,
+     "g": 1,
+     "pkt": 6
+    },
+    {
+     "pl": 2,
      "id": 44738,
      "n": "Jeunesse Junglinster I",
      "sp": 1,
@@ -24429,21 +24441,9 @@
      "pkt": 3
     },
     {
-     "pl": 2,
-     "id": 46353,
-     "n": "ENT Biwer/Berbourg/UMW I",
-     "sp": 1,
-     "s": 1,
-     "u": 0,
-     "nl": 0,
-     "t": 2,
-     "g": 0,
-     "pkt": 3
-    },
-    {
      "pl": 3,
-     "id": 44755,
-     "n": "Victoria Rosport I",
+     "id": 45396,
+     "n": "FC Koeppchen Wormeldange",
      "sp": 1,
      "s": 0,
      "u": 1,
@@ -24454,14 +24454,14 @@
     },
     {
      "pl": 4,
-     "id": 45396,
-     "n": "FC Koeppchen Wormeldange",
-     "sp": 1,
+     "id": 44755,
+     "n": "Victoria Rosport I",
+     "sp": 2,
      "s": 0,
      "u": 1,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
+     "nl": 1,
+     "t": 1,
+     "g": 2,
      "pkt": 1
     },
     {
@@ -24800,6 +24800,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 45896,
+     "n": "US Hostert II",
+     "sp": 2,
+     "s": 2,
+     "u": 0,
+     "nl": 0,
+     "t": 7,
+     "g": 3,
+     "pkt": 6
+    },
+    {
+     "pl": 2,
      "id": 46367,
      "n": "ENT UMW/Berbourg/Biwer II",
      "sp": 1,
@@ -24808,18 +24820,6 @@
      "nl": 0,
      "t": 11,
      "g": 1,
-     "pkt": 3
-    },
-    {
-     "pl": 2,
-     "id": 45896,
-     "n": "US Hostert II",
-     "sp": 1,
-     "s": 1,
-     "u": 0,
-     "nl": 0,
-     "t": 4,
-     "g": 2,
      "pkt": 3
     },
     {
@@ -24850,12 +24850,12 @@
      "pl": 5,
      "id": 44739,
      "n": "Jeunesse Junglinster II",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
-     "t": 2,
-     "g": 4,
+     "nl": 2,
+     "t": 3,
+     "g": 7,
      "pkt": 0
     },
     {
@@ -25568,24 +25568,24 @@
      "pl": 1,
      "id": 44703,
      "n": "US Berdorf-Consdorf 01",
-     "sp": 1,
-     "s": 1,
+     "sp": 2,
+     "s": 2,
      "u": 0,
      "nl": 0,
-     "t": 8,
-     "g": 4,
-     "pkt": 3
+     "t": 14,
+     "g": 5,
+     "pkt": 6
     },
     {
      "pl": 2,
      "id": 46761,
      "n": "ENT UMW/Biwer/Berbourg III",
-     "sp": 1,
+     "sp": 2,
      "s": 1,
      "u": 0,
-     "nl": 0,
-     "t": 7,
-     "g": 4,
+     "nl": 1,
+     "t": 8,
+     "g": 10,
      "pkt": 3
     },
     {
