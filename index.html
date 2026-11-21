@@ -322,7 +322,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-21 h";
+const FASSUNG = "2026-11-21 i";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1138,7 +1138,12 @@ function seLivePlatz(t, sp) {
   if (!CHAT_URL || !SE_LIVE_KATS.includes(t.kat) || isNaN(a) || jetzt < a - 15 * 60e3 || jetzt > a + 180 * 60e3) return "";
   return `<div class="selive" hidden data-kat="${esc(t.kat)}" data-anstoss="${esc(sp.d)}" data-gegner="${esc(gegner(sp).n)}"></div>`;
 }
+// SportEasy: „time“ der Tore ist in SEKUNDEN seit Anpfiff (über alle Hälften gezählt) → Minute = ⌊s/60⌋+1 (21.11.2026).
+// „is_current_team“ fehlt oft bei unseren Teams → FCJJ auch am Namen erkennen.
+const seWir = x => !!x && (x.wir || /junglinster/i.test(x.n || ""));
+const seMinute = t => t.min == null ? null : Math.floor(t.min / 60) + 1;
 function seLiveSpiel(spiele, el) {
+  for (const s of spiele) { s.links.wir = seWir(s.links); s.rechts.wir = seWir(s.rechts); }
   const a = Date.parse(el.dataset.anstoss), g = el.dataset.gegner.toLowerCase();
   const woerter = n => n.toLowerCase().split(/[^a-z0-9à-ÿ]+/).filter(w => w.length > 3 && !["jeunesse", "junglinster"].includes(w));
   const passt = s => woerter((s.links.wir ? s.rechts : s.links).n).some(w => g.includes(w));
@@ -1153,7 +1158,7 @@ function seLiveHtml(s) {
   const l = zahl(L, "links"), r = zahl(R, "rechts");
   if (l == null && r == null) return kopf + `<div class="klein">${esc(T().seLiveLeer)}</div>`;
   const kurz = x => x.wir ? "FCJJ" : x.n.split("/")[0].trim();
-  const tore = s.tore.length ? `<div class="selive-tore">${s.tore.map(t => `⚽ ${t.min != null ? t.min + "'" + (t.halb > 1 ? ` (H${t.halb})` : "") + " " : ""}${esc((t.seite === "links" ? L : R).wir && t.name ? t.name : kurz(t.seite === "links" ? L : R))}`).join(" · ")}</div>` : "";
+  const tore = s.tore.length ? `<div class="selive-tore">${s.tore.map(t => `⚽ ${seMinute(t) != null ? seMinute(t) + "' " : ""}${esc((t.seite === "links" ? L : R).wir && t.name ? t.name : kurz(t.seite === "links" ? L : R))}`).join(" · ")}</div>` : "";
   return kopf + `<div class="selive-stand"><span>${esc(name(L))}</span><b>${l ?? 0} : ${r ?? 0}</b><span>${esc(name(R))}</span></div>${tore}<div class="klein">${esc(T().seLiveHinweis)}</div>`;
 }
 async function seLiveHolen(kat) {

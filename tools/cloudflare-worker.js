@@ -173,7 +173,8 @@ export async function live(req, env) {
   const alle = new Map();
   for (const e of [...(liste.j.results || []), ln.j?.last_event, ln.j?.next_event]) if (e?.id) alle.set(e.id, e);
   const heute = lxTag(new Date()), spiele = [];
-  const seite = x => ({ n: x.full_name || x.short_name || "", tore: x.score == null || x.score === "" ? null : +x.score, wir: !!x.is_current_team, heim: !!x.is_home });
+  // „is_current_team“ fehlt bei Spielen, die ein anderes FCJJ-Team angelegt hat → FCJJ auch am Namen erkennen (21.11.2026).
+  const seite = x => ({ n: x.full_name || x.short_name || "", tore: x.score == null || x.score === "" ? null : +x.score, wir: !!x.is_current_team || /junglinster/i.test(x.full_name || x.short_name || ""), heim: !!x.is_home });
   for (const e of alle.values()) {
     if (!e.opponent_left || !e.opponent_right || e.is_cancelled || lxTag(new Date(e.start_at)) !== heute) continue;
     const sp = { start: e.start_at, links: seite(e.opponent_left), rechts: seite(e.opponent_right), tore: [] };
