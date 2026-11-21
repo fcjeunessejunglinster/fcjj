@@ -123,6 +123,7 @@ ul.spiele li.buvzeile{display:block;padding:10px 14px}
 #knoepfe button[data-reiter="buvette"][aria-pressed="true"]{background:#9b0014;border-color:#9b0014;color:#fff;box-shadow:0 0 0 2px var(--karte),0 0 0 4px #d0021b}
 #knoepfe .buvzahl{display:inline-block;min-width:1.4em;padding:0 5px;border-radius:999px;background:#fff;color:#d0021b!important;opacity:1;font-weight:800;font-size:.75rem;line-height:1.4em}
 .buvette .tag:first-of-type{margin-top:4px}
+li.buvzeile.leer b,li.buvzeile.leer .klein,li.buvzeile.leer .buvst{font-weight:800;color:var(--text)}li.buvzeile.leer .buvst.rot{color:var(--rot);font-size:.95rem}
 .buvuebersicht{display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 16px 0;margin:0}
 .buvspiel{display:flex;align-items:center;gap:6px;margin:3px 0}.buvspiel>span{white-space:nowrap}.buvspiel>span:last-child{white-space:normal;min-width:0;overflow-wrap:anywhere}.buvspiel img.vlogo{width:20px;height:20px}
 ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
@@ -321,7 +322,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-21 c";
+const FASSUNG = "2026-11-21 d";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1629,7 +1630,7 @@ function buvetteKarte(now) {
       : n != null && n < BUV.max ? `<button type="button" class="knopf buvan" data-buv-an="${x.id}">${b.an}</button>` : "";
     const v = new Date(x.von), t = tagKey(v), kopf = t !== tag ? `</ul><div class="tag">${esc(langDatum(new Date(t + "T12:00:00Z")))}</div><ul class="spiele">` : "";
     tag = t;
-    return `${kopf}<li class="buvzeile"><div><b>${uhr(v)}–${uhr(new Date(x.bis))}</b><div class="klein">${x.spiele.map(sp => `<div class="buvspiel">${logoHtml(sp.h)}<span>${esc(sp.team)}</span> – ${logoHtml(sp.a)}<span>${esc(sp.gegner)}</span></div>`).join("")}</div></div><div class="buvaktion">${st}<span>${knopf}</span></div></li>`;
+    return `${kopf}<li class="buvzeile${!n ? " leer" : ""}"><div><b>${uhr(v)}–${uhr(new Date(x.bis))}</b><div class="klein">${x.spiele.map(sp => `<div class="buvspiel">${logoHtml(sp.h)}<span>${esc(sp.team)}</span> – ${logoHtml(sp.a)}<span>${esc(sp.gegner)}</span></div>`).join("")}</div></div><div class="buvaktion">${st}<span>${knopf}</span></div></li>`;
   }).join("");
   // Übersicht: leere, halb und ganz besetzte Schichten (vom Verein, 20.11.2026)
   const zahl = f => liste.filter(x => f(BUV.belegt[x.id] || 0)).length;
