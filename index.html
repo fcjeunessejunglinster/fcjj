@@ -119,7 +119,9 @@ ul.spiele li.buvzeile{display:block;padding:10px 14px}
 .buvdlg::backdrop{background:#0008}.buvdlg h3{margin:0 0 8px}.buvdlg label{display:block;font-size:.9rem;font-weight:600;margin:10px 0}
 .buvdlg input{display:block;width:100%;margin-top:4px;padding:10px;border:1px solid var(--linie);border-radius:8px;font:inherit;background:var(--bg);color:var(--text)}
 .buvfehler{color:var(--rot);font-weight:700;min-height:1em;margin:4px 0}.buvknoepfe{display:flex;gap:10px;justify-content:flex-end}.buvknoepfe .knopf{width:auto;padding:10px 18px}
-.buvzahl{display:inline-block;min-width:1.4em;padding:0 5px;border-radius:999px;background:var(--rot);color:#fff;font-weight:800;font-size:.75rem;line-height:1.4em}
+#knoepfe button[data-reiter="buvette"]{background:#d0021b;border-color:#d0021b;color:#fff}
+#knoepfe button[data-reiter="buvette"][aria-pressed="true"]{background:#9b0014;border-color:#9b0014;color:#fff;box-shadow:0 0 0 2px var(--karte),0 0 0 4px #d0021b}
+#knoepfe .buvzahl{display:inline-block;min-width:1.4em;padding:0 5px;border-radius:999px;background:#fff;color:#d0021b!important;opacity:1;font-weight:800;font-size:.75rem;line-height:1.4em}
 .buvette .tag:first-of-type{margin-top:4px}
 .buvuebersicht{display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 16px 0;margin:0}
 .buvspiel{display:flex;align-items:center;gap:6px;margin:3px 0}.buvspiel>span{white-space:nowrap}.buvspiel>span:last-child{white-space:normal;min-width:0;overflow-wrap:anywhere}.buvspiel img.vlogo{width:20px;height:20px}
@@ -319,7 +321,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-21 b";
+const FASSUNG = "2026-11-21 c";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
