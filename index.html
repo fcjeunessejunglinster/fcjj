@@ -322,7 +322,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-21 g";
+const FASSUNG = "2026-11-21 h";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -573,7 +573,8 @@ const tagPlus = (key, n) => { const [y, m, d] = key.split("-").map(Number); cons
 const vorbei = (sp, now) => sp.gespielt || (offen(sp) ? tagKey(now) > tagKey(new Date(sp.d)) : now - new Date(sp.d) > 3 * 3600e3);
 
 // ---- Daten ----
-let D = null, AKTIV = merk.get("reiter") || "woche";
+// Beim Öffnen immer zuerst „Buvette Help“ (vom Verein, 21.11.2026); der Liveticker-Test (#liveticker) wie bisher.
+let D = null, AKTIV = location.hash === "#liveticker" ? (merk.get("reiter") || "woche") : "buvette";
 function eigeneSpiele(t) {
   const ids = new Set([...t.ids, ...(t.mit || [])]);
   const aus = [];
