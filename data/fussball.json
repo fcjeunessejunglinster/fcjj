@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-21T18:18:51.370Z",
+ "stand": "2026-11-21T18:48:18.324Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -24181,9 +24181,9 @@
       "n": "ENT Lintgen/Walferdange/Steinsel II",
       "c": 500070
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 10,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Grevenmacher, synth.)"
     },
