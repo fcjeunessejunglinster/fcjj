@@ -322,7 +322,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-21 d";
+const FASSUNG = "2026-11-21 e";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1618,7 +1618,7 @@ function buvOffen(now) {   // Zahl am Reiter: Schichten ohne Helfer (erst wenn d
 function buvetteKarte(now) {
   if (!D) return "";
   const liste = buvSchichtenJetzt(now), b = T().buv;
-  if (!liste.length) return `<section class="karte"><h2>${b.titel}</h2><p class="hinweis">${esc(b.text)}<br>${esc(b.dank)}</p><p class="hinweis">${esc(b.keine)}</p></section>`;
+  if (!liste.length) return `<section class="karte"><h2>${b.titel}</h2><p class="hinweis">${esc(b.text)}<br><b>${esc(b.dank)}</b></p><p class="hinweis">${esc(b.keine)}</p></section>`;
   buvHolen(liste.map(x => x.id));
   const geladen = BUV.ids && liste.every(x => x.id in BUV.belegt);
   const offen = liste.filter(x => (BUV.belegt[x.id] || 0) < 1).length;
@@ -1635,7 +1635,7 @@ function buvetteKarte(now) {
   // Übersicht: leere, halb und ganz besetzte Schichten (vom Verein, 20.11.2026)
   const zahl = f => liste.filter(x => f(BUV.belegt[x.id] || 0)).length;
   const uebersicht = geladen ? `<p class="buvuebersicht"><span class="buvst rot">🔴 ${zahl(n => n < 1)} ${b.leer}</span><span class="buvst orange">🟠 ${zahl(n => n >= 1 && n < BUV.max)} ${b.halb}</span><span class="buvst gruen">🟢 ${zahl(n => n >= BUV.max)} ${b.ganz}</span></p>` : "";
-  return `<section class="karte buvette"><h2>${b.titel}</h2>${uebersicht}<p class="hinweis">${esc(b.text)}<br>${esc(b.dank)}</p>${zeilen.replace(/^<\/ul>/, "")}</ul></section>`;
+  return `<section class="karte buvette"><h2>${b.titel}</h2>${uebersicht}<p class="hinweis">${esc(b.text)}<br><b>${esc(b.dank)}</b></p>${zeilen.replace(/^<\/ul>/, "")}</ul></section>`;
 }
 function buvDialog(id) {
   const x = buvetteSchichten(D).find(s => s.id === id); if (!x) return;
