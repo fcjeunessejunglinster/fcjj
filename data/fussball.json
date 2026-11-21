@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-21T17:48:22.277Z",
+ "stand": "2026-11-21T18:18:51.370Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -23690,16 +23690,28 @@
      "pl": 4,
      "id": 46003,
      "n": "Yellow Boys Weiler-la-Tour I",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
-     "u": 0,
+     "u": 1,
      "nl": 1,
-     "t": 2,
-     "g": 3,
-     "pkt": 0
+     "t": 3,
+     "g": 4,
+     "pkt": 1
     },
     {
      "pl": 5,
+     "id": 46355,
+     "n": "ENT Biwer/Berbourg/UMW",
+     "sp": 2,
+     "s": 0,
+     "u": 1,
+     "nl": 1,
+     "t": 2,
+     "g": 4,
+     "pkt": 1
+    },
+    {
+     "pl": 6,
      "id": 45769,
      "n": "ENT Izeg/Sandweiler I",
      "sp": 1,
@@ -23708,18 +23720,6 @@
      "nl": 1,
      "t": 3,
      "g": 5,
-     "pkt": 0
-    },
-    {
-     "pl": 6,
-     "id": 46355,
-     "n": "ENT Biwer/Berbourg/UMW",
-     "sp": 1,
-     "s": 0,
-     "u": 0,
-     "nl": 1,
-     "t": 1,
-     "g": 3,
      "pkt": 0
     }
    ],
@@ -24035,6 +24035,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 44735,
+     "n": "Jeunesse Junglinster II",
+     "sp": 2,
+     "s": 2,
+     "u": 0,
+     "nl": 0,
+     "t": 11,
+     "g": 1,
+     "pkt": 6
+    },
+    {
+     "pl": 2,
      "id": 46189,
      "n": "CS Grevenmacher",
      "sp": 1,
@@ -24043,18 +24055,6 @@
      "nl": 0,
      "t": 15,
      "g": 3,
-     "pkt": 3
-    },
-    {
-     "pl": 2,
-     "id": 44735,
-     "n": "Jeunesse Junglinster II",
-     "sp": 1,
-     "s": 1,
-     "u": 0,
-     "nl": 0,
-     "t": 7,
-     "g": 0,
      "pkt": 3
     },
     {
@@ -24097,12 +24097,12 @@
      "pl": 6,
      "id": 46268,
      "n": "ENT Canach/Mensdorf/Munsbach II",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
-     "t": 3,
-     "g": 15,
+     "nl": 2,
+     "t": 4,
+     "g": 19,
      "pkt": 0
     }
    ],
@@ -24432,28 +24432,40 @@
      "pl": 2,
      "id": 44738,
      "n": "Jeunesse Junglinster I",
-     "sp": 1,
+     "sp": 2,
      "s": 1,
-     "u": 0,
+     "u": 1,
      "nl": 0,
-     "t": 9,
-     "g": 2,
-     "pkt": 3
+     "t": 10,
+     "g": 3,
+     "pkt": 4
     },
     {
      "pl": 3,
-     "id": 45396,
-     "n": "FC Koeppchen Wormeldange",
-     "sp": 1,
-     "s": 0,
-     "u": 1,
-     "nl": 0,
-     "t": 0,
-     "g": 0,
-     "pkt": 1
+     "id": 46022,
+     "n": "Union Remich/Bous I",
+     "sp": 2,
+     "s": 1,
+     "u": 0,
+     "nl": 1,
+     "t": 5,
+     "g": 9,
+     "pkt": 3
     },
     {
      "pl": 4,
+     "id": 45396,
+     "n": "FC Koeppchen Wormeldange",
+     "sp": 2,
+     "s": 0,
+     "u": 2,
+     "nl": 0,
+     "t": 1,
+     "g": 1,
+     "pkt": 2
+    },
+    {
+     "pl": 5,
      "id": 44755,
      "n": "Victoria Rosport I",
      "sp": 2,
@@ -24465,27 +24477,15 @@
      "pkt": 1
     },
     {
-     "pl": 5,
+     "pl": 6,
      "id": 46192,
      "n": "CS Grevenmacher I",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
+     "nl": 2,
      "t": 0,
-     "g": 2,
-     "pkt": 0
-    },
-    {
-     "pl": 6,
-     "id": 46022,
-     "n": "Union Remich/Bous I",
-     "sp": 1,
-     "s": 0,
-     "u": 0,
-     "nl": 1,
-     "t": 2,
-     "g": 9,
+     "g": 5,
      "pkt": 0
     }
    ],
@@ -24800,6 +24800,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 46367,
+     "n": "ENT UMW/Berbourg/Biwer II",
+     "sp": 2,
+     "s": 2,
+     "u": 0,
+     "nl": 0,
+     "t": 14,
+     "g": 2,
+     "pkt": 6
+    },
+    {
+     "pl": 2,
      "id": 45896,
      "n": "US Hostert II",
      "sp": 2,
@@ -24809,18 +24821,6 @@
      "t": 7,
      "g": 3,
      "pkt": 6
-    },
-    {
-     "pl": 2,
-     "id": 46367,
-     "n": "ENT UMW/Berbourg/Biwer II",
-     "sp": 1,
-     "s": 1,
-     "u": 0,
-     "nl": 0,
-     "t": 11,
-     "g": 1,
-     "pkt": 3
     },
     {
      "pl": 3,
@@ -24838,12 +24838,12 @@
      "pl": 4,
      "id": 45374,
      "n": "Résidence Walferdange II",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
-     "t": 2,
-     "g": 4,
+     "nl": 2,
+     "t": 3,
+     "g": 7,
      "pkt": 0
     },
     {
@@ -25183,6 +25183,30 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 46216,
+     "n": "FC Lorentzweiler II",
+     "sp": 2,
+     "s": 2,
+     "u": 0,
+     "nl": 0,
+     "t": 21,
+     "g": 3,
+     "pkt": 6
+    },
+    {
+     "pl": 2,
+     "id": 45596,
+     "n": "Marisca Mersch II",
+     "sp": 2,
+     "s": 2,
+     "u": 0,
+     "nl": 0,
+     "t": 16,
+     "g": 2,
+     "pkt": 6
+    },
+    {
+     "pl": 3,
      "id": 46116,
      "n": "AS Rupensia Lusitanos Larochette",
      "sp": 1,
@@ -25190,30 +25214,6 @@
      "u": 0,
      "nl": 0,
      "t": 14,
-     "g": 1,
-     "pkt": 3
-    },
-    {
-     "pl": 2,
-     "id": 45596,
-     "n": "Marisca Mersch II",
-     "sp": 1,
-     "s": 1,
-     "u": 0,
-     "nl": 0,
-     "t": 11,
-     "g": 2,
-     "pkt": 3
-    },
-    {
-     "pl": 3,
-     "id": 46216,
-     "n": "FC Lorentzweiler II",
-     "sp": 1,
-     "s": 1,
-     "u": 0,
-     "nl": 0,
-     "t": 8,
      "g": 1,
      "pkt": 3
     },
@@ -25231,26 +25231,26 @@
     },
     {
      "pl": 5,
-     "id": 44636,
-     "n": "Minerva Lintgen",
-     "sp": 1,
+     "id": 46179,
+     "n": "Blo-Wäiss Medernach II",
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
-     "t": 2,
-     "g": 11,
+     "nl": 2,
+     "t": 1,
+     "g": 19,
      "pkt": 0
     },
     {
      "pl": 6,
-     "id": 46179,
-     "n": "Blo-Wäiss Medernach II",
-     "sp": 1,
+     "id": 44636,
+     "n": "Minerva Lintgen",
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
-     "t": 1,
-     "g": 14,
+     "nl": 2,
+     "t": 4,
+     "g": 24,
      "pkt": 0
     }
    ],
@@ -25349,9 +25349,9 @@
       "n": "Marisca Mersch II",
       "c": 500080
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 0,
+     "as": 5,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Stegen, synth.)"
     },
