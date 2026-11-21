@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-21T11:18:16.056Z",
+ "stand": "2026-11-21T12:18:16.726Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -22755,13 +22755,13 @@
      "pl": 1,
      "id": 46225,
      "n": "FC Lorentzweiler",
-     "sp": 1,
-     "s": 1,
+     "sp": 2,
+     "s": 2,
      "u": 0,
      "nl": 0,
-     "t": 7,
+     "t": 10,
      "g": 2,
-     "pkt": 3
+     "pkt": 6
     },
     {
      "pl": 2,
@@ -22813,18 +22813,6 @@
     },
     {
      "pl": 6,
-     "id": 46518,
-     "n": "ENT Feulen/Grevels/Heiderscheid",
-     "sp": 1,
-     "s": 0,
-     "u": 0,
-     "nl": 1,
-     "t": 2,
-     "g": 6,
-     "pkt": 0
-    },
-    {
-     "pl": 7,
      "id": 46746,
      "n": "ENT Schieren/Colmarberg/Erpeldange II",
      "sp": 1,
@@ -22833,6 +22821,18 @@
      "nl": 1,
      "t": 2,
      "g": 7,
+     "pkt": 0
+    },
+    {
+     "pl": 7,
+     "id": 46518,
+     "n": "ENT Feulen/Grevels/Heiderscheid",
+     "sp": 2,
+     "s": 0,
+     "u": 0,
+     "nl": 2,
+     "t": 2,
+     "g": 9,
      "pkt": 0
     }
    ],
