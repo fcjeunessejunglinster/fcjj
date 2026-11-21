@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-21T17:18:18.796Z",
+ "stand": "2026-11-21T17:48:22.277Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -24201,9 +24201,9 @@
       "n": "ENT Canach/Mensdorf/Munsbach II",
       "c": 500019
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 4,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
@@ -24584,9 +24584,9 @@
       "n": "Jeunesse Junglinster I",
       "c": 500062
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 1,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Am Ga (Wormeldange, synth.)"
     },
@@ -24604,9 +24604,9 @@
       "n": "CS Grevenmacher I",
       "c": 500050
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 3,
+     "as": 0,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain um Gréin (Remich, synth.)"
     },
@@ -25369,9 +25369,9 @@
       "n": "FC Lorentzweiler II",
       "c": 500071
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 2,
+     "as": 13,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Lintgen, synth.)"
     },
