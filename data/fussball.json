@@ -12840,7 +12840,7 @@
     },
     {
      "id": 6690075,
-     "d": "2026-11-22T12:30:00+01:00",
+     "d": "2026-11-22T09:30:00+01:00",
      "tag": 7,
      "h": {
       "id": 44906,
@@ -12856,7 +12856,8 @@
      "as": null,
      "gespielt": false,
      "forfait": false,
-     "ort": "Terrain 2 (Junglinster, synth.)"
+     "ort": "Terrain 2 (Junglinster, synth.)",
+     "geaendert": true
     },
     {
      "id": 6690081,

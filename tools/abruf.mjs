@@ -300,6 +300,17 @@ async function kategorienFinden(zeit, club, alt) {
   return { tag: heute, saison: zeit.seasonId, ids: gefunden, gesehen };
 }
 
+// Von Hand geänderte Anstoßzeiten (vom Verein): data/aenderungen.json { "<Spiel-id>": { "d": "<neu>", "flf": "<FLF-Zeit>" } }.
+// Gilt nur, solange die FLF noch die alte Zeit („flf“) hat; ändert die FLF selbst, gewinnt die FLF.
+export function aenderungen(d) {
+  let a = {};
+  try { a = JSON.parse(readFileSync(new URL("../data/aenderungen.json", import.meta.url), "utf8")); } catch (e) { return; }
+  for (const k of Object.values(d.klassen || {})) for (const sp of k.spiele || []) {
+    const x = a[sp.id];
+    if (x?.d && (!x.flf || x.flf === sp.d)) { sp.d = x.d; sp.geaendert = true; }
+  }
+}
+
 async function main() {
   const alt = existsSync(OUT) ? JSON.parse(readFileSync(OUT, "utf8")) : {};
   const d = await gq(Q_DEFAULTS);
@@ -342,6 +353,7 @@ async function main() {
   try { neu.nati = await (await import("./nati.mjs")).natiHolen(); console.log("Nationalmannschaft:", neu.nati.spiele.length, "Spiele,", neu.nati.gruppe?.n || "ohne Tabelle"); }
   catch (e) { console.error("Nationalmannschaft:", e.message); neu.nati = alt.nati || null; }
   for (const t of neu.teams) t.datei = dateiName(t);
+  aenderungen(neu);
   try { neu.orte = await orteFinden(neu, alt); } catch (e) { console.error("Orte:", e.message); neu.orte = alt.orte || null; }
 
   if (JSON.stringify({ ...alt, stand: 0, kategorien: 0 }) === JSON.stringify({ ...neu, stand: 0, kategorien: 0 }) && alt.kategorien?.tag === kategorien.tag && !process.env.NEU_SUCHEN) {
