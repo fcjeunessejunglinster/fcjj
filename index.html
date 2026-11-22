@@ -323,7 +323,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-22 d";
+const FASSUNG = "2026-11-22 e";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -2145,6 +2145,18 @@ async function laden() {
 }
 try { VIDEOS = JSON.parse(merk.get("videos")) || {}; } catch (e) {}
 try { LOGOS = JSON.parse(merk.get("logos")) || {}; } catch (e) {}
+// Nutzerzähler (vom Verein, 22.11.2026): einmal pro Tag und Handy ein anonymes „heute da“ an den Worker
+// (nur installiert/Browser, Sprache, Android/iPhone; keine ID). Statistik: Worker /statistik?key=…
+function zaehlen() {
+  const heute = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Luxembourg" }).format(new Date());
+  if (merk.get("gezaehlt") === heute || location.hostname === "localhost") return;
+  const ua = navigator.userAgent || "", os = /android/i.test(ua) ? "android" : /iphone|ipad|ipod/i.test(ua) || (/macintosh/i.test(ua) && navigator.maxTouchPoints > 1) ? "ios" : "andere";
+  const modus = matchMedia("(display-mode: standalone)").matches || navigator.standalone ? "app" : "web";
+  fetch("https://fcjj1.gilles-emeringer.workers.dev/zaehler", { method: "POST", keepalive: true, headers: { "content-type": "text/plain" },
+    body: JSON.stringify({ modus, lang: LANG, os }) }).then(r => { if (r.ok || r.status === 204) merk.set("gezaehlt", heute); }).catch(() => {});
+}
+setTimeout(zaehlen, 3000);
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") zaehlen(); });
 // Stealth mode: 5× schnell auf das Logo oben links tippen schaltet den Neon-Look an oder aus (gespeichert).
 {
   const an = x => { document.documentElement.classList.toggle("stealth", x); document.querySelector('meta[name="theme-color"]')?.setAttribute("content", x ? "#ff3d7f" : "#111111"); };

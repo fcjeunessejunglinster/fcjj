@@ -344,6 +344,43 @@ async function buvetteListe(env, url) {
     { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-robots-tag": "noindex" } });
 }
 
+// ---------------------------------------------------------------- Nutzerzähler (vom Verein, 22.11.2026)
+// Jedes Handy meldet sich höchstens einmal pro Tag (die App merkt sich den Tag). Gespeichert werden nur Summen je Tag:
+// alle, installierte App/Browser, Sprache, Android/iPhone/andere — keine ID, keine IP, kein Cookie.
+// Ansehen: /statistik?key=<BUVETTE_KEY>.
+const zCors = { "access-control-allow-origin": ORIGIN, "access-control-allow-methods": "POST, OPTIONS", "access-control-allow-headers": "content-type" };
+export async function zaehler(req, env) {
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: zCors });
+  if (req.method !== "POST" || !env.PUSH) return new Response(null, { status: 204, headers: zCors });
+  if ((req.headers.get("origin") || "") !== ORIGIN) return new Response(null, { status: 403, headers: zCors });
+  let x = {}; try { x = JSON.parse(await req.text()); } catch (e) {}
+  const tag = lxTag(new Date()), key = "zahl:" + tag;
+  let z = {}; try { z = JSON.parse(await env.PUSH.get(key)) || {}; } catch (e) {}
+  const plus = k => { z[k] = (z[k] || 0) + 1; };
+  plus("alle");
+  plus(x.modus === "app" ? "app" : "web");
+  plus(["de", "en", "fr"].includes(x.lang) ? x.lang : "andere_sprache");
+  plus(["android", "ios"].includes(x.os) ? x.os : "andere");
+  await env.PUSH.put(key, JSON.stringify(z), { expirationTtl: 400 * 86400 });
+  return new Response(null, { status: 204, headers: zCors });
+}
+async function statistik(env, url) {
+  if (!env.BUVETTE_KEY || url.searchParams.get("key") !== env.BUVETTE_KEY)
+    return new Response("Kein Zugang.", { status: 403, headers: { "content-type": "text/plain; charset=utf-8" } });
+  const tage = Array.from({ length: 42 }, (_, i) => lxTag(new Date(Date.now() - i * 864e5)));
+  const werte = await Promise.all(tage.map(async t => { try { return JSON.parse(await env.PUSH.get("zahl:" + t)) || {}; } catch (e) { return {}; } }));
+  const max = Math.max(1, ...werte.map(w => w.alle || 0));
+  const fmt = t => new Date(t + "T12:00:00Z").toLocaleDateString("de-DE", { weekday: "short", day: "numeric", month: "numeric" });
+  const pct = (w, k) => w.alle ? Math.round(100 * (w[k] || 0) / w.alle) + " %" : "–";
+  const zeilen = tage.map((t, i) => { const w = werte[i]; return `<tr><td>${fmt(t)}</td><td class="z"><b>${w.alle || 0}</b></td><td><div class="bar" style="width:${Math.round(100 * (w.alle || 0) / max)}%"></div></td><td class="z">${pct(w, "app")}</td><td class="z">${w.android || 0} / ${w.ios || 0} / ${w.andere || 0}</td><td class="z">${w.de || 0} / ${w.fr || 0} / ${w.en || 0}</td></tr>`; }).join("");
+  const sum = n => werte.slice(0, n).reduce((a, w) => a + (w.alle || 0), 0);
+  return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>FCJJ-App Statistik</title>
+<style>body{font:15px system-ui,sans-serif;margin:16px;color:#111}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #eee;padding:6px;text-align:left;white-space:nowrap}.z{text-align:right}.bar{height:12px;background:#c8102e;border-radius:3px;min-width:2px}td:nth-child(3){width:40%}small{color:#666}</style>
+<h1>📊 FCJJ-App: Nutzer pro Tag</h1><p>Heute: <b>${werte[0].alle || 0}</b> · letzte 7 Tage zusammen: <b>${sum(7)}</b> · letzte 30 Tage: <b>${sum(30)}</b><br><small>Jedes Handy zählt höchstens einmal pro Tag (wer die App an 3 Tagen öffnet, zählt in der Summe 3-mal). Keine persönlichen Daten.</small></p>
+<table><tr><th>Tag</th><th class="z">Nutzer</th><th></th><th class="z">installiert</th><th class="z">Android / iPhone / andere</th><th class="z">DE / FR / EN</th></tr>${zeilen}</table>`,
+    { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-robots-tag": "noindex" } });
+}
+
 export default {
   async scheduled(event, env, ctx) {
     if (abrufFaellig(new Date(event.scheduledTime))) ctx.waitUntil(anstossen(env));
@@ -353,6 +390,8 @@ export default {
     if (new URL(req.url).pathname === "/frage") return chat(req, env);
     const pfad = new URL(req.url).pathname;
     if (pfad === "/buvette" || pfad === "/buvette/liste") return buvette(req, env, pfad);
+    if (pfad === "/zaehler") return zaehler(req, env);
+    if (pfad === "/statistik") return statistik(env, new URL(req.url));
     if (new URL(req.url).pathname === "/live") return live(req, env);
     const jetzt = new Date();
     let naechster = null;
