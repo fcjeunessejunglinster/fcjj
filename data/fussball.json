@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T17:48:18.684Z",
+ "stand": "2026-11-22T18:18:20.132Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -410,16 +410,28 @@
      "pl": 1,
      "id": 44720,
      "n": "Jeunesse Junglinster",
-     "sp": 10,
-     "s": 7,
+     "sp": 11,
+     "s": 8,
      "u": 1,
      "nl": 2,
-     "t": 31,
+     "t": 34,
      "g": 12,
-     "pkt": 22
+     "pkt": 25
     },
     {
      "pl": 2,
+     "id": 44643,
+     "n": "Union 05 Kayl-Tétange",
+     "sp": 11,
+     "s": 7,
+     "u": 2,
+     "nl": 2,
+     "t": 28,
+     "g": 15,
+     "pkt": 23
+    },
+    {
+     "pl": 3,
      "id": 44825,
      "n": "Tricolore Gasperich",
      "sp": 10,
@@ -429,18 +441,6 @@
      "t": 24,
      "g": 12,
      "pkt": 22
-    },
-    {
-     "pl": 3,
-     "id": 44643,
-     "n": "Union 05 Kayl-Tétange",
-     "sp": 10,
-     "s": 6,
-     "u": 2,
-     "nl": 2,
-     "t": 23,
-     "g": 14,
-     "pkt": 20
     },
     {
      "pl": 4,
@@ -456,6 +456,18 @@
     },
     {
      "pl": 5,
+     "id": 44629,
+     "n": "FC Les Aiglons Dalheim",
+     "sp": 11,
+     "s": 5,
+     "u": 1,
+     "nl": 5,
+     "t": 24,
+     "g": 19,
+     "pkt": 16
+    },
+    {
+     "pl": 6,
      "id": 44877,
      "n": "FC Stengefort",
      "sp": 10,
@@ -467,7 +479,7 @@
      "pkt": 16
     },
     {
-     "pl": 6,
+     "pl": 7,
      "id": 44697,
      "n": "US Berdorf-Consdorf 01",
      "sp": 10,
@@ -479,19 +491,19 @@
      "pkt": 15
     },
     {
-     "pl": 7,
-     "id": 44629,
-     "n": "FC Les Aiglons Dalheim",
-     "sp": 10,
+     "pl": 8,
+     "id": 44959,
+     "n": "Alliance Äischdall Hobscheid-Eischen",
+     "sp": 11,
      "s": 4,
-     "u": 1,
+     "u": 2,
      "nl": 5,
-     "t": 21,
-     "g": 18,
-     "pkt": 13
+     "t": 22,
+     "g": 24,
+     "pkt": 14
     },
     {
-     "pl": 8,
+     "pl": 9,
      "id": 44915,
      "n": "Etoile Sportive Schouweiler",
      "sp": 10,
@@ -500,18 +512,6 @@
      "nl": 3,
      "t": 18,
      "g": 20,
-     "pkt": 13
-    },
-    {
-     "pl": 9,
-     "id": 44978,
-     "n": "Red Boys Aspelt",
-     "sp": 10,
-     "s": 4,
-     "u": 1,
-     "nl": 5,
-     "t": 23,
-     "g": 30,
      "pkt": 13
     },
     {
@@ -528,50 +528,50 @@
     },
     {
      "pl": 11,
-     "id": 44959,
-     "n": "Alliance Äischdall Hobscheid-Eischen",
-     "sp": 10,
-     "s": 3,
-     "u": 2,
-     "nl": 5,
-     "t": 18,
-     "g": 23,
-     "pkt": 11
+     "id": 44978,
+     "n": "Red Boys Aspelt",
+     "sp": 11,
+     "s": 4,
+     "u": 1,
+     "nl": 6,
+     "t": 24,
+     "g": 35,
+     "pkt": 13
     },
     {
      "pl": 12,
      "id": 45165,
      "n": "CS Oberkorn",
-     "sp": 10,
+     "sp": 11,
      "s": 3,
      "u": 2,
-     "nl": 5,
+     "nl": 6,
      "t": 17,
-     "g": 22,
+     "g": 25,
      "pkt": 11
     },
     {
      "pl": 13,
      "id": 44679,
      "n": "FC Ehlerange",
-     "sp": 10,
+     "sp": 11,
      "s": 3,
      "u": 0,
-     "nl": 7,
-     "t": 9,
-     "g": 19,
+     "nl": 8,
+     "t": 10,
+     "g": 22,
      "pkt": 9
     },
     {
      "pl": 14,
      "id": 44562,
      "n": "Etoile Sportive Clemency",
-     "sp": 10,
+     "sp": 11,
      "s": 1,
      "u": 1,
-     "nl": 8,
-     "t": 19,
-     "g": 37,
+     "nl": 9,
+     "t": 20,
+     "g": 41,
      "pkt": 4
     }
    ],
@@ -22383,6 +22383,18 @@
     },
     {
      "pl": 2,
+     "id": 44729,
+     "n": "Jeunesse Junglinster",
+     "sp": 2,
+     "s": 1,
+     "u": 1,
+     "nl": 0,
+     "t": 8,
+     "g": 3,
+     "pkt": 4
+    },
+    {
+     "pl": 3,
      "id": 46241,
      "n": "Avenir Beggen",
      "sp": 1,
@@ -22392,18 +22404,6 @@
      "t": 15,
      "g": 0,
      "pkt": 3
-    },
-    {
-     "pl": 3,
-     "id": 44729,
-     "n": "Jeunesse Junglinster",
-     "sp": 1,
-     "s": 0,
-     "u": 1,
-     "nl": 0,
-     "t": 3,
-     "g": 3,
-     "pkt": 1
     },
     {
      "pl": 4,
@@ -22421,12 +22421,12 @@
      "pl": 5,
      "id": 45389,
      "n": "ENT Wormeldange/Munsbach/Hostert",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
+     "nl": 2,
      "t": 1,
-     "g": 17,
+     "g": 22,
      "pkt": 0
     },
     {
@@ -23270,6 +23270,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 44963,
+     "n": "Alliance Äischdall Hobscheid-Eischen",
+     "sp": 2,
+     "s": 2,
+     "u": 0,
+     "nl": 0,
+     "t": 18,
+     "g": 6,
+     "pkt": 6
+    },
+    {
+     "pl": 2,
      "id": 44742,
      "n": "Jeunesse Junglinster",
      "sp": 2,
@@ -23279,18 +23291,6 @@
      "t": 5,
      "g": 3,
      "pkt": 4
-    },
-    {
-     "pl": 2,
-     "id": 44963,
-     "n": "Alliance Äischdall Hobscheid-Eischen",
-     "sp": 1,
-     "s": 1,
-     "u": 0,
-     "nl": 0,
-     "t": 13,
-     "g": 3,
-     "pkt": 3
     },
     {
      "pl": 3,
@@ -23320,12 +23320,12 @@
      "pl": 5,
      "id": 45465,
      "n": "FC Mamer 32 II",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
-     "t": 0,
-     "g": 4,
+     "nl": 2,
+     "t": 3,
+     "g": 9,
      "pkt": 0
     },
     {
