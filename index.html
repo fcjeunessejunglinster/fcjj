@@ -323,7 +323,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-22 c";
+const FASSUNG = "2026-11-22 d";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1136,7 +1136,10 @@ const SE_LIVE_KATS = ["U7", "U9", "U11", "U13", "U15", "U17", "U19", "WU11", "WU
 const SE_LIVE = new Map();   // Kategorie → { zeit, spiele, laeuft }
 function seLivePlatz(t, sp) {
   const a = Date.parse(sp.d), jetzt = Date.now();
-  if (!CHAT_URL || !SE_LIVE_KATS.includes(t.kat) || isNaN(a) || jetzt < a - 15 * 60e3 || jetzt > a + 180 * 60e3) return "";
+  // Bis zum Abend sichtbar (vom Verein, 22.11.2026): am Spieltag bis 23 Uhr, mindestens 3 Std. nach Anstoß.
+  const abend = Date.parse(tagKey(new Date(a)) + "T23:00:00" + (/[+-]\d\d:\d\d$/.test(sp.d) ? sp.d.slice(-6) : "+01:00"));
+  const bis = Math.max(a + 180 * 60e3, isNaN(abend) ? 0 : abend);
+  if (!CHAT_URL || !SE_LIVE_KATS.includes(t.kat) || isNaN(a) || jetzt < a - 15 * 60e3 || jetzt > bis) return "";
   return `<div class="selive" hidden data-kat="${esc(t.kat)}" data-anstoss="${esc(sp.d)}" data-gegner="${esc(gegner(sp).n)}"></div>`;
 }
 // SportEasy: „time“ der Tore ist in SEKUNDEN seit Anpfiff (über alle Hälften gezählt) → Minute = ⌊s/60⌋+1 (21.11.2026).
