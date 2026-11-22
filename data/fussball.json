@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T21:50:04.939Z",
+ "stand": "2026-11-22T22:33:24.246Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -480,6 +480,18 @@
     },
     {
      "pl": 7,
+     "id": 44915,
+     "n": "Etoile Sportive Schouweiler",
+     "sp": 11,
+     "s": 4,
+     "u": 4,
+     "nl": 3,
+     "t": 21,
+     "g": 20,
+     "pkt": 16
+    },
+    {
+     "pl": 8,
      "id": 44877,
      "n": "FC Stengefort",
      "sp": 11,
@@ -491,7 +503,7 @@
      "pkt": 16
     },
     {
-     "pl": 8,
+     "pl": 9,
      "id": 44959,
      "n": "Alliance Äischdall Hobscheid-Eischen",
      "sp": 11,
@@ -503,27 +515,15 @@
      "pkt": 14
     },
     {
-     "pl": 9,
-     "id": 44915,
-     "n": "Etoile Sportive Schouweiler",
-     "sp": 10,
-     "s": 3,
-     "u": 4,
-     "nl": 3,
-     "t": 18,
-     "g": 20,
-     "pkt": 13
-    },
-    {
      "pl": 10,
      "id": 45157,
      "n": "Minière Lasauvage",
-     "sp": 10,
+     "sp": 11,
      "s": 4,
      "u": 1,
-     "nl": 5,
+     "nl": 6,
      "t": 18,
-     "g": 26,
+     "g": 29,
      "pkt": 13
     },
     {
@@ -23270,6 +23270,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 46231,
+     "n": "Avenir Beggen",
+     "sp": 2,
+     "s": 2,
+     "u": 0,
+     "nl": 0,
+     "t": 15,
+     "g": 0,
+     "pkt": 6
+    },
+    {
+     "pl": 2,
      "id": 44963,
      "n": "Alliance Äischdall Hobscheid-Eischen",
      "sp": 2,
@@ -23281,7 +23293,7 @@
      "pkt": 6
     },
     {
-     "pl": 2,
+     "pl": 3,
      "id": 44742,
      "n": "Jeunesse Junglinster",
      "sp": 2,
@@ -23293,27 +23305,15 @@
      "pkt": 4
     },
     {
-     "pl": 3,
-     "id": 46231,
-     "n": "Avenir Beggen",
-     "sp": 1,
-     "s": 1,
-     "u": 0,
-     "nl": 0,
-     "t": 4,
-     "g": 0,
-     "pkt": 3
-    },
-    {
      "pl": 4,
      "id": 45328,
      "n": "FC Kopstal 33",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 1,
-     "nl": 0,
+     "nl": 1,
      "t": 1,
-     "g": 1,
+     "g": 12,
      "pkt": 1
     },
     {
