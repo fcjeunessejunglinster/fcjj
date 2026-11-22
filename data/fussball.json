@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T17:18:14.721Z",
+ "stand": "2026-11-22T17:33:17.195Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -2010,9 +2010,9 @@
       "n": "Jeunesse Junglinster",
       "c": 500062
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 0,
+     "as": 3,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Camille Mersch (synth.)"
     },
@@ -22537,9 +22537,9 @@
       "n": "ENT Wormeldange/Munsbach/Hostert",
       "c": 1003703
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 5,
+     "as": 0,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
