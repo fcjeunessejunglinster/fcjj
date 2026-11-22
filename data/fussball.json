@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T19:03:17.153Z",
+ "stand": "2026-11-22T19:18:13.087Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -2110,9 +2110,9 @@
       "n": "Tricolore Gasperich",
       "c": 500047
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 2,
+     "as": 2,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Norbert Hubsch (Sandweiler)"
     },
@@ -12164,7 +12164,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Hobscheid)"
     },
