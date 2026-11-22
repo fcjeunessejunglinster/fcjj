@@ -179,12 +179,22 @@ export async function live(req, env) {
     if (!e.opponent_left || !e.opponent_right || e.is_cancelled || lxTag(new Date(e.start_at)) !== heute) continue;
     const sp = { start: e.start_at, links: seite(e.opponent_left), rechts: seite(e.opponent_right), tore: [] };
     const ls = await seHolen(env, `/v2.1/teams/${team}/events/${e.id}/live-stats/events/`);
-    for (const a of ls.j?.results || []) if (a.action_slug_name === "football_goal" && !a.is_missed) {
-      const s = a.opponent === "opponent_left" ? "links" : "rechts", wir = sp[s].wir;
-      const name = wir && a.profile?.first_name ? String(a.profile.first_name).trim().split(/\s+/)[0].slice(0, 20) : null;
-      sp.tore.push({ min: a.time ?? null, halb: a.period ?? null, seite: s, name });
+    // Alle Live-Aktionen (vom Verein, 22.11.2026): Art, Zeit (Sekunden), Seite, „verfehlt“ und bei FCJJ nur Vornamen
+    // (Spieler und, falls vorhanden, zweite Person wie Vorlage oder Einwechslung). Tore zusätzlich wie bisher in „tore“.
+    const vorname = p => p?.first_name ? String(p.first_name).trim().split(/\s+/)[0].slice(0, 20) : null;
+    sp.aktionen = [];
+    for (const a of ls.j?.results || []) {
+      if (!a?.action_slug_name) continue;
+      const s = a.opponent === "opponent_left" ? "links" : a.opponent === "opponent_right" ? "rechts" : null, wir = s && sp[s].wir;
+      const zweit = a.related_profile || a.second_profile || a.assist_profile || a.profile_in || null;
+      sp.aktionen.push({ typ: String(a.action_slug_name).slice(0, 60), min: a.time ?? null, halb: a.period ?? null, seite: s,
+        verfehlt: !!a.is_missed, name: wir ? vorname(a.profile) : null, name2: wir ? vorname(zweit) : null });
+      if (a.action_slug_name === "football_goal" && !a.is_missed) sp.tore.push({ min: a.time ?? null, halb: a.period ?? null, seite: s, name: wir ? vorname(a.profile) : null });
     }
-    sp.tore.sort((a, b) => (a.halb ?? 0) - (b.halb ?? 0) || (a.min ?? 0) - (b.min ?? 0));
+    const zeit = (a, b) => (a.halb ?? 0) - (b.halb ?? 0) || (a.min ?? 0) - (b.min ?? 0);
+    sp.tore.sort(zeit); sp.aktionen.sort(zeit);
+    // Nur die Feldnamen (keine Werte), damit man neue Aktionsarten und Felder erkennen kann.
+    sp.felder = [...new Set((ls.j?.results || []).flatMap(x => Object.keys(x || {})))].slice(0, 40);
     spiele.push(sp);
   }
   const antwort = liveJson({ stand: new Date().toISOString(), spiele }, 200, 60);

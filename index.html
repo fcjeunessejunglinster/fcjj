@@ -95,6 +95,7 @@ header .innen>div:nth-child(2){min-width:0}
 .selive-stand span:first-child{text-align:right}
 .selive-stand span:last-child{text-align:left}
 .selive-tore{font-size:13px;margin-top:6px}
+.se-zeitleiste{display:flex;flex-direction:column;gap:3px;margin-top:8px}.se-akt{display:flex;gap:8px;font-size:13px}.se-akt.tor{font-weight:700}.se-min{flex:none;width:2.6em;text-align:right;color:var(--leise);font-variant-numeric:tabular-nums}
 .selive .klein{font-size:12px;color:var(--leise);margin-top:4px}
 .fupa .fupatext{padding:12px 14px 0;font-size:14px;color:var(--leise)}
 .fupa .fupatext a{color:var(--text)}
@@ -322,7 +323,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-22 b";
+const FASSUNG = "2026-11-22 c";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1150,6 +1151,38 @@ function seLiveSpiel(spiele, el) {
   const nah = spiele.filter(s => Math.abs(Date.parse(s.start) - a) <= 90 * 60e3);
   return nah.find(passt) || (nah.length === 1 && spiele.length === 1 ? nah[0] : null);
 }
+// Alle Live-Aktionen von SportEasy als Zeitleiste (vom Verein, 22.11.2026). Bekannte Arten mit Symbol und Text,
+// unbekannte mit dem Namen von SportEasy (ohne „football_“). Bei FCJJ der Vorname, beim Gegner der Vereinsname.
+const SE_AKTION = {
+  football_goal: ["⚽", { de: "Tor", en: "Goal", fr: "But" }],
+  football_own_goal: ["⚽", { de: "Eigentor", en: "Own goal", fr: "But contre son camp" }],
+  football_penalty: ["🎯", { de: "Elfmeter", en: "Penalty", fr: "Penalty" }],
+  football_penalty_goal: ["🎯", { de: "Elfmetertor", en: "Penalty goal", fr: "But sur penalty" }],
+  football_assist: ["👟", { de: "Vorlage", en: "Assist", fr: "Passe décisive" }],
+  football_yellow_card: ["🟨", { de: "Gelbe Karte", en: "Yellow card", fr: "Carton jaune" }],
+  football_red_card: ["🟥", { de: "Rote Karte", en: "Red card", fr: "Carton rouge" }],
+  football_second_yellow_card: ["🟨🟥", { de: "Gelb-Rot", en: "Second yellow", fr: "Deuxième jaune" }],
+  football_substitution: ["🔄", { de: "Wechsel", en: "Substitution", fr: "Remplacement" }],
+  football_shot: ["🥅", { de: "Torschuss", en: "Shot", fr: "Tir" }],
+  football_shot_on_target: ["🥅", { de: "Schuss aufs Tor", en: "Shot on target", fr: "Tir cadré" }],
+  football_save: ["🧤", { de: "Parade", en: "Save", fr: "Arrêt" }],
+  football_corner: ["🚩", { de: "Ecke", en: "Corner", fr: "Corner" }],
+  football_offside: ["🚩", { de: "Abseits", en: "Offside", fr: "Hors-jeu" }],
+  football_foul: ["⚠️", { de: "Foul", en: "Foul", fr: "Faute" }],
+  football_free_kick: ["🦶", { de: "Freistoß", en: "Free kick", fr: "Coup franc" }],
+};
+const SE_VERFEHLT = { de: "verfehlt", en: "missed", fr: "manqué" };
+function seAktionenHtml(s, L, R, kurz) {
+  const zeilen = s.aktionen.map(a => {
+    const [icon, txt] = SE_AKTION[a.typ === "football_goal" && a.verfehlt ? "football_shot" : a.typ] || ["•", null];
+    const art = txt ? (txt[LANG] || txt.en) : a.typ.replace(/^football_/, "").replace(/_/g, " ");
+    const team = a.seite ? (a.seite === "links" ? L : R) : null;
+    const wer = team ? (team.wir ? [a.name || "FCJJ", a.name2].filter(Boolean).join(" → ") : kurz(team)) : "";
+    const m = seMinute(a);
+    return `<div class="se-akt${a.typ === "football_goal" && !a.verfehlt ? " tor" : ""}"><span class="se-min">${m != null ? m + "'" : ""}</span><span>${a.verfehlt ? "❌" : icon} ${esc(art)}${a.verfehlt ? " (" + esc(SE_VERFEHLT[LANG] || SE_VERFEHLT.en) + ")" : ""}${wer ? ` · <b>${esc(wer)}</b>` : ""}</span></div>`;
+  }).join("");
+  return `<div class="selive-tore se-zeitleiste">${zeilen}</div>`;
+}
 function seLiveHtml(s) {
   const kopf = `<div class="selive-kopf">📡 ${esc(T().seLiveTitel)}</div>`;
   if (!s) return kopf + `<div class="klein">${esc(T().seLiveLeer)}</div>`;
@@ -1158,7 +1191,8 @@ function seLiveHtml(s) {
   const l = zahl(L, "links"), r = zahl(R, "rechts");
   if (l == null && r == null) return kopf + `<div class="klein">${esc(T().seLiveLeer)}</div>`;
   const kurz = x => x.wir ? "FCJJ" : x.n.split("/")[0].trim();
-  const tore = s.tore.length ? `<div class="selive-tore">${s.tore.map(t => `⚽ ${seMinute(t) != null ? seMinute(t) + "' " : ""}${esc((t.seite === "links" ? L : R).wir && t.name ? t.name : kurz(t.seite === "links" ? L : R))}`).join(" · ")}</div>` : "";
+  const tore = s.aktionen?.length ? seAktionenHtml(s, L, R, kurz)
+    : s.tore.length ? `<div class="selive-tore">${s.tore.map(t => `⚽ ${seMinute(t) != null ? seMinute(t) + "' " : ""}${esc((t.seite === "links" ? L : R).wir && t.name ? t.name : kurz(t.seite === "links" ? L : R))}`).join(" · ")}</div>` : "";
   return kopf + `<div class="selive-stand"><span>${esc(name(L))}</span><b>${l ?? 0} : ${r ?? 0}</b><span>${esc(name(R))}</span></div>${tore}<div class="klein">${esc(T().seLiveHinweis)}</div>`;
 }
 async function seLiveHolen(kat) {
