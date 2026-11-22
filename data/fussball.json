@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T14:18:32.035Z",
+ "stand": "2026-11-22T16:18:19.251Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -23270,6 +23270,18 @@
    "tabelle": [
     {
      "pl": 1,
+     "id": 44742,
+     "n": "Jeunesse Junglinster",
+     "sp": 2,
+     "s": 1,
+     "u": 1,
+     "nl": 0,
+     "t": 5,
+     "g": 3,
+     "pkt": 4
+    },
+    {
+     "pl": 2,
      "id": 44963,
      "n": "Alliance Äischdall Hobscheid-Eischen",
      "sp": 1,
@@ -23281,7 +23293,7 @@
      "pkt": 3
     },
     {
-     "pl": 2,
+     "pl": 3,
      "id": 46231,
      "n": "Avenir Beggen",
      "sp": 1,
@@ -23291,18 +23303,6 @@
      "t": 4,
      "g": 0,
      "pkt": 3
-    },
-    {
-     "pl": 3,
-     "id": 44742,
-     "n": "Jeunesse Junglinster",
-     "sp": 1,
-     "s": 0,
-     "u": 1,
-     "nl": 0,
-     "t": 1,
-     "g": 1,
-     "pkt": 1
     },
     {
      "pl": 4,
@@ -23332,12 +23332,12 @@
      "pl": 6,
      "id": 46309,
      "n": "FC Kehlen",
-     "sp": 1,
+     "sp": 2,
      "s": 0,
      "u": 0,
-     "nl": 1,
-     "t": 3,
-     "g": 13,
+     "nl": 2,
+     "t": 5,
+     "g": 17,
      "pkt": 0
     }
    ],
@@ -23456,9 +23456,9 @@
       "n": "FC Kehlen",
       "c": 500064
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 4,
+     "as": 2,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
