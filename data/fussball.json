@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T08:18:14.089Z",
+ "stand": "2026-11-22T11:33:20.904Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -12834,7 +12834,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Strassen, synth.)"
     },
