@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T11:33:20.904Z",
+ "stand": "2026-11-22T12:18:18.432Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -21990,28 +21990,16 @@
      "pl": 1,
      "id": 45293,
      "n": "Racing FC Union Luxembourg",
-     "sp": 1,
-     "s": 1,
+     "sp": 2,
+     "s": 2,
      "u": 0,
      "nl": 0,
-     "t": 17,
-     "g": 0,
-     "pkt": 3
+     "t": 23,
+     "g": 1,
+     "pkt": 6
     },
     {
      "pl": 2,
-     "id": 46415,
-     "n": "ENT Red Black Red Star Luxembourg I",
-     "sp": 1,
-     "s": 1,
-     "u": 0,
-     "nl": 0,
-     "t": 3,
-     "g": 2,
-     "pkt": 3
-    },
-    {
-     "pl": 3,
      "id": 45973,
      "n": "Atert Bissen",
      "sp": 1,
@@ -22020,6 +22008,18 @@
      "nl": 0,
      "t": 1,
      "g": 0,
+     "pkt": 3
+    },
+    {
+     "pl": 3,
+     "id": 46415,
+     "n": "ENT Red Black Red Star Luxembourg I",
+     "sp": 2,
+     "s": 1,
+     "u": 0,
+     "nl": 1,
+     "t": 4,
+     "g": 8,
      "pkt": 3
     },
     {
@@ -22134,9 +22134,9 @@
       "n": "Racing FC Union Luxembourg",
       "c": 1000234
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 1,
+     "as": 6,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Prince Jean (Luxembourg, synth.)"
     },
