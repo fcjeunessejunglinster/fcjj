@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T16:18:19.251Z",
+ "stand": "2026-11-22T16:48:25.426Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -23416,9 +23416,9 @@
       "n": "FC Mamer 32 II",
       "c": 500076
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 5,
+     "as": 3,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Hobscheid)"
     },
