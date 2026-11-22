@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T12:48:18.674Z",
+ "stand": "2026-11-22T13:03:27.765Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -22174,9 +22174,9 @@
       "n": "Jeunesse Junglinster",
       "c": 500062
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 7,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
     },
