@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T17:33:17.195Z",
+ "stand": "2026-11-22T17:48:18.684Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -1990,9 +1990,9 @@
       "n": "Etoile Sportive Clemency",
       "c": 500022
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 4,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Koericherberg (Hobscheid)"
     },
