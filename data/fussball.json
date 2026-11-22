@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T13:03:27.765Z",
+ "stand": "2026-11-22T13:33:23.717Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -10824,7 +10824,7 @@
      },
      "hs": null,
      "as": null,
-     "gespielt": false,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
     }
