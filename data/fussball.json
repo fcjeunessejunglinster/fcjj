@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-22T20:18:23.711Z",
+ "stand": "2026-11-22T21:50:04.939Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -2030,9 +2030,9 @@
       "n": "Minière Lasauvage",
       "c": 500069
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 3,
+     "as": 0,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Roger Winandy (Schouweiler)"
     },
@@ -23436,9 +23436,9 @@
       "n": "FC Kopstal 33",
       "c": 500066
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 11,
+     "as": 0,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Beggen, synth.)"
     },
