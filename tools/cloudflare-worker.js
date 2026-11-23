@@ -218,7 +218,7 @@ const htmlEsc = x => String(x ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "
 // Heimspiele der Jugend in Junglinster, je Anstoßzeit eine Schicht: 30 min vor dem Anstoß bis 30 min nach dem
 // Spielende, das Ende auf :00/:15/:30/:45 abgerundet, also nie später als 30 min nach dem Spiel (vom Verein, 23.11.2026). Schicht-ID: JJJJMMTT-HHMM.
 // SEN/RES: Seniors und Réserves in einem eigenen Abschnitt, Schicht-ID mit „s“ am Ende (vom Verein, 23.11.2026).
-const BUVETTE_DAUER = { U7: 90, U9: 90, U11: 75, WU11: 75, U13: 85, WU13: 60, U15: 85, WU15: 85, U17: 95, U19: 105, SEN: 105, RES: 105 };
+const BUVETTE_DAUER = { U7: 60, U9: 90, U11: 75, WU11: 75, U13: 85, WU13: 60, U15: 85, WU15: 85, U17: 95, U19: 105, SEN: 105, RES: 105 };
 function buvetteSchichten(d, ab = Date.now()) {
   const lx = t => Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Luxembourg", year: "numeric", month: "2-digit", day: "2-digit",
     hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date(t)).map(x => [x.type, x.value]));
