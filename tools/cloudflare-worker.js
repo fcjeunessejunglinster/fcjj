@@ -207,7 +207,7 @@ export async function live(req, env) {
 // Öffentlich sieht man nur, wie viele Plätze belegt sind; Namen und Telefon sieht nur der Verein unter
 // /buvette/liste?key=<BUVETTE_KEY> (Secret im Worker). Speicher: KV-Binding PUSH, Schlüssel buvette:<Schicht-ID>.
 const BUVETTE_MAX = 2, BUVETTE_MAX_SEN = 3, BUVETTE_PRO_TAG = 8;   // Seniors/Réserves: 3 Personen (23.11.2026)
-const bMax = id => String(id).endsWith("s") ? BUVETTE_MAX_SEN : String(id).endsWith("r") ? 1 : BUVETTE_MAX;   // Réserves: 1 Person
+const bMax = id => String(id).endsWith("s") ? BUVETTE_MAX_SEN : /[re]$/.test(String(id)) ? 1 : BUVETTE_MAX;   // Réserves, SCO, CAD, JUN: 1 Person
 const DATEN_URL = "https://fcjeunessejunglinster.github.io/fcjj/data/fussball.json";
 const bCors = { "access-control-allow-origin": ORIGIN, "access-control-allow-methods": "GET, POST, OPTIONS",
   "access-control-allow-headers": "content-type", "access-control-max-age": "86400" };
@@ -218,7 +218,7 @@ const htmlEsc = x => String(x ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "
 // Buvette-Schichten aus den App-Daten (gleicher Code in index.html und im Worker):
 // Heimspiele der Jugend in Junglinster, je Anstoßzeit eine Schicht: 30 min vor dem Anstoß bis 30 min nach dem
 // Spielende, das Ende auf :00/:15/:30/:45 abgerundet, also nie später als 30 min nach dem Spiel (vom Verein, 23.11.2026). Schicht-ID: JJJJMMTT-HHMM.
-// SEN/RES: Seniors und Réserves in einem eigenen Abschnitt, Schicht-ID mit „s“ (Seniors) oder „r“ (Réserves) am Ende (vom Verein, 23.11.2026).
+// SEN/RES: Seniors und Réserves in einem eigenen Abschnitt, Schicht-ID mit „s“ (Seniors, 3 Personen), „r“ (Réserves, 1) oder „e“ (SCO/CAD/JUN, 1) am Ende (vom Verein, 23.11.2026).
 const BUVETTE_DAUER = { U7: 60, U9: 90, U11: 75, WU11: 75, U13: 85, WU13: 60, U15: 85, WU15: 85, U17: 95, U19: 105, SEN: 105, RES: 105 };
 function buvetteSchichten(d, ab = Date.now()) {
   const lx = t => Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Luxembourg", year: "numeric", month: "2-digit", day: "2-digit",
@@ -229,7 +229,7 @@ function buvetteSchichten(d, ab = Date.now()) {
   for (const k of Object.values(d.klassen || {})) for (const sp of k.spiele || []) {
     const t = team.get(sp.h.id), an = Date.parse(sp.d);
     if (!t || (sp.ort && !/Junglinster/i.test(sp.ort)) || an + BUVETTE_DAUER[t.kat] * 6e4 + 18e5 < ab) continue;
-    const p = lx(an), sen = t.kat === "SEN" || t.kat === "RES", zus = t.kat === "RES" ? "r" : sen ? "s" : "", tag = p.year + p.month + p.day, gruppe = tag + zus;
+    const p = lx(an), sen = t.kat === "SEN" || t.kat === "RES", zus = t.kat === "RES" ? "r" : sen ? "s" : ["U15", "U17", "U19"].includes(t.kat) ? "e" : "", tag = p.year + p.month + p.day, gruppe = tag + zus;
     if (+p.hour < 6) continue;   // Anstoß vor 6 Uhr = Uhrzeit noch nicht festgelegt: erst eintragbar, wenn die FLF die Zeit hat
     if (!tage.has(gruppe)) tage.set(gruppe, []);
     tage.get(gruppe).push({ an, ende: an + BUVETTE_DAUER[t.kat] * 6e4, id: tag + "-" + p.hour + p.minute + zus, sen, team: t.reiter, gegner: sp.a.n, h: sp.h, a: sp.a, ort: sp.ort || "" });
@@ -276,7 +276,7 @@ export async function buvette(req, env, pfad) {
   const url = new URL(req.url);
   if (pfad === "/buvette/liste") return buvetteListe(env, url);
   if (req.method === "GET") {   // Belegung: ?ids=1,2,3 → { "1": 1, "2": 0 … }
-    const ids = (url.searchParams.get("ids") || "").split(",").filter(x => /^\d{8}-\d{4}[sr]?$/.test(x)).slice(0, 80);
+    const ids = (url.searchParams.get("ids") || "").split(",").filter(x => /^\d{8}-\d{4}[sre]?$/.test(x)).slice(0, 80);
     const aus = {};
     await Promise.all(ids.map(async id => { aus[id] = (await bLaden(env, id))?.leute?.length || 0; }));
     return bJson({ belegt: aus, max: BUVETTE_MAX, maxSen: BUVETTE_MAX_SEN });
@@ -285,7 +285,7 @@ export async function buvette(req, env, pfad) {
   if ((req.headers.get("origin") || "") !== ORIGIN) return bJson({ fehler: "herkunft" }, 403);
   let x; try { x = await req.json(); } catch (e) { return bJson({ fehler: "json" }, 400); }
   const id = String(x.id || "");
-  if (!/^\d{8}-\d{4}[sr]?$/.test(id)) return bJson({ fehler: "spiel" }, 400);
+  if (!/^\d{8}-\d{4}[sre]?$/.test(id)) return bJson({ fehler: "spiel" }, 400);
   const eintrag = (await bLaden(env, id)) || { leute: [] };
   if (x.aktion === "ab") {   // Austragen mit dem Schlüssel, den nur das eigene Handy kennt
     const h = await sha(String(x.token || ""));
