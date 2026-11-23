@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-23T03:06:31.097Z",
+ "stand": "2026-11-23T11:18:20.665Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -24801,18 +24801,6 @@
    "tabelle": [
     {
      "pl": 1,
-     "id": 46201,
-     "n": "US Moutfort-Medingen",
-     "sp": 2,
-     "s": 2,
-     "u": 0,
-     "nl": 0,
-     "t": 16,
-     "g": 4,
-     "pkt": 6
-    },
-    {
-     "pl": 2,
      "id": 46367,
      "n": "ENT UMW/Berbourg/Biwer II",
      "sp": 2,
@@ -24824,7 +24812,7 @@
      "pkt": 6
     },
     {
-     "pl": 3,
+     "pl": 2,
      "id": 45896,
      "n": "US Hostert II",
      "sp": 2,
@@ -24836,21 +24824,33 @@
      "pkt": 6
     },
     {
-     "pl": 4,
-     "id": 45374,
-     "n": "Résidence Walferdange II",
+     "pl": 3,
+     "id": 46201,
+     "n": "US Moutfort-Medingen",
      "sp": 2,
-     "s": 0,
+     "s": 1,
      "u": 0,
-     "nl": 2,
-     "t": 3,
-     "g": 7,
-     "pkt": 0
+     "nl": 1,
+     "t": 12,
+     "g": 5,
+     "pkt": 3
+    },
+    {
+     "pl": 4,
+     "id": 44739,
+     "n": "Jeunesse Junglinster II",
+     "sp": 2,
+     "s": 1,
+     "u": 0,
+     "nl": 1,
+     "t": 4,
+     "g": 3,
+     "pkt": 3
     },
     {
      "pl": 5,
-     "id": 44739,
-     "n": "Jeunesse Junglinster II",
+     "id": 45374,
+     "n": "Résidence Walferdange II",
      "sp": 2,
      "s": 0,
      "u": 0,
@@ -24887,10 +24887,11 @@
       "n": "Jeunesse Junglinster II",
       "c": 500062
      },
-     "hs": 4,
-     "as": 2,
+     "hs": 0,
+     "as": 3,
      "gespielt": true,
-     "forfait": false,
+     "forfait": true,
+     "bem": "FF",
      "ort": "Terrain Am Brill (Moutfort, synth.)"
     },
     {
