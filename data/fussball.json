@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-23T11:18:20.665Z",
+ "stand": "2026-11-23T17:18:22.965Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -374,7 +374,8 @@
     19509,
     18924,
     19511,
-    19513
+    19513,
+    19515
    ],
    "nr": 0,
    "reiter": "Réserves",
@@ -17005,6 +17006,176 @@
    ],
    "start": "2026-11-06T20:00:00+01:00"
   },
+  "19515": {
+   "id": 19515,
+   "n": "Coupe des Seniors Réserves - 1/8 de Finale",
+   "typ": "CUP",
+   "ergebnisse": true,
+   "tabelle": null,
+   "spiele": [
+    {
+     "id": 13515,
+     "d": "2026-12-11T20:00:00+01:00",
+     "tag": 1,
+     "h": {
+      "id": 44801,
+      "n": "FC The Belval Belvaux",
+      "c": 500006
+     },
+     "a": {
+      "id": 44983,
+      "n": "Racing FC Union Luxembourg",
+      "c": 1000234
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade FC The Belval (Belvaux, synth.)"
+    },
+    {
+     "id": 13516,
+     "d": "2026-12-11T20:00:00+01:00",
+     "tag": 1,
+     "h": {
+      "id": 44723,
+      "n": "Jeunesse Junglinster",
+      "c": 500062
+     },
+     "a": {
+      "id": 45483,
+      "n": "US Rumelange",
+      "c": 500104
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 13517,
+     "d": "2026-12-12T19:30:00+01:00",
+     "tag": 1,
+     "h": {
+      "id": 46412,
+      "n": "AS Red Black Luxembourg",
+      "c": 1003709
+     },
+     "a": {
+      "id": 44589,
+      "n": "F91 Dudelange",
+      "c": 500030
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Gaston Diderich (Luxembourg, synth.)"
+    },
+    {
+     "id": 13514,
+     "d": "2026-12-14T20:00:00+01:00",
+     "tag": 1,
+     "h": {
+      "id": 44792,
+      "n": "Atert Bissen I",
+      "c": 500012
+     },
+     "a": {
+      "id": 45625,
+      "n": "FC Differdange 03",
+      "c": 1000189
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
+    },
+    {
+     "id": 13519,
+     "d": "2026-12-14T20:00:00+01:00",
+     "tag": 1,
+     "h": {
+      "id": 45865,
+      "n": "Una Strassen I",
+      "c": 500114
+     },
+     "a": {
+      "id": 46464,
+      "n": "Young Boys Diekirch",
+      "c": 500027
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Strassen, synth.)"
+    },
+    {
+     "id": 13513,
+     "d": "2026-12-14T20:00:00+01:00",
+     "tag": 1,
+     "h": {
+      "id": 46513,
+      "n": "US Feulen",
+      "c": 500044
+     },
+     "a": {
+      "id": 45074,
+      "n": "FC Mamer 32",
+      "c": 500076
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain In Bertzent (Niederfeulen, synth.)"
+    },
+    {
+     "id": 13520,
+     "d": "2026-12-14T20:15:00+01:00",
+     "tag": 1,
+     "h": {
+      "id": 45116,
+      "n": "CS Fola Esch-Alzette I",
+      "c": 500039
+     },
+     "a": {
+      "id": 44595,
+      "n": "Yellow Boys Weiler-la-Tour I",
+      "c": 500121
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade E. Mayrisch II (Esch, synth.)"
+    },
+    {
+     "id": 13518,
+     "d": "2026-12-15T20:00:00+01:00",
+     "tag": 1,
+     "h": {
+      "id": 44556,
+      "n": "Syra Mensdorf",
+      "c": 500078
+     },
+     "a": {
+      "id": 44555,
+      "n": "Union Titus Pétange I",
+      "c": 1000454
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Mensdorf, synth.)"
+    }
+   ],
+   "start": "2026-12-11T20:00:00+01:00"
+  },
   "19527": {
    "id": 19527,
    "n": "Coupe de Luxembourg - tour 1",
@@ -22624,26 +22795,6 @@
      "ort": "Terrain 2 (Itzig, synth.)"
     },
     {
-     "id": 6253043,
-     "d": "2026-12-06T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 44729,
-      "n": "Jeunesse Junglinster",
-      "c": 500062
-     },
-     "a": {
-      "id": 46034,
-      "n": "ENT Région Moselle",
-      "c": 1000426
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Junglinster, synth.)"
-    },
-    {
      "id": 6253042,
      "d": "2026-12-06T00:00:01+01:00",
      "tag": 4,
@@ -22682,6 +22833,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Beggen, synth.)"
+    },
+    {
+     "id": 6253043,
+     "d": "2026-12-06T11:00:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 44729,
+      "n": "Jeunesse Junglinster",
+      "c": 500062
+     },
+     "a": {
+      "id": 46034,
+      "n": "ENT Région Moselle",
+      "c": 1000426
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
      "id": 6253053,
@@ -23100,26 +23271,6 @@
      "ort": "Terrain 2 (Walferdange, synth.)"
     },
     {
-     "id": 3276051,
-     "d": "2026-12-05T00:00:01+01:00",
-     "tag": 5,
-     "h": {
-      "id": 44732,
-      "n": "Jeunesse Junglinster",
-      "c": 500062
-     },
-     "a": {
-      "id": 46518,
-      "n": "ENT Feulen/Grevels/Heiderscheid",
-      "c": 500044
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Junglinster, synth.)"
-    },
-    {
      "id": 3276054,
      "d": "2026-12-05T16:30:00+01:00",
      "tag": 5,
@@ -23138,6 +23289,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Berbourg, synth.)"
+    },
+    {
+     "id": 3276051,
+     "d": "2026-12-05T18:00:00+01:00",
+     "tag": 5,
+     "h": {
+      "id": 44732,
+      "n": "Jeunesse Junglinster",
+      "c": 500062
+     },
+     "a": {
+      "id": 46518,
+      "n": "ENT Feulen/Grevels/Heiderscheid",
+      "c": 500044
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
      "id": 3276061,
@@ -23524,7 +23695,7 @@
     },
     {
      "id": 3300041,
-     "d": "2026-12-06T00:00:01+01:00",
+     "d": "2026-12-06T14:00:00+01:00",
      "tag": 4,
      "h": {
       "id": 44963,
@@ -23541,26 +23712,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Hobscheid)"
-    },
-    {
-     "id": 3300042,
-     "d": "2026-12-06T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 45465,
-      "n": "FC Mamer 32 II",
-      "c": 500076
-     },
-     "a": {
-      "id": 46309,
-      "n": "FC Kehlen",
-      "c": 500064
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Mamer, synth.)"
     },
     {
      "id": 3300043,
@@ -23581,6 +23732,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Beggen, synth.)"
+    },
+    {
+     "id": 3300042,
+     "d": "2026-12-06T16:00:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 45465,
+      "n": "FC Mamer 32 II",
+      "c": 500076
+     },
+     "a": {
+      "id": 46309,
+      "n": "FC Kehlen",
+      "c": 500064
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Mamer, synth.)"
     },
     {
      "id": 3300051,
@@ -23906,28 +24077,28 @@
      "ort": "Stade Am Dieltchen (Weiler, synth.)"
     },
     {
-     "id": 6316043,
-     "d": "2026-12-05T00:00:01+01:00",
+     "id": 6316041,
+     "d": "2026-12-05T14:30:00+01:00",
      "tag": 4,
      "h": {
-      "id": 46398,
-      "n": "AS Red Black Luxembourg II",
-      "c": 1003709
+      "id": 45899,
+      "n": "US Hostert II",
+      "c": 500059
      },
      "a": {
-      "id": 46003,
-      "n": "Yellow Boys Weiler-la-Tour I",
-      "c": 500121
+      "id": 44734,
+      "n": "Jeunesse Junglinster I",
+      "c": 500062
      },
      "hs": null,
      "as": null,
      "gespielt": false,
      "forfait": false,
-     "ort": "Stade Gaston Diderich (Luxembourg, synth.)"
+     "ort": "Terrain Carrière (Senningerberg, synth.)"
     },
     {
      "id": 6316042,
-     "d": "2026-12-05T00:00:01+01:00",
+     "d": "2026-12-05T15:00:00+01:00",
      "tag": 4,
      "h": {
       "id": 45769,
@@ -23946,24 +24117,24 @@
      "ort": "Terrain 2 (Itzig, synth.)"
     },
     {
-     "id": 6316041,
-     "d": "2026-12-05T01:30:00+01:00",
+     "id": 6316043,
+     "d": "2026-12-05T18:00:00+01:00",
      "tag": 4,
      "h": {
-      "id": 45899,
-      "n": "US Hostert II",
-      "c": 500059
+      "id": 46398,
+      "n": "AS Red Black Luxembourg II",
+      "c": 1003709
      },
      "a": {
-      "id": 44734,
-      "n": "Jeunesse Junglinster I",
-      "c": 500062
+      "id": 46003,
+      "n": "Yellow Boys Weiler-la-Tour I",
+      "c": 500121
      },
      "hs": null,
      "as": null,
      "gespielt": false,
      "forfait": false,
-     "ort": "Terrain Carrière (Senningerberg, synth.)"
+     "ort": "Stade Gaston Diderich (Luxembourg, synth.)"
     },
     {
      "id": 6316051,
@@ -24309,8 +24480,28 @@
      "ort": "Terrain Ralingen (synth.)"
     },
     {
+     "id": 6324043,
+     "d": "2026-12-05T16:00:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 44735,
+      "n": "Jeunesse Junglinster II",
+      "c": 500062
+     },
+     "a": {
+      "id": 46189,
+      "n": "CS Grevenmacher",
+      "c": 500050
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
      "id": 6324041,
-     "d": "2026-12-05T00:00:01+01:00",
+     "d": "2026-12-05T16:30:00+01:00",
      "tag": 4,
      "h": {
       "id": 46219,
@@ -24327,26 +24518,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Lorentzweiler, synth.)"
-    },
-    {
-     "id": 6324043,
-     "d": "2026-12-05T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 44735,
-      "n": "Jeunesse Junglinster II",
-      "c": 500062
-     },
-     "a": {
-      "id": 46189,
-      "n": "CS Grevenmacher",
-      "c": 500050
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 1 (Junglinster)"
     },
     {
      "id": 6324052,
@@ -24672,25 +24843,6 @@
      "ort": "Am Ga (Wormeldange, synth.)"
     },
     {
-     "id": 6345042,
-     "d": "2026-12-05T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 46192,
-      "n": "CS Grevenmacher I",
-      "c": 500050
-     },
-     "a": {
-      "id": 44738,
-      "n": "Jeunesse Junglinster I",
-      "c": 500062
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false
-    },
-    {
      "id": 6345041,
      "d": "2026-12-05T00:00:01+01:00",
      "tag": 4,
@@ -24709,6 +24861,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain um Gréin (Remich, synth.)"
+    },
+    {
+     "id": 6345042,
+     "d": "2026-12-05T14:30:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 46192,
+      "n": "CS Grevenmacher I",
+      "c": 500050
+     },
+     "a": {
+      "id": 44738,
+      "n": "Jeunesse Junglinster I",
+      "c": 500062
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Grevenmacher, synth.)"
     },
     {
      "id": 6345043,
@@ -25438,8 +25610,28 @@
      "ort": "Terrain 2 (Lorentzweiler, synth.)"
     },
     {
+     "id": 6358041,
+     "d": "2026-12-05T14:00:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 44737,
+      "n": "Jeunesse Junglinster III",
+      "c": 500062
+     },
+     "a": {
+      "id": 45596,
+      "n": "Marisca Mersch II",
+      "c": 500080
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
      "id": 6358042,
-     "d": "2026-12-05T00:00:01+01:00",
+     "d": "2026-12-05T15:00:00+01:00",
      "tag": 4,
      "h": {
       "id": 46116,
@@ -25459,7 +25651,7 @@
     },
     {
      "id": 6358043,
-     "d": "2026-12-05T00:00:01+01:00",
+     "d": "2026-12-05T15:00:00+01:00",
      "tag": 4,
      "h": {
       "id": 46179,
@@ -25476,26 +25668,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Stegen, synth.)"
-    },
-    {
-     "id": 6358041,
-     "d": "2026-12-05T01:30:00+01:00",
-     "tag": 4,
-     "h": {
-      "id": 44737,
-      "n": "Jeunesse Junglinster III",
-      "c": 500062
-     },
-     "a": {
-      "id": 45596,
-      "n": "Marisca Mersch II",
-      "c": 500080
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 1 (Junglinster)"
     },
     {
      "id": 6358051,
@@ -25770,7 +25942,7 @@
     },
     {
      "id": 6359041,
-     "d": "2026-12-05T01:30:00+01:00",
+     "d": "2026-12-05T11:00:00+01:00",
      "tag": 4,
      "h": {
       "id": 44911,
@@ -25786,7 +25958,7 @@
      "as": null,
      "gespielt": false,
      "forfait": false,
-     "ort": "Terrain 1 (Junglinster)"
+     "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
      "id": 6359051,
