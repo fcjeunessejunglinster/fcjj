@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-23T17:18:22.965Z",
+ "stand": "2026-11-23T21:18:22.867Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -5266,9 +5266,9 @@
       "n": "Young Boys Diekirch",
       "c": 500027
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 4,
+     "as": 2,
+     "gespielt": true,
      "forfait": false,
      "ort": "Terrain 2 (Weidingen)"
     },
@@ -18955,9 +18955,9 @@
       "n": "Jeunesse Junglinster",
       "c": 500062
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
+     "hs": 2,
+     "as": 1,
+     "gespielt": true,
      "forfait": false,
      "ort": "Stade Emile Bintner (Luxembourg, synth.)"
     },
