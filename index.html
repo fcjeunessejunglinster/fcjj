@@ -325,7 +325,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-23 d";
+const FASSUNG = "2026-11-23 e";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1638,7 +1638,7 @@ function buvetteSchichten(d, ab = Date.now()) {
     const bloecke = [];
     for (const s of liste) { const b = bloecke[bloecke.length - 1]; if (b && b.an === s.an) b.spiele.push(s); else bloecke.push({ id: s.id, an: s.an, spiele: [s] }); }
     // Jede Schicht: 30 min vor dem Anstoß bis 30 min nach dem Spielende (vom Verein, 23.11.2026).
-    for (const b of bloecke) aus.push({ id: b.id, von: b.an - 18e5, bis: Math.floor((Math.max(...b.spiele.map(s => s.ende)) + 18e5) / 9e5) * 9e5,   // höchstens 30 min nach Spielende, auf die Viertelstunde abgerundet
+    for (const b of bloecke) aus.push({ id: b.id, von: b.an - 18e5, bis: Math.floor((Math.max(...b.spiele.map(s => s.ende)) + (b.spiele[0].sen ? 36e5 : 18e5)) / 9e5) * 9e5,   // Seniors: 1 Std. nach Spielende (23.11.2026)   // höchstens 30 min nach Spielende, auf die Viertelstunde abgerundet
       sen: b.spiele[0].sen, spiele: b.spiele.map(s => ({ team: s.team, gegner: s.gegner, h: s.h, a: s.a })), ort: b.spiele[0].ort });
   }
   return aus.filter(s => s.bis > ab).sort((a, b) => a.von - b.von);
