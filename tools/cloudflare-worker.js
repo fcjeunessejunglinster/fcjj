@@ -216,7 +216,7 @@ const htmlEsc = x => String(x ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "
 
 // Buvette-Schichten aus den App-Daten (gleicher Code in index.html und im Worker):
 // Heimspiele der Jugend in Junglinster, je Anstoßzeit eine Schicht: 30 min vor dem Anstoß bis 30 min nach dem
-// Spielende, das Ende auf die nächste halbe oder volle Stunde gerundet (vom Verein, 23.11.2026). Schicht-ID: JJJJMMTT-HHMM.
+// Spielende, das Ende auf :00/:15/:30/:45 abgerundet, also nie später als 30 min nach dem Spiel (vom Verein, 23.11.2026). Schicht-ID: JJJJMMTT-HHMM.
 const BUVETTE_DAUER = { U7: 90, U9: 90, U11: 75, WU11: 75, U13: 85, WU13: 60, U15: 85, WU15: 85, U17: 95, U19: 105 };
 function buvetteSchichten(d, ab = Date.now()) {
   const lx = t => Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Luxembourg", year: "numeric", month: "2-digit", day: "2-digit",
@@ -238,7 +238,7 @@ function buvetteSchichten(d, ab = Date.now()) {
     const bloecke = [];
     for (const s of liste) { const b = bloecke[bloecke.length - 1]; if (b && b.an === s.an) b.spiele.push(s); else bloecke.push({ id: s.id, an: s.an, spiele: [s] }); }
     // Jede Schicht: 30 min vor dem Anstoß bis 30 min nach dem Spielende (vom Verein, 23.11.2026).
-    for (const b of bloecke) aus.push({ id: b.id, von: b.an - 18e5, bis: Math.round((Math.max(...b.spiele.map(s => s.ende)) + 18e5 + 1) / 18e5) * 18e5,   // auf :00/:30 gerundet
+    for (const b of bloecke) aus.push({ id: b.id, von: b.an - 18e5, bis: Math.floor((Math.max(...b.spiele.map(s => s.ende)) + 18e5) / 9e5) * 9e5,   // höchstens 30 min nach Spielende, auf die Viertelstunde abgerundet
       spiele: b.spiele.map(s => ({ team: s.team, gegner: s.gegner, h: s.h, a: s.a })), ort: b.spiele[0].ort });
   }
   return aus.filter(s => s.bis > ab).sort((a, b) => a.von - b.von);
