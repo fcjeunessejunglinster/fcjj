@@ -217,7 +217,8 @@ const htmlEsc = x => String(x ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "
 // Buvette-Schichten aus den App-Daten (gleicher Code in index.html und im Worker):
 // Heimspiele der Jugend in Junglinster, je Anstoßzeit eine Schicht: 30 min vor dem Anstoß bis 30 min nach dem
 // Spielende, das Ende auf :00/:15/:30/:45 abgerundet, also nie später als 30 min nach dem Spiel (vom Verein, 23.11.2026). Schicht-ID: JJJJMMTT-HHMM.
-const BUVETTE_DAUER = { U7: 90, U9: 90, U11: 75, WU11: 75, U13: 85, WU13: 60, U15: 85, WU15: 85, U17: 95, U19: 105 };
+// SEN: Seniors in einem eigenen Abschnitt, Schicht-ID mit „s“ am Ende (vom Verein, 23.11.2026).
+const BUVETTE_DAUER = { U7: 90, U9: 90, U11: 75, WU11: 75, U13: 85, WU13: 60, U15: 85, WU15: 85, U17: 95, U19: 105, SEN: 105 };
 function buvetteSchichten(d, ab = Date.now()) {
   const lx = t => Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Luxembourg", year: "numeric", month: "2-digit", day: "2-digit",
     hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date(t)).map(x => [x.type, x.value]));
@@ -227,10 +228,10 @@ function buvetteSchichten(d, ab = Date.now()) {
   for (const k of Object.values(d.klassen || {})) for (const sp of k.spiele || []) {
     const t = team.get(sp.h.id), an = Date.parse(sp.d);
     if (!t || (sp.ort && !/Junglinster/i.test(sp.ort)) || an + BUVETTE_DAUER[t.kat] * 6e4 + 18e5 < ab) continue;
-    const p = lx(an), tag = p.year + p.month + p.day;
+    const p = lx(an), sen = t.kat === "SEN", tag = p.year + p.month + p.day, gruppe = tag + (sen ? "s" : "");
     if (+p.hour < 6) continue;   // Anstoß vor 6 Uhr = Uhrzeit noch nicht festgelegt: erst eintragbar, wenn die FLF die Zeit hat
-    if (!tage.has(tag)) tage.set(tag, []);
-    tage.get(tag).push({ an, ende: an + BUVETTE_DAUER[t.kat] * 6e4, id: tag + "-" + p.hour + p.minute, team: t.reiter, gegner: sp.a.n, h: sp.h, a: sp.a, ort: sp.ort || "" });
+    if (!tage.has(gruppe)) tage.set(gruppe, []);
+    tage.get(gruppe).push({ an, ende: an + BUVETTE_DAUER[t.kat] * 6e4, id: tag + "-" + p.hour + p.minute + (sen ? "s" : ""), sen, team: t.reiter, gegner: sp.a.n, h: sp.h, a: sp.a, ort: sp.ort || "" });
   }
   const aus = [];
   for (const liste of tage.values()) {
@@ -239,7 +240,7 @@ function buvetteSchichten(d, ab = Date.now()) {
     for (const s of liste) { const b = bloecke[bloecke.length - 1]; if (b && b.an === s.an) b.spiele.push(s); else bloecke.push({ id: s.id, an: s.an, spiele: [s] }); }
     // Jede Schicht: 30 min vor dem Anstoß bis 30 min nach dem Spielende (vom Verein, 23.11.2026).
     for (const b of bloecke) aus.push({ id: b.id, von: b.an - 18e5, bis: Math.floor((Math.max(...b.spiele.map(s => s.ende)) + 18e5) / 9e5) * 9e5,   // höchstens 30 min nach Spielende, auf die Viertelstunde abgerundet
-      spiele: b.spiele.map(s => ({ team: s.team, gegner: s.gegner, h: s.h, a: s.a })), ort: b.spiele[0].ort });
+      sen: b.spiele[0].sen, spiele: b.spiele.map(s => ({ team: s.team, gegner: s.gegner, h: s.h, a: s.a })), ort: b.spiele[0].ort });
   }
   return aus.filter(s => s.bis > ab).sort((a, b) => a.von - b.von);
 }
@@ -274,7 +275,7 @@ export async function buvette(req, env, pfad) {
   const url = new URL(req.url);
   if (pfad === "/buvette/liste") return buvetteListe(env, url);
   if (req.method === "GET") {   // Belegung: ?ids=1,2,3 → { "1": 1, "2": 0 … }
-    const ids = (url.searchParams.get("ids") || "").split(",").filter(x => /^\d{8}-\d{4}$/.test(x)).slice(0, 80);
+    const ids = (url.searchParams.get("ids") || "").split(",").filter(x => /^\d{8}-\d{4}s?$/.test(x)).slice(0, 80);
     const aus = {};
     await Promise.all(ids.map(async id => { aus[id] = (await bLaden(env, id))?.leute?.length || 0; }));
     return bJson({ belegt: aus, max: BUVETTE_MAX });
@@ -283,7 +284,7 @@ export async function buvette(req, env, pfad) {
   if ((req.headers.get("origin") || "") !== ORIGIN) return bJson({ fehler: "herkunft" }, 403);
   let x; try { x = await req.json(); } catch (e) { return bJson({ fehler: "json" }, 400); }
   const id = String(x.id || "");
-  if (!/^\d{8}-\d{4}$/.test(id)) return bJson({ fehler: "spiel" }, 400);
+  if (!/^\d{8}-\d{4}s?$/.test(id)) return bJson({ fehler: "spiel" }, 400);
   const eintrag = (await bLaden(env, id)) || { leute: [] };
   if (x.aktion === "ab") {   // Austragen mit dem Schlüssel, den nur das eigene Handy kennt
     const h = await sha(String(x.token || ""));
