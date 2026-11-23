@@ -217,8 +217,8 @@ const htmlEsc = x => String(x ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "
 // Buvette-Schichten aus den App-Daten (gleicher Code in index.html und im Worker):
 // Heimspiele der Jugend in Junglinster, je Anstoßzeit eine Schicht: 30 min vor dem Anstoß bis 30 min nach dem
 // Spielende, das Ende auf :00/:15/:30/:45 abgerundet, also nie später als 30 min nach dem Spiel (vom Verein, 23.11.2026). Schicht-ID: JJJJMMTT-HHMM.
-// SEN: Seniors in einem eigenen Abschnitt, Schicht-ID mit „s“ am Ende (vom Verein, 23.11.2026).
-const BUVETTE_DAUER = { U7: 90, U9: 90, U11: 75, WU11: 75, U13: 85, WU13: 60, U15: 85, WU15: 85, U17: 95, U19: 105, SEN: 105 };
+// SEN/RES: Seniors und Réserves in einem eigenen Abschnitt, Schicht-ID mit „s“ am Ende (vom Verein, 23.11.2026).
+const BUVETTE_DAUER = { U7: 90, U9: 90, U11: 75, WU11: 75, U13: 85, WU13: 60, U15: 85, WU15: 85, U17: 95, U19: 105, SEN: 105, RES: 105 };
 function buvetteSchichten(d, ab = Date.now()) {
   const lx = t => Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Luxembourg", year: "numeric", month: "2-digit", day: "2-digit",
     hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date(t)).map(x => [x.type, x.value]));
@@ -228,7 +228,7 @@ function buvetteSchichten(d, ab = Date.now()) {
   for (const k of Object.values(d.klassen || {})) for (const sp of k.spiele || []) {
     const t = team.get(sp.h.id), an = Date.parse(sp.d);
     if (!t || (sp.ort && !/Junglinster/i.test(sp.ort)) || an + BUVETTE_DAUER[t.kat] * 6e4 + 18e5 < ab) continue;
-    const p = lx(an), sen = t.kat === "SEN", tag = p.year + p.month + p.day, gruppe = tag + (sen ? "s" : "");
+    const p = lx(an), sen = t.kat === "SEN" || t.kat === "RES", tag = p.year + p.month + p.day, gruppe = tag + (sen ? "s" : "");
     if (+p.hour < 6) continue;   // Anstoß vor 6 Uhr = Uhrzeit noch nicht festgelegt: erst eintragbar, wenn die FLF die Zeit hat
     if (!tage.has(gruppe)) tage.set(gruppe, []);
     tage.get(gruppe).push({ an, ende: an + BUVETTE_DAUER[t.kat] * 6e4, id: tag + "-" + p.hour + p.minute + (sen ? "s" : ""), sen, team: t.reiter, gegner: sp.a.n, h: sp.h, a: sp.a, ort: sp.ort || "" });
