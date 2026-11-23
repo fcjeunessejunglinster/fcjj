@@ -206,7 +206,8 @@ export async function live(req, env) {
 // Eltern tragen sich in der App für eine Buvette-Schicht bei Heimspielen der Jugend ein (mindestens 1, ideal 2 Personen).
 // Öffentlich sieht man nur, wie viele Plätze belegt sind; Namen und Telefon sieht nur der Verein unter
 // /buvette/liste?key=<BUVETTE_KEY> (Secret im Worker). Speicher: KV-Binding PUSH, Schlüssel buvette:<Schicht-ID>.
-const BUVETTE_MAX = 2, BUVETTE_PRO_TAG = 8;
+const BUVETTE_MAX = 2, BUVETTE_MAX_SEN = 3, BUVETTE_PRO_TAG = 8;   // Seniors/Réserves: 3 Personen (23.11.2026)
+const bMax = id => String(id).endsWith("s") ? BUVETTE_MAX_SEN : BUVETTE_MAX;
 const DATEN_URL = "https://fcjeunessejunglinster.github.io/fcjj/data/fussball.json";
 const bCors = { "access-control-allow-origin": ORIGIN, "access-control-allow-methods": "GET, POST, OPTIONS",
   "access-control-allow-headers": "content-type", "access-control-max-age": "86400" };
@@ -278,7 +279,7 @@ export async function buvette(req, env, pfad) {
     const ids = (url.searchParams.get("ids") || "").split(",").filter(x => /^\d{8}-\d{4}s?$/.test(x)).slice(0, 80);
     const aus = {};
     await Promise.all(ids.map(async id => { aus[id] = (await bLaden(env, id))?.leute?.length || 0; }));
-    return bJson({ belegt: aus, max: BUVETTE_MAX });
+    return bJson({ belegt: aus, max: BUVETTE_MAX, maxSen: BUVETTE_MAX_SEN });
   }
   if (req.method !== "POST") return bJson({ fehler: "methode" }, 405);
   if ((req.headers.get("origin") || "") !== ORIGIN) return bJson({ fehler: "herkunft" }, 403);
@@ -293,16 +294,16 @@ export async function buvette(req, env, pfad) {
     eintrag.leute = eintrag.leute.filter(l => l.h !== h);
     if (eintrag.leute.length === vorher) return bJson({ fehler: "token" }, 404);
     await env.PUSH.put("buvette:" + id, JSON.stringify(eintrag), { expirationTtl: 60 * 864e2 });
-    if (eintrag.spiel) await buvMail(env, `Buvette: Austragung ${schichtText(eintrag.spiel)} (${eintrag.leute.length}/${BUVETTE_MAX})`, [
+    if (eintrag.spiel) await buvMail(env, `Buvette: Austragung ${schichtText(eintrag.spiel)} (${eintrag.leute.length}/${bMax(id)})`, [
       `❌ <b>${htmlEsc(weg.name)}</b> hat sich ausgetragen.`, `<b>${htmlEsc(schichtText(eintrag.spiel))}</b><br>${eintrag.spiel.spiele.map(x => `${htmlEsc(x.team)} – ${htmlEsc(x.gegner)}`).join("<br>")}`,
-      `Jetzt belegt: ${eintrag.leute.length}/${BUVETTE_MAX}${eintrag.leute.length ? " (" + eintrag.leute.map(l => htmlEsc(l.name)).join(", ") + ")" : " – <b>niemand mehr eingetragen</b>"}`]);
+      `Jetzt belegt: ${eintrag.leute.length}/${bMax(id)}${eintrag.leute.length ? " (" + eintrag.leute.map(l => htmlEsc(l.name)).join(", ") + ")" : " – <b>niemand mehr eingetragen</b>"}`]);
     return bJson({ ok: true, belegt: eintrag.leute.length });
   }
   const name = String(x.name || "").trim().slice(0, 60), tel = String(x.tel || "").trim().slice(0, 30), notiz = String(x.notiz || "").trim().slice(0, 120);
   if (name.length < 3 || !/\d{6,}/.test(tel.replace(/\D/g, "") ) ) return bJson({ fehler: "daten" }, 400);
   const sp = await buvetteSchicht(id);
   if (!sp) return bJson({ fehler: "spiel" }, 400);
-  if (eintrag.leute.length >= BUVETTE_MAX) return bJson({ fehler: "voll", belegt: eintrag.leute.length }, 409);
+  if (eintrag.leute.length >= bMax(id)) return bJson({ fehler: "voll", belegt: eintrag.leute.length }, 409);
   // Tageslimit je Anschluss gegen Unfug
   const tag = new Date().toISOString().slice(0, 10), ip = await sha((req.headers.get("cf-connecting-ip") || "?") + "fcjj");
   const kIp = `bulimit:${tag}:${ip.slice(0, 16)}`, n = +(await env.PUSH.get(kIp)) || 0;
@@ -313,10 +314,10 @@ export async function buvette(req, env, pfad) {
   eintrag.leute.push({ name, tel, notiz, t: new Date().toISOString(), h: await sha(token) });
   const bis = Math.max(86400, Math.round((sp.bis - Date.now()) / 1000) + 30 * 86400);
   await env.PUSH.put("buvette:" + id, JSON.stringify(eintrag), { expirationTtl: bis });
-  await buvMail(env, `Buvette: ${name} – ${schichtText(sp)} (${eintrag.leute.length}/${BUVETTE_MAX})`, [
+  await buvMail(env, `Buvette: ${name} – ${schichtText(sp)} (${eintrag.leute.length}/${bMax(id)})`, [
     `✅ Neue Eintragung für die Buvette:`, `<b>${htmlEsc(name)}</b> · <a href="tel:${htmlEsc(tel.replace(/[^\d+]/g, ""))}">${htmlEsc(tel)}</a>${notiz ? `<br><i>${htmlEsc(notiz)}</i>` : ""}`,
     `<b>${htmlEsc(schichtText(sp))}</b> · ${htmlEsc(sp.ort)}<br>${sp.spiele.map(x => `${htmlEsc(x.team)} – ${htmlEsc(x.gegner)}`).join("<br>")}`,
-    `Jetzt belegt: ${eintrag.leute.length}/${BUVETTE_MAX} (${eintrag.leute.map(l => htmlEsc(l.name)).join(", ")})`]);
+    `Jetzt belegt: ${eintrag.leute.length}/${bMax(id)} (${eintrag.leute.map(l => htmlEsc(l.name)).join(", ")})`]);
   return bJson({ ok: true, token, belegt: eintrag.leute.length });
 }
 
@@ -330,7 +331,7 @@ async function buvetteListe(env, url) {
     .filter(e => e?.spiel && e.leute?.length && e.spiel.bis > Date.now() - 864e5).sort((a, b) => a.spiel.von - b.spiel.von);
   const zeit = d => new Date(d).toLocaleString("de-DE", { timeZone: "Europe/Luxembourg", weekday: "short", day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" });
   const uhr = d => new Date(d).toLocaleTimeString("de-DE", { timeZone: "Europe/Luxembourg", hour: "2-digit", minute: "2-digit" });
-  const zeilen = alle.map(e => `<tr><td>${htmlEsc(zeit(e.spiel.von))}–${htmlEsc(uhr(e.spiel.bis))}</td><td>${e.spiel.spiele.map(x => `<b>${htmlEsc(x.team)}</b> – ${htmlEsc(x.gegner)}`).join("<br>")}<br><small>${htmlEsc(e.spiel.ort)}</small></td><td>${e.leute.length}/${BUVETTE_MAX}</td><td>${e.leute.map(l => `${htmlEsc(l.name)} · <a href="tel:${htmlEsc(l.tel.replace(/[^\d+]/g, ""))}">${htmlEsc(l.tel)}</a>${l.notiz ? `<br><small>${htmlEsc(l.notiz)}</small>` : ""}`).join("<hr>")}</td></tr>`).join("");
+  const zeilen = alle.map(e => `<tr><td>${htmlEsc(zeit(e.spiel.von))}–${htmlEsc(uhr(e.spiel.bis))}</td><td>${e.spiel.spiele.map(x => `<b>${htmlEsc(x.team)}</b> – ${htmlEsc(x.gegner)}`).join("<br>")}<br><small>${htmlEsc(e.spiel.ort)}</small></td><td>${e.leute.length}/${bMax(e.spiel.id)}</td><td>${e.leute.map(l => `${htmlEsc(l.name)} · <a href="tel:${htmlEsc(l.tel.replace(/[^\d+]/g, ""))}">${htmlEsc(l.tel)}</a>${l.notiz ? `<br><small>${htmlEsc(l.notiz)}</small>` : ""}`).join("<hr>")}</td></tr>`).join("");
   return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Buvette FCJJ</title>
 <style>body{font:15px system-ui,sans-serif;margin:16px;color:#111}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ddd;padding:8px 6px;text-align:left;vertical-align:top}hr{border:0;border-top:1px dashed #ccc;margin:4px 0}small{color:#666}</style>
 <h1>🍺 Buvette – Eintragungen</h1><p>Nur Schichten mit mindestens einer Person. Schichten ohne Eintrag sieht man in der App („Hilfe gesucht“).</p>
