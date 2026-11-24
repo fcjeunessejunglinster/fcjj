@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-24T04:49:34.690Z",
+ "stand": "2026-11-24T11:18:21.226Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -20962,6 +20962,176 @@
    ],
    "start": "2026-11-07T14:30:00+01:00"
   },
+  "19619": {
+   "id": 19619,
+   "n": "Coupe U13 Minimes - 1/8 de Finale",
+   "typ": "CUP",
+   "ergebnisse": true,
+   "tabelle": null,
+   "spiele": [
+    {
+     "id": 13885,
+     "d": "2027-01-01T00:00:01+01:00",
+     "tag": 1,
+     "h": {
+      "id": 45496,
+      "n": "ENT Mondorf/Schengen",
+      "c": 500084
+     },
+     "a": {
+      "id": 45458,
+      "n": "FC Mamer 32",
+      "c": 500076
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Mondorf, synth.)"
+    },
+    {
+     "id": 13884,
+     "d": "2027-01-01T00:00:01+01:00",
+     "tag": 1,
+     "h": {
+      "id": 45558,
+      "n": "FC 72 Erpeldange",
+      "c": 500038
+     },
+     "a": {
+      "id": 46065,
+      "n": "FC Rodange 91",
+      "c": 500101
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Erpeldange, synth.)"
+    },
+    {
+     "id": 13887,
+     "d": "2027-01-01T00:00:01+01:00",
+     "tag": 1,
+     "h": {
+      "id": 45646,
+      "n": "FC Differdange 03",
+      "c": 1000189
+     },
+     "a": {
+      "id": 46443,
+      "n": "F91 Dudelange",
+      "c": 500030
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Municipal Differdange - Terrain 2 (synth.)"
+    },
+    {
+     "id": 13888,
+     "d": "2027-01-01T00:00:01+01:00",
+     "tag": 1,
+     "h": {
+      "id": 46300,
+      "n": "FC Kehlen",
+      "c": 500064
+     },
+     "a": {
+      "id": 45422,
+      "n": "CS Fola Esch-Alzette",
+      "c": 500039
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Kehlen, synth.)"
+    },
+    {
+     "id": 13881,
+     "d": "2027-01-01T00:00:01+01:00",
+     "tag": 1,
+     "h": {
+      "id": 44740,
+      "n": "Jeunesse Junglinster",
+      "c": 500062
+     },
+     "a": {
+      "id": 46214,
+      "n": "FC Lorentzweiler",
+      "c": 500071
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 13882,
+     "d": "2027-01-01T00:00:01+01:00",
+     "tag": 1,
+     "h": {
+      "id": 45272,
+      "n": "Racing FC Union Luxembourg",
+      "c": 1000234
+     },
+     "a": {
+      "id": 46404,
+      "n": "AS Red Black Luxembourg",
+      "c": 1003709
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Hollerich (synth.)"
+    },
+    {
+     "id": 13886,
+     "d": "2027-01-01T00:00:01+01:00",
+     "tag": 1,
+     "h": {
+      "id": 45350,
+      "n": "Sporting Bertrange",
+      "c": 500009
+     },
+     "a": {
+      "id": 45692,
+      "n": "Una Strassen",
+      "c": 500114
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Plaine des Jeux André Wolff (Bertrange, synth.)"
+    },
+    {
+     "id": 13883,
+     "d": "2027-01-01T00:00:01+01:00",
+     "tag": 1,
+     "h": {
+      "id": 45895,
+      "n": "US Hostert",
+      "c": 500059
+     },
+     "a": {
+      "id": 45985,
+      "n": "Atert Bissen",
+      "c": 500012
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Carrière (Senningerberg, synth.)"
+    }
+   ],
+   "start": "2027-01-01T00:00:01+01:00"
+  },
   "19641": {
    "id": 19641,
    "n": "Coupe FLF - 1/32 de Finale",
@@ -22412,26 +22582,6 @@
      "ort": "Terrain Hollerich (synth.)"
     },
     {
-     "id": 6231041,
-     "d": "2026-12-06T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 46080,
-      "n": "ENT Steinsel/Walferdange",
-      "c": 500113
-     },
-     "a": {
-      "id": 45153,
-      "n": "Jeunesse Junglinster",
-      "c": 500062
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Henri Bausch (Steinsel, synth.)"
-    },
-    {
      "id": 6231043,
      "d": "2026-12-06T11:00:00+01:00",
      "tag": 4,
@@ -22450,6 +22600,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
+    },
+    {
+     "id": 6231041,
+     "d": "2026-12-06T11:00:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 46080,
+      "n": "ENT Steinsel/Walferdange",
+      "c": 500113
+     },
+     "a": {
+      "id": 45153,
+      "n": "Jeunesse Junglinster",
+      "c": 500062
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Henri Bausch (Steinsel, synth.)"
     },
     {
      "id": 6231042,
@@ -22795,26 +22965,6 @@
      "ort": "Terrain 2 (Itzig, synth.)"
     },
     {
-     "id": 6253042,
-     "d": "2026-12-06T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 45148,
-      "n": "US Sandweiler",
-      "c": 500105
-     },
-     "a": {
-      "id": 45771,
-      "n": "FC Blo-Wäiss Izeg",
-      "c": 500061
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Sandweiler, synth.)"
-    },
-    {
      "id": 6253041,
      "d": "2026-12-06T11:00:00+01:00",
      "tag": 4,
@@ -22853,6 +23003,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 6253042,
+     "d": "2026-12-06T11:00:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 45148,
+      "n": "US Sandweiler",
+      "c": 500105
+     },
+     "a": {
+      "id": 45771,
+      "n": "FC Blo-Wäiss Izeg",
+      "c": 500061
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Sandweiler, synth.)"
     },
     {
      "id": 6253053,
@@ -23252,7 +23422,7 @@
     },
     {
      "id": 3276053,
-     "d": "2026-12-05T00:00:01+01:00",
+     "d": "2026-12-05T15:00:00+01:00",
      "tag": 5,
      "h": {
       "id": 45382,
@@ -24461,7 +24631,7 @@
     },
     {
      "id": 6324042,
-     "d": "2026-12-05T00:00:01+01:00",
+     "d": "2026-12-05T15:00:00+01:00",
      "tag": 4,
      "h": {
       "id": 46758,
@@ -24843,26 +25013,6 @@
      "ort": "Am Ga (Wormeldange, synth.)"
     },
     {
-     "id": 6345041,
-     "d": "2026-12-05T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 46022,
-      "n": "Union Remich/Bous I",
-      "c": 1000426
-     },
-     "a": {
-      "id": 44755,
-      "n": "Victoria Rosport I",
-      "c": 500103
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain um Gréin (Remich, synth.)"
-    },
-    {
      "id": 6345042,
      "d": "2026-12-05T14:30:00+01:00",
      "tag": 4,
@@ -24901,6 +25051,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Berbourg, synth.)"
+    },
+    {
+     "id": 6345041,
+     "d": "2026-12-05T16:00:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 46022,
+      "n": "Union Remich/Bous I",
+      "c": 1000426
+     },
+     "a": {
+      "id": 44755,
+      "n": "Victoria Rosport I",
+      "c": 500103
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain um Gréin (Remich, synth.)"
     },
     {
      "id": 6345052,
@@ -25228,7 +25398,7 @@
     },
     {
      "id": 6353042,
-     "d": "2026-12-05T00:00:01+01:00",
+     "d": "2026-12-05T14:30:00+01:00",
      "tag": 4,
      "h": {
       "id": 46169,
@@ -25247,28 +25417,8 @@
      "ort": "Stade Henri Bausch (Steinsel, synth.)"
     },
     {
-     "id": 6353043,
-     "d": "2026-12-05T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 46367,
-      "n": "ENT UMW/Berbourg/Biwer II",
-      "c": 500081
-     },
-     "a": {
-      "id": 45896,
-      "n": "US Hostert II",
-      "c": 500059
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain au Parc (Mertert, synth.)"
-    },
-    {
      "id": 6353041,
-     "d": "2026-12-05T01:30:00+01:00",
+     "d": "2026-12-05T14:30:00+01:00",
      "tag": 4,
      "h": {
       "id": 46201,
@@ -25285,6 +25435,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain Am Brill (Moutfort, synth.)"
+    },
+    {
+     "id": 6353043,
+     "d": "2026-12-05T16:30:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 46367,
+      "n": "ENT UMW/Berbourg/Biwer II",
+      "c": 500081
+     },
+     "a": {
+      "id": 45896,
+      "n": "US Hostert II",
+      "c": 500059
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain au Parc (Mertert, synth.)"
     },
     {
      "id": 6353051,
@@ -25921,26 +26091,6 @@
      "ort": "Terrain Maartbësch (Berdorf)"
     },
     {
-     "id": 6359043,
-     "d": "2026-12-05T00:00:01+01:00",
-     "tag": 4,
-     "h": {
-      "id": 46761,
-      "n": "ENT UMW/Biwer/Berbourg III",
-      "c": 500081
-     },
-     "a": {
-      "id": 46193,
-      "n": "CS Grevenmacher II",
-      "c": 500050
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain au Parc (Mertert, synth.)"
-    },
-    {
      "id": 6359041,
      "d": "2026-12-05T11:00:00+01:00",
      "tag": 4,
@@ -25959,6 +26109,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 6359043,
+     "d": "2026-12-05T14:30:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 46761,
+      "n": "ENT UMW/Biwer/Berbourg III",
+      "c": 500081
+     },
+     "a": {
+      "id": 46193,
+      "n": "CS Grevenmacher II",
+      "c": 500050
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain au Parc (Mertert, synth.)"
     },
     {
      "id": 6359051,

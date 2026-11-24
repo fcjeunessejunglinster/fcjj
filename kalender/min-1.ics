@@ -115,4 +115,13 @@ SUMMARY:⚽ FCJJ MIN 1 – Victoria Rosport I · Uhrzeit offen
 LOCATION:Terrain 2 (Junglinster\, synth.)
 DESCRIPTION:U13 Minimes Cl3 S2 Phase 2\, Spieltag 5
 END:VEVENT
+BEGIN:VEVENT
+UID:flf-13881-44738@fcjj-app
+DTSTAMP:20260701T000000Z
+DTSTART:20261231T230001Z
+DTEND:20270101T004501Z
+SUMMARY:⚽ FCJJ MIN 1 – FC Lorentzweiler (Pokal) · Uhrzeit offen
+LOCATION:Terrain 2 (Junglinster\, synth.)
+DESCRIPTION:Coupe U13 Minimes - 1/8 de Finale\, Spieltag 1
+END:VEVENT
 END:VCALENDAR
