@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-25T03:36:17.266Z",
+ "stand": "2026-11-25T11:18:20.588Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -5233,26 +5233,6 @@
      "ort": "Terrain 2 (Mersch, synth.)"
     },
     {
-     "id": 1012083,
-     "d": "2026-11-21T00:00:01+01:00",
-     "tag": 8,
-     "h": {
-      "id": 45520,
-      "n": "Daring Echternach",
-      "c": 500033
-     },
-     "a": {
-      "id": 46341,
-      "n": "FC Bastendorf 47 I",
-      "c": 500003
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Breil (Echternach, synth.)"
-    },
-    {
      "id": 1012081,
      "d": "2026-11-23T20:00:00+01:00",
      "tag": 8,
@@ -5311,26 +5291,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Schmitzgasse (Hupperdange)"
-    },
-    {
-     "id": 1012084,
-     "d": "2026-11-24T20:00:00+01:00",
-     "tag": 8,
-     "h": {
-      "id": 45014,
-      "n": "Jeunesse Gilsdorf",
-      "c": 500048
-     },
-     "a": {
-      "id": 46107,
-      "n": "Jeunesse Schieren",
-      "c": 500107
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Um Krottepull (Gilsdorf)"
     },
     {
      "id": 1012093,
@@ -5571,6 +5531,46 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Parc des Sports (Diekirch, synth.)"
+    },
+    {
+     "id": 1012083,
+     "d": "2026-12-12T18:30:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 45520,
+      "n": "Daring Echternach",
+      "c": 500033
+     },
+     "a": {
+      "id": 46341,
+      "n": "FC Bastendorf 47 I",
+      "c": 500003
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Breil (Echternach, synth.)"
+    },
+    {
+     "id": 1012084,
+     "d": "2026-12-15T20:00:00+01:00",
+     "tag": 8,
+     "h": {
+      "id": 45014,
+      "n": "Jeunesse Gilsdorf",
+      "c": 500048
+     },
+     "a": {
+      "id": 46107,
+      "n": "Jeunesse Schieren",
+      "c": 500107
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Um Krottepull (Gilsdorf)"
     },
     {
      "id": 1012114,
@@ -22905,6 +22905,26 @@
      "ort": "Terrain 2 (Beggen, synth.)"
     },
     {
+     "id": 6253033,
+     "d": "2026-11-28T10:30:00+01:00",
+     "tag": 3,
+     "h": {
+      "id": 45389,
+      "n": "ENT Wormeldange/Munsbach/Hostert",
+      "c": 1003703
+     },
+     "a": {
+      "id": 45148,
+      "n": "US Sandweiler",
+      "c": 500105
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain Munsbach (synth.)"
+    },
+    {
      "id": 6253031,
      "d": "2026-11-29T11:00:00+01:00",
      "tag": 3,
@@ -22923,26 +22943,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain Jos Durbach (Bous, synth.)"
-    },
-    {
-     "id": 6253033,
-     "d": "2026-11-29T11:00:00+01:00",
-     "tag": 3,
-     "h": {
-      "id": 45389,
-      "n": "ENT Wormeldange/Munsbach/Hostert",
-      "c": 1003703
-     },
-     "a": {
-      "id": 45148,
-      "n": "US Sandweiler",
-      "c": 500105
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain Munsbach (synth.)"
     },
     {
      "id": 6253032,
