@@ -332,7 +332,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-26 a";
+const FASSUNG = "2026-11-26 b";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -343,7 +343,7 @@ const merk = {
 // ---- Sprache (Deutsch / English) ----
 const TEXTE = {
   de: { cup: "Pokal", friendly: "Freundschaft", abgebr: "abgebr.", gespielt: "gespielt", offen: "offen", spieltag: "Spieltag",
-    forfait: "Forfait", laeuft: "Spiel läuft", heute: "Heute Spieltag! ⚽", morgen: "Morgen Spieltag! ⚽", zeitOffen: "Uhrzeit offen",
+    forfait: "Forfait", amTisch: n => `Am grünen Tisch gewonnen: ${n}`, laeuft: "Spiel läuft", heute: "Heute Spieltag! ⚽", morgen: "Morgen Spieltag! ⚽", zeitOffen: "Uhrzeit offen",
     ca: "ca. ", uhr: " Uhr", heim: "🏠 Heimspiel gegen ", aus: "✈️ Auswärts bei ", tabelle: "Tabelle",
     kopf: ["Mannschaft", "Sp", "S", "U", "N", "Tore", "Pkt"], ohneTag: "Ohne Spieltag", naechste: "Nächste Spiele",
     keineTermine: "Noch keine Termine.", ergebnisse: "Unsere Ergebnisse", alleKlasse: "Alle Spiele der Klasse", frueher: "Früher: ",
@@ -417,7 +417,7 @@ const TEXTE = {
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
-    forfait: "Forfeit", laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
+    forfait: "Forfeit", amTisch: n => `Won by decision: ${n}`, laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
     ca: "approx. ", uhr: "", heim: "🏠 Home vs ", aus: "✈️ Away at ", tabelle: "Table",
     kopf: ["Team", "P", "W", "D", "L", "Goals", "Pts"], ohneTag: "No matchday", naechste: "Upcoming matches",
     keineTermine: "No fixtures yet.", ergebnisse: "Our results", alleKlasse: "All matches in this division", frueher: "Earlier: ",
@@ -491,7 +491,7 @@ const TEXTE = {
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
-    forfait: "Forfait", laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
+    forfait: "Forfait", amTisch: n => `Gagné sur tapis vert : ${n}`, laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
     ca: "vers ", uhr: "", heim: "🏠 À domicile contre ", aus: "✈️ À l'extérieur à ", tabelle: "Classement",
     kopf: ["Équipe", "J", "G", "N", "P", "Buts", "Pts"], ohneTag: "Sans journée", naechste: "Prochains matchs",
     keineTermine: "Pas encore de dates.", ergebnisse: "Nos résultats", alleKlasse: "Tous les matchs de la division", frueher: "Avant : ",
@@ -599,6 +599,7 @@ function eigeneSpiele(t) {
 const gegner = sp => sp.heim ? sp.a : sp.h;
 function wertung(sp) {
   if (!sp.erg || sp.hs == null) return "";
+  if (sp.sieger) return (sp.sieger === "h") === sp.heim ? "S" : "N";   // am grünen Tisch entschieden (26.11.2026)
   const w = sp.heim ? sp.hs : sp.as, g = sp.heim ? sp.as : sp.hs;
   return w > g ? "S" : w < g ? "N" : "U";
 }
@@ -657,6 +658,7 @@ function formListe(teamId, vor) {
   for (const k of Object.values(D.klassen)) if (k.typ !== "CUP" && k.typ !== "FM" && k.ergebnisse)
     for (const x of k.spiele) if ((x.h.id === teamId || x.a.id === teamId) && (x.gespielt || x.forfait) && x.hs != null && x.d < vor) l.push(x);
   return l.sort((a, b) => a.d.localeCompare(b.d)).slice(-5).map(x => {
+    if (x.sieger) return (x.sieger === "h") === (x.h.id === teamId) ? "S" : "N";
     const w = x.h.id === teamId ? x.hs : x.as, g = x.h.id === teamId ? x.as : x.hs;
     return w > g ? "S" : w < g ? "N" : "U";
   });
@@ -806,7 +808,8 @@ function spielLi(sp, now, mitTeam) {
   const meta = [sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")];
   if (!vorbei(sp, now) && sp.ort) meta.push("📍 " + sp.ort);
   if (kabine(sp, now)) meta.push(kabine(sp, now));
-  if (sp.forfait) meta.push(T().forfait);
+  if (sp.sieger) meta.push(T().amTisch(sp.sieger === "h" ? sp.h.n : sp.a.n));
+  else if (sp.forfait) meta.push(T().forfait);
   if (sp.bem && sp.bem !== "Arrêté") meta.push(sp.bem);
   const r = [routeLink(sp, now), videoLink(sp)].filter(Boolean).join(" · ");
   const unten = `${mitTeam ? `<span class="schild team">${esc(sp.team.reiter)}</span>` : ""}${artSchild(sp)}<b>${wt(d)} ${kurzDatum(d)}</b> · ${esc(meta.join(" · "))}${r ? " · " + r : ""}`;

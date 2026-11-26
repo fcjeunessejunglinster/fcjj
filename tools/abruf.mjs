@@ -300,14 +300,17 @@ async function kategorienFinden(zeit, club, alt) {
   return { tag: heute, saison: zeit.seasonId, ids: gefunden, gesehen };
 }
 
-// Von Hand geänderte Anstoßzeiten (vom Verein): data/aenderungen.json { "<Spiel-id>": { "d": "<neu>", "flf": "<FLF-Zeit>" } }.
+// Von Hand geänderte Spiele (vom Verein): data/aenderungen.json { "<Spiel-id>": { "d": "<neu>", "flf": "<FLF-Zeit>", "sieger": "h"|"a" } }.
 // Gilt nur, solange die FLF noch die alte Zeit („flf“) hat; ändert die FLF selbst, gewinnt die FLF.
 export function aenderungen(d) {
   let a = {};
   try { a = JSON.parse(readFileSync(new URL("../data/aenderungen.json", import.meta.url), "utf8")); } catch (e) { return; }
   for (const k of Object.values(d.klassen || {})) for (const sp of k.spiele || []) {
     const x = a[sp.id];
-    if (x?.d && (!x.flf || x.flf === sp.d)) { sp.d = x.d; sp.geaendert = true; }
+    if (!x) continue;
+    if (x.d && (!x.flf || x.flf === sp.d)) { sp.d = x.d; sp.geaendert = true; }
+    // „sieger“: "h" oder "a" = am grünen Tisch gewonnen (z. B. Forfait-Entscheid), Ergebnis auf dem Platz bleibt sichtbar.
+    if (x.sieger === "h" || x.sieger === "a") sp.sieger = x.sieger;
   }
 }
 
