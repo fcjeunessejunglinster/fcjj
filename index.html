@@ -129,6 +129,13 @@ svg.flasche{width:.62em;height:1.3em;vertical-align:-.27em;margin:0 .06em 0 -.12
 li.buvzeile.leer b,li.buvzeile.leer .klein,li.buvzeile.leer .buvst{font-weight:800;color:var(--text)}li.buvzeile.leer .buvst.rot{color:var(--rot);font-size:.95rem}
 .buvuebersicht{display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 16px 0;margin:0}
 .buvspiel{display:flex;align-items:center;gap:6px;margin:3px 0}.buvspiel>span{white-space:nowrap}.buvspiel>span:last-child{white-space:normal;min-width:0;overflow-wrap:anywhere}.buvspiel img.vlogo{width:20px;height:20px}
+.statgitter{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:12px 16px 0}
+.statk{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px;border-radius:12px;background:var(--bg)}
+.statk b{font-size:24px;font-weight:900;line-height:1.1}.statk span{font-size:12px;color:var(--leise);text-align:center}
+.statk.s b{color:var(--sieg)}.statk.u b{color:var(--leise)}.statk.n b{color:var(--rot)}
+.statbalken{display:flex;height:10px;margin:12px 16px 0;border-radius:999px;overflow:hidden;background:var(--linie)}
+.statbalken i{display:block}.statbalken .s{background:var(--sieg)}.statbalken .u{background:#9a9a9a}.statbalken .n{background:var(--rot)}
+.statzeilen{padding:10px 16px 0;font-size:14px;display:flex;flex-direction:column;gap:4px}
 ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
 .tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
 .tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
@@ -325,7 +332,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-25 c";
+const FASSUNG = "2026-11-26 a";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -377,6 +384,7 @@ const TEXTE = {
     matchball: "⚽ Einen Spielball sponsern",
     spielfeld: k => `Spielfeld ${k}`,
     buv: { reiter: "🍺☕️ Buvette Help 🥰", unter: "Helfer für die Buvette · diese Woche (Mo–So)", jugend: "⚽️ Jugendspiele", senioren: "⚽ Seniors & Réserves", leer: "leer", halb: "halb besetzt", ganz: "voll besetzt", titel: "🍺☕️ Buvette-Helfer", sum: n => n ? `${n} ${n === 1 ? "Schicht sucht" : "Schichten suchen"} noch Hilfe` : "alle Schichten besetzt", anrede: "Liebe Eltern,", text: "Bei Heimspielen öffnet die Buvette 30 Minuten vor dem ersten Spiel und schließt 30 Minuten nach dem letzten. Pro Schicht braucht es mindestens 1, ideal 2 Personen (SCO, CAD, JUN, WU15 und Réserves: 1 · Seniors: 3).", dank: "Danke an alle für eure Unterstützung, euer Engagement und euren Teamgeist ⚪️🔴⚫️", frei: "Hilfe gesucht", mehr: k => k === 1 ? "1 weitere Person willkommen" : `${k} weitere Personen willkommen`, voll: "besetzt", an: "Eintragen", ich: "Du bist eingetragen ✓", ab: "Austragen", abFrage: "Wirklich austragen?", name: "Vor- und Nachname", tel: "Telefon (für den Verein)", notiz: "Bemerkung (optional, z. B. erst ab 14:30)", senden: "Eintragen", zu: "Abbrechen", privat: "Name und Telefon sieht nur der Verein, nicht die anderen Nutzer der App.", danke: "Danke! Du bist eingetragen.", fehler: { voll: "Diese Schicht ist inzwischen besetzt.", daten: "Bitte Namen und eine gültige Telefonnummer angeben.", limit: "Zu viele Eintragungen heute. Bitte morgen noch einmal versuchen.", sonst: "Das hat nicht geklappt. Bitte später noch einmal versuchen." }, keine: "Diese Woche gibt es keine Heimspiele mehr." },
+    stat: { titel: n => `Saisonbilanz ${n.replace(/^Saison\s*/, "")}`, sp: "Spiele", S: "Siege", U: "Unentschieden", N: "Niederlagen", kS: "S", kU: "U", kN: "N", tore: "Tore", quote: "Siegquote", liga: "Meisterschaft", cup: "Pokal", hinweis: "Offizielle Spiele mit Ergebnis seit Saisonbeginn (Meisterschaft und Pokal, ohne Freundschaftsspiele).", keine: "Noch keine offiziellen Ergebnisse in dieser Saison." }, 
     chat: { knopf: "💬 Frag Sami ⚽️", titel: "Frag Sami", platzhalter: "Deine Frage zum Verein …", senden: "Senden", schliessen: "Schließen",
       hallo: "Hallo, ich bin Sami! Frag mich etwas zum FCJJ, z. B. „Wann spielt MIN 1 am Samstag?“ oder „Was kostet die Cotisation?“",
       hinweis: "KI-Antwort (Claude), kann Fehler enthalten. Verbindlich sind Trainer und fcjj.lu. Deine Frage wird an Anthropic geschickt; gib keine persönlichen Daten ein.",
@@ -450,6 +458,7 @@ const TEXTE = {
     matchball: "⚽ Sponsor a match ball",
     spielfeld: k => `Pitch ${k}`,
     buv: { reiter: "🍺☕️ Buvette Help 🥰", unter: "Buvette helpers · this week (Mon–Sun)", jugend: "⚽️ Youth Games", senioren: "⚽ Seniors & Réserves", leer: "empty", halb: "half-covered", ganz: "fully covered", titel: "🍺☕️ Buvette helpers", sum: n => n ? `${n} ${n === 1 ? "shift still needs" : "shifts still need"} help` : "all shifts covered", anrede: "Dear parents,", text: "At home games the buvette opens 30 minutes before the first game and closes 30 minutes after the last one. Each shift needs at least 1, ideally 2 people (SCO, CAD, JUN, WU15 and Réserves: 1 · Seniors: 3).", dank: "Thank you all for your support, your commitment and your team spirit ⚪️🔴⚫️", frei: "Help needed", mehr: k => k === 1 ? "1 more person welcome" : `${k} more people welcome`, voll: "covered", an: "Sign up", ich: "You’re signed up ✓", ab: "Cancel", abFrage: "Really cancel?", name: "First and last name", tel: "Phone (for the club)", notiz: "Note (optional, e.g. only from 2:30 pm)", senden: "Sign up", zu: "Close", privat: "Only the club sees your name and phone number, not the other app users.", danke: "Thank you! You’re signed up.", fehler: { voll: "This shift is already covered.", daten: "Please enter your name and a valid phone number.", limit: "Too many sign-ups today. Please try again tomorrow.", sonst: "That didn’t work. Please try again later." }, keine: "No more home games this week." },
+    stat: { titel: n => `Season record ${n.replace(/^Saison\s*/, "")}`, sp: "Played", S: "Won", U: "Drawn", N: "Lost", kS: "W", kU: "D", kN: "L", tore: "Goals", quote: "Win rate", liga: "League", cup: "Cup", hinweis: "Official games with a result since the start of the season (league and cup, no friendlies).", keine: "No official results yet this season." }, 
     chat: { knopf: "💬 Ask Sami ⚽️", titel: "Ask Sami", platzhalter: "Your question about the club …", senden: "Send", schliessen: "Close",
       hallo: "Hi, I’m Sami! Ask me anything about FCJJ, e.g. “When does MIN 1 play on Saturday?” or “How much is the membership fee?”",
       hinweis: "AI answer (Claude), may contain mistakes. Coaches and fcjj.lu are authoritative. Your question is sent to Anthropic; don't enter personal data.",
@@ -523,6 +532,7 @@ const TEXTE = {
     matchball: "⚽ Sponsoriser un ballon de match",
     spielfeld: k => `Terrain ${k}`,
     buv: { reiter: "🍺☕️ Buvette Help 🥰", unter: "Bénévoles buvette · cette semaine (lun–dim)", jugend: "⚽️ Matchs des jeunes", senioren: "⚽ Seniors & Réserves", leer: "vides", halb: "à moitié couverts", ganz: "entièrement couverts", titel: "🍺☕️ Bénévoles buvette", sum: n => n ? `${n} ${n === 1 ? "créneau cherche" : "créneaux cherchent"} encore de l’aide` : "tous les créneaux sont couverts", anrede: "Chers parents,", text: "Lors des matchs à domicile, la buvette ouvre 30 minutes avant le premier match et ferme 30 minutes après le dernier. Il faut au moins 1, idéalement 2 personnes par créneau (SCO, CAD, JUN, WU15 et Réserves : 1 · Seniors : 3).", dank: "Merci à tous pour votre soutien, votre engagement et votre esprit d’équipe ⚪️🔴⚫️", frei: "Aide recherchée", mehr: k => k === 1 ? "1 personne de plus bienvenue" : `${k} personnes de plus bienvenues`, voll: "couvert", an: "S’inscrire", ich: "Tu es inscrit(e) ✓", ab: "Se désinscrire", abFrage: "Vraiment se désinscrire ?", name: "Prénom et nom", tel: "Téléphone (pour le club)", notiz: "Remarque (facultatif, p. ex. seulement à partir de 14h30)", senden: "S’inscrire", zu: "Fermer", privat: "Seul le club voit ton nom et ton téléphone, pas les autres utilisateurs de l’app.", danke: "Merci ! Tu es inscrit(e).", fehler: { voll: "Ce créneau est déjà couvert.", daten: "Merci d’indiquer ton nom et un numéro de téléphone valide.", limit: "Trop d’inscriptions aujourd’hui. Réessaie demain.", sonst: "Cela n’a pas marché. Réessaie plus tard." }, keine: "Plus de matchs à domicile cette semaine." },
+    stat: { titel: n => `Bilan de la saison ${n.replace(/^Saison\s*/, "")}`, sp: "Matchs", S: "Victoires", U: "Nuls", N: "Défaites", kS: "V", kU: "N", kN: "D", tore: "Buts", quote: "Taux de victoires", liga: "Championnat", cup: "Coupe", hinweis: "Matchs officiels avec résultat depuis le début de la saison (championnat et coupe, sans matchs amicaux).", keine: "Pas encore de résultats officiels cette saison." }, 
     chat: { knopf: "💬 Demande à Sami ⚽️", titel: "Demande à Sami", platzhalter: "Ta question sur le club …", senden: "Envoyer", schliessen: "Fermer",
       hallo: "Bonjour, je suis Sami ! Pose-moi une question sur le FCJJ, p. ex. « Quand joue MIN 1 samedi ? » ou « Combien coûte la cotisation ? »",
       hinweis: "Réponse d’IA (Claude), peut contenir des erreurs. Les entraîneurs et fcjj.lu font foi. Ta question est envoyée à Anthropic ; n’indique pas de données personnelles.",
@@ -877,6 +887,28 @@ function letztesHtml(t, spiele, now, aktuell, kinder) {
 }
 // 🥇 wenn die Seniors Tabellenerster sind (vom Verein, 15.11.2026).
 const erster = (t, z) => t.kat === "SEN" && z?.pl === 1 && t.ids.includes(z.id);
+// Saisonbilanz (vom Verein, 26.11.2026): ab MIN bis Veteranen alle offiziellen Spiele mit Ergebnis (Meisterschaft + Pokal,
+// ohne Freundschaftsspiele): Spiele, Siege, Unentschieden, Niederlagen, Tore; darunter Meisterschaft und Pokal getrennt.
+function statistikKarte(t) {
+  if (KEINE_ERG.includes(t.kat)) return "";
+  const l = eigeneSpiele(t).filter(sp => sp.erg && sp.typ !== "FM" && (sp.gespielt || sp.forfait) && sp.hs != null);
+  const bilanz = liste => {
+    const b = { sp: liste.length, S: 0, U: 0, N: 0, tf: 0, tg: 0 };
+    for (const sp of liste) { b[wertung(sp)]++; b.tf += sp.heim ? sp.hs : sp.as; b.tg += sp.heim ? sp.as : sp.hs; }
+    return b;
+  };
+  const a = bilanz(l), s = T().stat;
+  if (!a.sp) return `<details class="karte statkarte"><summary>📊 ${esc(s.titel(D.saison?.n || ""))}</summary><p class="hinweis">${esc(s.keine)}</p></details>`;
+  const kachel = (zahl, text, kl) => `<div class="statk ${kl}"><b>${zahl}</b><span>${esc(text)}</span></div>`;
+  const pct = x => Math.round(100 * x / a.sp);
+  const teil = (liste, name) => { const b = bilanz(liste); return b.sp ? `<div>${esc(name)}: <b>${b.S}</b> ${esc(s.kS)} · <b>${b.U}</b> ${esc(s.kU)} · <b>${b.N}</b> ${esc(s.kN)}</div>` : ""; };
+  const liga = l.filter(sp => sp.typ !== "CUP"), cup = l.filter(sp => sp.typ === "CUP");
+  return `<details class="karte statkarte" open><summary>📊 ${esc(s.titel(D.saison?.n || ""))}</summary>
+    <div class="statgitter">${kachel(a.sp, s.sp, "")}${kachel(a.S, s.S, "s")}${kachel(a.U, s.U, "u")}${kachel(a.N, s.N, "n")}</div>
+    <div class="statbalken" role="img" aria-label="${a.S} ${esc(s.S)}, ${a.U} ${esc(s.U)}, ${a.N} ${esc(s.N)}"><i class="s" style="width:${pct(a.S)}%"></i><i class="u" style="width:${pct(a.U)}%"></i><i class="n" style="width:${pct(a.N)}%"></i></div>
+    <div class="statzeilen"><div>${esc(s.tore)}: <b>${a.tf}:${a.tg}</b> (${a.tf - a.tg > 0 ? "+" : ""}${a.tf - a.tg}) · ${esc(s.quote)}: <b>${pct(a.S)} %</b></div>${cup.length ? teil(liga, s.liga) + teil(cup, s.cup) : ""}</div>
+    <p class="hinweis" style="font-size:12px">${esc(s.hinweis)}</p></details>`;
+}
 function tabelleKarte(k, t) {
   if (!k?.tabelle?.length) return "";
   const ids = new Set(t.ids);
@@ -921,6 +953,7 @@ function teamHtml(t, now) {
     + (morgen ? morgenHtml(morgen, now) : "") + letztesHtml(t, spiele, now, aktuell, kinder);
   html += naechsteKarte(kommend, now, kalenderKnopf(t)) + eventsKarte(now, t.kat);
   if (aktuell) html += tabelleKarte(aktuell, t);
+  html += statistikKarte(t);
   if (gespielt.length) html += `<section class="karte"><h2>${T().ergebnisse}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
   if (aktuell) html += `<details class="karte"><summary>${T().alleKlasse}</summary>${klassenSpiele(aktuell, t, now)}</details>`;
   for (const w of FUPA_EXTRA[t.reiter] || []) html += fupaExtraHtml(w);
