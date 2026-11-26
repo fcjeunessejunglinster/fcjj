@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-26T02:52:13.568Z",
+ "stand": "2026-11-26T11:18:49.236Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -24327,26 +24327,6 @@
      "ort": "Stade Gaston Diderich (Luxembourg, synth.)"
     },
     {
-     "id": 6316053,
-     "d": "2026-12-12T00:00:01+01:00",
-     "tag": 5,
-     "h": {
-      "id": 46355,
-      "n": "ENT Biwer/Berbourg/UMW",
-      "c": 500013
-     },
-     "a": {
-      "id": 44734,
-      "n": "Jeunesse Junglinster I",
-      "c": 500062
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Berbourg, synth.)"
-    },
-    {
      "id": 6316052,
      "d": "2026-12-12T00:00:01+01:00",
      "tag": 5,
@@ -24365,6 +24345,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Am Dieltchen (Weiler, synth.)"
+    },
+    {
+     "id": 6316053,
+     "d": "2026-12-12T17:00:00+01:00",
+     "tag": 5,
+     "h": {
+      "id": 46355,
+      "n": "ENT Biwer/Berbourg/UMW",
+      "c": 500013
+     },
+     "a": {
+      "id": 44734,
+      "n": "Jeunesse Junglinster I",
+      "c": 500062
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain au Parc (Mertert, synth.)"
     }
    ],
    "start": "2026-11-14T17:30:00+01:00"
@@ -25093,26 +25093,6 @@
      "ort": "Am Ga (Wormeldange, synth.)"
     },
     {
-     "id": 6345051,
-     "d": "2026-12-12T01:30:00+01:00",
-     "tag": 5,
-     "h": {
-      "id": 46353,
-      "n": "ENT Biwer/Berbourg/UMW I",
-      "c": 500013
-     },
-     "a": {
-      "id": 46022,
-      "n": "Union Remich/Bous I",
-      "c": 1000426
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Berbourg, synth.)"
-    },
-    {
      "id": 6345053,
      "d": "2026-12-12T01:30:00+01:00",
      "tag": 5,
@@ -25131,6 +25111,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 6345051,
+     "d": "2026-12-12T14:00:00+01:00",
+     "tag": 5,
+     "h": {
+      "id": 46353,
+      "n": "ENT Biwer/Berbourg/UMW I",
+      "c": 500013
+     },
+     "a": {
+      "id": 46022,
+      "n": "Union Remich/Bous I",
+      "c": 1000426
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain au Parc (Mertert, synth.)"
     }
    ],
    "start": "2026-11-14T15:00:00+01:00"
@@ -25457,26 +25457,6 @@
      "ort": "Terrain au Parc (Mertert, synth.)"
     },
     {
-     "id": 6353051,
-     "d": "2026-12-12T00:00:01+01:00",
-     "tag": 5,
-     "h": {
-      "id": 46367,
-      "n": "ENT UMW/Berbourg/Biwer II",
-      "c": 500081
-     },
-     "a": {
-      "id": 46201,
-      "n": "US Moutfort-Medingen",
-      "c": 500085
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain au Parc (Mertert, synth.)"
-    },
-    {
      "id": 6353052,
      "d": "2026-12-12T00:00:01+01:00",
      "tag": 5,
@@ -25515,6 +25495,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 6353051,
+     "d": "2026-12-12T11:00:00+01:00",
+     "tag": 5,
+     "h": {
+      "id": 46367,
+      "n": "ENT UMW/Berbourg/Biwer II",
+      "c": 500081
+     },
+     "a": {
+      "id": 46201,
+      "n": "US Moutfort-Medingen",
+      "c": 500085
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain au Parc (Mertert, synth.)"
     }
    ],
    "start": "2026-11-14T15:00:00+01:00"
@@ -26131,26 +26131,6 @@
      "ort": "Terrain au Parc (Mertert, synth.)"
     },
     {
-     "id": 6359051,
-     "d": "2026-12-12T00:00:01+01:00",
-     "tag": 5,
-     "h": {
-      "id": 46761,
-      "n": "ENT UMW/Biwer/Berbourg III",
-      "c": 500081
-     },
-     "a": {
-      "id": 44911,
-      "n": "Jeunesse Junglinster IV",
-      "c": 500062
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain au Parc (Mertert, synth.)"
-    },
-    {
      "id": 6359052,
      "d": "2026-12-12T01:30:00+01:00",
      "tag": 5,
@@ -26169,6 +26149,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Grevenmacher, synth.)"
+    },
+    {
+     "id": 6359051,
+     "d": "2026-12-12T11:00:00+01:00",
+     "tag": 5,
+     "h": {
+      "id": 46761,
+      "n": "ENT UMW/Biwer/Berbourg III",
+      "c": 500081
+     },
+     "a": {
+      "id": 44911,
+      "n": "Jeunesse Junglinster IV",
+      "c": 500062
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain au Parc (Mertert, synth.)"
     }
    ],
    "start": "2026-11-21T14:00:00+01:00"
