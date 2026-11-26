@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-26T11:18:49.236Z",
+ "stand": "2026-11-26T16:48:55.121Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -22662,26 +22662,6 @@
      "ort": "Terrain Hollerich (synth.)"
     },
     {
-     "id": 6231051,
-     "d": "2026-12-13T01:30:00+01:00",
-     "tag": 5,
-     "h": {
-      "id": 45973,
-      "n": "Atert Bissen",
-      "c": 500012
-     },
-     "a": {
-      "id": 46080,
-      "n": "ENT Steinsel/Walferdange",
-      "c": 500113
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
-    },
-    {
      "id": 6231052,
      "d": "2026-12-13T01:30:00+01:00",
      "tag": 5,
@@ -22700,6 +22680,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Stade Prince Jean (Luxembourg, synth.)"
+    },
+    {
+     "id": 6231051,
+     "d": "2026-12-13T11:00:00+01:00",
+     "tag": 5,
+     "h": {
+      "id": 45973,
+      "n": "Atert Bissen",
+      "c": 500012
+     },
+     "a": {
+      "id": 46080,
+      "n": "ENT Steinsel/Walferdange",
+      "c": 500113
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Stade Klengbousbierg 2 (Bissen, synth.)"
     }
    ],
    "start": "2026-11-15T11:00:00+01:00"
@@ -23924,26 +23924,6 @@
      "ort": "Terrain 2 (Mamer, synth.)"
     },
     {
-     "id": 3300051,
-     "d": "2026-12-13T00:00:01+01:00",
-     "tag": 5,
-     "h": {
-      "id": 46231,
-      "n": "Avenir Beggen",
-      "c": 500005
-     },
-     "a": {
-      "id": 44963,
-      "n": "Alliance Äischdall Hobscheid-Eischen",
-      "c": 1000281
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Beggen, synth.)"
-    },
-    {
      "id": 3300053,
      "d": "2026-12-13T00:00:01+01:00",
      "tag": 5,
@@ -23982,6 +23962,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Junglinster, synth.)"
+    },
+    {
+     "id": 3300051,
+     "d": "2026-12-13T14:00:00+01:00",
+     "tag": 5,
+     "h": {
+      "id": 46231,
+      "n": "Avenir Beggen",
+      "c": 500005
+     },
+     "a": {
+      "id": 44963,
+      "n": "Alliance Äischdall Hobscheid-Eischen",
+      "c": 1000281
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Beggen, synth.)"
     }
    ],
    "start": "2026-11-15T11:00:00+01:00"
