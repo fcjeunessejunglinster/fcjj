@@ -136,6 +136,8 @@ li.buvzeile.leer b,li.buvzeile.leer .klein,li.buvzeile.leer .buvst{font-weight:8
 .statbalken{display:flex;height:10px;margin:12px 16px 0;border-radius:999px;overflow:hidden;background:var(--linie)}
 .statbalken i{display:block}.statbalken .s{background:var(--sieg)}.statbalken .u{background:#9a9a9a}.statbalken .n{background:var(--rot)}
 .statzeilen{padding:10px 16px 0;font-size:14px;display:flex;flex-direction:column;gap:4px}
+.buvimspiel{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--bg);font-size:13px;text-align:left}
+.buvimspiel .knopf{padding:5px 10px;width:auto;font-size:.8rem;border-radius:8px;min-height:0}
 ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
 .tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
 .tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
@@ -332,7 +334,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-26 b";
+const FASSUNG = "2026-11-27 a";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -813,7 +815,7 @@ function spielLi(sp, now, mitTeam) {
   if (sp.bem && sp.bem !== "Arrêté") meta.push(sp.bem);
   const r = [routeLink(sp, now), videoLink(sp)].filter(Boolean).join(" · ");
   const unten = `${mitTeam ? `<span class="schild team">${esc(sp.team.reiter)}</span>` : ""}${artSchild(sp)}<b>${wt(d)} ${kurzDatum(d)}</b> · ${esc(meta.join(" · "))}${r ? " · " + r : ""}`;
-  return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, w: wertung(sp), unten, attr: mitTeam ? ` data-gehe="${sp.team.id}"` : "" });
+  return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, w: wertung(sp), unten: unten + buvSpielHtml(sp, now), attr: mitTeam ? ` data-gehe="${sp.team.id}"` : "" });
 }
 
 // ---- Mannschaft ----
@@ -1016,7 +1018,7 @@ function naechsteKarte(kommend, now, unten = "", titel = T().naechste) {
         if (i) return spielLi(sp, now);
         const meta = [sp.ort ? "📍 " + sp.ort : "", kabine(sp, now), sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")].filter(Boolean);
         return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, m: '<span class="mitte leise">–</span>', form: FORM_KATS.includes(sp.team?.kat),
-          unten: `${artSchild(sp)}${esc(meta.join(" · "))}${routeLink(sp, now) ? " · " + routeLink(sp, now) : ""}` }).replace('class="sp"', 'class="sp erstes"');
+          unten: `${artSchild(sp)}${esc(meta.join(" · "))}${routeLink(sp, now) ? " · " + routeLink(sp, now) : ""}${buvSpielHtml(sp, now)}` }).replace('class="sp"', 'class="sp erstes"');
       }).join("") + "</ul>";
   }
   return h + unten + "</section>";
@@ -1730,6 +1732,19 @@ function buvetteKarte(now) {
   const uebersicht = geladen ? `<p class="buvuebersicht"><span class="buvst rot">🔴 ${zahl(n => n < 1)} ${b.leer}</span><span class="buvst orange">🟠 ${zahl((n, m) => n >= 1 && n < m)} ${b.halb}</span><span class="buvst gruen">🟢 ${zahl((n, m) => n >= m)} ${b.ganz}</span></p>` : "";
   return `<section class="karte buvette"><h2>${b.titel}</h2>${uebersicht}<p class="hinweis">${esc(b.anrede)}<br>${esc(b.text)}<br><b>${esc(b.dank)}</b></p>${zeilen}</section>`;
 }
+// Buvette-Status direkt beim Heimspiel (vom Verein, 27.11.2026): nur für Schichten der angezeigten Woche,
+// mit Belegung und „Eintragen“ – wie im Reiter Buvette Help.
+function buvSpielHtml(sp, now) {
+  if (!sp.heim || !D) return "";
+  const x = buvSchichtenJetzt(now).find(s => s.spiele.some(g => g.h?.id === sp.h.id && g.a?.id === sp.a.id) && tagKey(new Date(s.von)) === tagKey(new Date(sp.d)));
+  if (!x) return "";
+  buvHolen(buvSchichtenJetzt(now).map(s => s.id));
+  const b = T().buv, n = BUV.belegt[x.id], m = buvMax(x.id), mein = BUV_MEIN[x.id];
+  const st = n == null ? "" : n >= m ? `<span class="buvst gruen">🟢 ${n}/${m} · ${b.voll}</span>` : n ? `<span class="buvst orange">🟠 ${n}/${m} · ${b.mehr(m - n)}</span>` : `<span class="buvst rot">🔴 0/${m} · ${b.frei}</span>`;
+  const knopf = mein ? `<span class="buvich">${b.ich}</span> <button type="button" class="buvab" data-buv-ab="${x.id}">${b.ab}</button>`
+    : n != null && n < m ? `<button type="button" class="knopf buvan" data-buv-an="${x.id}">${b.an}</button>` : "";
+  return `<div class="buvimspiel"><div><b>🍺 Buvette ${uhr(new Date(x.von))}–${uhr(new Date(x.bis))}</b> ${st}</div>${knopf ? `<span>${knopf}</span>` : ""}</div>`;
+}
 function buvDialog(id) {
   const x = buvetteSchichten(D).find(s => s.id === id); if (!x) return;
   const b = T().buv, v = new Date(x.von), dlg = document.getElementById("buvDlg");
@@ -2098,6 +2113,7 @@ document.addEventListener("click", e => {
 });
 document.getElementById("inhalt").addEventListener("click", e => {
   if (e.target.closest("a")) return;   // Links (Route) nicht als Reiterwechsel
+  if (e.target.closest("[data-buv-an], [data-buv-ab]")) return;   // Buvette-Knöpfe im Spiel nicht als „zum Team springen“
   const li = e.target.closest("[data-gehe]"); if (!li) return;
   AKTIV = li.dataset.gehe; merk.set("reiter", AKTIV); render(); scrollTo(0, 0);
 });
