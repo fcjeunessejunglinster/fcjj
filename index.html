@@ -339,7 +339,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-27 i";
+const FASSUNG = "2026-11-27 j";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -1150,6 +1150,7 @@ function spielTemp(sp, now) {
 }
 let KALT_NOW = 0, KALT_GEZEIGT = new Set();   // je Anzeige nur einmal pro Spiel
 function kaltHtml(sp, now) {
+  if (["SEN", "RES", "VET"].includes(sp.team?.kat)) return "";   // nicht für Seniors, Réserves, Vétérans (vom Verein, 27.11.2026)
   if (KALT_NOW !== +now) { KALT_NOW = +now; KALT_GEZEIGT = new Set(); }
   if (KALT_GEZEIGT.has(sp.id)) return "";
   const t = spielTemp(sp, now);
