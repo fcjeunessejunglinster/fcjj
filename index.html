@@ -141,8 +141,8 @@ li.buvzeile.leer b,li.buvzeile.leer .klein,li.buvzeile.leer .buvst{font-weight:8
 .kalt{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#e3f0ff;color:#0b3d75;font-weight:700;font-size:14px}
 @media (prefers-color-scheme:dark){.kalt{background:#12304f;color:#cfe5ff}}
 .absage{margin:6px 0 0;padding:6px 10px;border-radius:8px;background:var(--rotHell, #fde8ea);color:var(--rot);font-weight:800;font-size:14px;text-align:center}
-a.whatsapp{display:inline-block;margin:0 0 14px;padding:10px 16px;border-radius:999px;background:#1f8f4e;color:#fff;font-weight:700;text-decoration:none}
-a.whatsapp:hover{background:#18723e}
+.knopf.whatsapp{background:#1f8f4e;border-color:#1f8f4e;color:#fff;text-align:center}
+.knopf.whatsapp:hover{background:#18723e}
 ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
 .tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
 .tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
@@ -329,7 +329,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 </div></header>
 <nav id="reiter"><div class="innen raster" id="knoepfe"></div></nav>
 <main><div class="innen" id="inhalt"><p class="hinweis">Lade …</p></div></main>
-<div class="teilen"><div class="unten-knoepfe"><a class="knopf" id="shop" href="https://form.jotform.com/242614644810352" target="_blank" rel="noopener"></a><button class="knopf" id="teilen" type="button"></button><button class="knopf" id="chatAuf" type="button" hidden></button></div><span class="ok" id="teilenOk" aria-live="polite"></span></div>
+<div class="teilen"><div class="unten-knoepfe"><a class="knopf" id="shop" href="https://form.jotform.com/242614644810352" target="_blank" rel="noopener"></a><button class="knopf" id="teilen" type="button"></button><button class="knopf" id="chatAuf" type="button" hidden></button></div><a class="knopf whatsapp" id="whatsapp" href="https://chat.whatsapp.com/HSLwwK03vwxBdITXiKXXX7" target="_blank" rel="noopener"></a><span class="ok" id="teilenOk" aria-live="polite"></span></div>
 <dialog id="buvDlg" class="buvdlg" aria-label="Buvette"></dialog>
 <dialog id="chat" aria-labelledby="chatTitel"><div class="chatkopf"><b id="chatTitel"></b><button type="button" class="knopf" id="chatZu"></button></div>
 <div id="chatVerlauf" aria-live="polite"></div><p class="leise chathinweis" id="chatHinweis"></p>
@@ -339,7 +339,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-27 g";
+const FASSUNG = "2026-11-27 h";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -2152,9 +2152,9 @@ function render() {
   document.getElementById("teilen").textContent = T().teilen;
   document.getElementById("shop").textContent = T().shop;
   hilfeAufbauen();
-  // WhatsApp-Kanal der Eltern (vom Verein, 27.11.2026)
-  document.getElementById("fuss").innerHTML = `<a class="whatsapp" href="${WHATSAPP_ELTERN}" target="_blank" rel="noopener">💬 ${esc(T().whatsapp)}</a>`
-    + T().fuss(`${kurzDatum(stand)} ${uhr(stand)}`, FASSUNG)
+  // WhatsApp-Kanal der Eltern unter „Frag Sami“ (vom Verein, 27.11.2026)
+  document.getElementById("whatsapp").textContent = "💬 " + T().whatsapp;
+  document.getElementById("fuss").innerHTML = T().fuss(`${kurzDatum(stand)} ${uhr(stand)}`, FASSUNG)
     + (fupaOk() ? `<br><button class="linkknopf" data-fupa="nein">${T().fupaAus}</button>` : "");
 }
 document.getElementById("knoepfe").addEventListener("click", e => {
