@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-27T15:17:39.461Z",
+ "stand": "2026-11-27T16:34:56.742Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -5414,26 +5414,6 @@
      "ort": "Terrain 2 (Berbourg, synth.)"
     },
     {
-     "id": 1012103,
-     "d": "2026-12-04T20:00:00+01:00",
-     "tag": 10,
-     "h": {
-      "id": 45919,
-      "n": "Marisca Mersch",
-      "c": 500080
-     },
-     "a": {
-      "id": 46107,
-      "n": "Jeunesse Schieren",
-      "c": 500107
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain 2 (Mersch, synth.)"
-    },
-    {
      "id": 1012104,
      "d": "2026-12-05T18:30:00+01:00",
      "tag": 10,
@@ -5472,6 +5452,26 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain 2 (Weidingen)"
+    },
+    {
+     "id": 1012103,
+     "d": "2026-12-07T20:00:00+01:00",
+     "tag": 10,
+     "h": {
+      "id": 45919,
+      "n": "Marisca Mersch",
+      "c": 500080
+     },
+     "a": {
+      "id": 46107,
+      "n": "Jeunesse Schieren",
+      "c": 500107
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain 2 (Mersch, synth.)"
     },
     {
      "id": 1012106,
@@ -25399,6 +25399,26 @@
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
+     "id": 6353043,
+     "d": "2026-12-05T10:30:00+01:00",
+     "tag": 4,
+     "h": {
+      "id": 46367,
+      "n": "ENT UMW/Berbourg/Biwer II",
+      "c": 500081
+     },
+     "a": {
+      "id": 45896,
+      "n": "US Hostert II",
+      "c": 500059
+     },
+     "hs": null,
+     "as": null,
+     "gespielt": false,
+     "forfait": false,
+     "ort": "Terrain au Parc (Mertert, synth.)"
+    },
+    {
      "id": 6353042,
      "d": "2026-12-05T14:30:00+01:00",
      "tag": 4,
@@ -25437,26 +25457,6 @@
      "gespielt": false,
      "forfait": false,
      "ort": "Terrain Am Brill (Moutfort, synth.)"
-    },
-    {
-     "id": 6353043,
-     "d": "2026-12-05T16:30:00+01:00",
-     "tag": 4,
-     "h": {
-      "id": 46367,
-      "n": "ENT UMW/Berbourg/Biwer II",
-      "c": 500081
-     },
-     "a": {
-      "id": 45896,
-      "n": "US Hostert II",
-      "c": 500059
-     },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
-     "ort": "Terrain au Parc (Mertert, synth.)"
     },
     {
      "id": 6353052,
