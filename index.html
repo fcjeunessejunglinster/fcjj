@@ -339,7 +339,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-27 k";
+const FASSUNG = "2026-11-27 l";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -855,13 +855,13 @@ function heuteHtml(h, now, kinder, extra = "") {
   return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
     ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${extra}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
-    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now) + (satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : "")}</div></section>`;
+    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : (satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : "") + buvSpielHtml(sp, now)}</div></section>`;
 }
 function morgenHtml(sp, now) {
   return `<section class="karte heute">${kopf(T().morgen, sp)}<div class="kasten"><div class="wann">${esc(offen(sp) ? T().zeitOffen : T().anstoss(uhr(new Date(sp.d))))}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
     ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
-    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now) + `<div class="satz">${esc(T().trinken)}</div>`}</div></section>`;
+    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : `<div class="satz">${esc(T().trinken)}</div>` + buvSpielHtml(sp, now)}</div></section>`;
 }
 // Slogan nach einem Sieg einer Jugendmannschaft (alle außer Seniors, Réserves und Veteranen; vom Verein, 8.11.2026).
 const ROCKS = '<div class="rocks">#YOUth ROCKs! 🤘</div>';
