@@ -138,6 +138,8 @@ li.buvzeile.leer b,li.buvzeile.leer .klein,li.buvzeile.leer .buvst{font-weight:8
 .statzeilen{padding:10px 16px 0;font-size:14px;display:flex;flex-direction:column;gap:4px}
 .buvimspiel{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--bg);font-size:13px;text-align:left}
 .buvimspiel .knopf{padding:5px 10px;width:auto;font-size:.8rem;border-radius:8px;min-height:0}
+.kalt{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#e3f0ff;color:#0b3d75;font-weight:700;font-size:14px}
+@media (prefers-color-scheme:dark){.kalt{background:#12304f;color:#cfe5ff}}
 ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
 .tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
 .tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
@@ -334,7 +336,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-27 b";
+const FASSUNG = "2026-11-27 c";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -345,7 +347,7 @@ const merk = {
 // ---- Sprache (Deutsch / English) ----
 const TEXTE = {
   de: { cup: "Pokal", friendly: "Freundschaft", abgebr: "abgebr.", gespielt: "gespielt", offen: "offen", spieltag: "Spieltag",
-    forfait: "Forfait", amTisch: n => `Am grünen Tisch gewonnen: ${n}`, laeuft: "Spiel läuft", heute: "Heute Spieltag! ⚽", morgen: "Morgen Spieltag! ⚽", zeitOffen: "Uhrzeit offen",
+    forfait: "Forfait", kalt: "Es wird kalt – bitte warm anziehen (Jacke, Mütze, Handschuhe)!", sehrKalt: "Sehr kalt – bitte richtig warm anziehen: Jacke, Mütze, Handschuhe und eine warme Schicht drunter!", amTisch: n => `Am grünen Tisch gewonnen: ${n}`, laeuft: "Spiel läuft", heute: "Heute Spieltag! ⚽", morgen: "Morgen Spieltag! ⚽", zeitOffen: "Uhrzeit offen",
     ca: "ca. ", uhr: " Uhr", heim: "🏠 Heimspiel gegen ", aus: "✈️ Auswärts bei ", tabelle: "Tabelle",
     kopf: ["Mannschaft", "Sp", "S", "U", "N", "Tore", "Pkt"], ohneTag: "Ohne Spieltag", naechste: "Nächste Spiele",
     keineTermine: "Noch keine Termine.", ergebnisse: "Unsere Ergebnisse", alleKlasse: "Alle Spiele der Klasse", frueher: "Früher: ",
@@ -419,7 +421,7 @@ const TEXTE = {
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
-    forfait: "Forfeit", amTisch: n => `Won by decision: ${n}`, laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
+    forfait: "Forfeit", kalt: "It’s going to be cold – please wear warm clothes (jacket, hat, gloves)!", sehrKalt: "Very cold – please dress really warm: jacket, hat, gloves and an extra warm layer!", amTisch: n => `Won by decision: ${n}`, laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
     ca: "approx. ", uhr: "", heim: "🏠 Home vs ", aus: "✈️ Away at ", tabelle: "Table",
     kopf: ["Team", "P", "W", "D", "L", "Goals", "Pts"], ohneTag: "No matchday", naechste: "Upcoming matches",
     keineTermine: "No fixtures yet.", ergebnisse: "Our results", alleKlasse: "All matches in this division", frueher: "Earlier: ",
@@ -493,7 +495,7 @@ const TEXTE = {
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
-    forfait: "Forfait", amTisch: n => `Gagné sur tapis vert : ${n}`, laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
+    forfait: "Forfait", kalt: "Il va faire froid – pensez à bien vous couvrir (veste, bonnet, gants) !", sehrKalt: "Très froid – habillez-vous bien chaudement : veste, bonnet, gants et une couche chaude en dessous !", amTisch: n => `Gagné sur tapis vert : ${n}`, laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
     ca: "vers ", uhr: "", heim: "🏠 À domicile contre ", aus: "✈️ À l'extérieur à ", tabelle: "Classement",
     kopf: ["Équipe", "J", "G", "N", "P", "Buts", "Pts"], ohneTag: "Sans journée", naechste: "Prochains matchs",
     keineTermine: "Pas encore de dates.", ergebnisse: "Nos résultats", alleKlasse: "Tous les matchs de la division", frueher: "Avant : ",
@@ -847,13 +849,13 @@ function heuteHtml(h, now, kinder, extra = "") {
   return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
     ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${extra}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
-    ${buvSpielHtml(sp, now, true)}${satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : ""}</div></section>`;
+    ${kaltHtml(sp, now)}${buvSpielHtml(sp, now, true)}${satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : ""}</div></section>`;
 }
 function morgenHtml(sp, now) {
   return `<section class="karte heute">${kopf(T().morgen, sp)}<div class="kasten"><div class="wann">${esc(offen(sp) ? T().zeitOffen : T().anstoss(uhr(new Date(sp.d))))}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
     ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
-    ${buvSpielHtml(sp, now, true)}<div class="satz">${esc(T().trinken)}</div></div></section>`;
+    ${kaltHtml(sp, now)}${buvSpielHtml(sp, now, true)}<div class="satz">${esc(T().trinken)}</div></div></section>`;
 }
 // Slogan nach einem Sieg einer Jugendmannschaft (alle außer Seniors, Réserves und Veteranen; vom Verein, 8.11.2026).
 const ROCKS = '<div class="rocks">#YOUth ROCKs! 🤘</div>';
@@ -1128,7 +1130,25 @@ function warnSpielHtml(sp, now) {
     && (!w.von || w.von < ende) && (!w.bis || w.bis > beginn));
   return l.map(w => `<div class="warnspiel w-${w.farbe}">${WARN_FARBE[w.farbe]} ${WARN_ICON[w.icon] || "⚠️"} ${esc(w.titel)}${warnRegion(w) ? " · " + esc(warnRegion(w)) : ""}</div>`).join("");
 }
-function wetterHtml(sp, now) { return wetterNurHtml(sp, now) + warnSpielHtml(sp, now); }
+function wetterHtml(sp, now) { return wetterNurHtml(sp, now) + kaltHtml(sp, now) + warnSpielHtml(sp, now); }
+// Kalt zur Anstoßzeit (≤ 8 °C, gefühlt oft kälter): Hinweis, sich warm anzuziehen (vom Verein, 27.11.2026).
+function spielTemp(sp, now) {
+  const d = new Date(sp.d);
+  if (d - now > 7 * 864e5 || vorbei(sp, now)) return null;
+  const k = koordinaten(sp); if (!k) return null;
+  const w = WETTER.get(k.join(","));
+  if (!w || (!w.laedt && Date.now() - (w.geholt || 0) > 3600e3)) wetterHolen(k.join(","));
+  const x = w?.stunden?.[`${tagKey(d)}T${offen(sp) ? "14:00" : uhr(d).slice(0, 2) + ":00"}`];
+  return x ? x[0] : null;
+}
+let KALT_NOW = 0, KALT_GEZEIGT = new Set();   // je Anzeige nur einmal pro Spiel
+function kaltHtml(sp, now) {
+  if (KALT_NOW !== +now) { KALT_NOW = +now; KALT_GEZEIGT = new Set(); }
+  if (KALT_GEZEIGT.has(sp.id)) return "";
+  const t = spielTemp(sp, now);
+  if (t != null && t <= 8) KALT_GEZEIGT.add(sp.id);
+  return t != null && t <= 8 ? `<div class="kalt">🧥 ${esc(t <= 2 ? T().sehrKalt : T().kalt)}</div>` : "";
+}
 function wetterNurHtml(sp, now) {
   const d = new Date(sp.d);
   if (d - now > 7 * 864e5 || vorbei(sp, now)) return "";
