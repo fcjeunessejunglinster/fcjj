@@ -140,6 +140,7 @@ li.buvzeile.leer b,li.buvzeile.leer .klein,li.buvzeile.leer .buvst{font-weight:8
 .buvimspiel .knopf{padding:5px 10px;width:auto;font-size:.8rem;border-radius:8px;min-height:0}
 .kalt{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#e3f0ff;color:#0b3d75;font-weight:700;font-size:14px}
 @media (prefers-color-scheme:dark){.kalt{background:#12304f;color:#cfe5ff}}
+.absage{margin:6px 0 0;padding:6px 10px;border-radius:8px;background:var(--rotHell, #fde8ea);color:var(--rot);font-weight:800;font-size:14px;text-align:center}
 ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
 .tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
 .tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
@@ -336,7 +337,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-27 d";
+const FASSUNG = "2026-11-27 e";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -347,7 +348,7 @@ const merk = {
 // ---- Sprache (Deutsch / English) ----
 const TEXTE = {
   de: { cup: "Pokal", friendly: "Freundschaft", abgebr: "abgebr.", gespielt: "gespielt", offen: "offen", spieltag: "Spieltag",
-    forfait: "Forfait", kalt: "Es wird kalt – bitte warm anziehen (Jacke, Mütze, Handschuhe)!", sehrKalt: "Sehr kalt – bitte richtig warm anziehen: Jacke, Mütze, Handschuhe und eine warme Schicht drunter!", amTisch: n => `Am grünen Tisch gewonnen: ${n}`, laeuft: "Spiel läuft", heute: "Heute Spieltag! ⚽", morgen: "Morgen Spieltag! ⚽", zeitOffen: "Uhrzeit offen",
+    forfait: "Forfait", abgesagt: "Abgesagt (laut SportEasy)", kalt: "Es wird kalt – bitte warm anziehen (Jacke, Mütze, Handschuhe)!", sehrKalt: "Sehr kalt – bitte richtig warm anziehen: Jacke, Mütze, Handschuhe und eine warme Schicht drunter!", amTisch: n => `Am grünen Tisch gewonnen: ${n}`, laeuft: "Spiel läuft", heute: "Heute Spieltag! ⚽", morgen: "Morgen Spieltag! ⚽", zeitOffen: "Uhrzeit offen",
     ca: "ca. ", uhr: " Uhr", heim: "🏠 Heimspiel gegen ", aus: "✈️ Auswärts bei ", tabelle: "Tabelle",
     kopf: ["Mannschaft", "Sp", "S", "U", "N", "Tore", "Pkt"], ohneTag: "Ohne Spieltag", naechste: "Nächste Spiele",
     keineTermine: "Noch keine Termine.", ergebnisse: "Unsere Ergebnisse", alleKlasse: "Alle Spiele der Klasse", frueher: "Früher: ",
@@ -421,7 +422,7 @@ const TEXTE = {
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
-    forfait: "Forfeit", kalt: "It’s going to be cold – please wear warm clothes (jacket, hat, gloves)!", sehrKalt: "Very cold – please dress really warm: jacket, hat, gloves and an extra warm layer!", amTisch: n => `Won by decision: ${n}`, laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
+    forfait: "Forfeit", abgesagt: "Cancelled (according to SportEasy)", kalt: "It’s going to be cold – please wear warm clothes (jacket, hat, gloves)!", sehrKalt: "Very cold – please dress really warm: jacket, hat, gloves and an extra warm layer!", amTisch: n => `Won by decision: ${n}`, laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
     ca: "approx. ", uhr: "", heim: "🏠 Home vs ", aus: "✈️ Away at ", tabelle: "Table",
     kopf: ["Team", "P", "W", "D", "L", "Goals", "Pts"], ohneTag: "No matchday", naechste: "Upcoming matches",
     keineTermine: "No fixtures yet.", ergebnisse: "Our results", alleKlasse: "All matches in this division", frueher: "Earlier: ",
@@ -495,7 +496,7 @@ const TEXTE = {
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
-    forfait: "Forfait", kalt: "Il va faire froid – pensez à bien vous couvrir (veste, bonnet, gants) !", sehrKalt: "Très froid – habillez-vous bien chaudement : veste, bonnet, gants et une couche chaude en dessous !", amTisch: n => `Gagné sur tapis vert : ${n}`, laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
+    forfait: "Forfait", abgesagt: "Annulé (selon SportEasy)", kalt: "Il va faire froid – pensez à bien vous couvrir (veste, bonnet, gants) !", sehrKalt: "Très froid – habillez-vous bien chaudement : veste, bonnet, gants et une couche chaude en dessous !", amTisch: n => `Gagné sur tapis vert : ${n}`, laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
     ca: "vers ", uhr: "", heim: "🏠 À domicile contre ", aus: "✈️ À l'extérieur à ", tabelle: "Classement",
     kopf: ["Équipe", "J", "G", "N", "P", "Buts", "Pts"], ohneTag: "Sans journée", naechste: "Prochains matchs",
     keineTermine: "Pas encore de dates.", ergebnisse: "Nos résultats", alleKlasse: "Tous les matchs de la division", frueher: "Avant : ",
@@ -817,7 +818,7 @@ function spielLi(sp, now, mitTeam) {
   if (sp.bem && sp.bem !== "Arrêté") meta.push(sp.bem);
   const r = [routeLink(sp, now), videoLink(sp)].filter(Boolean).join(" · ");
   const unten = `${mitTeam ? `<span class="schild team">${esc(sp.team.reiter)}</span>` : ""}${artSchild(sp)}<b>${wt(d)} ${kurzDatum(d)}</b> · ${esc(meta.join(" · "))}${r ? " · " + r : ""}`;
-  return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, w: wertung(sp), unten: unten + buvSpielHtml(sp, now), attr: mitTeam ? ` data-gehe="${sp.team.id}"` : "" });
+  return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, w: wertung(sp), unten: absageHtml(sp) + unten + (spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now)), attr: mitTeam ? ` data-gehe="${sp.team.id}"` : "" });
 }
 
 // ---- Mannschaft ----
@@ -849,13 +850,13 @@ function heuteHtml(h, now, kinder, extra = "") {
   return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
     ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${extra}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
-    ${kaltHtml(sp, now)}${buvSpielHtml(sp, now, true)}${satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : ""}</div></section>`;
+    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now, true) + (satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : "")}</div></section>`;
 }
 function morgenHtml(sp, now) {
   return `<section class="karte heute">${kopf(T().morgen, sp)}<div class="kasten"><div class="wann">${esc(offen(sp) ? T().zeitOffen : T().anstoss(uhr(new Date(sp.d))))}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
     ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
-    ${kaltHtml(sp, now)}${buvSpielHtml(sp, now, true)}<div class="satz">${esc(T().trinken)}</div></div></section>`;
+    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now, true) + `<div class="satz">${esc(T().trinken)}</div>`}</div></section>`;
 }
 // Slogan nach einem Sieg einer Jugendmannschaft (alle außer Seniors, Réserves und Veteranen; vom Verein, 8.11.2026).
 const ROCKS = '<div class="rocks">#YOUth ROCKs! 🤘</div>';
@@ -1020,7 +1021,7 @@ function naechsteKarte(kommend, now, unten = "", titel = T().naechste) {
         if (i) return spielLi(sp, now);
         const meta = [sp.ort ? "📍 " + sp.ort : "", kabine(sp, now), sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")].filter(Boolean);
         return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, m: '<span class="mitte leise">–</span>', form: FORM_KATS.includes(sp.team?.kat),
-          unten: `${artSchild(sp)}${esc(meta.join(" · "))}${routeLink(sp, now) ? " · " + routeLink(sp, now) : ""}${buvSpielHtml(sp, now)}` }).replace('class="sp"', 'class="sp erstes"');
+          unten: `${artSchild(sp)}${esc(meta.join(" · "))}${routeLink(sp, now) ? " · " + routeLink(sp, now) : ""}${absageHtml(sp)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now)}` }).replace('class="sp"', 'class="sp erstes"');
       }).join("") + "</ul>";
   }
   return h + unten + "</section>";
@@ -1206,6 +1207,29 @@ function seLivePlatz(t, sp) {
 // „is_current_team“ fehlt oft bei unseren Teams → FCJJ auch am Namen erkennen.
 const seWir = x => !!x && (x.wir || /junglinster/i.test(x.n || ""));
 const seMinute = t => t.min == null ? null : Math.floor(t.min / 60) + 1;
+// Absagen aus SportEasy (vom Verein, 27.11.2026): der Worker liefert abgesagte Jugendspiele der nächsten 14 Tage;
+// zugeordnet über Kategorie, Tag, Anstoß (±90 min) und Gegnername. Abgesagte Spiele: rotes „Abgesagt“, keine Buvette-Schicht.
+let ABSAGEN = { liste: [], geholt: 0, laedt: false };
+async function absagenHolen() {
+  if (ABSAGEN.laedt || Date.now() - ABSAGEN.geholt < 10 * 60e3) return;
+  ABSAGEN.laedt = true;
+  try {
+    const r = await fetch("https://fcjj1.gilles-emeringer.workers.dev/absagen");
+    if (r.ok) { const j = await r.json(); const neu = j.absagen || []; const anders = JSON.stringify(neu) !== JSON.stringify(ABSAGEN.liste); ABSAGEN.liste = neu; if (anders) render(); }
+  } catch (e) {} finally { ABSAGEN.geholt = Date.now(); ABSAGEN.laedt = false; }
+}
+function abgesagt(kat, d, gegnerName) {
+  if (!SE_LIVE_KATS.includes(kat)) return false;
+  absagenHolen();
+  if (!ABSAGEN.liste.length) return false;
+  const tag = tagKey(new Date(d)), g = (gegnerName || "").toLowerCase();
+  const woerter = n => n.toLowerCase().split(/[^a-z0-9à-ÿ]+/).filter(w => w.length > 3 && !["jeunesse", "junglinster"].includes(w));
+  return ABSAGEN.liste.some(a => a.kat === kat && tagKey(new Date(a.start)) === tag && Math.abs(Date.parse(a.start) - Date.parse(d)) <= 90 * 60e3
+    && woerter(/junglinster/i.test(a.links) ? a.rechts : a.links).some(w => g.includes(w)));
+}
+const spielAbgesagt = sp => !!sp.team && !vorbeiEinfach(sp) && abgesagt(sp.team.kat, sp.d, (sp.heim ? sp.a : sp.h).n);
+const vorbeiEinfach = sp => Date.parse(sp.d) < Date.now() - 864e5;
+const absageHtml = sp => spielAbgesagt(sp) ? `<div class="absage">❌ ${esc(T().abgesagt)}</div>` : "";
 function seLiveSpiel(spiele, el) {
   for (const s of spiele) { s.links.wir = seWir(s.links); s.rechts.wir = seWir(s.rechts); }
   const a = Date.parse(el.dataset.anstoss), g = el.dataset.gegner.toLowerCase();
@@ -1719,7 +1743,8 @@ async function buvHolen(ids) {
 const WASSERFLASCHE = '<svg class="flasche" viewBox="0 0 12 24" aria-hidden="true"><rect x="4" y="0.5" width="4" height="2.5" rx="0.6" fill="#1565c0"/><path d="M4.2 3h3.6v1.6c0 .6 2.7 1.6 2.7 3.6V22a1.5 1.5 0 0 1-1.5 1.5H3A1.5 1.5 0 0 1 1.5 22V8.2c0-2 2.7-3 2.7-3.6z" fill="#cfe8ff" stroke="#1565c0" stroke-width="1"/><path d="M2.1 12.5h7.8V22a.9.9 0 0 1-.9.9H3a.9.9 0 0 1-.9-.9z" fill="#4fa3f7"/><rect x="2.1" y="10" width="7.8" height="2.2" fill="#fff" opacity=".85"/></svg>';
 // Eigener Reiter „Buvette“ (vom Verein, 20.11.2026): alle Schichten der nächsten 7 Tage.
 // Immer die Woche Montag–Sonntag wie „Unsere Woche“ (Sonntag ab 22 Uhr schon die nächste; vom Verein, 21.11.2026).
-const buvSchichtenJetzt = now => { if (!D) return []; const tage = new Set(wocheTage(now)); return buvetteSchichten(D, +now).filter(x => tage.has(tagKey(new Date(x.von)))); };
+const buvSchichtenJetzt = now => { if (!D) return []; const tage = new Set(wocheTage(now)); const kat = new Map(D.teams.map(t => [t.reiter, t.kat]));
+  return buvetteSchichten(D, +now).filter(x => tage.has(tagKey(new Date(x.von))) && !x.spiele.every(g => abgesagt(kat.get(g.team), new Date(x.von + 18e5).toISOString(), g.gegner))); };   // ganz abgesagte Schichten fallen weg
 function buvOffen(now) {   // Zahl am Reiter: Schichten ohne Helfer (erst wenn die Belegung geladen ist)
   const l = buvSchichtenJetzt(now); if (l.length) buvHolen(l.map(x => x.id));
   return l.filter(x => x.id in BUV.belegt && BUV.belegt[x.id] < 1).length;

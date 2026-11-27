@@ -376,6 +376,31 @@ async function statistik(env, url) {
     { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-robots-tag": "noindex" } });
 }
 
+// ---------------------------------------------------------------- Absagen aus SportEasy (vom Verein, 27.11.2026)
+// Abgesagte Spiele (is_cancelled) aller Jugendkategorien in den nächsten 14 Tagen: nur Kategorie, Anstoß und die beiden
+// Mannschaftsnamen. Die App ordnet sie den FLF-Spielen zu (gleicher Tag, Gegnername). 10 Minuten zwischengespeichert.
+export async function absagen(req, env) {
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: liveCors });
+  if (!env.SE_USER || !env.SE_PASSWORD) return liveJson({ fehler: "aus" }, 503, 300);
+  const cache = caches.default, schluessel = new Request("https://fcjj-live.intern/absagen");
+  const alt = await cache.match(schluessel);
+  if (alt) return alt;
+  const jetzt = Date.now(), bis = jetzt + 14 * 864e5, aus = [];
+  let fehler = 0;
+  for (const [kat, team] of Object.entries(SE_TEAMS)) {
+    const r = await seHolen(env, `/v2.1/teams/${team}/events/`);
+    if (!r.j) { fehler++; continue; }
+    for (const e of r.j.results || []) {
+      const t = Date.parse(e.start_at);
+      if (!e.is_cancelled || !e.opponent_left || !e.opponent_right || !(t > jetzt - 864e5 && t < bis)) continue;
+      aus.push({ kat, start: e.start_at, links: e.opponent_left.full_name || e.opponent_left.short_name || "", rechts: e.opponent_right.full_name || e.opponent_right.short_name || "" });
+    }
+  }
+  const antwort = liveJson({ stand: new Date().toISOString(), absagen: aus, fehler }, 200, 600);
+  if (!fehler) await cache.put(schluessel, antwort.clone());
+  return antwort;
+}
+
 export default {
   async scheduled(event, env, ctx) {
     if (abrufFaellig(new Date(event.scheduledTime))) ctx.waitUntil(anstossen(env));
@@ -388,6 +413,7 @@ export default {
     if (pfad === "/zaehler") return zaehler(req, env);
     if (pfad === "/statistik") return statistik(env, new URL(req.url));
     if (new URL(req.url).pathname === "/live") return live(req, env);
+    if (new URL(req.url).pathname === "/absagen") return absagen(req, env);
     const jetzt = new Date();
     let naechster = null;
     for (let t = Math.ceil(jetzt / 9e5) * 9e5, i = 0; i < 4 * 24 * 8; t += 9e5, i++) if (abrufFaellig(new Date(t))) { naechster = new Date(t); break; }
