@@ -141,6 +141,8 @@ li.buvzeile.leer b,li.buvzeile.leer .klein,li.buvzeile.leer .buvst{font-weight:8
 .kalt{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#e3f0ff;color:#0b3d75;font-weight:700;font-size:14px}
 @media (prefers-color-scheme:dark){.kalt{background:#12304f;color:#cfe5ff}}
 .absage{margin:6px 0 0;padding:6px 10px;border-radius:8px;background:var(--rotHell, #fde8ea);color:var(--rot);font-weight:800;font-size:14px;text-align:center}
+a.whatsapp{display:inline-block;margin:0 0 14px;padding:10px 16px;border-radius:999px;background:#1f8f4e;color:#fff;font-weight:700;text-decoration:none}
+a.whatsapp:hover{background:#18723e}
 ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
 .tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
 .tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
@@ -337,7 +339,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-27 f";
+const FASSUNG = "2026-11-27 g";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -358,6 +360,7 @@ const TEXTE = {
     wocheText: (n, h) => `${n === 1 ? "1 Spiel" : n + " Spiele"}, davon ${h} zu Hause. Tippen öffnet die Mannschaft.`,
     keineWoche: "Diese Woche keine Spiele.", heuteKurz: " · heute", alle: "Alle Mannschaften", saison: "Saison",
     leer: "Noch keine Daten", leerText: "Die Spiele kommen mit dem ersten automatischen Abruf von der FLF. Das dauert nach dem Einrichten ein paar Minuten.",
+    whatsapp: "WhatsApp: FC Jeunesse Junglinster Parents",
     fuss: (d, f) => `Daten von der FLF · zuletzt geändert ${d}<br>FC Jeunesse Junglinster · seit 1935 · Fassung&nbsp;${f.replace(" ", "&nbsp;")}`,
     unterzeile: "Spiele, Ergebnisse und Tabellen", laden: "Lade …",
     gleich: "Gleich geht's los! ⚽", anpfiffIn: m => `Anpfiff in ${m} ${m === 1 ? "Minute" : "Minuten"}`, anstoss: z => `Anstoß ${z}`,
@@ -432,6 +435,7 @@ const TEXTE = {
     wocheText: (n, h) => `${n === 1 ? "1 match" : n + " matches"}, ${h} at home. Tap a match to open the team.`,
     keineWoche: "No matches this week.", heuteKurz: " · today", alle: "All teams", saison: "Season",
     leer: "No data yet", leerText: "The matches arrive with the first automatic update from the FLF, a few minutes after setup.",
+    whatsapp: "WhatsApp: FC Jeunesse Junglinster Parents",
     fuss: (d, f) => `Data from the FLF · last updated ${d}<br>FC Jeunesse Junglinster · since 1935 · Version&nbsp;${f.replace(" ", "&nbsp;")}`,
     unterzeile: "Matches, results and tables", laden: "Loading …",
     gleich: "Kick-off soon! ⚽", anpfiffIn: m => `Kick-off in ${m} ${m === 1 ? "minute" : "minutes"}`, anstoss: z => `Kick-off ${z}`,
@@ -506,6 +510,7 @@ const TEXTE = {
     wocheText: (n, h) => `${n === 1 ? "1 match" : n + " matchs"}, dont ${h} à domicile. Touchez un match pour ouvrir l'équipe.`,
     keineWoche: "Pas de match cette semaine.", heuteKurz: " · aujourd'hui", alle: "Toutes les équipes", saison: "Saison",
     leer: "Pas encore de données", leerText: "Les matchs arrivent avec la première mise à jour automatique de la FLF, quelques minutes après l'installation.",
+    whatsapp: "WhatsApp : FC Jeunesse Junglinster Parents",
     fuss: (d, f) => `Données de la FLF · dernière mise à jour ${d}<br>FC Jeunesse Junglinster · depuis 1935 · Version&nbsp;${f.replace(" ", "&nbsp;")}`,
     unterzeile: "Matchs, résultats et classements", laden: "Chargement …",
     gleich: "Ça va commencer ! ⚽", anpfiffIn: m => `Coup d'envoi dans ${m} ${m === 1 ? "minute" : "minutes"}`, anstoss: z => `Coup d'envoi ${z}`,
@@ -1729,6 +1734,7 @@ function buvetteSchichten(d, ab = Date.now()) {
 // Buvette-Helfer (vom Verein, 20.11.2026): Belegung und Eintragen über den Worker (/buvette), Schlüssel zum Austragen nur auf dem eigenen Handy.
 // Seniors/Réserves-Schichten (ID mit „s“): 3 Personen, Jugend 2 (vom Verein, 23.11.2026)
 const buvMax = id => String(id).endsWith("s") ? BUV.maxSen || 3 : /[re]$/.test(String(id)) ? 1 : BUV.max || 2;   // Réserves, SCO, CAD, JUN, WU15: 1 Person
+const WHATSAPP_ELTERN = "https://chat.whatsapp.com/HSLwwK03vwxBdITXiKXXX7";
 const BUV_URL = "https://fcjj1.gilles-emeringer.workers.dev/buvette";   // derselbe Worker wie der Chat
 let BUV = { belegt: {}, max: 2, maxSen: 3, geholt: 0, ids: "" }, BUV_LAEDT = false, BUV_MEIN = {};
 try { BUV_MEIN = JSON.parse(merk.get("buvette")) || {}; } catch (e) {}
@@ -1890,6 +1896,7 @@ const CHAT_NEWSLETTER = [
 ];
 // Allgemeines Wissen für den Chat, ohne Ablaufdatum (vom Verein)
 const CHAT_WISSEN = [
+  "WhatsApp-Kanal für Eltern: „FC Jeunesse Junglinster Parents“ – beitreten über https://chat.whatsapp.com/HSLwwK03vwxBdITXiKXXX7 (Link auch unten in der App; vom Verein, 27.11.2026).",
   "Wozu eine FLF-Lizenz? (vom Verein, 25.11.2026) Eine Lizenz der FLF hat zwei Hauptzwecke: 1) Spielberechtigung für offizielle Spiele; 2) Zugang zur Sportversicherung und zur Erstattung bei Sportunfällen (C.S.M.S.).",
   "Fundsachen (lost and found / objets trouvés / Fonnsaachen): Vergessene oder gefundene Sachen liegen im Zelt beim Terrain 2 (pitch 2) op Freinen (1, op de Freinen, Junglinster), dort kann man sie abholen (vom Verein, 17.11.2026).",
   "Jugendkoordinator (coordinateur des jeunes) des FCJJ: coordinateur.jeunes@fcjj.lu – für Anliegen zur Jugend, die mit dem Trainerteam nicht geklärt werden konnten.",
@@ -2145,7 +2152,9 @@ function render() {
   document.getElementById("teilen").textContent = T().teilen;
   document.getElementById("shop").textContent = T().shop;
   hilfeAufbauen();
-  document.getElementById("fuss").innerHTML = T().fuss(`${kurzDatum(stand)} ${uhr(stand)}`, FASSUNG)
+  // WhatsApp-Kanal der Eltern (vom Verein, 27.11.2026)
+  document.getElementById("fuss").innerHTML = `<a class="whatsapp" href="${WHATSAPP_ELTERN}" target="_blank" rel="noopener">💬 ${esc(T().whatsapp)}</a>`
+    + T().fuss(`${kurzDatum(stand)} ${uhr(stand)}`, FASSUNG)
     + (fupaOk() ? `<br><button class="linkknopf" data-fupa="nein">${T().fupaAus}</button>` : "");
 }
 document.getElementById("knoepfe").addEventListener("click", e => {
