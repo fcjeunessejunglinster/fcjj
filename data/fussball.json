@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-27T02:54:45.568Z",
+ "stand": "2026-11-27T15:17:39.461Z",
  "saison": {
   "id": "20262027",
   "n": "Saison 2026-2027"
@@ -4276,6 +4276,18 @@
     },
     {
      "pl": 5,
+     "id": 44722,
+     "n": "Jeunesse Junglinster",
+     "sp": 8,
+     "s": 4,
+     "u": 2,
+     "nl": 2,
+     "t": 25,
+     "g": 18,
+     "pkt": 14
+    },
+    {
+     "pl": 6,
      "id": 45428,
      "n": "ENT Berbourg/UMW I",
      "sp": 8,
@@ -4285,18 +4297,6 @@
      "t": 31,
      "g": 31,
      "pkt": 12
-    },
-    {
-     "pl": 6,
-     "id": 44722,
-     "n": "Jeunesse Junglinster",
-     "sp": 7,
-     "s": 3,
-     "u": 2,
-     "nl": 2,
-     "t": 22,
-     "g": 18,
-     "pkt": 11
     },
     {
      "pl": 7,
@@ -4362,12 +4362,12 @@
      "pl": 12,
      "id": 45014,
      "n": "Jeunesse Gilsdorf",
-     "sp": 7,
+     "sp": 8,
      "s": 0,
      "u": 1,
-     "nl": 6,
+     "nl": 7,
      "t": 13,
-     "g": 48,
+     "g": 51,
      "pkt": 1
     }
    ],
@@ -5294,7 +5294,7 @@
     },
     {
      "id": 1012093,
-     "d": "2026-11-27T20:00:00+01:00",
+     "d": "2026-11-27T00:00:01+01:00",
      "tag": 9,
      "h": {
       "id": 44722,
@@ -5306,10 +5306,11 @@
       "n": "Jeunesse Gilsdorf",
       "c": 500048
      },
-     "hs": null,
-     "as": null,
-     "gespielt": false,
-     "forfait": false,
+     "hs": 3,
+     "as": 0,
+     "gespielt": true,
+     "forfait": true,
+     "bem": "FF",
      "ort": "Terrain 2 (Junglinster, synth.)"
     },
     {
