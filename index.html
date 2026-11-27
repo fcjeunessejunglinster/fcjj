@@ -339,7 +339,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-27 j";
+const FASSUNG = "2026-11-27 k";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -855,13 +855,13 @@ function heuteHtml(h, now, kinder, extra = "") {
   return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
     ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${extra}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
-    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now, true) + (satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : "")}</div></section>`;
+    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now) + (satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : "")}</div></section>`;
 }
 function morgenHtml(sp, now) {
   return `<section class="karte heute">${kopf(T().morgen, sp)}<div class="kasten"><div class="wann">${esc(offen(sp) ? T().zeitOffen : T().anstoss(uhr(new Date(sp.d))))}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
     ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
-    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now, true) + `<div class="satz">${esc(T().trinken)}</div>`}</div></section>`;
+    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now) + `<div class="satz">${esc(T().trinken)}</div>`}</div></section>`;
 }
 // Slogan nach einem Sieg einer Jugendmannschaft (alle außer Seniors, Réserves und Veteranen; vom Verein, 8.11.2026).
 const ROCKS = '<div class="rocks">#YOUth ROCKs! 🤘</div>';
@@ -1785,7 +1785,7 @@ function buvetteKarte(now) {
   const uebersicht = geladen ? `<p class="buvuebersicht"><span class="buvst rot">🔴 ${zahl(n => n < 1)} ${b.leer}</span><span class="buvst orange">🟠 ${zahl((n, m) => n >= 1 && n < m)} ${b.halb}</span><span class="buvst gruen">🟢 ${zahl((n, m) => n >= m)} ${b.ganz}</span></p>` : "";
   return `<section class="karte buvette"><h2>${b.titel}</h2>${uebersicht}<p class="hinweis">${esc(b.anrede)}<br>${esc(b.text)}<br><b>${esc(b.dank)}</b></p>${zeilen}</section>`;
 }
-// Buvette-Status direkt beim Heimspiel (vom Verein, 27.11.2026; im Heute/Morgen-Kasten nur, wenn noch nicht besetzt): nur für Schichten der angezeigten Woche,
+// Buvette-Status direkt beim Heimspiel (vom Verein, 27.11.2026; überall immer, auch wenn besetzt): nur für Schichten der angezeigten Woche,
 // mit Belegung und „Eintragen“ – wie im Reiter Buvette Help.
 function buvSpielHtml(sp, now, nurOffen = false) {
   if (!sp.heim || !D) return "";
