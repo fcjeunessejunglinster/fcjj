@@ -143,6 +143,8 @@ li.buvzeile.leer b,li.buvzeile.leer .klein,li.buvzeile.leer .buvst{font-weight:8
 .absage{margin:6px 0 0;padding:6px 10px;border-radius:8px;background:var(--rotHell, #fde8ea);color:var(--rot);font-weight:800;font-size:14px;text-align:center}
 .knopf.whatsapp{background:#1f8f4e;border-color:#1f8f4e;color:#fff;text-align:center}
 .knopf.whatsapp:hover{background:#18723e}
+.spstatus{margin:6px auto 0;padding:5px 10px;border-radius:8px;background:var(--bg);font-weight:800;font-size:14px;text-align:center;width:fit-content;max-width:100%}
+.spstatus.gew{color:var(--sieg)}.spstatus.verl{color:var(--rot)}.spstatus.annul{color:var(--leise)}
 ol.conseils{margin:.4rem 0 .2rem;padding-left:1.8rem;line-height:1.7}
 .tagpunkte{position:absolute;top:4px;right:4px;display:flex;gap:3px}
 .tagpunkt{width:9px;height:9px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 2px var(--karte)}
@@ -339,7 +341,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-27 l";
+const FASSUNG = "2026-11-27 m";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -350,7 +352,7 @@ const merk = {
 // ---- Sprache (Deutsch / English) ----
 const TEXTE = {
   de: { cup: "Pokal", friendly: "Freundschaft", abgebr: "abgebr.", gespielt: "gespielt", offen: "offen", spieltag: "Spieltag",
-    forfait: "Forfait", abgesagt: "Abgesagt (laut SportEasy)", kalt: "Es wird kalt – bitte warm anziehen (Jacke, Mütze, Handschuhe)!", sehrKalt: "Sehr kalt – bitte richtig warm anziehen: Jacke, Mütze, Handschuhe und eine warme Schicht drunter!", amTisch: n => `Am grünen Tisch gewonnen: ${n}`, laeuft: "Spiel läuft", heute: "Heute Spieltag! ⚽", morgen: "Morgen Spieltag! ⚽", zeitOffen: "Uhrzeit offen",
+    forfait: "Forfait", stGewFF: "Durch Forfait (FF) gewonnen", stVerlFF: "Durch Forfait (FF) verloren", stFF: "Forfait (FF)", stGewTisch: "Am grünen Tisch gewonnen", stVerlTisch: "Am grünen Tisch verloren", stArrete: "Spiel abgebrochen bzw. annulliert (FLF)", abgesagt: "Abgesagt (laut SportEasy)", kalt: "Es wird kalt – bitte warm anziehen (Jacke, Mütze, Handschuhe)!", sehrKalt: "Sehr kalt – bitte richtig warm anziehen: Jacke, Mütze, Handschuhe und eine warme Schicht drunter!", amTisch: n => `Am grünen Tisch gewonnen: ${n}`, laeuft: "Spiel läuft", heute: "Heute Spieltag! ⚽", morgen: "Morgen Spieltag! ⚽", zeitOffen: "Uhrzeit offen",
     ca: "ca. ", uhr: " Uhr", heim: "🏠 Heimspiel gegen ", aus: "✈️ Auswärts bei ", tabelle: "Tabelle",
     kopf: ["Mannschaft", "Sp", "S", "U", "N", "Tore", "Pkt"], ohneTag: "Ohne Spieltag", naechste: "Nächste Spiele",
     keineTermine: "Noch keine Termine.", ergebnisse: "Unsere Ergebnisse", alleKlasse: "Alle Spiele der Klasse", frueher: "Früher: ",
@@ -425,7 +427,7 @@ const TEXTE = {
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
-    forfait: "Forfeit", abgesagt: "Cancelled (according to SportEasy)", kalt: "It’s going to be cold – please wear warm clothes (jacket, hat, gloves)!", sehrKalt: "Very cold – please dress really warm: jacket, hat, gloves and an extra warm layer!", amTisch: n => `Won by decision: ${n}`, laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
+    forfait: "Forfeit", stGewFF: "Won by forfeit (FF)", stVerlFF: "Lost by forfeit (FF)", stFF: "Forfeit (FF)", stGewTisch: "Won by decision", stVerlTisch: "Lost by decision", stArrete: "Match abandoned or cancelled (FLF)", abgesagt: "Cancelled (according to SportEasy)", kalt: "It’s going to be cold – please wear warm clothes (jacket, hat, gloves)!", sehrKalt: "Very cold – please dress really warm: jacket, hat, gloves and an extra warm layer!", amTisch: n => `Won by decision: ${n}`, laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
     ca: "approx. ", uhr: "", heim: "🏠 Home vs ", aus: "✈️ Away at ", tabelle: "Table",
     kopf: ["Team", "P", "W", "D", "L", "Goals", "Pts"], ohneTag: "No matchday", naechste: "Upcoming matches",
     keineTermine: "No fixtures yet.", ergebnisse: "Our results", alleKlasse: "All matches in this division", frueher: "Earlier: ",
@@ -500,7 +502,7 @@ const TEXTE = {
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
-    forfait: "Forfait", abgesagt: "Annulé (selon SportEasy)", kalt: "Il va faire froid – pensez à bien vous couvrir (veste, bonnet, gants) !", sehrKalt: "Très froid – habillez-vous bien chaudement : veste, bonnet, gants et une couche chaude en dessous !", amTisch: n => `Gagné sur tapis vert : ${n}`, laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
+    forfait: "Forfait", stGewFF: "Gagné par forfait (FF)", stVerlFF: "Perdu par forfait (FF)", stFF: "Forfait (FF)", stGewTisch: "Gagné sur tapis vert", stVerlTisch: "Perdu sur tapis vert", stArrete: "Match arrêté ou annulé (FLF)", abgesagt: "Annulé (selon SportEasy)", kalt: "Il va faire froid – pensez à bien vous couvrir (veste, bonnet, gants) !", sehrKalt: "Très froid – habillez-vous bien chaudement : veste, bonnet, gants et une couche chaude en dessous !", amTisch: n => `Gagné sur tapis vert : ${n}`, laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
     ca: "vers ", uhr: "", heim: "🏠 À domicile contre ", aus: "✈️ À l'extérieur à ", tabelle: "Classement",
     kopf: ["Équipe", "J", "G", "N", "P", "Buts", "Pts"], ohneTag: "Sans journée", naechste: "Prochains matchs",
     keineTermine: "Pas encore de dates.", ergebnisse: "Nos résultats", alleKlasse: "Tous les matchs de la division", frueher: "Avant : ",
@@ -813,17 +815,29 @@ const videoKnopf = sp => videoUrl(sp) ? `<a class="knopf routeknopf" href="${esc
 let SPORTEASY = {};
 const seKnopf = t => SPORTEASY[t.reiter] ? `<a class="knopf routeknopf" href="${esc(SPORTEASY[t.reiter])}" target="_blank" rel="noopener">📡 ${T().seLive}</a>` : "";
 
+// Spielstatus deutlich im Spielfenster (vom Verein, 27.11.2026): gewonnen/verloren durch Forfait (FF),
+// am grünen Tisch entschieden, von der FLF abgebrochen/annulliert („Arrêté“). Absagen aus SportEasy: absageHtml.
+function statusHtml(sp) {
+  const team = sp.team, ids = team ? new Set([...team.ids, ...(team.mit || [])]) : null;
+  const wirHeim = sp.heim ?? (ids ? ids.has(sp.h.id) : null);
+  if (sp.sieger && wirHeim != null) { const g = (sp.sieger === "h") === wirHeim; return `<div class="spstatus ${g ? "gew" : "verl"}">${g ? "✅" : "❌"} ${esc(g ? T().stGewTisch : T().stVerlTisch)}</div>`; }
+  if (sp.forfait && sp.hs != null && wirHeim != null && sp.hs !== sp.as) {
+    const g = (sp.hs > sp.as) === wirHeim;
+    return `<div class="spstatus ${g ? "gew" : "verl"}">${g ? "✅" : "❌"} ${esc(g ? T().stGewFF : T().stVerlFF)}</div>`;
+  }
+  if (sp.forfait) return `<div class="spstatus">⚠️ ${esc(T().stFF)}</div>`;
+  if (sp.bem === "Arrêté") return `<div class="spstatus annul">⛔ ${esc(T().stArrete)}</div>`;
+  return "";
+}
 function spielLi(sp, now, mitTeam) {
   const d = new Date(sp.d);
   const meta = [sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")];
   if (!vorbei(sp, now) && sp.ort) meta.push("📍 " + sp.ort);
   if (kabine(sp, now)) meta.push(kabine(sp, now));
-  if (sp.sieger) meta.push(T().amTisch(sp.sieger === "h" ? sp.h.n : sp.a.n));
-  else if (sp.forfait) meta.push(T().forfait);
-  if (sp.bem && sp.bem !== "Arrêté") meta.push(sp.bem);
+  if (sp.bem && sp.bem !== "Arrêté" && sp.bem !== "FF") meta.push(sp.bem);
   const r = [routeLink(sp, now), videoLink(sp)].filter(Boolean).join(" · ");
   const unten = `${mitTeam ? `<span class="schild team">${esc(sp.team.reiter)}</span>` : ""}${artSchild(sp)}<b>${wt(d)} ${kurzDatum(d)}</b> · ${esc(meta.join(" · "))}${r ? " · " + r : ""}`;
-  return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, w: wertung(sp), unten: absageHtml(sp) + unten + (spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now)), attr: mitTeam ? ` data-gehe="${sp.team.id}"` : "" });
+  return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, w: wertung(sp), unten: statusHtml(sp) + absageHtml(sp) + unten + (spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now)), attr: mitTeam ? ` data-gehe="${sp.team.id}"` : "" });
 }
 
 // ---- Mannschaft ----
@@ -855,7 +869,7 @@ function heuteHtml(h, now, kinder, extra = "") {
   return `<section class="karte heute">${kopf(titel, sp)}<div class="kasten"><div class="wann">${esc(oben)}</div>
     ${kastenZeile(sp, now, '<span class="mitte leise">–</span>')}
     ${sp.ort ? `<div class="zusatz">📍 ${esc(sp.ort)}${platzAdresse(sp.ort) ? `<br>${esc(platzAdresse(sp.ort))}` : ""}</div>` : ""}${routeLink(sp, now) ? `<a class="knopf routeknopf" href="${esc(routeUrl(sp.ort))}" target="_blank" rel="noopener">🧭 ${T().routeLang}</a>` : ""}${kabine(sp, now) ? `<div class="kabine">${esc(kabine(sp, now))}</div>` : ""}${extra}${wetterHtml(sp, now)}<div class="zusatz">${esc(sp.klasse)}</div>
-    ${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : (satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : "") + buvSpielHtml(sp, now)}</div></section>`;
+    ${statusHtml(sp)}${absageHtml(sp)}${kaltHtml(sp, now)}${spielAbgesagt(sp) ? "" : (satz ? `<div class="${kinder ? "satz" : "zusatz"}">${esc(satz)}</div>` : "") + buvSpielHtml(sp, now)}</div></section>`;
 }
 function morgenHtml(sp, now) {
   return `<section class="karte heute">${kopf(T().morgen, sp)}<div class="kasten"><div class="wann">${esc(offen(sp) ? T().zeitOffen : T().anstoss(uhr(new Date(sp.d))))}</div>
@@ -885,7 +899,7 @@ function letztesHtml(t, spiele, now, aktuell, kinder) {
     return `<section class="karte heute">${kopf(T().letztes, null, erg ? T().endstand : T().ergFolgt)}<div class="kasten">
       <div class="wann klein">${esc(datum(sp))}${sp.tag ? ` · ${T().spieltag} ${sp.tag}` : ""}</div>${["SEN", "RES", "VET"].includes(t.kat) ? "" : `<div class="satz">${esc(jugendSatz(t, sp))}</div>`}
       ${kastenZeile(sp, now, `<span class="mitte gross ${erg ? wertung(sp) : ""}">${erg ? `${sp.hs}:${sp.as}` : "–:–"}</span>`)}
-      ${erg ? rocks(t, sp) : `<div class="zusatz">${T().ergFlf}</div>`}${videoKnopf(sp)}<div class="zusatz">${unten}</div></div></section>`;
+      ${statusHtml(sp)}${erg ? rocks(t, sp) : `<div class="zusatz">${T().ergFlf}</div>`}${videoKnopf(sp)}<div class="zusatz">${unten}</div></div></section>`;
   }
   // Ohne (noch) offizielles Ergebnis – BAM, PUP, POU, WU11 oder Ergebnis noch nicht eingetragen: „Allez Lënster!“ (vom Verein, 15.11.2026).
   // „Super gemacht“ nur nach einem Sieg, sonst „Weiter so, dranbleiben“ (vom Verein, 14.11.2026).
@@ -896,7 +910,7 @@ function letztesHtml(t, spiele, now, aktuell, kinder) {
   const n = spiele.find(s => !vorbei(s, now));
   const naechst = n ? `<div class="zusatz">${sp.bam ? T().naechstesBam : T().naechstes}: <b>${esc(wannText(n))}</b>${n.bam ? "" : esc(T().gegenW + gegner(n).n)}${n.ort ? "<br>📍 " + esc(n.ort) : ""}</div>` : "";
   return `<section class="karte heute">${kopf(T().letztes, sp)}<div class="kasten"><div class="wann klein">${esc(datum(sp))}</div>
-    <div class="satz">${esc(jugendSatz(t, sp))}</div>${kastenZeile(sp, now)}${rocks(t, sp)}${videoKnopf(sp)}${naechst}</div></section>`;
+    <div class="satz">${esc(jugendSatz(t, sp))}</div>${kastenZeile(sp, now)}${statusHtml(sp)}${rocks(t, sp)}${videoKnopf(sp)}${naechst}</div></section>`;
 }
 // 🥇 wenn die Seniors Tabellenerster sind (vom Verein, 15.11.2026).
 const erster = (t, z) => t.kat === "SEN" && z?.pl === 1 && t.ids.includes(z.id);
@@ -1027,7 +1041,7 @@ function naechsteKarte(kommend, now, unten = "", titel = T().naechste) {
         if (i) return spielLi(sp, now);
         const meta = [sp.ort ? "📍 " + sp.ort : "", kabine(sp, now), sp.klasse + (sp.tag ? ` · ${T().spieltag} ${sp.tag}` : "")].filter(Boolean);
         return zeile(sp, now, { wirH: sp.heim, wirA: !sp.heim, erg: sp.erg, m: '<span class="mitte leise">–</span>', form: FORM_KATS.includes(sp.team?.kat),
-          unten: `${artSchild(sp)}${esc(meta.join(" · "))}${routeLink(sp, now) ? " · " + routeLink(sp, now) : ""}${absageHtml(sp)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now)}` }).replace('class="sp"', 'class="sp erstes"');
+          unten: `${artSchild(sp)}${esc(meta.join(" · "))}${routeLink(sp, now) ? " · " + routeLink(sp, now) : ""}${statusHtml(sp)}${absageHtml(sp)}${spielAbgesagt(sp) ? "" : buvSpielHtml(sp, now)}` }).replace('class="sp"', 'class="sp erstes"');
       }).join("") + "</ul>";
   }
   return h + unten + "</section>";
