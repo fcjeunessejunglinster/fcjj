@@ -339,7 +339,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-27 h";
+const FASSUNG = "2026-11-27 i";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -967,7 +967,8 @@ function teamHtml(t, now) {
   html += naechsteKarte(kommend, now, kalenderKnopf(t)) + eventsKarte(now, t.kat);
   if (aktuell) html += tabelleKarte(aktuell, t);
   html += statistikKarte(t);
-  if (gespielt.length) html += `<section class="karte"><h2>${T().ergebnisse}</h2><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></section>`;
+  // „Unsere Ergebnisse“ auf- und zuklappbar (vom Verein, 27.11.2026); offen, bis man sie zuklappt (gemerkt wie bei den Tabellen).
+  if (gespielt.length) html += `<details class="karte tabkarte" data-tab="ergebnisse"${TAB_ZU.has("ergebnisse") ? "" : " open"}><summary>${T().ergebnisse}</summary><ul class="spiele">${gespielt.map(sp => spielLi(sp, now)).join("")}</ul></details>`;
   if (aktuell) html += `<details class="karte"><summary>${T().alleKlasse}</summary>${klassenSpiele(aktuell, t, now)}</details>`;
   for (const w of FUPA_EXTRA[t.reiter] || []) html += fupaExtraHtml(w);
   for (const l of FUPA_LINKS[t.reiter] || []) html += fupaLinkHtml(l);
