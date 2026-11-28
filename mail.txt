@@ -1,0 +1,9 @@
+FCJJ-App: Abruf-Anstoß, Chat und SportEasy-Live
+
+Token: vorhanden ✓
+Chat (ANTHROPIC_API_KEY): vorhanden ✓
+Tageslimits (KV PUSH): verbunden ✓
+Buvette-Liste (BUVETTE_KEY): vorhanden ✓
+Buvette-Mails (RESEND_API_KEY): vorhanden ✓
+SportEasy-Live (SE_USER, SE_PASSWORD): vorhanden ✓
+Nächster Anstoß: Sa., 28.11., 12:15
