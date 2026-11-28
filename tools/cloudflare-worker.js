@@ -418,11 +418,13 @@ export function buvWhatsappText(offen) {
   const zeilen = offen.map(x => `• ${z(x.von, { weekday: "short", day: "numeric", month: "numeric" })} ${z(x.von, { hour: "2-digit", minute: "2-digit" })}–${z(x.bis, { hour: "2-digit", minute: "2-digit" })} · ${x.spiele.map(g => g.team).join(" + ")} · ${x.n}/${x.max}`);
   return `☕️ *Buvette – on cherche encore de l'aide !*\n\n${zeilen.join("\n")}\n\nInscription en 1 clic dans l'app (onglet « Buvette Help ») :\n${APP_URL}\n\nMerci à tous pour votre soutien ⚪️🔴⚫️`;
 }
-async function buvFreitagsMail(env) {
+async function buvFreitagsMail(env, sofort = false) {
   if (!env.PUSH || !env.RESEND_API_KEY) return;
   const tag = lxTag(new Date()), merkKey = "buvfreitag:" + tag;
-  if (await env.PUSH.get(merkKey)) return;
-  await env.PUSH.put(merkKey, "1", { expirationTtl: 3 * 86400 });
+  if (!sofort) {
+    if (await env.PUSH.get(merkKey)) return;
+    await env.PUSH.put(merkKey, "1", { expirationTtl: 3 * 86400 });
+  }
   const r = await fetch(DATEN_URL, { cf: { cacheTtl: 300, cacheEverything: true } }); if (!r.ok) return;
   const jetzt = Date.now(), alle = buvetteSchichten(await r.json(), jetzt).filter(x => x.von < jetzt + 7 * 864e5);
   const offen = [];
@@ -445,6 +447,13 @@ export default {
   async fetch(req, env) {
     if (new URL(req.url).pathname === "/frage") return chat(req, env);
     const pfad = new URL(req.url).pathname;
+    // Mail mit den offenen Schichten sofort schicken: /buvette/mail?key=<BUVETTE_KEY> (vom Verein, 28.11.2026)
+    if (pfad === "/buvette/mail") {
+      const u = new URL(req.url);
+      if (!env.BUVETTE_KEY || u.searchParams.get("key") !== env.BUVETTE_KEY) return new Response("Kein Zugang.", { status: 403, headers: { "content-type": "text/plain; charset=utf-8" } });
+      await buvFreitagsMail(env, true);
+      return new Response("Mail mit den offenen Buvette-Schichten ist verschickt ✓", { headers: { "content-type": "text/plain; charset=utf-8" } });
+    }
     if (pfad === "/buvette" || pfad === "/buvette/liste") return buvette(req, env, pfad);
     if (pfad === "/zaehler") return zaehler(req, env);
     if (pfad === "/statistik") return statistik(env, new URL(req.url));
