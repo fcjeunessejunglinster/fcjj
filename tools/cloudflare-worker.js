@@ -409,9 +409,37 @@ export async function absagen(req, env) {
   return antwort;
 }
 
+// ---------------------------------------------------------------- Freitags-Mail: offene Buvette-Schichten (vom Verein, 28.11.2026)
+// WhatsApp erlaubt kein automatisches Posten in Gruppen. Deshalb kommt jeden Freitag um 20:00 eine Mail an BUVETTE_MAIL mit
+// der fertigen Nachricht und einem Knopf, der WhatsApp mit dem Text öffnet (Gruppe wählen, senden). Zeitraum: nächste 7 Tage.
+const APP_URL = "https://fcjeunessejunglinster.github.io/fcjj/";
+export function buvWhatsappText(offen) {
+  const z = (d, o) => new Date(d).toLocaleString("fr-FR", { timeZone: "Europe/Luxembourg", ...o });
+  const zeilen = offen.map(x => `• ${z(x.von, { weekday: "short", day: "numeric", month: "numeric" })} ${z(x.von, { hour: "2-digit", minute: "2-digit" })}–${z(x.bis, { hour: "2-digit", minute: "2-digit" })} · ${x.spiele.map(g => g.team).join(" + ")} · ${x.n}/${x.max}`);
+  return `☕️ *Buvette – on cherche encore de l'aide !*\n\n${zeilen.join("\n")}\n\nInscription en 1 clic dans l'app (onglet « Buvette Help ») :\n${APP_URL}\n\nMerci à tous pour votre soutien ⚪️🔴⚫️`;
+}
+async function buvFreitagsMail(env) {
+  if (!env.PUSH || !env.RESEND_API_KEY) return;
+  const tag = lxTag(new Date()), merkKey = "buvfreitag:" + tag;
+  if (await env.PUSH.get(merkKey)) return;
+  await env.PUSH.put(merkKey, "1", { expirationTtl: 3 * 86400 });
+  const r = await fetch(DATEN_URL, { cf: { cacheTtl: 300, cacheEverything: true } }); if (!r.ok) return;
+  const jetzt = Date.now(), alle = buvetteSchichten(await r.json(), jetzt).filter(x => x.von < jetzt + 7 * 864e5);
+  const offen = [];
+  for (const x of alle) { const n = (await bLaden(env, x.id))?.leute?.length || 0, max = bMax(x.id); if (n < max) offen.push({ ...x, n, max }); }
+  if (!offen.length) { await buvMail(env, "Buvette: alle Schichten der nächsten 7 Tage sind besetzt 🎉", ["Keine offenen Schichten – nichts zu posten."]); return; }
+  const text = buvWhatsappText(offen), wa = "https://wa.me/?text=" + encodeURIComponent(text);
+  await buvMail(env, `Buvette: ${offen.length} offene Schicht${offen.length > 1 ? "en" : ""} – Nachricht für WhatsApp`, [
+    `Hier die offenen Buvette-Schichten der nächsten 7 Tage. Auf dem Handy auf den Knopf tippen, die Gruppe „FC Jeunesse Junglinster Parents“ wählen und senden:`,
+    `<a href="${wa}" style="display:inline-block;background:#1f8f4e;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700">💬 In WhatsApp öffnen</a>`,
+    `<pre style="white-space:pre-wrap;font:14px system-ui,sans-serif;background:#f4f4f4;padding:12px;border-radius:8px">${htmlEsc(text)}</pre>`]);
+}
+
 export default {
   async scheduled(event, env, ctx) {
     if (abrufFaellig(new Date(event.scheduledTime))) ctx.waitUntil(anstossen(env));
+    const o = ortszeit(new Date(event.scheduledTime));
+    if (o.tag === 5 && o.std === 20 && o.min < 15) ctx.waitUntil(buvFreitagsMail(env));   // Freitag 20:00
   },
   // Statusseite (verrät nichts Geheimes, stößt nichts an).
   async fetch(req, env) {
