@@ -341,7 +341,7 @@ footer{text-align:center;font-size:13px;color:var(--leise);padding:0 14px 30px}
 
 <script>
 "use strict";
-const FASSUNG = "2026-11-27 m";
+const FASSUNG = "2026-11-28 a";
 const TZ = "Europe/Luxembourg";
 const KEINE_ERG = ["U7", "U9", "U11", "WU11"];
 const MERK = "fcjj_v1_";
@@ -352,7 +352,7 @@ const merk = {
 // ---- Sprache (Deutsch / English) ----
 const TEXTE = {
   de: { cup: "Pokal", friendly: "Freundschaft", abgebr: "abgebr.", gespielt: "gespielt", offen: "offen", spieltag: "Spieltag",
-    forfait: "Forfait", stGewFF: "Durch Forfait (FF) gewonnen", stVerlFF: "Durch Forfait (FF) verloren", stFF: "Forfait (FF)", stGewTisch: "Am grünen Tisch gewonnen", stVerlTisch: "Am grünen Tisch verloren", stArrete: "Spiel abgebrochen bzw. annulliert (FLF)", abgesagt: "Abgesagt (laut SportEasy)", kalt: "Es wird kalt – bitte warm anziehen (Jacke, Mütze, Handschuhe)!", sehrKalt: "Sehr kalt – bitte richtig warm anziehen: Jacke, Mütze, Handschuhe und eine warme Schicht drunter!", amTisch: n => `Am grünen Tisch gewonnen: ${n}`, laeuft: "Spiel läuft", heute: "Heute Spieltag! ⚽", morgen: "Morgen Spieltag! ⚽", zeitOffen: "Uhrzeit offen",
+    forfait: "Forfait", stGewFF: "Durch Forfait (FF) gewonnen", stVerlFF: "Durch Forfait (FF) verloren", stFF: "Forfait (FF)", stGewTisch: "Am grünen Tisch gewonnen", stVerlTisch: "Am grünen Tisch verloren", stArrete: "Spiel abgebrochen bzw. annulliert (FLF)", stSE: "Ergebnis laut SportEasy, noch nicht von der FLF bestätigt", abgesagt: "Abgesagt (laut SportEasy)", kalt: "Es wird kalt – bitte warm anziehen (Jacke, Mütze, Handschuhe)!", sehrKalt: "Sehr kalt – bitte richtig warm anziehen: Jacke, Mütze, Handschuhe und eine warme Schicht drunter!", amTisch: n => `Am grünen Tisch gewonnen: ${n}`, laeuft: "Spiel läuft", heute: "Heute Spieltag! ⚽", morgen: "Morgen Spieltag! ⚽", zeitOffen: "Uhrzeit offen",
     ca: "ca. ", uhr: " Uhr", heim: "🏠 Heimspiel gegen ", aus: "✈️ Auswärts bei ", tabelle: "Tabelle",
     kopf: ["Mannschaft", "Sp", "S", "U", "N", "Tore", "Pkt"], ohneTag: "Ohne Spieltag", naechste: "Nächste Spiele",
     keineTermine: "Noch keine Termine.", ergebnisse: "Unsere Ergebnisse", alleKlasse: "Alle Spiele der Klasse", frueher: "Früher: ",
@@ -427,7 +427,7 @@ const TEXTE = {
     natiNaechste: "Nächste Länderspiele", natiErg: "Letzte Ergebnisse", natiUnter: "Nationalmannschaft", gruppe: "Gruppe",
     natiQuelle: "Länderspiele von FuPa", natiKeine: "Im Moment sind keine Länderspiele angesetzt." },
   en: { cup: "Cup", friendly: "Friendly", abgebr: "aband.", gespielt: "played", offen: "TBC", spieltag: "Matchday",
-    forfait: "Forfeit", stGewFF: "Won by forfeit (FF)", stVerlFF: "Lost by forfeit (FF)", stFF: "Forfeit (FF)", stGewTisch: "Won by decision", stVerlTisch: "Lost by decision", stArrete: "Match abandoned or cancelled (FLF)", abgesagt: "Cancelled (according to SportEasy)", kalt: "It’s going to be cold – please wear warm clothes (jacket, hat, gloves)!", sehrKalt: "Very cold – please dress really warm: jacket, hat, gloves and an extra warm layer!", amTisch: n => `Won by decision: ${n}`, laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
+    forfait: "Forfeit", stGewFF: "Won by forfeit (FF)", stVerlFF: "Lost by forfeit (FF)", stFF: "Forfeit (FF)", stGewTisch: "Won by decision", stVerlTisch: "Lost by decision", stArrete: "Match abandoned or cancelled (FLF)", stSE: "Score from SportEasy, not yet confirmed by the FLF", abgesagt: "Cancelled (according to SportEasy)", kalt: "It’s going to be cold – please wear warm clothes (jacket, hat, gloves)!", sehrKalt: "Very cold – please dress really warm: jacket, hat, gloves and an extra warm layer!", amTisch: n => `Won by decision: ${n}`, laeuft: "Match in progress", heute: "Match day today! ⚽", morgen: "Match day tomorrow! ⚽", zeitOffen: "Kick-off time TBC",
     ca: "approx. ", uhr: "", heim: "🏠 Home vs ", aus: "✈️ Away at ", tabelle: "Table",
     kopf: ["Team", "P", "W", "D", "L", "Goals", "Pts"], ohneTag: "No matchday", naechste: "Upcoming matches",
     keineTermine: "No fixtures yet.", ergebnisse: "Our results", alleKlasse: "All matches in this division", frueher: "Earlier: ",
@@ -502,7 +502,7 @@ const TEXTE = {
     natiNaechste: "Upcoming internationals", natiErg: "Recent results", natiUnter: "National team", gruppe: "Group",
     natiQuelle: "International matches from FuPa", natiKeine: "No international matches scheduled at the moment." },
   fr: { cup: "Coupe", friendly: "Amical", abgebr: "arrêté", gespielt: "joué", offen: "à fixer", spieltag: "Journée",
-    forfait: "Forfait", stGewFF: "Gagné par forfait (FF)", stVerlFF: "Perdu par forfait (FF)", stFF: "Forfait (FF)", stGewTisch: "Gagné sur tapis vert", stVerlTisch: "Perdu sur tapis vert", stArrete: "Match arrêté ou annulé (FLF)", abgesagt: "Annulé (selon SportEasy)", kalt: "Il va faire froid – pensez à bien vous couvrir (veste, bonnet, gants) !", sehrKalt: "Très froid – habillez-vous bien chaudement : veste, bonnet, gants et une couche chaude en dessous !", amTisch: n => `Gagné sur tapis vert : ${n}`, laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
+    forfait: "Forfait", stGewFF: "Gagné par forfait (FF)", stVerlFF: "Perdu par forfait (FF)", stFF: "Forfait (FF)", stGewTisch: "Gagné sur tapis vert", stVerlTisch: "Perdu sur tapis vert", stArrete: "Match arrêté ou annulé (FLF)", stSE: "Score selon SportEasy, pas encore confirmé par la FLF", abgesagt: "Annulé (selon SportEasy)", kalt: "Il va faire froid – pensez à bien vous couvrir (veste, bonnet, gants) !", sehrKalt: "Très froid – habillez-vous bien chaudement : veste, bonnet, gants et une couche chaude en dessous !", amTisch: n => `Gagné sur tapis vert : ${n}`, laeuft: "Match en cours", heute: "Jour de match aujourd'hui ! ⚽", morgen: "Jour de match demain ! ⚽", zeitOffen: "Heure à fixer",
     ca: "vers ", uhr: "", heim: "🏠 À domicile contre ", aus: "✈️ À l'extérieur à ", tabelle: "Classement",
     kopf: ["Équipe", "J", "G", "N", "P", "Buts", "Pts"], ohneTag: "Sans journée", naechste: "Prochains matchs",
     keineTermine: "Pas encore de dates.", ergebnisse: "Nos résultats", alleKlasse: "Tous les matchs de la division", frueher: "Avant : ",
@@ -818,6 +818,7 @@ const seKnopf = t => SPORTEASY[t.reiter] ? `<a class="knopf routeknopf" href="${
 // Spielstatus deutlich im Spielfenster (vom Verein, 27.11.2026): gewonnen/verloren durch Forfait (FF),
 // am grünen Tisch entschieden, von der FLF abgebrochen/annulliert („Arrêté“). Absagen aus SportEasy: absageHtml.
 function statusHtml(sp) {
+  if (sp.seErg) return `<div class="spstatus annul">ℹ️ ${esc(T().stSE)}</div>`;
   const team = sp.team, ids = team ? new Set([...team.ids, ...(team.mit || [])]) : null;
   const wirHeim = sp.heim ?? (ids ? ids.has(sp.h.id) : null);
   if (sp.sieger && wirHeim != null) { const g = (sp.sieger === "h") === wirHeim; return `<div class="spstatus ${g ? "gew" : "verl"}">${g ? "✅" : "❌"} ${esc(g ? T().stGewTisch : T().stVerlTisch)}</div>`; }
@@ -1230,13 +1231,15 @@ const seWir = x => !!x && (x.wir || /junglinster/i.test(x.n || ""));
 const seMinute = t => t.min == null ? null : Math.floor(t.min / 60) + 1;
 // Absagen aus SportEasy (vom Verein, 27.11.2026): der Worker liefert abgesagte Jugendspiele der nächsten 14 Tage;
 // zugeordnet über Kategorie, Tag, Anstoß (±90 min) und Gegnername. Abgesagte Spiele: rotes „Abgesagt“, keine Buvette-Schicht.
-let ABSAGEN = { liste: [], geholt: 0, laedt: false };
+let ABSAGEN = { liste: [], erg: [], geholt: 0, laedt: false };
 async function absagenHolen() {
   if (ABSAGEN.laedt || Date.now() - ABSAGEN.geholt < 10 * 60e3) return;
   ABSAGEN.laedt = true;
   try {
     const r = await fetch("https://fcjj1.gilles-emeringer.workers.dev/absagen");
-    if (r.ok) { const j = await r.json(); const neu = j.absagen || []; const anders = JSON.stringify(neu) !== JSON.stringify(ABSAGEN.liste); ABSAGEN.liste = neu; if (anders) render(); }
+    if (r.ok) { const j = await r.json(); const neu = j.absagen || [], erg = j.ergebnisse || [];
+      const anders = JSON.stringify([neu, erg]) !== JSON.stringify([ABSAGEN.liste, ABSAGEN.erg]); ABSAGEN.liste = neu; ABSAGEN.erg = erg;
+      if (anders) { seErgAnwenden(); render(); } }
   } catch (e) {} finally { ABSAGEN.geholt = Date.now(); ABSAGEN.laedt = false; }
 }
 function abgesagt(kat, d, gegnerName) {
@@ -1247,6 +1250,27 @@ function abgesagt(kat, d, gegnerName) {
   const woerter = n => n.toLowerCase().split(/[^a-z0-9à-ÿ]+/).filter(w => w.length > 3 && !["jeunesse", "junglinster"].includes(w));
   return ABSAGEN.liste.some(a => a.kat === kat && tagKey(new Date(a.start)) === tag && Math.abs(Date.parse(a.start) - Date.parse(d)) <= 90 * 60e3
     && woerter(/junglinster/i.test(a.links) ? a.rechts : a.links).some(w => g.includes(w)));
+}
+// Spielstand aus SportEasy (vom Verein, 28.11.2026): nur für Jugendspiele mit offiziellen Ergebnissen, solange die FLF
+// noch keins hat; die FLF hat immer Vorrang (neue FLF-Daten ersetzen D, dann gilt deren Ergebnis). Markiert mit sp.seErg.
+function seErgAnwenden() {
+  if (!D || !ABSAGEN.erg?.length) return;
+  const kat = new Map();
+  for (const t of D.teams) if (!KEINE_ERG.includes(t.kat) && SE_LIVE_KATS.includes(t.kat)) for (const id of [...t.ids, ...(t.mit || [])]) kat.set(id, t.kat);
+  const woerter = n => n.toLowerCase().split(/[^a-z0-9à-ÿ]+/).filter(w => w.length > 3 && !["jeunesse", "junglinster"].includes(w));
+  for (const k of Object.values(D.klassen)) {
+    if (!k.ergebnisse || k.typ === "FM") continue;
+    for (const sp of k.spiele) {
+      if (sp.hs != null && !sp.seErg) continue;
+      const wirH = kat.has(sp.h.id), wirA = kat.has(sp.a.id); if (!wirH && !wirA) continue;
+      const g = (wirH ? sp.a : sp.h).n.toLowerCase(), tag = tagKey(new Date(sp.d));
+      const e = ABSAGEN.erg.find(x => x.kat === kat.get(wirH ? sp.h.id : sp.a.id) && tagKey(new Date(x.start)) === tag
+        && Math.abs(Date.parse(x.start) - Date.parse(sp.d)) <= 90 * 60e3 && woerter(/junglinster/i.test(x.links) ? x.rechts : x.links).some(w => g.includes(w)));
+      if (!e) continue;
+      const wirTore = /junglinster/i.test(e.links) ? e.tl : e.tr, ihreTore = /junglinster/i.test(e.links) ? e.tr : e.tl;
+      sp.hs = wirH ? wirTore : ihreTore; sp.as = wirH ? ihreTore : wirTore; sp.gespielt = true; sp.seErg = true;
+    }
+  }
 }
 const spielAbgesagt = sp => !!sp.team && !vorbeiEinfach(sp) && abgesagt(sp.team.kat, sp.d, (sp.heim ? sp.a : sp.h).n);
 const vorbeiEinfach = sp => Date.parse(sp.d) < Date.now() - 864e5;
@@ -2268,6 +2292,7 @@ async function laden() {
     if (!r.ok) throw new Error(r.status);
     const neu = await r.json();
     D = neu; merk.set("data", JSON.stringify(neu));
+    seErgAnwenden();
   } catch (e) {
     if (!D) { try { D = JSON.parse(merk.get("data")); } catch (x) {} }
   }

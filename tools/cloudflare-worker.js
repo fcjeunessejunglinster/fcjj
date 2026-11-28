@@ -385,18 +385,26 @@ export async function absagen(req, env) {
   const cache = caches.default, schluessel = new Request("https://fcjj-live.intern/absagen");
   const alt = await cache.match(schluessel);
   if (alt) return alt;
-  const jetzt = Date.now(), bis = jetzt + 14 * 864e5, aus = [];
+  const jetzt = Date.now(), bis = jetzt + 14 * 864e5, aus = [], ergebnisse = [];
   let fehler = 0;
   for (const [kat, team] of Object.entries(SE_TEAMS)) {
     const r = await seHolen(env, `/v2.1/teams/${team}/events/`);
     if (!r.j) { fehler++; continue; }
-    for (const e of r.j.results || []) {
+    const ln = await seHolen(env, `/v2.1/teams/${team}/events/last-next/`);   // auch das letzte Spiel, falls die Liste nur kommende hat
+    const ev = new Map();
+    for (const e of [...(r.j.results || []), ln.j?.last_event]) if (e?.id) ev.set(e.id, e);
+    for (const e of ev.values()) {
       const t = Date.parse(e.start_at);
+      // Ergebnisse der letzten 7 Tage (vom Verein, 28.11.2026): nur Spielstand, die App nimmt sie, solange die FLF keins hat.
+      const tor = x => x?.score == null || x.score === "" ? null : +x.score;
+      if (!e.is_cancelled && e.opponent_left && e.opponent_right && t < jetzt && t > jetzt - 7 * 864e5 && tor(e.opponent_left) != null && tor(e.opponent_right) != null)
+        ergebnisse.push({ kat, start: e.start_at, links: e.opponent_left.full_name || e.opponent_left.short_name || "", rechts: e.opponent_right.full_name || e.opponent_right.short_name || "",
+          tl: tor(e.opponent_left), tr: tor(e.opponent_right) });
       if (!e.is_cancelled || !e.opponent_left || !e.opponent_right || !(t > jetzt - 864e5 && t < bis)) continue;
       aus.push({ kat, start: e.start_at, links: e.opponent_left.full_name || e.opponent_left.short_name || "", rechts: e.opponent_right.full_name || e.opponent_right.short_name || "" });
     }
   }
-  const antwort = liveJson({ stand: new Date().toISOString(), absagen: aus, fehler }, 200, 600);
+  const antwort = liveJson({ stand: new Date().toISOString(), absagen: aus, ergebnisse, fehler }, 200, 600);
   if (!fehler) await cache.put(schluessel, antwort.clone());
   return antwort;
 }
